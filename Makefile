@@ -140,3 +140,4 @@ fclean: clean
 	@rm -rf ${VENV}
 
 .PHONY	: all app freeze h help install make migrate req root static venv vexit clean fclean
+
