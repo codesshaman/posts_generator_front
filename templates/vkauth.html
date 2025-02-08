@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Авторизация через VK</title>
+    <script>
+        async function loginWithVK() {
+            try {
+                const response = await fetch("http://127.0.0.1:8000/api/login-url/", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM5MDQ4MDA2LCJpYXQiOjE3MzkwMTI2ODAsImp0aSI6Ijc5MGY1ZWEyNjE0MTQ2ODhhOTc5ZjIxMGZlODcwZDM5IiwidXNlcl9pZCI6Mn0._rD_iQU5ScutBDubjpKj9XVDGQg5BTpBHO-hMZgFVHs"
+                    },
+                });
+                const data = await response.json();
+                window.location.href = data.auth_url;
+                console.log(data);  // Логируем полученные данные
+            } catch (error) {
+                console.error("Ошибка при запросе:", error);
+            }
+            
+           
+        }
+
+        async function handleCallback() {
+            const params = new URLSearchParams(window.location.search);
+            const code = params.get("code");
+            if (code) {
+                const response = await fetch(`http://127.0.0.1:8000/api/callback/?code=${code}`);
+                const data = await response.json();
+                if (data.access_token) {
+                    localStorage.setItem("vk_token", data.access_token);
+                    document.getElementById("status").innerText = "Авторизация успешна!";
+                } else {
+                    document.getElementById("status").innerText = "Ошибка авторизации.";
+                }
+            }
+        }
+
+        window.onload = handleCallback;
+    </script>
+</head>
+<body>
+    <h1>Вход через VK</h1>
+    <button onclick="loginWithVK()">Войти через VK</button>
+    <p id="status"></p>
+</body>
+</html>
