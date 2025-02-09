@@ -1,48 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Авторизация через VK</title>
-    <script>
-        async function loginWithVK() {
-            try {
-                const response = await fetch("http://127.0.0.1:8000/api/login-url/", {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM5MDQ4MDA2LCJpYXQiOjE3MzkwMTI2ODAsImp0aSI6Ijc5MGY1ZWEyNjE0MTQ2ODhhOTc5ZjIxMGZlODcwZDM5IiwidXNlcl9pZCI6Mn0._rD_iQU5ScutBDubjpKj9XVDGQg5BTpBHO-hMZgFVHs"
-                    },
-                });
-                const data = await response.json();
-                window.location.href = data.auth_url;
-                console.log(data);  // Логируем полученные данные
-            } catch (error) {
-                console.error("Ошибка при запросе:", error);
-            }
-            
-           
-        }
-
-        async function handleCallback() {
-            const params = new URLSearchParams(window.location.search);
-            const code = params.get("code");
-            if (code) {
-                const response = await fetch(`http://127.0.0.1:8000/api/callback/?code=${code}`);
-                const data = await response.json();
-                if (data.access_token) {
-                    localStorage.setItem("vk_token", data.access_token);
-                    document.getElementById("status").innerText = "Авторизация успешна!";
-                } else {
-                    document.getElementById("status").innerText = "Ошибка авторизации.";
-                }
-            }
-        }
-
-        window.onload = handleCallback;
-    </script>
 </head>
 <body>
-    <h1>Вход через VK</h1>
-    <button onclick="loginWithVK()">Войти через VK</button>
-    <p id="status"></p>
+    <h2>Войти через ВКонтакте</h2>
+    <button onclick="loginWithVK()">Войти</button>
+
+    <script>
+        function loginWithVK() {
+            let clientId = '53029697'; // Замените на ваш client_id
+            let redirectUri = 'http://127.0.0.1:1024';
+            let authUrl = `https://oauth.vk.com/authorize?client_id=${clientId}&display=popup&redirect_uri=${redirectUri}&response_type=token`;
+
+            let popup = window.open(authUrl, "_blank", "width=600,height=500");
+
+            let checkPopup = setInterval(() => {
+                if (!popup || popup.closed) {
+                    clearInterval(checkPopup);
+                    console.log("Авторизация закрыта");
+                }
+            }, 1000);
+
+            window.addEventListener("message", function(event) {
+                if (event.origin !== redirectUri) return;
+                let data = event.data;
+                if (data && data.access_token) {
+                    sendUserDataToBackend(data);
+                }
+            }, false);
+        }
+
+        function sendUserDataToBackend(userData) {
+            fetch('http://127.0.0.1:8000/api/login-url/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Ответ сервера:", data);
+                alert("Успешная регистрация!");
+            })
+            .catch(error => console.error("Ошибка:", error));
+        }
+    </script>
 </body>
 </html>
