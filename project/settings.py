@@ -35,18 +35,35 @@ ALLOWED_HOST_1 = os.getenv('ALLOWED_HOST_1')
 ALLOWED_HOST_2 = os.getenv('ALLOWED_HOST_2')
 ALLOWED_HOST_DEV = os.getenv('ALLOWED_HOST_DEV')
 
-ALLOWED_HOSTS = [ALLOWED_HOST_1, ALLOWED_HOST_2, ALLOWED_HOST_DEV]
+# ALLOWED_HOSTS = [ALLOWED_HOST_1, ALLOWED_HOST_2, ALLOWED_HOST_DEV]
+ALLOWED_HOSTS = ['*']
+
+VK_CLIENT_ID = os.getenv('VK_CLIENT_ID')
+VK_CLIENT_SECRET = os.getenv('VK_CLIENT_SECRET')
+VK_REDIRECT_URI = os.getenv('VK_REDIRECT_URI')
+
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = VK_CLIENT_ID # Вставь сюда свой клиентский ID
+SOCIAL_AUTH_VK_OAUTH2_SECRET = VK_CLIENT_SECRET # Вставь сюда свой секретный ключ
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email'] # Запрашиваем разрешения на доступ к email
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'django.contrib.auth',
+    'django.contrib.sessions',
     'django.contrib.contenttypes',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.vk_auth.apps.VkAuthConfig',
+    'apps.google_auth.apps.GoogleAuthConfig',
     'apps.mainpage',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +74,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.vk.VKOAuth2',  # Для авторизации через ВКонтакте
+    'django.contrib.auth.backends.ModelBackend',  # Стандартный backend для Django
+)
 
 ROOT_URLCONF = 'project.urls'
 
@@ -72,6 +95,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -140,3 +165,5 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SILENCED_SYSTEM_CHECKS = ['databases', 'admin.E403']
+
+

@@ -1,8 +1,8 @@
-from django.urls import path
-from .views import vk_login_view
+from django.urls import path, include
+from .views import home, user_data_api, logout_view
 
 urlpatterns = [
-    path('', vk_login_view, name='vk_login'),         # Отображение HTML-страницы
-    # path('login-url/', vk_login_url, name='vk_login_url'),  # API для авторизации
-    # path('callback/', vk_callback, name='vk_callback'),    # API для обработки кода
+    path('', home, name='home'),
+    path('user-data/', user_data_api, name='user_data_api'),  # API-метод для получения данных
+    path('logout/', logout_view, name='logout'),
 ]
