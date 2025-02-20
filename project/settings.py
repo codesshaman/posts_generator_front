@@ -35,8 +35,8 @@ ALLOWED_HOST_1 = os.getenv('ALLOWED_HOST_1')
 ALLOWED_HOST_2 = os.getenv('ALLOWED_HOST_2')
 ALLOWED_HOST_DEV = os.getenv('ALLOWED_HOST_DEV')
 
-ALLOWED_HOSTS = [ALLOWED_HOST_1, ALLOWED_HOST_2, ALLOWED_HOST_DEV]
-# ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = [ALLOWED_HOST_1, ALLOWED_HOST_2, ALLOWED_HOST_DEV]
+ALLOWED_HOSTS = ['*']
 
 VK_CLIENT_ID = os.getenv('VK_CLIENT_ID')
 VK_CLIENT_SECRET = os.getenv('VK_CLIENT_SECRET')
@@ -110,7 +110,8 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.dummy'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
