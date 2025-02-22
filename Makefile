@@ -20,7 +20,7 @@ WARN_COLOR=\033[33;01m	# Warning yellow
 
 all:
 	@printf "$(OK_COLOR)==== Starting the configuration ${name} ====$(NO_COLOR)\n"
-	$(PYTHON) manage.py runserver $(ALLOWED_HOST_1):$(ALLOWED_PORT)
+	$(PYTHON) manage.py runserver $(ALLOWED_HOST):$(ALLOWED_PORT)
 
 app:
 	@printf "$(OK_COLOR)==== Creating a new application ====$(NO_COLOR)\n"
@@ -62,6 +62,7 @@ help:
 	@echo -e "$(WARN_COLOR)- make				        : Launch configuration"
 	@echo -e "$(WARN_COLOR)- make h				: Makefile commands reference"
 	@echo -e "$(WARN_COLOR)- make help				: Makefile commands reference"
+	@echo -e "$(WARN_COLOR)- make cert		 		: Generate certificates"
 	@echo -e "$(WARN_COLOR)- make install <libname>		: Launch pip install"
 	@echo -e "$(WARN_COLOR)- make make				: Make makemigrations"
 	@echo -e "$(WARN_COLOR)- make migrate			        : Make migrations"
@@ -88,6 +89,10 @@ install:
 	else \
 		echo "$(ERROR_COLOR)Enter the library name!$(NO_COLOR)\n"; \
 	fi
+
+certs:
+	@printf "$(OK_COLOR)==== Generate certificate for ${name} ====$(NO_COLOR)\n"
+	@bash scripts/certs.sh
 
 make:
 	@printf "$(OK_COLOR)==== Make makemigrations ${name} ====$(NO_COLOR)\n"
