@@ -18,5 +18,6 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('', include('apps.mainpage.urls')),
+    path('', include('apps.mainpage.urls')),    # Заглавная страница
+    path('', include('apps.vkoauth.urls')),     # Аутентификация VK
 ]

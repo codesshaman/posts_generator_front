@@ -58,6 +58,7 @@ LOGOUT_REDIRECT_URL = '/'
 
 INSTALLED_APPS = [
     'django.contrib.staticfiles',
+    'apps.vkoauth.apps.VKoauthConfig',
     'apps.mainpage.apps.MainpageConfig'
 ]
 
@@ -91,7 +92,6 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {}
 
-
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
@@ -120,4 +120,3 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
-
