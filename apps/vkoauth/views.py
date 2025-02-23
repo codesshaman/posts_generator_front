@@ -75,3 +75,17 @@ def logout_view(request):
     if debug:
         print("Выходим из аккаунта")
     return render(request, 'vk_logauth.html')
+
+def vk_auth(request):
+    """Отображает страницу авторизации через VK с динамической ссылкой."""
+    vk_auth_url = (
+        "https://oauth.vk.com/authorize?"
+        "client_id={client_id}&"
+        "display=page&"
+        "redirect_uri={redirect_uri}&"
+        "scope=email&"
+        "response_type=token&"
+        "v=5.131"
+    ).format()
+    print(vk_auth_url)
+    return render(request, 'index.html', {'vk_auth_url': vk_auth_url})
