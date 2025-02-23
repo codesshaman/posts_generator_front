@@ -10,43 +10,34 @@
 <body>
     <div class="auth-container">
         <h1>Добро пожаловать!</h1>
-        <p>Нажмите кнопку ниже, чтобы получить данные пользователя из VK</p>
-        <button onclick="getUserData()">Получить данные</button>
-        <pre id="user-info"></pre>
+        {% if access_token %}
+            <p>Токен авторизации: {{ access_token }}</p>
+            {% if user_data %}
+                <p>Данные пользователя:</p>
+                <pre id="user-info">{{ user_data|safe }}</pre>
+            {% endif %}
+        {% endif %}
+        {% if error_message %}
+            <p style="color: red;">{{ error_message }}</p>
+        {% endif %}
         <a href="/logout/">Выйти</a>
     </div>
 
     <script>
-        // Получаем access_token из URL фрагмента после редиректа от VK
+        // Проверяем наличие hash в URL
         const hash = window.location.hash.substring(1);
-        const params = new URLSearchParams(hash);
-        const accessToken = params.get('access_token');
-
-        function getUserData() {
-            console.log("Нажата кнопка 'Получить данные'");
-            fetch(`/user-data/?access_token=${accessToken}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    const userInfo = document.getElementById("user-info");
-                    userInfo.textContent = JSON.stringify(data, null, 2);
-                    userInfo.style.display = 'block';
-                })
-                .catch(error => {
-                    console.error("Ошибка:", error);
-                    document.getElementById("user-info").textContent = 
-                        `Ошибка при получении данных: ${error.message}`;
-                    document.getElementById("user-info").style.display = 'block';
-                });
-        }
-
-        // Очищаем hash из URL после получения токена
-        if (accessToken) {
-            window.location.hash = '';
+        if (hash) {
+            // Парсим параметры из hash
+            const params = new URLSearchParams(hash);
+            const accessToken = params.get('access_token');
+            
+            if (accessToken) {
+                // Перенаправляем на тот же URL с токеном в GET-параметрах
+                window.location.href = `/auth/?access_token=${accessToken}`;
+            } else {
+                // Очищаем hash, если токена нет
+                window.location.hash = '';
+            }
         }
     </script>
 </body>

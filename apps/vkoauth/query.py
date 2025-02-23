@@ -1,5 +1,6 @@
-from dotenv import load_doten
+from dotenv import load_dotenv
 import requests
+import os
 
 # Загружаем .env файл
 load_dotenv()
@@ -7,8 +8,8 @@ load_dotenv()
 # Устанавливаем debug mode
 debug = os.getenv('DEBUG')
 backend_url = os.getenv('BACKEND_HOST')
-if not backend_url.startwith('https://'):
-    backend_url = 'https://' + backend_url
+if not backend_url.startswith('https://'):
+    backend_url = 'https://' + backend_url + '/api/register/'
 
 
 class Query:

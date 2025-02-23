@@ -1,4 +1,4 @@
-from .views import user_data_api, logout_view, vk_auth
+from .views import user_data_api, logout_view, auth
 from django.urls import path
 from . import views
 
