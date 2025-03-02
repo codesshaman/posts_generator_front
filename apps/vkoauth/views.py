@@ -13,8 +13,7 @@ load_dotenv()
 debug = os.getenv('DEBUG')
 
 def auth(request):
-    """Отображает страницу авторизации с данными пользователя"""
-    if debug:  # Предполагается, что debug определен где-то в коде
+    if debug:
         print("Отображаем страницу auth")
     
     access_token = request.GET.get('access_token')
@@ -31,24 +30,31 @@ def auth(request):
             }
             
             response = requests.get(vk_api_url, params=params)
+            print("VK API response:", response.text)  # Отладка
             if response.ok:
                 user_data = response.json()
-                user_info = user_data['response'][0]
-                user_data = {
-                    'username': f"vk_{user_info['id']}",  # Формируем псевдо-username
-                    'photo_200': user_info['photo_200'],
-                    'vk_id': user_info['id'],
-                    'first_name': user_info.get('first_name', ''),
-                    'last_name': user_info.get('last_name', ''),
-                    'email': user_info.get('email', ''),  # Email доступен только если разрешён приложением
-                }
-
-                backend_query = Query(user_data, access_token)
-                backend_query.query_to_backend()
+                if 'response' not in user_data or not user_data['response']:
+                    error_message = "Некорректный ответ от VK API"
+                else:
+                    user_info = user_data['response'][0]
+                    user_data = {
+                        'username': f"vk_{user_info['id']}",
+                        'photo_200': user_info['photo_200'],
+                        'vk_id': user_info['id'],
+                        'first_name': user_info.get('first_name', ''),
+                        'last_name': user_info.get('last_name', ''),
+                        'email': user_info.get('email', ''),
+                    }
+                    backend_query = Query(user_data, access_token)
+                    backend_response = backend_query.query_to_backend()
+                    print("Backend response:", backend_response)  # Отладка
             else:
-                error_message = f"Ошибка VK API: {response.status_code}"
+                error_message = f"Ошибка VK API: {response.status_code} - {response.text}"
         except requests.RequestException as e:
             error_message = f"Ошибка при получении данных: {str(e)}"
+        except Exception as e:
+            error_message = f"Неизвестная ошибка: {str(e)}"
+            print("Unexpected error:", str(e))  # Отладка
     else:
         error_message = "Токен авторизации отсутствует"
 
@@ -61,9 +67,11 @@ def auth(request):
     
     return render(request, "vk_auth.html", context)
 
+
 def logout_view(request):
     # Здесь должна быть логика выхода, например:
     return render(request, "logout.html")
+
 
 def user_data_api(request):
     """
@@ -119,22 +127,23 @@ def user_data_api(request):
 
         return JsonResponse({'error': f'Failed to fetch VK data: {str(e)}'}, status=500)
 
+
 def logout_view(request):
     """Простая заглушка для выхода (без реальной аутентификации)"""
     if debug:
         print("Выходим из аккаунта")
     return render(request, 'vk_logauth.html')
 
-def vk_auth(request):
-    """Отображает страницу авторизации через VK с динамической ссылкой."""
-    vk_auth_url = (
-        "https://oauth.vk.com/authorize?"
-        "client_id={client_id}&"
-        "display=page&"
-        "redirect_uri={redirect_uri}&"
-        "scope=email&"
-        "response_type=token&"
-        "v=5.131"
-    ).format()
-    print(vk_auth_url)
-    return render(request, 'index.html', {'vk_auth_url': vk_auth_url})
+# def vk_auth(request):
+#     """Отображает страницу авторизации через VK с динамической ссылкой."""
+#     vk_auth_url = (
+#         "https://oauth.vk.com/authorize?"
+#         "client_id={client_id}&"
+#         "display=page&"
+#         "redirect_uri={redirect_uri}&"
+#         "scope=email&"
+#         "response_type=token&"
+#         "v=5.131"
+#     ).format()
+#     print(vk_auth_url)
+#     return render(request, 'index.html', {'vk_auth_url': vk_auth_url})
