@@ -38,9 +38,8 @@ class Query:
             "email": self.vk_data.get("email", ""),
             "name": self.vk_data.get("first_name", ""),
             "surname": self.vk_data.get("last_name", ""),
-            "password": "",                  # Пароль пустой для VK
+            "password": "",
             "password_confirm": "",
-            "is_staff": "False",
             "referrer": "1"
         }
         if debug:
