@@ -154,7 +154,12 @@ def logout_view(request):
     """Простая заглушка для выхода (без реальной аутентификации)"""
     if debug:
         print("Выходим из аккаунта")
-    return render(request, 'authentications/vk_logauth.html')
+    return render(request, 'authentications/vk_logauth.html',  {
+        "title": "Счастливого пути!",
+        "h1_text": "Вы успешно разлогинились!",
+        "h2_text": "Чтобы вернуться на главную страницу, нажимте кнопку",
+        "button_text": "Главная страница",
+    })
 
 # def vk_auth(request):
 #     """Отображает страницу авторизации через VK с динамической ссылкой."""
