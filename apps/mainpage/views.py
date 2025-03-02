@@ -11,28 +11,17 @@ load_dotenv()
 debug = os.getenv('DEBUG')
 
 # Получаем данные приложения VK
-client_id = os.getenv('VK_CLIENT_ID')
-redirect_uri = os.getenv('VK_REDIRECT_URI')
+host = os.getenv('PUBLIC_HOST')
 
 def index(request):
     """Отображает главную страницу"""
     if debug:
         print("Отображаем главную страницу")
-    vk_auth_url = (
-        "https://oauth.vk.com/authorize?"
-        "client_id={client_id}&"
-        "display=page&"
-        "redirect_uri={redirect_uri}&"
-        "scope=email&"
-        "response_type=token&"
-        "v=5.131"
-    ).format(
-        client_id=client_id,
-        redirect_uri=redirect_uri,
-    )
+    auth_url = "https://" + host + "/authentications/"
     return render(request, "index.html", {
-            "title": "Добро пожаловать!",
-            "h2_text": "Авторизация!",
-            "vk_auth_text": "Войдите через VK для продолжения!",
-            'vk_auth_url': vk_auth_url
+            "title": "Добро пожаловать",
+            "h2_text": "Главная страница",
+            "auth_text": "Войдите для продолжения!",
+            "auth_button_text": "Аутентификация",
+            'auth_url': auth_url
         })
