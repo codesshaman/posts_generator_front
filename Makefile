@@ -23,6 +23,10 @@ all:
 	@printf "$(OK_COLOR)==== Starting the configuration ${name} ====$(NO_COLOR)\n"
 	$(GUNICORN) --bind $(ALLOWED_HOST):$(ALLOWED_PORT) project.wsgi:application
 
+ssl:
+	@printf "$(OK_COLOR)==== Starting the configuration ${name} ====$(NO_COLOR)\n"
+	$(GUNICORN) --certfile=certs/cert.pem --keyfile=certs/key.pem --bind $(ALLOWED_HOST):$(ALLOWED_PORT) project.wsgi:application
+
 app:
 	@printf "$(OK_COLOR)==== Creating a new application ====$(NO_COLOR)\n"
 	@$(eval args := $(words $(filter-out --,$(MAKECMDGOALS))))
@@ -71,6 +75,7 @@ help:
 	@echo -e "$(WARN_COLOR)- make req				: Install pip requirements"
 	@echo -e "$(WARN_COLOR)- make root				: Create superuser"
 	@echo -e "$(WARN_COLOR)- make static				: Collect static"
+	@echo -e "$(WARN_COLOR)- make ssl				: Launch with ssl certificates"
 	@echo -e "$(WARN_COLOR)- make venv				: Create virtual environment"
 	@echo -e "$(WARN_COLOR)- make vexit				: Exit from virtual environment"
 	@echo -e "$(WARN_COLOR)- make clean				: Remove python cache"
