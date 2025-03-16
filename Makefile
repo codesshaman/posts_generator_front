@@ -152,5 +152,5 @@ fclean: clean
 	@printf "$(ERROR_COLOR)==== Cleaning configuration ${name}... ====$(NO_COLOR)\n"
 	@rm -rf ${VENV}
 
-.PHONY	: all app freeze h help install make migrate req root static venv vexit clean fclean
+.PHONY	: all app freeze certs h help install make migrate req root static venv vexit clean fclean
 
