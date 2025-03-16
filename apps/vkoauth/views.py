@@ -15,28 +15,28 @@ debug = os.getenv('DEBUG')
 client_id = os.getenv('VK_CLIENT_ID')
 redirect_uri = os.getenv('VK_REDIRECT_URI')
 
-def authentications(request):
-    """Отображает главную страницу"""
-    if debug:
-        print("Отображаем главную страницу")
-    vk_auth_url = (
-        "https://oauth.vk.com/authorize?"
-        "client_id={client_id}&"
-        "display=page&"
-        "redirect_uri={redirect_uri}&"
-        "scope=email&"
-        "response_type=token&"
-        "v=5.131"
-    ).format(
-        client_id=client_id,
-        redirect_uri=redirect_uri,
-    )
-    return render(request, "authentications/auth.html", {
-            "title": "Афтаризуйтесь!",
-            "h2_text": "Авторизация!",
-            "vk_auth_text": "Войдите через VK для продолжения!",
-            'vk_auth_url': vk_auth_url
-        })
+# def authentications(request):
+#     """Отображает страницу входа"""
+#     if debug:
+#         print("Отображаем главную страницу")
+#     vk_auth_url = (
+#         "https://oauth.vk.com/authorize?"
+#         "client_id={client_id}&"
+#         "display=page&"
+#         "redirect_uri={redirect_uri}&"
+#         "scope=email&"
+#         "response_type=token&"
+#         "v=5.131"
+#     ).format(
+#         client_id=client_id,
+#         redirect_uri=redirect_uri,
+#     )
+#     return render(request, "authentications/auth.html", {
+#             "title": "Афтаризуйтесь!",
+#             "h2_text": "Авторизация!",
+#             "vk_auth_text": "Войдите через VK для продолжения!",
+#             'vk_auth_url': vk_auth_url
+#         })
 
 
 def auth(request):
@@ -161,16 +161,23 @@ def logout_view(request):
         "button_text": "Главная страница",
     })
 
-# def vk_auth(request):
-#     """Отображает страницу авторизации через VK с динамической ссылкой."""
-#     vk_auth_url = (
-#         "https://oauth.vk.com/authorize?"
-#         "client_id={client_id}&"
-#         "display=page&"
-#         "redirect_uri={redirect_uri}&"
-#         "scope=email&"
-#         "response_type=token&"
-#         "v=5.131"
-#     ).format()
-#     print(vk_auth_url)
-#     return render(request, 'index.html', {'vk_auth_url': vk_auth_url})
+def authentications(request):
+    """Отображает страницу авторизации через VK с динамической ссылкой."""
+    vk_auth_url = (
+        "https://oauth.vk.com/authorize?"
+        f"client_id={client_id}&"
+        "display=page&"
+        "redirect_uri=https://devfront.groupposter.ru/auth/&"
+        "scope=email&"
+        "response_type=code&"  # Используем code вместо token
+        "v=5.131"
+    )
+    if debug:
+        print("VK Auth URL:", vk_auth_url)
+    return render(request, "authentications/auth.html", {
+        "title": "Афтаризуйтесь!",
+        "h2_text": "Авторизация!",
+        "vk_auth_text": "Войдите через VK для продолжения!",
+        'vk_auth_url': vk_auth_url,
+        'client_id': client_id  # Передаем client_id в шаблон
+    })

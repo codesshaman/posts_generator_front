@@ -11,9 +11,21 @@
     <div class="container">
         <h2>{{ h2_text }}</h2>
         <p>{{ vk_auth_text }}</p>
-        <a href="{{ vk_auth_url }}" class="vk-button">
-            Войти через VK
-        </a>
+        <a href="{{ vk_auth_url }}" class="vk-button">Войти через VK</a>
     </div>
+
+    <script>
+        // Передаем client_id из Python в JavaScript
+        const clientId = "{{ client_id|escapejs }}";
+        console.log("Client ID:", clientId);
+
+        // Пример: динамическое формирование URL на клиенте (опционально)
+        const redirectUri = "https://devfront.groupposter.ru/auth/";
+        const vkAuthUrl = `https://oauth.vk.com/authorize?client_id=${clientId}&display=page&redirect_uri=${redirectUri}&scope=email&response_type=code&v=5.131`;
+        console.log("Dynamic VK Auth URL:", vkAuthUrl);
+
+        // Можно обновить ссылку динамически, если нужно
+        document.querySelector('.vk-button').href = vkAuthUrl;
+    </script>
 </body>
 </html>
