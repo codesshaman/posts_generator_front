@@ -408,7 +408,7 @@
     <div class="load-more-container text-center my-5">
         <button id="loadMoreBtn" class="btn btn-load-more">
             <i class="ph ph-arrow-down me-2"></i>
-            Загрузить еще
+            {{ load_more_text }}
         </button>
         <!-- Заменяем стандартный спиннер Bootstrap на кастомный -->
         <div id="loadingSpinner" class="custom-spinner d-none">
@@ -419,6 +419,15 @@
     </div>
     {% endif %}
 
+    <!-- Перевод для скрипта -->
+    <script>
+        window.translations = {
+            readButton: "{{ read_button }}",
+            loadMoreText: "{{ load_more_text }}",
+            noMorePostsText: "{{ no_more_posts_text }}",
+            PublishText: "{{ publish_text }}"
+        };
+    </script>
     <!-- Кнопка загрузить еще посты -->
     <script src = "{% static 'js/load_articles.js' %}"></script>
 

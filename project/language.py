@@ -1,28 +1,33 @@
-from django.http import HttpRequest
-from django.utils.translation import get_language_from_request
+import os
+
+def load_translations(file_path="translate.txt"):
+    translations = {}
+    with open(file_path, "r", encoding="utf-8") as f:
+        first_line = f.readline().strip()
+        if not first_line:
+            return translations
+
+        separator = first_line[0]
+        parts = first_line.split(separator)
+
+        if len(parts) > 1:
+            key = parts[1]
+            translations[key] = parts[2:]
+
+        # Читаем оставшиеся строки
+        for line in f:
+            parts = line.strip().split(separator)
+            if len(parts) > 1:
+                key = parts[1]
+                translations[key] = parts[2:]
+
+    return translations
 
 
-def translator(ru_value: str, en_value: str, request: HttpRequest) -> str:
-    """Возвращает значение в зависимости от языка пользователя, определённого из заголовка Accept-Language."""
+def translate(text, lang="en"):
+    translations = load_translations()
 
-    lang = get_language_from_request(request)  # Определяем язык из заголовка
-    accept_lang = request.headers.get('Accept-Language', 'не указан')  # Читаем заголовок Accept-Language
-
-    # print(f"Django Language: {lang}, Accept-Language: {accept_lang}")  # Логируем для отладки
-
-    if lang.startswith("ru"):  # Если язык начинается с "ru", возвращаем русское значение
-        return ru_value
-    return en_value  # В остальных случаях — английское
-
-def fs_translator(request: HttpRequest, ru_value: str, en_value: str, *args, **kwargs) -> str:
-    """Форматирует строку в зависимости от языка пользователя, подставляя args и kwargs в порядке их передачи."""
-
-    lang = get_language_from_request(request)
-    accept_lang = request.headers.get('Accept-Language', 'не указан')
-
-    print(f"Django Language: {lang}, Accept-Language: {accept_lang}")  # Лог для проверки
-
-    template = ru_value if lang.startswith("ru") else en_value
-
-    # Форматируем строку, передавая позиционные и именованные аргументы
-    return template.format(*args, **kwargs)
+    lang_index = {"ru": 0, "en": 1, "fr": 2}
+    if text in translations and lang in lang_index:
+        return translations[text][lang_index[lang] - 1]
+    return text

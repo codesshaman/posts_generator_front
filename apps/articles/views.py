@@ -1,8 +1,13 @@
+from project.language import translate
 from django.http import JsonResponse
 from django.shortcuts import render
 from dotenv import load_dotenv
 from datetime import datetime
 import os
+
+
+# Устанавливаем язык
+lang = "en"
 
 # Загружаем .env файл
 load_dotenv()
@@ -35,10 +40,12 @@ def articles(request):
     return render(request, "articles/articles_list.html", {
         "articles": initial_articles,
         "has_more": has_more,
-        "title": "Статьи",
-        "h2_text": "Статьи",
-        "publish_text": "Публикация: ",
-        "read_button": "Читать статью"
+        "title": translate("Статьи", lang),
+        "h2_text": translate("Статьи", lang),
+        "publish_text": translate("Публикация: ", lang),
+        "read_button": translate("Читать статью", lang),
+        "load_more_text": translate("Загрузить ещё: ", lang),
+        "no_more_posts_text": translate("Больше постов нет", lang),
     })
 
 def load_more_articles(request):

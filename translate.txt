@@ -1,0 +1,5 @@
+^Статьи^Articles^
+^Публикация: ^Publication: ^
+^Читать статью^Read the article^
+^Больше постов нет^Has no more posts^
+^Загрузить ещё^Load more^
