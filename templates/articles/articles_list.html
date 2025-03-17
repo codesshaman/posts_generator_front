@@ -86,6 +86,24 @@
                 <div class="sidebar">
                     <div class="d-flex flex-column flex-shrink-0 p-3 h-100">
                         <ul class="nav nav-pills flex-column mb-auto">
+                            <div class="dropdown me-2 mb-2 mb-md-0">
+                                <button class="btn btn-light dropdown-toggle" type="button" id="platformDropdown"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Все платформы
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="platformDropdown">
+                                    <li><a class="dropdown-item" href="#"><i class="ph ph-globe me-2"></i> Все платформы</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="#"><i class="ph ph-facebook-logo me-2"></i>
+                                            Facebook</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="ph ph-instagram-logo me-2"></i>
+                                            Instagram</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="ph ph-twitter-logo me-2"></i>
+                                            Twitter</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="ph ph-linkedin-logo me-2"></i>
+                                            LinkedIn</a></li>
+                                </ul>
+                            </div>
                             <li class="nav-item">
                                 <a href="#" class="nav-link active d-flex align-items-center ">
                                     <i class="ph ph-file-text me-3"></i> Мои посты
@@ -204,24 +222,24 @@
                                         старые</a></li>
                             </ul>
                         </div>
-                        <div class="dropdown me-2 mb-2 mb-md-0">
-                            <button class="btn btn-light dropdown-toggle" type="button" id="platformDropdown"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Все платформы
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="platformDropdown">
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-globe me-2"></i> Все платформы</a>
-                                </li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-facebook-logo me-2"></i>
-                                        Facebook</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-instagram-logo me-2"></i>
-                                        Instagram</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-twitter-logo me-2"></i>
-                                        Twitter</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-linkedin-logo me-2"></i>
-                                        LinkedIn</a></li>
-                            </ul>
-                        </div>
+<!--                        <div class="dropdown me-2 mb-2 mb-md-0">-->
+<!--                            <button class="btn btn-light dropdown-toggle" type="button" id="platformDropdown"-->
+<!--                                data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--                                Все платформы-->
+<!--                            </button>-->
+<!--                            <ul class="dropdown-menu" aria-labelledby="platformDropdown">-->
+<!--                                <li><a class="dropdown-item" href="#"><i class="ph ph-globe me-2"></i> Все платформы</a>-->
+<!--                                </li>-->
+<!--                                <li><a class="dropdown-item" href="#"><i class="ph ph-facebook-logo me-2"></i>-->
+<!--                                        Facebook</a></li>-->
+<!--                                <li><a class="dropdown-item" href="#"><i class="ph ph-instagram-logo me-2"></i>-->
+<!--                                        Instagram</a></li>-->
+<!--                                <li><a class="dropdown-item" href="#"><i class="ph ph-twitter-logo me-2"></i>-->
+<!--                                        Twitter</a></li>-->
+<!--                                <li><a class="dropdown-item" href="#"><i class="ph ph-linkedin-logo me-2"></i>-->
+<!--                                        LinkedIn</a></li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
                         <div class="dropdown me-2 mb-2 mb-md-0">
                             <button class="btn btn-light dropdown-toggle" type="button" id="statusDropdown"
                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -243,125 +261,166 @@
 
 
                 <!-- Список постов -->
-                <div class="card mb-4 post-card">
-                    <div class="row g-0">
-                        <div class="col-md-3 position-relative">
-                            <img src="https://venyoo.ru/blog/wp-content/uploads/2017/04/10_Yml6ZXNwcm9jZXNz.jpg"
-                                class="img-fluid rounded-start post-image" alt="Изображение поста">
-                            <span class="post-status status-published">Опубликовано</span>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="card-body d-flex flex-column h-100">
-                                <div class="post-meta mb-2">
-                                    <span class="platform-badge platform-linkedin">LinkedIn</span>
-                                    <span class="post-time"><i class="ph ph-clock me-1"></i> 12.05.2023, 14:30</span>
-                                </div>
-                                <h5 class="card-title mb-2">10 способов увеличить конверсию вашего сайта</h5>
-                                <p class="card-text mb-3 post-description">Статья о методах повышения конверсии
-                                    веб-сайтов с практическими советами и рекомендациями для бизнеса любого размера.
-                                    Узнайте, как улучшить показатели...</p>
-                                <div class="post-actions mt-auto">
-                                    <button class="btn-edit">Редактировать</button>
-                                    <button class="btn-delete">Удалить</button>
-                                </div>
+<!--                    <div class="card mb-4 post-card">-->
+<!--                        <div class="row g-0">-->
+<!--                            <div class="col-md-3 position-relative">-->
+<!--                                <img src="https://venyoo.ru/blog/wp-content/uploads/2017/04/10_Yml6ZXNwcm9jZXNz.jpg"-->
+<!--                                    class="img-fluid rounded-start post-image" alt="Изображение поста">-->
+<!--                                <span class="post-status status-published">Опубликовано</span>-->
+<!--                            </div>-->
+<!--                        <div class="col-md-9">-->
+<!--                            <div class="card-body d-flex flex-column h-100">-->
+<!--                                <div class="post-meta mb-2">-->
+<!--                                    <span class="platform-badge platform-linkedin">LinkedIn</span>-->
+<!--                                    <span class="post-time"><i class="ph ph-clock me-1"></i> 12.05.2023, 14:30</span>-->
+<!--                                </div>-->
+<!--                                <h5 class="card-title mb-2">10 способов увеличить конверсию вашего сайта</h5>-->
+<!--                                <p class="card-text mb-3 post-description">Статья о методах повышения конверсии-->
+<!--                                    веб-сайтов с практическими советами и рекомендациями для бизнеса любого размера.-->
+<!--                                    Узнайте, как улучшить показатели...</p>-->
+<!--                                <div class="post-actions mt-auto">-->
+<!--                                    <button class="btn-edit">Редактировать</button>-->
+<!--                                    <button class="btn-delete">Удалить</button>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="card mb-4 post-card">-->
+<!--                    <div class="row g-0">-->
+<!--                        <div class="col-md-3 position-relative">-->
+<!--                            <img src="https://sberbs.ru/uploads/models/announcement/announcement_image/70/0._Image_by_Freepik.jpg"-->
+<!--                                class="img-fluid rounded-start post-image" alt="Изображение поста">-->
+<!--                            <span class="post-status status-draft">Черновик</span>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-9">-->
+<!--                            <div class="card-body d-flex flex-column h-100">-->
+<!--                                <div class="post-meta mb-2">-->
+<!--                                    <span class="platform-badge platform-facebook">Facebook</span>-->
+<!--                                    <span class="post-time"><i class="ph ph-clock me-1"></i> 08.05.2023, 10:15</span>-->
+<!--                                </div>-->
+<!--                                <h5 class="card-title mb-2">Искусственный интеллект в маркетинге: тренды 2023</h5>-->
+<!--                                <p class="card-text mb-3 post-description">Обзор последних трендов использования ИИ в-->
+<!--                                    маркетинговых стратегиях. Как искусственный интеллект меняет подход к взаимодействию-->
+<!--                                    с клиентами...</p>-->
+<!--                                <div class="post-actions mt-auto">-->
+<!--                                    <button class="btn-edit" data-post-id="123">Редактировать</button>-->
+<!--                                    <button class="btn-delete" data-post-id="123">Удалить</button>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="card mb-4 post-card">-->
+<!--                    <div class="row g-0">-->
+<!--                        <div class="col-md-3 position-relative">-->
+<!--                            <img src="https://s0.rbk.ru/v6_top_pics/media/img/2/34/347186930962342.png"-->
+<!--                                class="img-fluid rounded-start post-image" alt="Изображение поста">-->
+<!--                            <span class="post-status status-queued">В очереди</span>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-9">-->
+<!--                            <div class="card-body d-flex flex-column h-100">-->
+<!--                                <div class="post-meta mb-2">-->
+<!--                                    <span class="platform-badge platform-instagram">Instagram</span>-->
+<!--                                    <span class="post-time"><i class="ph ph-clock me-1"></i> Публикация: 20.05.2023,-->
+<!--                                        09:00</span>-->
+<!--                                </div>-->
+<!--                                <h5 class="card-title mb-2">5 эффективных тактик email-маркетинга</h5>-->
+<!--                                <p class="card-text post-description">Руководство по созданию эффективных email-кампаний-->
+<!--                                    для вашего бизнеса. Узнайте, как повысить открываемость писем и конверсию...</p>-->
+<!--                                <div class="post-actions mt-auto">-->
+<!--                                    <button class="btn-edit">Редактировать</button>-->
+<!--                                    <button class="btn-delete">Удалить</button>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--            Цикл вывода всех имеющихся статей   -->
+<!--                {% for article in articles %}-->
+<!--                <div class="card mb-4 post-card">-->
+<!--                    <div class="row g-0">-->
+<!--                        <div class="col-md-3 position-relative">-->
+<!--                            <img src={{ article.image }}-->
+<!--                                class="img-fluid rounded-start post-image" alt="Изображение поста">-->
+<!--&lt;!&ndash;                            <span class="post-status status-queued">В очереди</span>&ndash;&gt;-->
+<!--                        </div>-->
+<!--                        <div class="col-md-9">-->
+<!--                            <div class="card-body d-flex flex-column h-100">-->
+<!--                                <div class="post-meta mb-2">-->
+<!--                                    <span class="platform-badge platform-instagram">{{ article.category_id }}</span>-->
+<!--                                    <span class="post-time">-->
+<!--                                        <i class="ph ph-clock me-1"></i>-->
+<!--                                        {{ publish_text }}{{ article.publish_date|date:"d.m.Y H:i" }}-->
+<!--                                    </span>-->
+<!--                                </div>-->
+<!--                                <h5 class="card-title mb-2">{{ article.title }}</h5>-->
+<!--                                <p class="card-text post-description">{{ article.description }}</p>-->
+<!--                                <div class="post-actions mt-auto">-->
+<!--                                    <button class="btn-read">{{ read_button }}</button>-->
+<!--&lt;!&ndash;                                    <button class="btn-delete">{{ article.author_id }}</button>&ndash;&gt;-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                {% empty %}-->
+<!--                    <p>Статей пока нет.</p>-->
+<!--                {% endfor %}-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!-- Контейнер для статей -->
+    <div id="articles-list">
+        {% for article in articles %}
+            <div class="card mb-4 post-card">
+                <div class="row g-0">
+                    <div class="col-md-3 position-relative">
+                        <img src="{{ article.image }}" class="img-fluid rounded-start post-image" alt="Изображение поста">
+                    </div>
+                    <div class="col-md-9">
+                        <div class="card-body d-flex flex-column h-100">
+                            <div class="post-meta mb-2">
+                                <span class="platform-badge platform-instagram">{{ article.category_id }}</span>
+                                <span class="post-time">
+                                    <i class="ph ph-clock me-1"></i>
+                                    {{ publish_text }}{{ article.publish_date|date:"d.m.Y H:i" }}
+                                </span>
+                            </div>
+                            <h5 class="card-title mb-2">{{ article.title }}</h5>
+                            <p class="card-text post-description">{{ article.description }}</p>
+                            <div class="post-actions mt-auto">
+                                <button class="btn-read">{{ read_button }}</button>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="card mb-4 post-card">
-                    <div class="row g-0">
-                        <div class="col-md-3 position-relative">
-                            <img src="https://sberbs.ru/uploads/models/announcement/announcement_image/70/0._Image_by_Freepik.jpg"
-                                class="img-fluid rounded-start post-image" alt="Изображение поста">
-                            <span class="post-status status-draft">Черновик</span>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="card-body d-flex flex-column h-100">
-                                <div class="post-meta mb-2">
-                                    <span class="platform-badge platform-facebook">Facebook</span>
-                                    <span class="post-time"><i class="ph ph-clock me-1"></i> 08.05.2023, 10:15</span>
-                                </div>
-                                <h5 class="card-title mb-2">Искусственный интеллект в маркетинге: тренды 2023</h5>
-                                <p class="card-text mb-3 post-description">Обзор последних трендов использования ИИ в
-                                    маркетинговых стратегиях. Как искусственный интеллект меняет подход к взаимодействию
-                                    с клиентами...</p>
-                                <div class="post-actions mt-auto">
-                                    <button class="btn-edit" data-post-id="123">Редактировать</button>
-                                    <button class="btn-delete" data-post-id="123">Удалить</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card mb-4 post-card">
-                    <div class="row g-0">
-                        <div class="col-md-3 position-relative">
-                            <img src="https://s0.rbk.ru/v6_top_pics/media/img/2/34/347186930962342.png"
-                                class="img-fluid rounded-start post-image" alt="Изображение поста">
-                            <span class="post-status status-queued">В очереди</span>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="card-body d-flex flex-column h-100">
-                                <div class="post-meta mb-2">
-                                    <span class="platform-badge platform-instagram">Instagram</span>
-                                    <span class="post-time"><i class="ph ph-clock me-1"></i> Публикация: 20.05.2023,
-                                        09:00</span>
-                                </div>
-                                <h5 class="card-title mb-2">5 эффективных тактик email-маркетинга</h5>
-                                <p class="card-text post-description">Руководство по созданию эффективных email-кампаний
-                                    для вашего бизнеса. Узнайте, как повысить открываемость писем и конверсию...</p>
-                                <div class="post-actions mt-auto">
-                                    <button class="btn-edit">Редактировать</button>
-                                    <button class="btn-delete">Удалить</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mb-4 post-card">
-                    <div class="row g-0">
-                        <div class="col-md-3 position-relative">
-                            <img src="https://s0.rbk.ru/v6_top_pics/media/img/2/34/347186930962342.png"
-                                class="img-fluid rounded-start post-image" alt="Изображение поста">
-                            <span class="post-status status-queued">В очереди</span>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="card-body d-flex flex-column h-100">
-                                <div class="post-meta mb-2">
-                                    <span class="platform-badge platform-instagram">Instagram</span>
-                                    <span class="post-time"><i class="ph ph-clock me-1"></i> Публикация: 20.05.2023,
-                                        09:00</span>
-                                </div>
-                                <h5 class="card-title mb-2">5 эффективных тактик email-маркетинга</h5>
-                                <p class="card-text post-description">Руководство по созданию эффективных email-кампаний
-                                    для вашего бизнеса. Узнайте, как повысить открываемость писем и конверсию...</p>
-                                <div class="post-actions mt-auto">
-                                    <button class="btn-edit">Редактировать</button>
-                                    <button class="btn-delete">Удалить</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="load-more-container text-center my-5">
-                    <button id="loadMoreBtn" class="btn btn-load-more">
-                        <i class="ph ph-arrow-down me-2"></i>
-                        Загрузить еще
-                    </button>
-                    <!-- Заменяем стандартный спиннер Bootstrap на кастомный -->
-                    <div id="loadingSpinner" class="custom-spinner d-none">
-                        <svg viewBox="0 0 50 50" class="spinner-svg">
-                            <circle class="spinner-path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
-                        </svg>
-                    </div>
-                </div>
-
-
             </div>
+        {% empty %}
+            <p>Статей пока нет.</p>
+        {% endfor %}
+    </div>
+
+    {% if has_more %}
+    <div class="load-more-container text-center my-5">
+        <button id="loadMoreBtn" class="btn btn-load-more">
+            <i class="ph ph-arrow-down me-2"></i>
+            Загрузить еще
+        </button>
+        <!-- Заменяем стандартный спиннер Bootstrap на кастомный -->
+        <div id="loadingSpinner" class="custom-spinner d-none">
+            <svg viewBox="0 0 50 50" class="spinner-svg">
+                <circle class="spinner-path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+            </svg>
         </div>
     </div>
+    {% endif %}
+
+    <!-- Кнопка загрузить еще посты -->
+    <script src = "{% static 'js/load_articles.js' %}"></script>
 
     <!-- JavaScript для работы с мобильным меню -->
     <script src = "{% static 'js/mobile_menu.js' %}"></script>
@@ -463,7 +522,7 @@
     <script src = "{% static 'js/post_edit.js' %}"></script>
 
     <!-- Кнопка загрузить еще посты -->
-    <script src = "{% static 'js/upload_posts.js' %}"></script>
+<!--    <script src = "{% static 'js/upload_posts.js' %}"></script>-->
 
     <!-- Phosphor Icons JavaScript -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
