@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     loadingSpinner.remove();
                     const endMessage = document.createElement('div');
                     endMessage.className = 'card mb-4 post-card text-center';
-                    endMessage.innerHTML = `${window.translations.loadMoreText}`;
+                    endMessage.innerHTML = window.translations.noMorePostsText;
                     document.querySelector('.load-more-container').appendChild(endMessage);
                 } else {
                     loadMoreBtn.disabled = false;

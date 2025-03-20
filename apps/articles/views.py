@@ -7,7 +7,7 @@ import os
 
 
 # Устанавливаем язык
-lang = "en"
+lang = "ru"
 
 # Загружаем .env файл
 load_dotenv()
@@ -44,7 +44,7 @@ def articles(request):
         "h2_text": translate("Статьи", lang),
         "publish_text": translate("Публикация: ", lang),
         "read_button": translate("Читать статью", lang),
-        "load_more_text": translate("Загрузить ещё: ", lang),
+        "load_more_text": translate("Загрузить ещё", lang),
         "no_more_posts_text": translate("Больше постов нет", lang),
     })
 
