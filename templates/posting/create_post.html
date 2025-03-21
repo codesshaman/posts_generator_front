@@ -1,0 +1,1412 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создать пост - Платформа генерации текста с ИИ</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Подключение внешнего CSS файла -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Дополнительные стили для страницы создания поста -->
+    <link rel="stylesheet" href="create-post.css">
+</head>
+<body>
+    <!-- Шапка/Навигация -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container-fluid px-4">
+            <!-- Кнопка мобильного меню -->
+            <button class="btn d-lg-none toggle-sidebar me-2">
+                <i class="ph ph-list"></i>
+            </button>
+
+            <!-- Логотип -->
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="rgb(79, 70, 229)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bot h-8 w-8 me-2">
+                    <path d="M12 8V4H8"></path>
+                    <rect width="16" height="12" x="4" y="8" rx="2"></rect>
+                    <path d="M2 14h2"></path>
+                    <path d="M20 14h2"></path>
+                    <path d="M15 13v2"></path>
+                    <path d="M9 13v2"></path>
+                </svg>
+                <span class="logo-text">ContentAI</span>
+            </a>
+
+            <!-- Правая часть навигации -->
+            <div class="navbar-nav ms-auto d-flex align-items-center">
+                <div class="user-profile-container d-flex align-items-center me-3 d-none d-lg-flex">
+                    <div class="user-avatar d-flex align-items-center justify-content-center me-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgb(79, 70, 229)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user">
+                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="username-text">Иван Иванов</span>
+                    </div>
+                </div>
+                <button class="btn btn-custom-logout d-none d-lg-flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out me-1">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" x2="9" y1="12" y2="12"></line>
+                    </svg>
+                    <span>Выйти</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Оверлей для мобильного меню -->
+    <div class="overlay"></div>
+
+    <!-- Основная область контента -->
+    <div class="container-fluid" style="margin-top: 40px;">
+        <div class="row g-0">
+            <!-- Боковое меню -->
+            <div class="col-lg-3 col-md-4 px-0 sidebar-column">
+                <div class="sidebar">
+                    <div class="d-flex flex-column flex-shrink-0 p-3 h-100">
+                        <ul class="nav nav-pills flex-column mb-auto">
+                            <li class="nav-item">
+                                <a href="index.html" class="nav-link d-flex align-items-center">
+                                    <i class="ph ph-file-text me-3"></i> Мои посты
+                                </a>
+                            </li>
+                            <li class="nav-item mt-3">
+                                <a href="create-post.html" class="nav-link active d-flex align-items-center">
+                                    <i class="ph ph-plus-circle me-3"></i> Создать пост
+                                </a>
+                            </li>
+                            <li class="nav-item mt-3">
+                                <a href="queue.html" class="nav-link d-flex align-items-center">
+                                    <i class="ph ph-queue me-3"></i> Очередь публикаций
+                                </a>
+                            </li>
+                            <li class="nav-item mt-3">
+                                <a href="autogeneration.html" class="nav-link d-flex align-items-center">
+                                    <i class="ph ph-magic-wand me-3"></i> Автогенерация постов
+                                </a>
+                            </li>
+                            <li class="nav-item mt-3">
+                                <a href="#" class="nav-link d-flex align-items-center">
+                                    <i class="ph ph-wallet me-3"></i> Моя подписка
+                                </a>
+                            </li>
+                            <li class="nav-item mt-3">
+                                <a href="#" class="nav-link d-flex align-items-center">
+                                    <i class="ph ph-gear me-3"></i> Настройки
+                                </a>
+                            </li>
+                        </ul>
+                        <hr class="mt-5">
+                        <!-- Использование токенов -->
+                        <div class="tokens-block mb-3">
+                            <!-- Первая строка: иконка и слово "Токены" -->
+                            <div class="d-flex align-items-center mb-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-2 text-indigo-600">
+                                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                                </svg>
+                                <span class="fw-bold">Токены</span>
+                            </div>
+
+                            <!-- Вторая строка: "Использовано" и счетчик токенов -->
+                            <div class="d-flex align-items-center mb-2">
+                                <small class="text-muted me-1">Использовано:</small>
+                                <span class="fw-bold small m-lg-auto">2,450 / 5,000</span>
+                            </div>
+
+                            <!-- Прогресс-бар и кнопка -->
+                            <div class="progress token-progress mb-3">
+                                <div class="progress-bar" role="progressbar" style="width: 49%" aria-valuenow="49" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <button class="btn btn-indigo w-100">Купить токены</button>
+                        </div>
+
+                        <!-- Кнопка выхода в мобильной версии (в самом низу) -->
+                        <div class="d-lg-none">
+                            <hr class="my-3">
+                            <a href="#" class="nav-link d-flex align-items-center text-danger">
+                                <i class="ph ph-sign-out me-2"></i> Выйти
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Основной контент -->
+            <div class="col-lg-9 col-md-9 mt-4  main-content">
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 mt-5">
+                    <!-- Контейнер для заголовка и имени пользователя -->
+                    <div class="d-flex justify-content-between align-items-center mb-3 mb-md-0">
+                        <h2 class="page-title m-0">Создать пост</h2>
+
+                        <!-- Имя пользователя для мобильной версии -->
+                        <div class="user-profile-container d-flex d-lg-none align-items-center">
+                            <div class="user-avatar d-flex align-items-center justify-content-center me-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgb(79, 70, 229)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user">
+                                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                            </div>
+                            <div>
+                                <span class="username-text">Иван Иванов</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Форма создания поста -->
+                <div class="card create-post-card">
+                    <div class="card-body">
+                        <form id="createPostForm">
+                            <!-- Заголовок поста -->
+                            <div class="mb-4">
+                                <label for="postTitle" class="form-label">Заголовок поста</label>
+                                <input type="text" class="form-control" id="postTitle" placeholder="Введите заголовок поста" required>
+                                <div class="form-text">Заголовок должен быть информативным и привлекательным</div>
+                            </div>
+
+                            <!-- Выбор платформы -->
+                            <div class="mb-4">
+                                <label class="form-label">Платформа</label>
+                                <div class="platform-selector">
+                                    <div class="form-check form-check-inline platform-option">
+                                        <input class="form-check-input" type="radio" name="platform" id="platformLinkedin" value="linkedin" checked>
+                                        <label class="form-check-label" for="platformLinkedin">
+                                            <i class="ph ph-linkedin-logo platform-icon linkedin"></i>
+                                            <span>LinkedIn</span>
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline platform-option">
+                                        <input class="form-check-input" type="radio" name="platform" id="platformFacebook" value="facebook">
+                                        <label class="form-check-label" for="platformFacebook">
+                                            <i class="ph ph-facebook-logo platform-icon facebook"></i>
+                                            <span>Facebook</span>
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline platform-option">
+                                        <input class="form-check-input" type="radio" name="platform" id="platformInstagram" value="instagram">
+                                        <label class="form-check-label" for="platformInstagram">
+                                            <i class="ph ph-instagram-logo platform-icon instagram"></i>
+                                            <span>Instagram</span>
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline platform-option">
+                                        <input class="form-check-input" type="radio" name="platform" id="platformTwitter" value="twitter">
+                                        <label class="form-check-label" for="platformTwitter">
+                                            <i class="ph ph-twitter-logo platform-icon twitter"></i>
+                                            <span>Twitter</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Содержание поста -->
+                            <div class="mb-4">
+                                <label for="postContent" class="form-label">Содержание поста</label>
+                                <div class="editor-toolbar">
+                                    <button type="button" class="btn btn-sm btn-editor" data-action="bold" title="Жирный">
+                                        <i class="ph ph-text-b"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-editor" data-action="italic" title="Курсив">
+                                        <i class="ph ph-text-italic"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-editor" data-action="underline" title="Подчеркнутый">
+                                        <i class="ph ph-text-underline"></i>
+                                    </button>
+                                    <span class="toolbar-divider"></span>
+                                    <button type="button" class="btn btn-sm btn-editor" data-action="heading" title="Заголовок">
+                                        <i class="ph ph-text-h"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-editor" data-action="list-ul" title="Маркированный список">
+                                        <i class="ph ph-list-bullets"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-editor" data-action="list-ol" title="Нумерованный список">
+                                        <i class="ph ph-list-numbers"></i>
+                                    </button>
+                                    <span class="toolbar-divider"></span>
+                                    <button type="button" class="btn btn-sm btn-editor" data-action="link" title="Ссылка">
+                                        <i class="ph ph-link"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-editor" data-action="image" title="Изображение">
+                                        <i class="ph ph-image"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-editor" data-action="emoji" title="Эмодзи">
+                                        <i class="ph ph-smiley"></i>
+                                    </button>
+                                </div>
+                                <textarea class="form-control content-editor" id="postContent" rows="8" placeholder="Введите содержание поста..." required></textarea>
+                                <div class="form-text">Рекомендуемая длина: 1500-2000 символов для LinkedIn, 250-500 для Facebook/Twitter</div>
+                            </div>
+
+                            <!-- Загрузка изображения -->
+                            <div class="mb-4">
+                                <label class="form-label">Изображение поста</label>
+                                <div class="image-upload-container">
+                                    <div class="image-upload-area" id="imageDropArea">
+                                        <input type="file" id="postImage" class="image-upload-input" accept="image/*" hidden>
+                                        <div class="image-upload-placeholder">
+                                            <i class="ph ph-image-square"></i>
+                                            <p>Перетащите изображение сюда или <span class="browse-link">выберите файл</span></p>
+                                            <small class="text-muted">PNG, JPG или GIF, максимум 5MB</small>
+                                            <div class="mt-3">
+                                                <button type="button" class="btn btn-outline-primary btn-sm" id="generateImageBtn">
+                                                    <i class="ph ph-magic-wand me-1"></i> Сгенерировать с помощью ИИ
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="image-preview" id="imagePreview">
+                                            <img src="" alt="Предпросмотр" id="previewImg">
+                                            <button type="button" class="btn btn-sm btn-remove-image" id="removeImage">
+                                                <i class="ph ph-x"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="image-suggestions">
+                                        <p class="suggestion-title">Или выберите из предложенных:</p>
+                                        <div class="suggestion-images">
+                                            <div class="suggestion-image" data-src="https://venyoo.ru/blog/wp-content/uploads/2017/04/10_Yml6ZXNwcm9jZXNz.jpg">
+                                                <img src="https://venyoo.ru/blog/wp-content/uploads/2017/04/10_Yml6ZXNwcm9jZXNz.jpg" alt="Предложение 1">
+                                            </div>
+                                            <div class="suggestion-image" data-src="https://sberbs.ru/uploads/models/announcement/announcement_image/70/0._Image_by_Freepik.jpg">
+                                                <img src="https://sberbs.ru/uploads/models/announcement/announcement_image/70/0._Image_by_Freepik.jpg" alt="Предложение 2">
+                                            </div>
+                                            <div class="suggestion-image" data-src="https://s0.rbk.ru/v6_top_pics/media/img/2/34/347186930962342.png">
+                                                <img src="https://s0.rbk.ru/v6_top_pics/media/img/2/34/347186930962342.png" alt="Предложение 3">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- Настройки публикации -->
+                            <div class="mb-4">
+                                <label class="form-label">Настройки публикации</label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-check form-switch mb-3">
+                                            <input class="form-check-input" type="checkbox" id="schedulePost">
+                                            <label class="form-check-label ms-sm-2" for="schedulePost">Запланировать публикацию</label>
+                                        </div>
+                                        <div id="scheduleOptions" class="schedule-options">
+                                            <div class="mb-3">
+                                                <label for="publishDate" class="form-label">Дата публикации</label>
+                                                <input type="date" class="form-control" id="publishDate">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="publishTime" class="form-label">Время публикации</label>
+                                                <input type="time" class="form-control" id="publishTime">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check form-switch mb-3">
+                                            <input class="form-check-input" type="checkbox" id="saveAsDraft" checked>
+                                            <label class="form-check-label ms-sm-2" for="saveAsDraft">Сохранить как черновик</label>
+                                        </div>
+                                        <div class="form-check form-switch mb-3">
+                                            <input class="form-check-input" type="checkbox" id="enableComments" checked>
+                                            <label class="form-check-label ms-sm-2" for="enableComments">Разрешить комментарии</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Хэштеги -->
+                            <div class="mb-4">
+                                <label for="postTags" class="form-label">Хэштеги</label>
+                                <div class="tags-input-container">
+                                    <div class="tags-container" id="tagsContainer"></div>
+                                    <input type="text" class="form-control tags-input" id="postTags" placeholder="Добавьте хэштег и нажмите Enter">
+                                </div>
+                                <div class="form-text">Добавьте релевантные хэштеги для увеличения охвата</div>
+                            </div>
+
+                            <!-- Кнопки действий -->
+                            <div class="d-flex justify-content-between mt-5">
+                                <div>
+                                    <button type="button" class="btn btn-outline-secondary me-2" id="previewPostBtn">
+                                        <i class="ph ph-eye me-1"></i> Предпросмотр
+                                    </button>
+                                    <button type="button" class="btn btn-outline-primary" id="generateWithAIBtn">
+                                        <i class="ph ph-magic-wand me-1"></i> Сгенерировать с ИИ
+                                    </button>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-light me-2" id="saveDraftBtn">
+                                        <i class="ph ph-floppy-disk me-1"></i> Сохранить черновик
+                                    </button>
+                                    <button type="submit" class="btn btn-primary" id="publishPostBtn">
+                                        <i class="ph ph-paper-plane-right me-1"></i> Опубликовать
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Модальное окно предпросмотра -->
+                <div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="previewModalLabel">Предпросмотр поста</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="preview-container">
+                                    <div class="preview-platform-badge" id="previewPlatformBadge">LinkedIn</div>
+                                    <h3 class="preview-title" id="previewTitle">Заголовок поста</h3>
+                                    <div class="preview-image-container" id="previewImageContainer">
+                                        <img src="" alt="Изображение поста" id="previewPostImage">
+                                    </div>
+                                    <div class="preview-content" id="previewContent">
+                                        Содержание поста будет отображаться здесь...
+                                    </div>
+                                    <div class="preview-tags" id="previewTags"></div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                <button type="button" class="btn btn-primary" id="publishFromPreviewBtn">Опубликовать</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Модальное окно генерации с ИИ -->
+                <div class="modal fade" id="aiGeneratorModal" tabindex="-1" aria-labelledby="aiGeneratorModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="aiGeneratorModalLabel">Генерация поста с помощью ИИ</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="aiPrompt" class="form-label">Опишите, какой пост вы хотите создать</label>
+                                    <textarea class="form-control" id="aiPrompt" rows="3" placeholder="Например: Напиши пост о преимуществах искусственного интеллекта в маркетинге для LinkedIn"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Параметры генерации</label>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-2">
+                                                <label for="aiTone" class="form-label small">Тон</label>
+                                                <select class="form-select" id="aiTone">
+                                                    <option value="professional">Профессиональный</option>
+                                                    <option value="friendly">Дружелюбный</option>
+                                                    <option value="casual">Неформальный</option>
+                                                    <option value="enthusiastic">Энтузиастичный</option>
+                                                    <option value="informative">Информативный</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-2">
+                                                <label for="aiLength" class="form-label small">Длина</label>
+                                                <select class="form-select" id="aiLength">
+                                                    <option value="short">Короткий (100-200 слов)</option>
+                                                    <option value="medium" selected>Средний (200-400 слов)</option>
+                                                    <option value="long">Длинный (400-600 слов)</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ai-result-container" id="aiResultContainer">
+                                    <div class="ai-loading" id="aiLoading">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="visually-hidden">Загрузка...</span>
+                                        </div>
+                                        <p>Генерация поста...</p>
+                                    </div>
+                                    <div class="ai-result" id="aiResult">
+                                        <h5>Сгенерированный пост</h5>
+                                        <div class="ai-result-content" id="aiResultContent"></div>
+                                        <div class="ai-result-actions mt-3">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary me-2" id="regenerateBtn">
+                                                <i class="ph ph-arrows-clockwise me-1"></i> Сгенерировать заново
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-primary" id="useGeneratedBtn">
+                                                <i class="ph ph-check me-1"></i> Использовать
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="token-usage mt-3">
+                                    <small class="text-muted">Использовано токенов: <span id="tokensUsed">0</span> / 5,000</small>
+                                    <div class="progress token-progress mt-1">
+                                        <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                                <button type="button" class="btn btn-primary" id="generateBtn">Сгенерировать</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript для работы с мобильным меню -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleButton = document.querySelector('.toggle-sidebar');
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.overlay');
+
+            if (toggleButton) {
+                toggleButton.addEventListener('click', function() {
+                    sidebar.classList.toggle('show');
+                    if (sidebar.classList.contains('show')) {
+                        overlay.style.display = 'block';
+                    } else {
+                        overlay.style.display = 'none';
+                    }
+                });
+            }
+
+            if (overlay) {
+                overlay.addEventListener('click', function() {
+                    sidebar.classList.remove('show');
+                    overlay.style.display = 'none';
+                });
+            }
+        });
+    </script>
+
+    <!-- JavaScript для работы с формой создания поста -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Переменные для работы с загрузкой изображения
+            const imageDropArea = document.getElementById('imageDropArea');
+            const imageInput = document.getElementById('postImage');
+            const imagePreview = document.getElementById('imagePreview');
+            const previewImg = document.getElementById('previewImg');
+            const removeImageBtn = document.getElementById('removeImage');
+            const browseLink = document.querySelector('.browse-link');
+            const suggestionImages = document.querySelectorAll('.suggestion-image');
+
+            // Переменные для работы с хэштегами
+            const tagsInput = document.getElementById('postTags');
+            const tagsContainer = document.getElementById('tagsContainer');
+            const tags = [];
+
+            // Переменные для работы с планированием публикации
+            const schedulePostCheckbox = document.getElementById('schedulePost');
+            const scheduleOptions = document.getElementById('scheduleOptions');
+            const saveAsDraftCheckbox = document.getElementById('saveAsDraft');
+
+            // Переменные для работы с предпросмотром
+            const previewPostBtn = document.getElementById('previewPostBtn');
+            const previewTitle = document.getElementById('previewTitle');
+            const previewContent = document.getElementById('previewContent');
+            const previewPostImage = document.getElementById('previewPostImage');
+            const previewPlatformBadge = document.getElementById('previewPlatformBadge');
+            const previewTags = document.getElementById('previewTags');
+            const previewModal = new bootstrap.Modal(document.getElementById('previewModal'));
+
+            // Переменные для работы с генерацией ИИ
+            const generateWithAIBtn = document.getElementById('generateWithAIBtn');
+            const aiGeneratorModal = new bootstrap.Modal(document.getElementById('aiGeneratorModal'));
+            const generateBtn = document.getElementById('generateBtn');
+            const aiPrompt = document.getElementById('aiPrompt');
+            const aiLoading = document.getElementById('aiLoading');
+            const aiResult = document.getElementById('aiResult');
+            const aiResultContent = document.getElementById('aiResultContent');
+            const regenerateBtn = document.getElementById('regenerateBtn');
+            const useGeneratedBtn = document.getElementById('useGeneratedBtn');
+            const tokensUsed = document.getElementById('tokensUsed');
+
+            // Переменные для работы с кнопками формы
+            const saveDraftBtn = document.getElementById('saveDraftBtn');
+            const publishPostBtn = document.getElementById('publishPostBtn');
+            const publishFromPreviewBtn = document.getElementById('publishFromPreviewBtn');
+
+            // Переменные для работы с редактором
+            const editorButtons = document.querySelectorAll('.btn-editor');
+            const contentEditor = document.getElementById('postContent');
+
+            // Инициализация формы
+            initForm();
+
+            // Функция инициализации формы
+            function initForm() {
+                // Скрываем опции планирования по умолчанию
+                scheduleOptions.style.display = 'none';
+
+                // Скрываем предпросмотр изображения по умолчанию
+                imagePreview.style.display = 'none';
+
+                // Скрываем результат генерации ИИ по умолчанию
+                aiResult.style.display = 'none';
+                aiLoading.style.display = 'none';
+
+                // Устанавливаем текущую дату и время для планирования
+                const now = new Date();
+                const dateStr = now.toISOString().split('T')[0];
+                const timeStr = now.getHours().toString().padStart(2, '0') + ':' +
+                               (now.getMinutes() + 30).toString().padStart(2, '0');
+
+                document.getElementById('publishDate').value = dateStr;
+                document.getElementById('publishTime').value = timeStr;
+            }
+
+            // Обработчики событий для загрузки изображения
+            imageDropArea.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                imageDropArea.classList.add('dragover');
+            });
+
+            imageDropArea.addEventListener('dragleave', function() {
+                imageDropArea.classList.remove('dragover');
+            });
+
+            imageDropArea.addEventListener('drop', function(e) {
+                e.preventDefault();
+                imageDropArea.classList.remove('dragover');
+
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    handleImageFile(files[0]);
+                }
+            });
+
+            browseLink.addEventListener('click', function() {
+                imageInput.click();
+            });
+
+            imageInput.addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    handleImageFile(this.files[0]);
+                }
+            });
+
+            removeImageBtn.addEventListener('click', function() {
+                imageInput.value = '';
+                previewImg.src = '';
+                imagePreview.style.display = 'none';
+                document.querySelector('.image-upload-placeholder').style.display = 'flex';
+            });
+
+            // Обработчик для предложенных изображений
+            suggestionImages.forEach(function(img) {
+                img.addEventListener('click', function() {
+                    const imgSrc = this.getAttribute('data-src');
+                    previewImg.src = imgSrc;
+                    imagePreview.style.display = 'block';
+                    document.querySelector('.image-upload-placeholder').style.display = 'none';
+                });
+            });
+
+            // Функция обработки загруженного изображения
+            function handleImageFile(file) {
+                // Проверка типа файла
+                if (!file.type.match('image.*')) {
+                    alert('Пожалуйста, загрузите изображение');
+                    return;
+                }
+
+                // Проверка размера файла (5MB максимум)
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('Размер файла не должен превышать 5MB');
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    imagePreview.style.display = 'block';
+                    document.querySelector('.image-upload-placeholder').style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+
+            // Обработчики событий для хэштегов
+            tagsInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ',') {
+                    e.preventDefault();
+                    addTag(this.value.trim());
+                    this.value = '';
+                }
+            });
+
+            // Функция добавления хэштега
+            function addTag(tag) {
+                if (tag === '') return;
+
+                // Удаляем # в начале, если он есть
+                if (tag.startsWith('#')) {
+                    tag = tag.substring(1);
+                }
+
+                // Проверяем, что тег еще не добавлен
+                if (tags.includes(tag)) return;
+
+                // Добавляем тег в массив
+                tags.push(tag);
+
+                // Создаем элемент тега
+                const tagElement = document.createElement('div');
+                tagElement.classList.add('tag');
+                tagElement.innerHTML = `
+                    <span class="tag-text">#${tag}</span>
+                    <button type="button" class="btn-remove-tag" data-tag="${tag}">
+                        <i class="ph ph-x"></i>
+                    </button>
+                `;
+
+                // Добавляем тег в контейнер
+                tagsContainer.appendChild(tagElement);
+
+                // Добавляем обработчик для удаления тега
+                tagElement.querySelector('.btn-remove-tag').addEventListener('click', function() {
+                    const tagToRemove = this.getAttribute('data-tag');
+                    removeTag(tagToRemove);
+                });
+            }
+
+            // Функция удаления хэштега
+            function removeTag(tag) {
+                // Удаляем тег из массива
+                const index = tags.indexOf(tag);
+                if (index !== -1) {
+                    tags.splice(index, 1);
+                }
+
+                // Удаляем элемент тега из DOM
+                const tagElements = document.querySelectorAll('.tag');
+                tagElements.forEach(function(element) {
+                    if (element.querySelector('.btn-remove-tag').getAttribute('data-tag') === tag) {
+                        element.remove();
+                    }
+                });
+            }
+
+            // Обработчик для чекбокса планирования
+            schedulePostCheckbox.addEventListener('change', function() {
+                if (this.checked) {
+                    scheduleOptions.style.display = 'block';
+                    saveAsDraftCheckbox.checked = false;
+                } else {
+                    scheduleOptions.style.display = 'none';
+                }
+            });
+
+            // Обработчик для чекбокса черновика
+            saveAsDraftCheckbox.addEventListener('change', function() {
+                if (this.checked) {
+                    schedulePostCheckbox.checked = false;
+                    scheduleOptions.style.display = 'none';
+                }
+            });
+
+            // Обработчик для кнопки предпросмотра
+            previewPostBtn.addEventListener('click', function() {
+                updatePreview();
+                previewModal.show();
+            });
+
+            // Функция обновления предпросмотра
+            function updatePreview() {
+                const title = document.getElementById('postTitle').value || 'Заголовок поста';
+                const content = document.getElementById('postContent').value || 'Содержание поста будет отображаться здесь...';
+                const platform = document.querySelector('input[name="platform"]:checked').value;
+
+                previewTitle.textContent = title;
+                previewContent.innerHTML = formatContent(content);
+
+                // Устанавливаем платформу
+                previewPlatformBadge.textContent = getPlatformName(platform);
+                previewPlatformBadge.className = 'preview-platform-badge';
+                previewPlatformBadge.classList.add('platform-' + platform);
+
+                // Устанавливаем изображение
+                if (previewImg.src) {
+                    previewPostImage.src = previewImg.src;
+                    document.getElementById('previewImageContainer').style.display = 'block';
+                } else {
+                    document.getElementById('previewImageContainer').style.display = 'none';
+                }
+
+                // Устанавливаем хэштеги
+                previewTags.innerHTML = '';
+                tags.forEach(function(tag) {
+                    const tagSpan = document.createElement('span');
+                    tagSpan.classList.add('preview-tag');
+                    tagSpan.textContent = '#' + tag;
+                    previewTags.appendChild(tagSpan);
+                });
+            }
+
+            // Функция форматирования контента для предпросмотра
+            function formatContent(content) {
+                // Заменяем переносы строк на <br>
+                content = content.replace(/\n/g, '<br>');
+                return content;
+            }
+
+            // Функция получения названия платформы
+            function getPlatformName(platform) {
+                switch(platform) {
+                    case 'linkedin': return 'LinkedIn';
+                    case 'facebook': return 'Facebook';
+                    case 'instagram': return 'Instagram';
+                    case 'twitter': return 'Twitter';
+                    default: return 'Неизвестно';
+                }
+            }
+
+            // Обработчик для кнопки генерации с ИИ
+            generateWithAIBtn.addEventListener('click', function() {
+                aiGeneratorModal.show();
+            });
+
+            // Обработчик для кнопки генерации в модальном окне
+            generateBtn.addEventListener('click', function() {
+                const prompt = aiPrompt.value.trim();
+                if (prompt === '') {
+                    alert('Пожалуйста, введите запрос для генерации');
+                    return;
+                }
+
+                // Показываем индикатор загрузки
+                aiLoading.style.display = 'flex';
+                aiResult.style.display = 'none';
+
+                // Имитация запроса к API
+                setTimeout(function() {
+                    // Здесь должен быть запрос к API для генерации контента
+                    // Для демонстрации используем заглушку
+                    const generatedContent = generateDummyContent(prompt);
+
+                    // Обновляем счетчик токенов
+                    const tokens = Math.floor(Math.random() * 500) + 100;
+                    tokensUsed.textContent = tokens;
+                    document.querySelector('.token-usage .progress-bar').style.width = (tokens / 5000 * 100) + '%';
+                    // Отображаем результат
+                    aiResultContent.innerHTML = generatedContent;
+                    aiLoading.style.display = 'none';
+                    aiResult.style.display = 'block';
+                }, 2000);
+            });
+
+            // Функция для генерации примера контента (заглушка)
+            function generateDummyContent(prompt) {
+                const tone = document.getElementById('aiTone').value;
+                const length = document.getElementById('aiLength').value;
+                const platform = document.querySelector('input[name="platform"]:checked').value;
+
+                let title = '';
+                let content = '';
+
+                // Генерируем заголовок в зависимости от запроса
+                if (prompt.toLowerCase().includes('маркетинг')) {
+                    title = '5 инновационных стратегий маркетинга, которые нельзя игнорировать в 2023 году';
+                } else if (prompt.toLowerCase().includes('искусственный интеллект') || prompt.toLowerCase().includes('ии')) {
+                    title = 'Как искусственный интеллект трансформирует бизнес-процессы уже сегодня';
+                } else if (prompt.toLowerCase().includes('продажи')) {
+                    title = 'Увеличение продаж на 30%: проверенные методы, которые работают';
+                } else {
+                    title = 'Тренды индустрии, которые изменят ваш бизнес в ближайшие 5 лет';
+                }
+
+                // Генерируем контент в зависимости от тона и длины
+                let paragraphs = [];
+
+                if (tone === 'professional') {
+                    paragraphs = [
+                        'В современном быстро меняющемся бизнес-ландшафте критически важно оставаться в курсе последних тенденций и инноваций. Компании, которые адаптируются к изменениям, получают значительное конкурентное преимущество.',
+                        'Исследования показывают, что организации, инвестирующие в новые технологии, демонстрируют на 26% более высокую прибыльность по сравнению с конкурентами. Это подчеркивает важность стратегического подхода к внедрению инноваций.',
+                        'Для достижения оптимальных результатов рекомендуется разработать детальную дорожную карту трансформации, учитывающую как краткосрочные выгоды, так и долгосрочные стратегические цели компании.'
+                    ];
+                } else if (tone === 'friendly') {
+                    paragraphs = [
+                        'Привет, друзья! Сегодня хочу поделиться с вами некоторыми интересными наблюдениями о том, как меняется наша индустрия. Уверен, многие из вас уже замечают эти изменения!',
+                        'Знаете, что меня больше всего удивляет? То, как быстро компании, которые не боятся пробовать новое, обгоняют тех, кто предпочитает "проверенные методы". Цифры говорят сами за себя — инновационные подходы дают прирост эффективности до 30%!',
+                        'Давайте вместе исследовать эти возможности! Я всегда открыт для обсуждения и обмена опытом. Что вы думаете об этих трендах? Поделитесь своим мнением в комментариях!'
+                    ];
+                } else {
+                    paragraphs = [
+                        'Трансформация бизнес-процессов становится не просто желательной, а необходимой для выживания в современных условиях. Компании всех размеров ищут способы оптимизации и повышения эффективности.',
+                        'Согласно последним исследованиям, внедрение инновационных подходов позволяет сократить операционные расходы на 15-25% при одновременном повышении качества продуктов и услуг.',
+                        'Важно отметить, что успешная трансформация требует не только технологических изменений, но и культурных сдвигов внутри организации. Команды, которые разделяют общее видение и ценности, демонстрируют наилучшие результаты.'
+                    ];
+                }
+
+                // Корректируем количество параграфов в зависимости от длины
+                if (length === 'short') {
+                    paragraphs = paragraphs.slice(0, 1);
+                } else if (length === 'long') {
+                    paragraphs.push('Более того, стратегическое партнерство и коллаборации становятся ключевыми факторами успеха. Компании, которые умеют выстраивать эффективные экосистемы, получают доступ к новым рынкам и ресурсам.');
+                    paragraphs.push('В заключение хотелось бы подчеркнуть, что адаптивность и готовность к постоянному обучению — это фундаментальные качества, необходимые для процветания в эпоху цифровой трансформации. Инвестиции в развитие человеческого капитала остаются одним из самых надежных способов обеспечить долгосрочный успех.');
+                }
+
+                // Адаптируем контент для разных платформ
+                if (platform === 'twitter') {
+                    // Для Twitter делаем короткий текст
+                    content = paragraphs[0];
+                } else if (platform === 'instagram') {
+                    // Для Instagram добавляем эмодзи
+                    content = paragraphs.join('\n\n');
+                    content = content.replace('важно', '⚠️ важно');
+                    content = content.replace('успех', 'успех 🚀');
+                    content = content.replace('инновации', 'инновации ✨');
+                } else {
+                    // Для LinkedIn и Facebook используем полный текст
+                    content = paragraphs.join('\n\n');
+                }
+
+                // Формируем хэштеги
+                let hashtags = '';
+                if (prompt.toLowerCase().includes('маркетинг')) {
+                    hashtags = '<span class="preview-tag">#маркетинг</span> <span class="preview-tag">#стратегия</span> <span class="preview-tag">#бизнес</span>';
+                } else if (prompt.toLowerCase().includes('искусственный интеллект')) {
+                    hashtags = '<span class="preview-tag">#ИИ</span> <span class="preview-tag">#технологии</span> <span class="preview-tag">#инновации</span>';
+                } else {
+                    hashtags = '<span class="preview-tag">#бизнес</span> <span class="preview-tag">#тренды</span> <span class="preview-tag">#развитие</span>';
+                }
+
+                return `<h4>${title}</h4><div class="ai-content-text">${content.replace(/\n\n/g, '<br><br>')}</div><div class="ai-suggested-tags mt-3"><p>Рекомендуемые хэштеги:</p>${hashtags}</div>`;
+            }
+
+            // Обработчик для кнопки "Использовать" сгенерированный контент
+            useGeneratedBtn.addEventListener('click', function() {
+                const generatedTitle = aiResultContent.querySelector('h4').textContent;
+                const generatedContent = aiResultContent.querySelector('.ai-content-text').innerHTML.replace(/<br><br>/g, '\n\n');
+
+                // Заполняем форму сгенерированными данными
+                document.getElementById('postTitle').value = generatedTitle;
+                document.getElementById('postContent').value = generatedContent.replace(/<br>/g, '\n');
+
+                // Добавляем хэштеги
+                const suggestedTags = aiResultContent.querySelectorAll('.ai-suggested-tags .preview-tag');
+                suggestedTags.forEach(function(tag) {
+                    const tagText = tag.textContent.substring(1); // Убираем #
+                    addTag(tagText);
+                });
+
+                // Закрываем модальное окно
+                aiGeneratorModal.hide();
+            });
+
+            // Обработчик для кнопки "Сгенерировать заново"
+            regenerateBtn.addEventListener('click', function() {
+                generateBtn.click();
+            });
+
+            // Обработчики для кнопок редактора
+            editorButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const action = this.getAttribute('data-action');
+                    applyFormatting(action);
+                });
+            });
+
+            // Функция применения форматирования к тексту
+            function applyFormatting(action) {
+                const textarea = document.getElementById('postContent');
+                const start = textarea.selectionStart;
+                const end = textarea.selectionEnd;
+                const selectedText = textarea.value.substring(start, end);
+                let formattedText = '';
+
+                switch(action) {
+                    case 'bold':
+                        formattedText = `**${selectedText}**`;
+                        break;
+                    case 'italic':
+                        formattedText = `*${selectedText}*`;
+                        break;
+                    case 'underline':
+                        formattedText = `_${selectedText}_`;
+                        break;
+                    case 'heading':
+                        formattedText = `## ${selectedText}`;
+                        break;
+                    case 'list-ul':
+                        formattedText = selectedText.split('\n').map(line => `• ${line}`).join('\n');
+                        break;
+                    case 'list-ol':
+                        formattedText = selectedText.split('\n').map((line, index) => `${index + 1}. ${line}`).join('\n');
+                        break;
+                    case 'link':
+                        const url = prompt('Введите URL:', 'https://');
+                        if (url) {
+                            formattedText = `[${selectedText}](${url})`;
+                        } else {
+                            return;
+                        }
+                        break;
+                    case 'image':
+                        // Открываем диалог выбора изображения
+                        imageInput.click();
+                        return;
+                    case 'emoji':
+                        // Простая реализация выбора эмодзи
+                        const emojis = ['😊', '👍', '🎉', '💡', '⭐', '🚀', '💼', '📊', '📈', '🔍'];
+                        const emojiList = emojis.map(emoji => `<button class="emoji-btn">${emoji}</button>`).join('');
+                        const emojiSelector = document.createElement('div');
+                        emojiSelector.className = 'emoji-selector';
+                        emojiSelector.innerHTML = emojiList;
+
+                        // Позиционируем селектор эмодзи
+                        const buttonRect = this.getBoundingClientRect();
+                        emojiSelector.style.top = (buttonRect.bottom + window.scrollY) + 'px';
+                        emojiSelector.style.left = (buttonRect.left + window.scrollX) + 'px';
+
+                        document.body.appendChild(emojiSelector);
+
+                        // Обработчики для кнопок эмодзи
+                        const emojiButtons = emojiSelector.querySelectorAll('.emoji-btn');
+                        emojiButtons.forEach(function(btn) {
+                            btn.addEventListener('click', function() {
+                                const emoji = this.textContent;
+                                insertTextAtCursor(textarea, emoji);
+                                emojiSelector.remove();
+                            });
+                        });
+
+                        // Закрываем селектор при клике вне его
+                        document.addEventListener('click', function closeEmojiSelector(e) {
+                            if (!emojiSelector.contains(e.target) && e.target !== document.querySelector('[data-action="emoji"]')) {
+                                emojiSelector.remove();
+                                document.removeEventListener('click', closeEmojiSelector);
+                            }
+                        });
+
+                        return;
+                }
+
+                // Вставляем отформатированный текст
+                textarea.value = textarea.value.substring(0, start) + formattedText + textarea.value.substring(end);
+                textarea.focus();
+                textarea.selectionStart = start;
+                textarea.selectionEnd = start + formattedText.length;
+            }
+
+            // Функция вставки текста в позицию курсора
+            function insertTextAtCursor(textarea, text) {
+                const start = textarea.selectionStart;
+                textarea.value = textarea.value.substring(0, start) + text + textarea.value.substring(textarea.selectionEnd);
+                textarea.focus();
+                textarea.selectionStart = start + text.length;
+                textarea.selectionEnd = start + text.length;
+            }
+
+            // Обработчик для кнопки "Сохранить черновик"
+            saveDraftBtn.addEventListener('click', function() {
+                savePost('draft');
+            });
+
+            // Обработчик для кнопки "Опубликовать"
+            publishPostBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (validateForm()) {
+                    if (saveAsDraftCheckbox.checked) {
+                        savePost('draft');
+                    } else if (schedulePostCheckbox.checked) {
+                        savePost('scheduled');
+                    } else {
+                        savePost('published');
+                    }
+                }
+            });
+
+            // Обработчик для кнопки "Опубликовать" в предпросмотре
+            publishFromPreviewBtn.addEventListener('click', function() {
+                if (validateForm()) {
+                    savePost('published');
+                    previewModal.hide();
+                }
+            });
+
+            // Функция валидации формы
+            function validateForm() {
+                const title = document.getElementById('postTitle').value.trim();
+                const content = document.getElementById('postContent').value.trim();
+
+                if (title === '') {
+                    alert('Пожалуйста, введите заголовок поста');
+                    return false;
+                }
+
+                if (content === '') {
+                    alert('Пожалуйста, введите содержание поста');
+                    return false;
+                }
+
+                return true;
+            }
+
+            // Функция сохранения поста
+            function savePost(status) {
+                // Собираем данные формы
+                const title = document.getElementById('postTitle').value.trim();
+                const content = document.getElementById('postContent').value.trim();
+                const platform = document.querySelector('input[name="platform"]:checked').value;
+                const image = previewImg.src;
+
+                // Получаем дату публикации, если пост запланирован
+                let publishDate = null;
+                if (status === 'scheduled') {
+                    const date = document.getElementById('publishDate').value;
+                    const time = document.getElementById('publishTime').value;
+                    publishDate = new Date(`${date}T${time}`);
+
+                    // Проверяем, что дата в будущем
+                    if (publishDate <= new Date()) {
+                        alert('Дата публикации должна быть в будущем');
+                        return;
+                    }
+                }
+
+                // Создаем объект поста
+                const post = {
+                    id: generateUniqueId(),
+                    title: title,
+                    content: content,
+                    platform: platform,
+                    image: image,
+                    tags: tags,
+                    status: status,
+                    publishDate: publishDate,
+                    createdAt: new Date(),
+                    allowComments: document.getElementById('enableComments').checked
+                };
+
+                // В реальном приложении здесь был бы AJAX-запрос к серверу
+                // Для демонстрации просто сохраняем в localStorage
+                savePostToLocalStorage(post);
+
+                // Показываем уведомление об успешном сохранении
+                showNotification(status);
+
+                // Перенаправляем на страницу со списком постов через 2 секунды
+                setTimeout(function() {
+                    window.location.href = 'index.html';
+                }, 2000);
+            }
+
+            // Функция генерации уникального ID
+            function generateUniqueId() {
+                return Date.now().toString(36) + Math.random().toString(36).substr(2);
+            }
+
+            // Функция сохранения поста в localStorage
+            function savePostToLocalStorage(post) {
+                // Получаем существующие посты
+                let posts = JSON.parse(localStorage.getItem('posts')) || [];
+
+                // Добавляем новый пост
+                posts.push(post);
+
+                // Сохраняем обновленный список
+                localStorage.setItem('posts', JSON.stringify(posts));
+            }
+
+            // Функция отображения уведомления
+            function showNotification(status) {
+                // Создаем элемент уведомления
+                const notification = document.createElement('div');
+                notification.className = 'notification';
+
+                // Устанавливаем текст в зависимости от статуса
+                let message = '';
+                let icon = '';
+
+                switch(status) {
+                    case 'published':
+                        message = 'Пост успешно опубликован!';
+                        icon = '<i class="ph ph-check-circle"></i>';
+                        notification.classList.add('notification-success');
+                        break;
+                    case 'draft':
+                        message = 'Черновик успешно сохранен!';
+                        icon = '<i class="ph ph-note-pencil"></i>';
+                        notification.classList.add('notification-info');
+                        break;
+                    case 'scheduled':
+                        message = 'Пост запланирован к публикации!';
+                        icon = '<i class="ph ph-clock"></i>';
+                        notification.classList.add('notification-info');
+                        break;
+                }
+
+                notification.innerHTML = `${icon} <span>${message}</span>`;
+
+                // Добавляем уведомление на страницу
+                document.body.appendChild(notification);
+
+                // Показываем уведомление с анимацией
+                setTimeout(function() {
+                    notification.classList.add('show');
+                }, 10);
+
+                // Скрываем уведомление через 2 секунды
+                setTimeout(function() {
+                    notification.classList.remove('show');
+                    setTimeout(function() {
+                        notification.remove();
+                    }, 300);
+                }, 2000);
+            }
+        });
+
+    </script>
+
+    <!-- Модальное окно для генерации изображения с ИИ -->
+    <div class="modal fade" id="imageGeneratorModal" tabindex="-1" aria-labelledby="imageGeneratorModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageGeneratorModalLabel">Генерация изображения с ИИ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="imagePrompt" class="form-label">Опишите желаемое изображение</label>
+                        <textarea class="form-control" id="imagePrompt" rows="3" placeholder="Например: Профессиональный бизнесмен в офисе работает за компьютером, современный стиль, яркие цвета"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Стиль изображения</label>
+                        <div class="d-flex flex-wrap gap-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="imageStyle" id="styleRealistic" value="realistic" checked>
+                                <label class="form-check-label" for="styleRealistic">Реалистичный</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="imageStyle" id="styleCartoon" value="cartoon">
+                                <label class="form-check-label" for="styleCartoon">Мультяшный</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="imageStyle" id="styleAbstract" value="abstract">
+                                <label class="form-check-label" for="styleAbstract">Абстрактный</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="imageStyle" id="style3D" value="3d">
+                                <label class="form-check-label" for="style3D">3D</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Соотношение сторон</label>
+                        <div class="d-flex flex-wrap gap-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="imageRatio" id="ratio1x1" value="1:1" checked>
+                                <label class="form-check-label" for="ratio1x1">1:1 (квадрат)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="imageRatio" id="ratio4x3" value="4:3">
+                                <label class="form-check-label" for="ratio4x3">4:3</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="imageRatio" id="ratio16x9" value="16:9">
+                                <label class="form-check-label" for="ratio16x9">16:9</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Контейнер для отображения результата генерации -->
+                    <div id="imageGenerationResult" class="mt-4" style="display: none;">
+                        <h6>Результат генерации:</h6>
+                        <div class="image-generation-container">
+                            <div id="imageGenerationLoading" class="text-center py-4">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Загрузка...</span>
+                                </div>
+                                <p class="mt-2">Генерация изображения...</p>
+                                <small class="text-muted">Это может занять до 30 секунд</small>
+                            </div>
+                            <div id="generatedImageContainer" style="display: none;">
+                                <img id="generatedImage" src="" alt="Сгенерированное изображение" class="img-fluid rounded">
+                            </div>
+                        </div>
+
+                        <!-- Информация об использовании токенов -->
+                        <div class="token-usage mt-3">
+                            <small class="text-muted">Использовано токенов: <span id="imageTokensUsed">0</span> / 5,000</small>
+                            <div class="progress token-progress mt-1">
+                                <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary" id="generateImageBtnSubmit">Сгенерировать</button>
+                    <button type="button" class="btn btn-success" id="useGeneratedImageBtn" style="display: none;">Использовать изображение</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Проверяем наличие элементов перед их использованием
+            const generateImageBtn = document.getElementById('generateImageBtn');
+            const imageGeneratorModalElement = document.getElementById('imageGeneratorModal');
+
+            if (!generateImageBtn) {
+                console.error('Элемент с ID "generateImageBtn" не найден');
+                return;
+            }
+
+            if (!imageGeneratorModalElement) {
+                console.error('Элемент с ID "imageGeneratorModal" не найден');
+                return;
+            }
+
+            // Проверяем, доступен ли объект bootstrap
+            if (typeof bootstrap === 'undefined') {
+                console.error('Bootstrap JS не подключен');
+                return;
+            }
+
+            // Инициализируем модальное окно
+            const imageGeneratorModal = new bootstrap.Modal(imageGeneratorModalElement);
+
+            // Получаем остальные элементы
+            const generateImageBtnSubmit = document.getElementById('generateImageBtnSubmit');
+            const imagePrompt = document.getElementById('imagePrompt');
+            const imageGenerationResult = document.getElementById('imageGenerationResult');
+            const imageGenerationLoading = document.getElementById('imageGenerationLoading');
+            const generatedImageContainer = document.getElementById('generatedImageContainer');
+            const generatedImage = document.getElementById('generatedImage');
+            const useGeneratedImageBtn = document.getElementById('useGeneratedImageBtn');
+            const imageTokensUsed = document.getElementById('imageTokensUsed');
+            const previewImg = document.getElementById('previewImg');
+            const imagePreview = document.getElementById('imagePreview');
+
+            // Проверяем наличие всех необходимых элементов
+            if (!generateImageBtnSubmit || !imagePrompt || !imageGenerationResult ||
+                !imageGenerationLoading || !generatedImageContainer || !generatedImage ||
+                !useGeneratedImageBtn || !imageTokensUsed || !previewImg || !imagePreview) {
+                console.error('Не все необходимые элементы найдены');
+                return;
+            }
+
+            // Обработчик для кнопки "Сгенерировать фото с помощью ИИ"
+            generateImageBtn.addEventListener('click', function() {
+                // Сбрасываем предыдущие результаты
+                imageGenerationResult.style.display = 'none';
+                generatedImageContainer.style.display = 'none';
+                useGeneratedImageBtn.style.display = 'none';
+                imagePrompt.value = '';
+
+                // Открываем модальное окно
+                imageGeneratorModal.show();
+            });
+
+            // Остальной код без изменений...
+
+            // Обработчик для кнопки "Сгенерировать" в модальном окне
+            generateImageBtnSubmit.addEventListener('click', function() {
+                const prompt = imagePrompt.value.trim();
+                if (prompt === '') {
+                    alert('Пожалуйста, введите описание для генерации изображения');
+                    return;
+                }
+
+                // Получаем выбранный стиль и соотношение сторон
+                const style = document.querySelector('input[name="imageStyle"]:checked').value;
+                const ratio = document.querySelector('input[name="imageRatio"]:checked').value;
+
+                // Показываем индикатор загрузки
+                imageGenerationResult.style.display = 'block';
+                imageGenerationLoading.style.display = 'block';
+                generatedImageContainer.style.display = 'none';
+                useGeneratedImageBtn.style.display = 'none';
+
+                // Имитация запроса к API
+                setTimeout(function() {
+                    // Здесь должен быть запрос к API для генерации изображения
+                    // Для демонстрации используем заглушку с случайным изображением
+                    generateDummyImage(prompt, style, ratio);
+
+                    // Обновляем счетчик токенов
+                    const tokens = Math.floor(Math.random() * 800) + 200;
+                    imageTokensUsed.textContent = tokens;
+                    document.querySelector('#imageGenerationResult .progress-bar').style.width = (tokens / 5000 * 100) + '%';
+
+                    // Скрываем индикатор загрузки и показываем результат
+                    imageGenerationLoading.style.display = 'none';
+                    generatedImageContainer.style.display = 'block';
+                    useGeneratedImageBtn.style.display = 'inline-block';
+                }, 3000);
+            });
+
+            // Функция для генерации примера изображения (заглушка)
+            function generateDummyImage(prompt, style, ratio) {
+                // Определяем размеры изображения в зависимости от соотношения сторон
+                let width, height;
+                switch(ratio) {
+                    case '1:1':
+                        width = 512;
+                        height = 512;
+                        break;
+                    case '4:3':
+                        width = 640;
+                        height = 480;
+                        break;
+                    case '16:9':
+                        width = 640;
+                        height = 360;
+                        break;
+                    default:
+                        width = 512;
+                        height = 512;
+                }
+
+                // Генерируем случайное изображение с Unsplash Source
+                // Используем параметры из запроса для получения релевантного изображения
+                let keywords = prompt.split(' ').slice(0, 3).join(',');
+
+                // Добавляем стиль в ключевые слова
+                if (style === 'realistic') keywords += ',photo';
+                if (style === 'cartoon') keywords += ',illustration';
+                if (style === 'abstract') keywords += ',abstract';
+                if (style === '3d') keywords += ',3d';
+
+                // Генерируем URL для изображения
+                const imageUrl = `https://source.unsplash.com/random/${width}x${height}/?${encodeURIComponent(keywords)}`;
+
+                // Устанавливаем изображение
+                generatedImage.src = imageUrl;
+            }
+
+            // Обработчик для кнопки "Использовать изображение"
+            useGeneratedImageBtn.addEventListener('click', function() {
+                // Устанавливаем сгенерированное изображение в предпросмотр
+                previewImg.src = generatedImage.src;
+                imagePreview.style.display = 'block';
+                document.querySelector('.image-upload-placeholder').style.display = 'none';
+
+                // Закрываем модальное окно
+                imageGeneratorModal.hide();
+            });
+        });
+        </script>
+
+    <!-- Phosphor Icons JavaScript -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

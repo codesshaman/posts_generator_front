@@ -7,7 +7,7 @@ import os
 
 
 # Устанавливаем язык
-lang = "ru"
+lang = "en"
 
 # Загружаем .env файл
 load_dotenv()
@@ -32,7 +32,7 @@ articles_data = [
 host = os.getenv('PUBLIC_HOST')
 
 def articles(request):
-    """Отображает главную страницу"""
+    """Отображает страницу статей"""
     if debug:
         print("Отображаем страницу статей")
     initial_articles = articles_data[:3]  # Первые 3 статьи (индексы 0-2)

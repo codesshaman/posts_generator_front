@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'whitenoise.runserver_nostatic',
     'apps.vkoauth.apps.VKoauthConfig',
+    'apps.posting.apps.PostingConfig',
     'apps.articles.apps.ArticlesConfig',
     'apps.mainpage.apps.MainpageConfig'
 ]
