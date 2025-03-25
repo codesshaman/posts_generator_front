@@ -23,7 +23,9 @@ def get_category_style(category_id):
     elif category_id == 3:
         return "platform-linkedin".strip()
     elif category_id == 4:
-        return "platform-blog".strip()
+        return "platform-twitter".strip()
+    else:
+        return "platform-vk".strip()
 
 # Эмулированные данные статей
 articles_data = [
