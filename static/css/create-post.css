@@ -1,0 +1,743 @@
+/* Стили для страницы создания поста */
+
+/* Основной контейнер формы */
+.create-post-card {
+    background-color: #FFFFFF;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+}
+
+/* Стили для полей формы */
+.form-label {
+    font-weight: 500;
+    color: #111827;
+    margin-bottom: 8px;
+}
+
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #E5E7EB;
+    padding: 10px 15px;
+    transition: all 0.2s ease;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.form-text {
+    color: #6B7280;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+/* Стили для выбора платформы */
+.platform-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.platform-option {
+    margin: 0;
+}
+
+.platform-option .form-check-input {
+    display: none;
+}
+
+.platform-option .form-check-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 20px;
+    border-radius: 10px;
+    border: 1px solid #E5E7EB;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.platform-option .form-check-input:checked + .form-check-label {
+    border-color: var(--primary-color);
+    background-color: var(--primary-light);
+}
+
+.platform-icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.platform-icon.linkedin {
+    color: #0077B5;
+}
+
+.platform-icon.facebook {
+    color: #1877F2;
+}
+
+.platform-icon.instagram {
+    color: #E1306C;
+}
+
+.platform-icon.twitter {
+    color: #1DA1F2;
+}
+
+/* Стили для редактора контента */
+.editor-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 8px;
+    background-color: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    margin-bottom: -1px;
+}
+
+.btn-editor {
+    background-color: transparent;
+    border: none;
+    color: #4B5563;
+    padding: 6px 10px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.btn-editor:hover {
+    background-color: #E5E7EB;
+    color: #111827;
+}
+
+.toolbar-divider {
+    width: 1px;
+    height: 24px;
+    background-color: #E5E7EB;
+    margin: 0 5px;
+}
+
+.content-editor {
+    min-height: 200px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    resize: vertical;
+}
+
+/* Стили для загрузки изображения */
+.image-upload-container {
+    margin-top: 10px;
+}
+
+.image-upload-area {
+    position: relative;
+    border: 2px dashed #E5E7EB;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.2s ease;
+    margin-bottom: 15px;
+}
+
+.image-upload-area.dragover {
+    border-color: var(--primary-color);
+    background-color: var(--primary-light);
+}
+
+.image-upload-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+.image-upload-placeholder i {
+    font-size: 48px;
+    color: #9CA3AF;
+    margin-bottom: 15px;
+}
+
+.image-upload-placeholder p {
+    margin-bottom: 5px;
+    color: #4B5563;
+}
+
+.browse-link {
+    color: var(--primary-color);
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.image-preview {
+    position: relative;
+    display: none;
+}
+
+.image-preview img {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 8px;
+    object-fit: contain;
+}
+
+.btn-remove-image {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #EF4444;
+    transition: all 0.2s ease;
+}
+
+.btn-remove-image:hover {
+    background-color: #FEE2E2;
+}
+
+.image-suggestions {
+    margin-top: 15px;
+}
+
+.suggestion-title {
+    font-size: 14px;
+    color: #4B5563;
+    margin-bottom: 10px;
+}
+
+.suggestion-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.suggestion-image {
+    width: 100px;
+    height: 70px;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+}
+
+.suggestion-image:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.suggestion-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Стили для настроек публикации */
+.schedule-options {
+    display: none;
+    padding: 10px;
+    background-color: #F9FAFB;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+/* Стили для хэштегов */
+.tags-input-container {
+    position: relative;
+}
+
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.tag {
+    display: flex;
+    align-items: center;
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.tag-text {
+    margin-right: 5px;
+}
+
+.btn-remove-tag {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.btn-remove-tag:hover {
+    background-color: rgba(79, 70, 229, 0.2);
+}
+
+/* Стили для предпросмотра */
+.preview-container {
+    padding: 20px;
+    background-color: #F9FAFB;
+    border-radius: 10px;
+}
+
+.preview-platform-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.preview-platform-badge.platform-linkedin {
+    background-color: #0077B5;
+}
+
+.preview-platform-badge.platform-facebook {
+    background-color: #1877F2;
+}
+
+.preview-platform-badge.platform-instagram {
+    background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+}
+
+.preview-platform-badge.platform-twitter {
+    background-color: #1DA1F2;
+}
+
+.preview-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 15px;
+}
+
+.preview-image-container {
+    margin-bottom: 15px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.preview-image-container img {
+    max-width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+}
+
+.preview-content {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #4B5563;
+    margin-bottom: 15px;
+}
+
+.preview-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.preview-tag {
+    background-color: #F3F4F6;
+    color: #4B5563;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+/* Стили для модального
+/* Стили для модального окна генерации с ИИ */
+.ai-result-container {
+    margin-top: 20px;
+}
+
+.ai-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    text-align: center;
+}
+
+.ai-loading p {
+    margin-top: 15px;
+    color: #4B5563;
+}
+
+.ai-result {
+    background-color: #F9FAFB;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.ai-result h5 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 15px;
+}
+
+.ai-result-content {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #4B5563;
+}
+
+.ai-result-content h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 15px;
+}
+
+.ai-suggested-tags {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #E5E7EB;
+}
+
+.ai-suggested-tags p {
+    font-size: 14px;
+    color: #4B5563;
+    margin-bottom: 10px;
+}
+
+.token-usage {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #E5E7EB;
+}
+
+/* Стили для селектора эмодзи */
+.emoji-selector {
+    position: absolute;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    z-index: 1000;
+}
+
+.emoji-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.emoji-btn:hover {
+    background-color: #F3F4F6;
+}
+
+/* Стили для уведомлений */
+.notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 1050;
+}
+
+.notification.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.notification i {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.notification-success {
+    border-left: 4px solid var(--success-color);
+}
+
+.notification-success i {
+    color: var(--success-color);
+}
+
+.notification-info {
+    border-left: 4px solid var(--primary-color);
+}
+
+.notification-info i {
+    color: var(--primary-color);
+}
+
+.notification-warning {
+    border-left: 4px solid var(--warning-color);
+}
+
+.notification-warning i {
+    color: var(--warning-color);
+}
+
+.notification-error {
+    border-left: 4px solid var(--danger-color);
+}
+
+.notification-error i {
+    color: var(--danger-color);
+}
+
+/* Адаптивные стили */
+@media (max-width: 767px) {
+    .platform-selector {
+        justify-content: center;
+    }
+    
+    .platform-option .form-check-label {
+        padding: 10px 15px;
+    }
+    
+    .editor-toolbar {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .toolbar-divider {
+        display: none;
+    }
+    
+    .suggestion-images {
+        justify-content: center;
+    }
+    
+    .preview-container {
+        padding: 15px;
+    }
+    
+    .preview-title {
+        font-size: 20px;
+    }
+    
+    .notification {
+        left: 20px;
+        right: 20px;
+        text-align: center;
+        justify-content: center;
+    }
+}
+
+/* Дополнительные стили для формы */
+.form-check-input {
+    width: 1.2em;
+    height: 1.2em;
+    margin-top: 0.15em;
+}
+
+.form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.form-switch .form-check-input {
+    width: 2.5em;
+    height: 1.25em;
+    margin-left: -2.5em;
+}
+
+.form-check-label {
+    font-weight: 500;
+    color: #4B5563;
+}
+
+/* Стили для кнопок действий */
+.btn-outline-secondary {
+    color: #6B7280;
+    border-color: #D1D5DB;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #F3F4F6;
+    color: #4B5563;
+    border-color: #9CA3AF;
+}
+
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-light {
+    background-color: #F9FAFB;
+    border-color: #E5E7EB;
+    color: #4B5563;
+}
+
+.btn-light:hover {
+    background-color: #F3F4F6;
+    border-color: #D1D5DB;
+    color: #111827;
+}
+
+.btn i {
+    font-size: 1.1em;
+    vertical-align: -0.125em;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.create-post-card {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Стили для модальных окон */
+.modal-content {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.modal-header {
+    border-bottom: 1px solid #F3F4F6;
+    padding: 15px 20px;
+}
+
+.modal-title {
+    font-weight: 600;
+    color: #111827;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-footer {
+    border-top: 1px solid #F3F4F6;
+    padding: 15px 20px;
+}
+
+/* Дополнительные стили для улучшения внешнего вида */
+.card-header {
+    background-color: transparent;
+    border-bottom: 1px solid #F3F4F6;
+    padding: 20px;
+}
+
+.card-header h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* Стили для фокуса на элементах */
+:focus {
+    outline: none;
+}
+
+.form-control:focus,
+.btn:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* Стили для подсказок */
+.form-text {
+    font-size: 13px;
+    color: #6B7280;
+    margin-top: 5px;
+}
+
+/* Стили для обязательных полей */
+.form-label.required::after {
+    content: "*";
+    color: var(--danger-color);
+    margin-left: 4px;
+}
+/* Стили для модального окна генерации изображения */
+.image-generation-container {
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #F9FAFB;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#generatedImageContainer {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+}
+
+#generatedImage {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+#imageGenerationLoading {
+    color: #6B7280;
+}
+
+/* Стили для кнопки генерации изображения */
+#generateImageBtn {
+    transition: all 0.3s ease;
+}
+
+#generateImageBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(67, 97, 238, 0.2);
+}
+
+/* Стили для опций генерации изображения */
+.form-check {
+    margin-right: 10px;
+    margin-bottom: 5px;
+}

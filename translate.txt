@@ -1,5 +1,36 @@
+##############################
+### apps/articles/views.py ###
+##############################
 ^Статьи^Articles^
 ^Публикация: ^Publication: ^
 ^Читать статью^Read the article^
 ^Больше постов нет^Has no more posts^
 ^Загрузить ещё^Load more^
+##################################
+### apps/posting/views_post.py ###
+##################################
+^Мои посты^My posts^
+^По дате^By date^
+^Сегодня^Today^
+^Последние 7 дней^Last 7 days^
+^Последние 30 дней^Last 30 days^
+^Последние 90 дней^Last 90 days^
+^Сначала новые^New ones first^
+^Сначала старые^Old ones first^
+^Все платформы^All platforms^
+^Вконтакте^VK.com^
+^Телеграм^Telegram^
+^Все статусы^All statuses^
+^Опубликовано^Published^
+^Черновик^Draft^
+^В очереди^In the queue^
+^Редактировать^Edit^
+^Удалить^Delete^
+^Создать пост^Create post^
+^Очередь публикаций^Publication queue^
+^Бусти^Boosty^
+^Бусти^Boosty^
+^Бусти^Boosty^
+^Бусти^Boosty^
+^Бусти^Boosty^
+^Бусти^Boosty^

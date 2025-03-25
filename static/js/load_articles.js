@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         <div class="col-md-9">
                             <div class="card-body d-flex flex-column h-100">
                                 <div class="post-meta mb-2">
-                                    <span class="platform-badge platform-instagram">${post.category_id}</span>
+                                    <span class="platform-badge ${post.category_style}">${post.category_id}</span>
                                     <span class="post-time">
                                         <i class="ph ph-clock me-1"></i>
                                         ${window.translations.PublishText}${post.publish_date}

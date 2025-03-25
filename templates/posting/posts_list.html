@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Платформа генерации текста с ИИ - Личный кабинет</title>
+    <title>{{ title }}</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Phosphor Icons - современная библиотека иконок -->
@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Подключение внешнего CSS файла -->
-    <link rel="stylesheet" href="styles.css">
+    <!--<link rel="stylesheet" href="styles.css">-->
 </head>
 <body>
     <!-- Шапка/Навигация -->
@@ -213,90 +213,91 @@
                 </div>
 
 
-                <!-- Список постов -->
-                <!-- Пример поста для ВКонтакте -->
-                <div class="card mb-4 post-card">
-                    <div class="row g-0">
-                        <div class="col-md-3 position-relative">
-                            <img src="https://venyoo.ru/blog/wp-content/uploads/2017/04/10_Yml6ZXNwcm9jZXNz.jpg" class="img-fluid rounded-start post-image" alt="Изображение поста">
-                            <span class="post-status status-published">Опубликовано</span>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="card-body d-flex flex-column h-100">
-                                <div class="post-meta mb-2">
-                                    <span class="platform-badge platform-vk">ВКонтакте</span>
-                                    <span class="post-time"><i class="ph ph-clock me-1"></i> 12.05.2023, 14:30</span>
-                                </div>
-                                <h5 class="card-title mb-2">10 способов увеличить конверсию вашего сайта</h5>
-                                <p class="card-text mb-3 post-description">Статья о методах повышения конверсии веб-сайтов с практическими советами и рекомендациями для бизнеса любого размера. Узнайте, как улучшить показатели...</p>
-                                <div class="post-actions mt-auto">
-                                    <button class="btn-edit">Редактировать</button>
-                                    <button class="btn-delete">Удалить</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!--                &lt;!&ndash; Список постов &ndash;&gt;-->
+<!--                &lt;!&ndash; Пример поста для ВКонтакте &ndash;&gt;-->
+<!--                <div class="card mb-4 post-card">-->
+<!--                    <div class="row g-0">-->
+<!--                        <div class="col-md-3 position-relative">-->
+<!--                            <img src="https://venyoo.ru/blog/wp-content/uploads/2017/04/10_Yml6ZXNwcm9jZXNz.jpg" class="img-fluid rounded-start post-image" alt="Изображение поста">-->
+<!--                            <span class="post-status status-published">Опубликовано</span>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-9">-->
+<!--                            <div class="card-body d-flex flex-column h-100">-->
+<!--                                <div class="post-meta mb-2">-->
+<!--                                    <span class="platform-badge platform-vk">ВКонтакте</span>-->
+<!--                                    <span class="post-time"><i class="ph ph-clock me-1"></i> 12.05.2023, 14:30</span>-->
+<!--                                </div>-->
+<!--                                <h5 class="card-title mb-2">10 способов увеличить конверсию вашего сайта</h5>-->
+<!--                                <p class="card-text mb-3 post-description">Статья о методах повышения конверсии веб-сайтов с практическими советами и рекомендациями для бизнеса любого размера. Узнайте, как улучшить показатели...</p>-->
+<!--                                <div class="post-actions mt-auto">-->
+<!--                                    <button class="btn-edit">Редактировать</button>-->
+<!--                                    <button class="btn-delete">Удалить</button>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-                <!-- Пример поста для Telegram -->
-                <div class="card mb-4 post-card">
-                    <div class="row g-0">
-                        <div class="col-md-3 position-relative">
-                            <img src="https://sberbs.ru/uploads/models/announcement/announcement_image/70/0._Image_by_Freepik.jpg" class="img-fluid rounded-start post-image" alt="Изображение поста">
-                            <span class="post-status status-draft">Черновик</span>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="card-body d-flex flex-column h-100">
-                                <div class="post-meta mb-2">
-                                    <span class="platform-badge platform-telegram">Telegram</span>
-                                    <span class="post-time"><i class="ph ph-clock me-1"></i> 08.05.2023, 10:15</span>
-                                </div>
-                                <h5 class="card-title mb-2">Искусственный интеллект в маркетинге: тренды 2023</h5>
-                                <p class="card-text mb-3 post-description">Обзор последних трендов использования ИИ в маркетинговых стратегиях. Как искусственный интеллект меняет подход к взаимодействию с клиентами...</p>
-                                <div class="post-actions mt-auto">
-                                    <button class="btn-edit">Редактировать</button>
-                                    <button class="btn-delete">Удалить</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!--                &lt;!&ndash; Пример поста для Telegram &ndash;&gt;-->
+<!--                <div class="card mb-4 post-card">-->
+<!--                    <div class="row g-0">-->
+<!--                        <div class="col-md-3 position-relative">-->
+<!--                            <img src="https://sberbs.ru/uploads/models/announcement/announcement_image/70/0._Image_by_Freepik.jpg" class="img-fluid rounded-start post-image" alt="Изображение поста">-->
+<!--                            <span class="post-status status-draft">Черновик</span>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-9">-->
+<!--                            <div class="card-body d-flex flex-column h-100">-->
+<!--                                <div class="post-meta mb-2">-->
+<!--                                    <span class="platform-badge platform-telegram">Telegram</span>-->
+<!--                                    <span class="post-time"><i class="ph ph-clock me-1"></i> 08.05.2023, 10:15</span>-->
+<!--                                </div>-->
+<!--                                <h5 class="card-title mb-2">Искусственный интеллект в маркетинге: тренды 2023</h5>-->
+<!--                                <p class="card-text mb-3 post-description">Обзор последних трендов использования ИИ в маркетинговых стратегиях. Как искусственный интеллект меняет подход к взаимодействию с клиентами...</p>-->
+<!--                                <div class="post-actions mt-auto">-->
+<!--                                    <button class="btn-edit">Редактировать</button>-->
+<!--                                    <button class="btn-delete">Удалить</button>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-                <!-- Пример поста для Email -->
-                <div class="card mb-4 post-card">
-                    <div class="row g-0">
-                        <div class="col-md-3 position-relative">
-                            <img src="https://s0.rbk.ru/v6_top_pics/media/img/2/34/347186930962342.png" class="img-fluid rounded-start post-image" alt="Изображение поста">
-                            <span class="post-status status-queued">В очереди</span>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="card-body d-flex flex-column h-100">
-                                <div class="post-meta mb-2">
-                                    <span class="platform-badge platform-email">Email</span>
-                                    <span class="post-time"><i class="ph ph-clock me-1"></i> Публикация: 20.05.2023, 09:00</span>
-                                </div>
-                                <h5 class="card-title mb-2">5 эффективных тактик email-маркетинга</h5>
-                                <p class="card-text post-description">Руководство по созданию эффективных email-кампаний для вашего бизнеса. Узнайте, как повысить открываемость писем и конверсию...</p>
-                                <div class="post-actions mt-auto">
-                                    <button class="btn-edit">Редактировать</button>
-                                    <button class="btn-delete">Удалить</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!--                &lt;!&ndash; Пример поста для Email &ndash;&gt;-->
+<!--                <div class="card mb-4 post-card">-->
+<!--                    <div class="row g-0">-->
+<!--                        <div class="col-md-3 position-relative">-->
+<!--                            <img src="https://s0.rbk.ru/v6_top_pics/media/img/2/34/347186930962342.png" class="img-fluid rounded-start post-image" alt="Изображение поста">-->
+<!--                            <span class="post-status status-queued">В очереди</span>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-9">-->
+<!--                            <div class="card-body d-flex flex-column h-100">-->
+<!--                                <div class="post-meta mb-2">-->
+<!--                                    <span class="platform-badge platform-email">Email</span>-->
+<!--                                    <span class="post-time"><i class="ph ph-clock me-1"></i> Публикация: 20.05.2023, 09:00</span>-->
+<!--                                </div>-->
+<!--                                <h5 class="card-title mb-2">5 эффективных тактик email-маркетинга</h5>-->
+<!--                                <p class="card-text post-description">Руководство по созданию эффективных email-кампаний для вашего бизнеса. Узнайте, как повысить открываемость писем и конверсию...</p>-->
+<!--                                <div class="post-actions mt-auto">-->
+<!--                                    <button class="btn-edit">Редактировать</button>-->
+<!--                                    <button class="btn-delete">Удалить</button>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
                 <!-- Пример поста для Блога -->
+            {% for post in posts %}
                 <div class="card mb-4 post-card">
                     <div class="row g-0">
                         <div class="col-md-3 position-relative">
-                            <img src="https://s0.rbk.ru/v6_top_pics/media/img/2/34/347186930962342.png" class="img-fluid rounded-start post-image" alt="Изображение поста">
-                            <span class="post-status status-published">Опубликовано</span>
+                            <img src="{{ article.image }}" class="img-fluid rounded-start post-image" alt="Изображение поста">
+                            <span class="post-status status-published">{{ publish_text }}</span>
                         </div>
                         <div class="col-md-9">
                             <div class="card-body d-flex flex-column h-100">
                                 <div class="post-meta mb-2">
-                                    <span class="platform-badge platform-blog">Блог</span>
+                                    <span class="platform-badge platform-blog">{{ article.category_id }}</span>
                                     <span class="post-time"><i class="ph ph-clock me-1"></i> 15.05.2023, 11:30</span>
                                 </div>
                                 <h5 class="card-title mb-2">Как создать эффективный контент-план на месяц</h5>
@@ -309,6 +310,9 @@
                         </div>
                     </div>
                 </div>
+            {% empty %}
+                <p>Статей пока нет.</p>
+            {% endfor %}
 
                 <div class="load-more-container text-center my-5">
                     <button id="loadMoreBtn" class="btn btn-load-more">
@@ -322,84 +326,12 @@
                         </svg>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
 
     <!-- JavaScript для работы с мобильным меню -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-        const toggleButton = document.querySelector('.toggle-sidebar');
-        const sidebar = document.querySelector('.sidebar');
-        const overlay = document.querySelector('.overlay');
-        const body = document.body;
-
-        // Сохраняем позицию прокрутки
-        let scrollPosition = 0;
-
-        if (toggleButton) {
-            toggleButton.addEventListener('click', function() {
-            sidebar.classList.toggle('show');
-
-            if (sidebar.classList.contains('show')) {
-                // Сохраняем текущую позицию прокрутки
-                scrollPosition = window.pageYOffset;
-
-                // Блокируем прокрутку основной страницы
-                body.classList.add('menu-open');
-
-                // Устанавливаем позицию прокрутки (чтобы страница не прыгала)
-                body.style.top = `-${scrollPosition}px`;
-
-                // Показываем оверлей
-                overlay.style.display = 'block';
-            } else {
-                // Разблокируем прокрутку основной страницы
-                body.classList.remove('menu-open');
-
-                // Восстанавливаем позицию прокрутки
-                body.style.top = '';
-                window.scrollTo(0, scrollPosition);
-
-                // Скрываем оверлей
-                overlay.style.display = 'none';
-            }
-            });
-        }
-
-        if (overlay) {
-            overlay.addEventListener('click', function() {
-            // Скрываем меню
-            sidebar.classList.remove('show');
-
-            // Разблокируем прокрутку основной страницы
-            body.classList.remove('menu-open');
-
-            // Восстанавливаем позицию прокрутки
-            body.style.top = '';
-            window.scrollTo(0, scrollPosition);
-
-            // Скрываем оверлей
-            overlay.style.display = 'none';
-            });
-        }
-
-        // Обработка изменения размера окна
-        window.addEventListener('resize', function() {
-            if (window.innerWidth > 992 && sidebar.classList.contains('show')) {
-            // Если окно стало больше 992px и меню открыто, закрываем его
-            sidebar.classList.remove('show');
-            body.classList.remove('menu-open');
-            body.style.top = '';
-            window.scrollTo(0, scrollPosition);
-            overlay.style.display = 'none';
-            }
-        });
-        });
-
-    </script>
+    <script src = "{% static 'js/posting/overlay.js' %}"></script>
 
     <!-- Модальное окно подтверждения удаления -->
     <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
@@ -420,124 +352,7 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          // Получаем модальное окно
-          const deleteModalElement = document.getElementById('deleteConfirmModal');
-
-          if (!deleteModalElement) {
-            console.error('Модальное окно подтверждения удаления не найдено');
-            return;
-          }
-
-          let deleteModal;
-          try {
-            deleteModal = new bootstrap.Modal(deleteModalElement);
-          } catch (error) {
-            console.error('Ошибка при инициализации модального окна:', error);
-            return;
-          }
-
-          // Получаем все кнопки удаления
-          const deleteButtons = document.querySelectorAll('.btn-delete');
-
-          if (deleteButtons.length === 0) {
-            console.warn('Кнопки удаления не найдены');
-          }
-
-          // Переменная для хранения ссылки на пост, который нужно удалить
-          let postToDelete = null;
-
-          // Добавляем обработчик события для каждой кнопки удаления
-          deleteButtons.forEach(button => {
-            button.addEventListener('click', function(e) {
-              e.preventDefault();
-
-              // Сохраняем ссылку на родительский элемент поста
-              postToDelete = this.closest('.post-card');
-
-              if (!postToDelete) {
-                console.error('Не удалось найти родительскую карточку поста');
-                return;
-              }
-
-              // Можно также получить заголовок поста для отображения в модальном окне
-              const postTitle = postToDelete.querySelector('.card-title')?.textContent || 'этот пост';
-              const confirmMessage = document.getElementById('deleteConfirmMessage');
-
-              if (confirmMessage) {
-                confirmMessage.textContent = `Вы действительно хотите удалить "${postTitle}"?`;
-              }
-
-              // Открываем модальное окно
-              deleteModal.show();
-            });
-          });
-
-          // Обработчик для кнопки подтверждения удаления
-          const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
-
-          if (!confirmDeleteBtn) {
-            console.error('Кнопка подтверждения удаления не найдена');
-            return;
-          }
-
-          confirmDeleteBtn.addEventListener('click', function() {
-            // Здесь можно добавить AJAX-запрос для удаления поста на сервере
-            // const postId = postToDelete.querySelector('.btn-edit')?.dataset.postId;
-
-            // fetch('/api/posts/' + postId, {
-            //   method: 'DELETE',
-            //   headers: {
-            //     'Content-Type': 'application/json',
-            //     'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]')?.content
-            //   }
-            // })
-            // .then(response => {
-            //   if (!response.ok) {
-            //     throw new Error('Ошибка при удалении поста');
-            //   }
-            //   return response.json();
-            // })
-            // .then(data => {
-            //   // Удаляем пост из DOM с анимацией
-            //   animateAndRemovePost(postToDelete);
-            // })
-            // .catch(error => {
-            //   console.error('Ошибка:', error);
-            //   alert('Не удалось удалить пост. Пожалуйста, попробуйте еще раз.');
-            // })
-            // .finally(() => {
-            //   // Закрываем модальное окно
-            //   deleteModal.hide();
-            // });
-
-            // Для демонстрации просто удаляем элемент из DOM с анимацией
-            if (postToDelete) {
-              animateAndRemovePost(postToDelete);
-            }
-
-            // Закрываем модальное окно
-            deleteModal.hide();
-          });
-
-          // Функция для анимации удаления поста
-          function animateAndRemovePost(postElement) {
-            // Добавляем плавную анимацию исчезновения
-            postElement.style.transition = 'all 0.3s ease';
-            postElement.style.opacity = '0';
-            postElement.style.transform = 'translateY(20px)';
-
-            // Удаляем элемент после завершения анимации
-            setTimeout(() => {
-              postElement.remove();
-            }, 300);
-          }
-        });
-    </script>
-
-
-
+    <script src = "{% static 'js/posting/remove_posts.js' %}"></script>
 
     <!-- Модальное окно редактирования поста -->
     <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
@@ -606,595 +421,10 @@
     </div>
 
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-        // Проверяем наличие элементов перед их использованием
-        const editModalElement = document.getElementById('editPostModal');
-
-        if (!editModalElement) {
-            console.error('Модальное окно не найдено');
-            return;
-        }
-
-        // Получаем модальное окно редактирования
-        let editModal;
-        try {
-            editModal = new bootstrap.Modal(editModalElement);
-        } catch (error) {
-            console.error('Ошибка при инициализации модального окна:', error);
-            return;
-        }
-
-        // Получаем все кнопки редактирования
-        const editButtons = document.querySelectorAll('.btn-edit');
-
-        if (editButtons.length === 0) {
-            console.warn('Кнопки редактирования не найдены');
-        }
-
-        // Функция для автоматического изменения размера textarea
-        // Улучшенная функция для изменения размера textarea с ограничением максимальной высоты
-        function autoResizeTextarea(textarea) {
-        if (!textarea) return;
-
-        // Сохраняем текущую позицию прокрутки
-        const scrollPos = window.pageYOffset || document.documentElement.scrollTop;
-
-        // Сбрасываем высоту до минимальной
-        textarea.style.height = 'auto';
-
-        // Определяем минимальную и максимальную высоту
-        const minHeight = 60;
-        const maxHeight = 300;
-
-        // Устанавливаем высоту равной scrollHeight, но не больше максимальной
-        const newHeight = Math.min(maxHeight, Math.max(minHeight, textarea.scrollHeight));
-        textarea.style.height = newHeight + 'px';
-
-        // Если содержимое больше максимальной высоты, включаем прокрутку
-        if (textarea.scrollHeight > maxHeight) {
-            textarea.style.overflowY = 'auto';
-        } else {
-            textarea.style.overflowY = 'hidden';
-        }
-
-        // Восстанавливаем позицию прокрутки
-        window.scrollTo(0, scrollPos);
-
-        console.log('Изменен размер textarea:', newHeight + 'px',
-                    'Реальная высота содержимого:', textarea.scrollHeight + 'px');
-        }
-
-
-        // Инициализируем автоматическое изменение размера для textarea
-        const descriptionTextarea = document.getElementById('editPostDescription');
-        if (descriptionTextarea) {
-            descriptionTextarea.addEventListener('input', function() {
-            autoResizeTextarea(this);
-            });
-        }
-
-        // Настраиваем автоматическое открытие календаря при клике на поле даты
-        const dateInput = document.getElementById('editPostPublishDate');
-        if (dateInput) {
-            // Убедимся, что у поля правильный тип
-            dateInput.setAttribute('type', 'datetime-local');
-
-            // При клике на поле даты автоматически открываем календарь
-            dateInput.addEventListener('click', function(e) {
-            // Фокусируемся на поле
-            this.focus();
-
-            // Используем современный метод showPicker, если он доступен
-            if (this.showPicker) {
-                this.showPicker();
-            } else {
-                // Для старых браузеров - эмулируем клик
-                const event = new MouseEvent('mousedown', {
-                view: window,
-                bubbles: true,
-                cancelable: true
-                });
-                this.dispatchEvent(event);
-            }
-            });
-
-            // Также можно добавить иконку календаря для улучшения UX
-            const dateInputContainer = dateInput.parentElement;
-            if (dateInputContainer) {
-            const calendarIcon = document.createElement('span');
-            calendarIcon.className = 'calendar-icon ph ph-calendar position-absolute';
-            calendarIcon.style.right = '10px';
-            calendarIcon.style.top = '50%';
-            calendarIcon.style.transform = 'translateY(-50%)';
-            calendarIcon.style.pointerEvents = 'none';
-            calendarIcon.style.zIndex = '10';
-
-            // Добавляем относительное позиционирование к контейнеру
-            dateInputContainer.style.position = 'relative';
-
-            // Вставляем иконку после input
-            dateInput.insertAdjacentElement('afterend', calendarIcon);
-            }
-        }
-
-        // Добавляем обработчик события для каждой кнопки редактирования
-        editButtons.forEach(button => {
-            button.addEventListener('click', function(e) {
-            e.preventDefault();
-
-            // Получаем родительский элемент поста
-            const postCard = this.closest('.post-card');
-
-            if (!postCard) {
-                console.error('Не удалось найти родительскую карточку поста');
-                return;
-            }
-
-            // Получаем данные поста с проверками
-            const titleElement = postCard.querySelector('.card-title');
-            const descriptionElement = postCard.querySelector('.post-description');
-            const imageElement = postCard.querySelector('.post-image');
-
-            if (!titleElement || !descriptionElement || !imageElement) {
-                console.error('Не удалось найти необходимые элементы поста');
-                return;
-            }
-
-            const postTitle = titleElement.textContent;
-            const postDescription = descriptionElement.textContent;
-            const postImage = imageElement.src;
-
-            // Определяем платформу по классу - ИСПРАВЛЕННЫЙ КОД
-            let platform = 'vk'; // По умолчанию теперь ВКонтакте
-            const platformBadge = postCard.querySelector('.platform-badge');
-            if (platformBadge) {
-                // Проверяем новые платформы
-                if (platformBadge.classList.contains('platform-vk')) platform = 'vk';
-                if (platformBadge.classList.contains('platform-telegram')) platform = 'telegram';
-                if (platformBadge.classList.contains('platform-email')) platform = 'email';
-                if (platformBadge.classList.contains('platform-blog')) platform = 'blog';
-
-                // Оставляем проверку старых платформ для совместимости
-                if (platformBadge.classList.contains('platform-facebook')) platform = 'facebook';
-                if (platformBadge.classList.contains('platform-instagram')) platform = 'instagram';
-                if (platformBadge.classList.contains('platform-twitter')) platform = 'twitter';
-                if (platformBadge.classList.contains('platform-linkedin')) platform = 'linkedin';
-
-                // Для отладки
-                console.log('Определена платформа:', platform);
-                console.log('Классы платформы:', platformBadge.className);
-            }
-
-            // Определяем статус по классу
-            let status = 'published'; // По умолчанию
-            const statusBadge = postCard.querySelector('.post-status');
-            if (statusBadge) {
-                if (statusBadge.classList.contains('status-draft')) status = 'draft';
-                if (statusBadge.classList.contains('status-queued')) status = 'queued';
-            }
-
-            // Получаем дату публикации из текста
-            const postTimeElement = postCard.querySelector('.post-time');
-            let publishDate = '';
-
-            if (postTimeElement) {
-                const timeText = postTimeElement.textContent;
-                // Извлекаем дату из текста (например, из "12.05.2023, 14:30")
-                const dateMatch = timeText.match(/(\d{2})\.(\d{2})\.(\d{4}),\s*(\d{2}):(\d{2})/);
-
-                if (dateMatch) {
-                // Преобразуем в формат для input type="datetime-local": YYYY-MM-DDThh:mm
-                publishDate = `${dateMatch[3]}-${dateMatch[2]}-${dateMatch[1]}T${dateMatch[4]}:${dateMatch[5]}`;
-
-                const publishDateInput = document.getElementById('editPostPublishDate');
-                if (publishDateInput) {
-                    publishDateInput.value = publishDate;
-                }
-                } else if (timeText.includes('Публикация:')) {
-                // Если это запланированная публикация
-                const scheduledMatch = timeText.match(/Публикация:\s*(\d{2})\.(\d{2})\.(\d{4}),\s*(\d{2}):(\d{2})/);
-                if (scheduledMatch) {
-                    publishDate = `${scheduledMatch[3]}-${scheduledMatch[2]}-${scheduledMatch[1]}T${scheduledMatch[4]}:${scheduledMatch[5]}`;
-
-                    const publishDateInput = document.getElementById('editPostPublishDate');
-                    if (publishDateInput) {
-                    publishDateInput.value = publishDate;
-                    }
-                }
-                }
-            }
-
-            // Можно также получить ID поста, если он есть
-            const postId = this.dataset.postId || '0';
-
-            // Заполняем форму данными поста с проверками
-            const idInput = document.getElementById('editPostId');
-            const titleInput = document.getElementById('editPostTitle');
-            const descriptionInput = document.getElementById('editPostDescription');
-            const platformInput = document.getElementById('editPostPlatform');
-            const statusInput = document.getElementById('editPostStatus');
-            const publishDateInput = document.getElementById('editPostPublishDate');
-            const currentImage = document.getElementById('currentPostImage');
-
-            if (idInput) idInput.value = postId;
-            if (titleInput) titleInput.value = postTitle;
-            if (descriptionInput) {
-                descriptionInput.value = postDescription;
-                // Автоматически изменяем размер textarea при загрузке данных
-                setTimeout(() => autoResizeTextarea(descriptionInput), 0);
-            }
-
-            // Устанавливаем значение платформы - ИСПРАВЛЕННЫЙ КОД
-            if (platformInput) {
-                platformInput.value = platform;
-                console.log('Установлена платформа:', platform);
-            }
-
-            if (statusInput) statusInput.value = status;
-            if (publishDateInput) publishDateInput.value = publishDate;
-
-            // Отображаем текущее изображение
-            if (currentImage) {
-                currentImage.src = postImage;
-                currentImage.style.display = 'block';
-            }
-
-            // Открываем модальное окно
-            try {
-                editModal.show();
-            } catch (error) {
-                console.error('Ошибка при открытии модального окна:', error);
-            }
-            });
-        });
-
-          saveButton.addEventListener('click', function() {
-            // Получаем данные из формы с проверками
-            const postIdInput = document.getElementById('editPostId');
-            const titleInput = document.getElementById('editPostTitle');
-            const descriptionInput = document.getElementById('editPostDescription');
-            const platformInput = document.getElementById('editPostPlatform');
-            const statusInput = document.getElementById('editPostStatus');
-            const publishDateInput = document.getElementById('editPostPublishDate');
-            const imageInput = document.getElementById('editPostImage');
-            const currentImageElement = document.getElementById('currentPostImage');
-
-            if (!postIdInput || !titleInput || !descriptionInput || !platformInput || !statusInput) {
-              console.error('Не удалось найти необходимые поля формы');
-              return;
-            }
-
-            const postId = postIdInput.value;
-            const title = titleInput.value;
-            const description = descriptionInput.value;
-            const platform = platformInput.value;
-            const status = statusInput.value;
-            const publishDate = publishDateInput ? publishDateInput.value : '';
-            const imageFile = imageInput && imageInput.files.length > 0 ? imageInput.files[0] : null;
-            const currentImage = currentImageElement ? currentImageElement.src : '';
-
-            // Валидация формы
-            if (!title || !description) {
-              alert('Пожалуйста, заполните все обязательные поля');
-              return;
-            }
-
-            // Для демонстрации просто обновляем пост в DOM
-            try {
-              updatePostInDOM(postId, {
-                title: title,
-                description: description,
-                platform: platform,
-                status: status,
-                publishDate: publishDate,
-                // Если новое изображение не выбрано, используем текущее
-                image: imageFile ? URL.createObjectURL(imageFile) : currentImage
-              });
-
-              // Закрываем модальное окно
-              editModal.hide();
-            } catch (error) {
-              console.error('Ошибка при обновлении поста:', error);
-              alert('Произошла ошибка при сохранении изменений');
-            }
-          });
-
-          // Функция для обновления поста в DOM
-          function updatePostInDOM(postId, postData) {
-            // Находим пост по ID или другому селектору
-            const postCards = document.querySelectorAll('.post-card');
-
-            if (postCards.length === 0) {
-              console.error('Посты не найдены в DOM');
-              return;
-            }
-
-            let targetPost = null;
-
-            // Ищем пост по ID
-            for (let i = 0; i < postCards.length; i++) {
-              const card = postCards[i];
-              const editButton = card.querySelector('.btn-edit');
-              if (editButton && editButton.dataset.postId === postId) {
-                targetPost = card;
-                break;
-              }
-            }
-
-            if (!targetPost) {
-              console.warn('Пост с ID ' + postId + ' не найден, используем первый пост');
-              targetPost = postCards[0];
-            }
-
-            // Обновляем данные поста с проверками
-            const titleElement = targetPost.querySelector('.card-title');
-            const descriptionElement = targetPost.querySelector('.post-description');
-            const imageElement = targetPost.querySelector('.post-image');
-
-            if (titleElement) titleElement.textContent = postData.title;
-            if (descriptionElement) descriptionElement.textContent = postData.description;
-
-            // Обновляем изображение, если оно изменилось
-            if (postData.image && imageElement) {
-              imageElement.src = postData.image;
-            }
-
-            // Обновляем платформу
-            const platformBadge = targetPost.querySelector('.platform-badge');
-            if (platformBadge) {
-                platformBadge.className = 'platform-badge'; // Сбрасываем классы
-                platformBadge.classList.add('platform-' + postData.platform);
-
-                // Обновляем текст платформы
-                let platformText = 'ВКонтакте';
-                if (postData.platform === 'telegram') platformText = 'Telegram';
-                if (postData.platform === 'email') platformText = 'Email';
-                if (postData.platform === 'blog') platformText = 'Блог';
-                platformBadge.textContent = platformText;
-            }
-
-            // Обновляем статус
-            const statusBadge = targetPost.querySelector('.post-status');
-            if (statusBadge) {
-              statusBadge.className = 'post-status'; // Сбрасываем классы
-              statusBadge.classList.add('status-' + postData.status);
-
-              // Обновляем текст статуса
-              let statusText = 'Опубликовано';
-              if (postData.status === 'draft') statusText = 'Черновик';
-              if (postData.status === 'queued') statusText = 'В очереди';
-              statusBadge.textContent = statusText;
-            }
-
-            // Обновляем дату публикации
-            const postTimeElement = targetPost.querySelector('.post-time');
-            if (postTimeElement && postData.publishDate) {
-              try {
-                // Преобразуем формат даты из YYYY-MM-DDThh:mm в DD.MM.YYYY
-                          // Преобразуем формат даты из YYYY-MM-DDThh:mm в DD.MM.YYYY, hh:mm
-            const date = new Date(postData.publishDate);
-
-            if (isNaN(date.getTime())) {
-                console.error('Некорректная дата:', postData.publishDate);
-                return;
-            }
-
-            const formattedDate = `${date.getDate().toString().padStart(2, '0')}.${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getFullYear()}, ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
-
-            // Если статус "В очереди", показываем "Публикация: дата"
-            if (postData.status === 'queued') {
-                postTimeElement.innerHTML = `<i class="ph ph-clock me-1"></i> Публикация: ${formattedDate}`;
-            } else {
-                postTimeElement.innerHTML = `<i class="ph ph-clock me-1"></i> ${formattedDate}`;
-            }
-            } catch (error) {
-            console.error('Ошибка при форматировании даты:', error);
-            }
-        } else if (postTimeElement) {
-            // Если дата не указана, показываем текущую дату
-            const now = new Date();
-            const formattedNow = `${now.getDate().toString().padStart(2, '0')}.${(now.getMonth() + 1).toString().padStart(2, '0')}.${now.getFullYear()}, ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
-            postTimeElement.innerHTML = `<i class="ph ph-clock me-1"></i> ${formattedNow}`;
-        }
-        }
-
-        // Добавляем CSS для поля даты с иконкой календаря
-        const style = document.createElement('style');
-        style.textContent = `
-        /* Стили для textarea с автоматическим изменением размера */
-        textarea.form-control {
-            min-height: 60px;
-            max-height: 300px;
-            overflow-y: auto;
-            resize: none;
-            transition: height 0.2s ease;
-        }
-
-        /* Стили для поля даты */
-        #editPostPublishDate {
-            padding-right: 30px; /* Место для иконки */
-            cursor: pointer;
-        }
-
-        /* Стили для иконки календаря */
-        .calendar-icon {
-            color: #6c757d;
-            cursor: pointer;
-        }
-
-        /* Стили для описания поста */
-        .post-description {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            line-height: 1.5;
-            max-height: 4.5em; /* 3 строки * 1.5 line-height */
-            transition: max-height 0.3s ease;
-        }
-
-        /* При наведении на карточку показываем весь текст */
-        .post-card:hover .post-description {
-            -webkit-line-clamp: unset;
-            max-height: 500px;
-        }
-        `;
-        document.head.appendChild(style);
-
-        // Обработчик события для модального окна при открытии
-        editModalElement.addEventListener('shown.bs.modal', function() {
-        // Автоматически изменяем размер textarea при открытии модального окна
-        const descriptionTextarea = document.getElementById('editPostDescription');
-        if (descriptionTextarea) {
-            autoResizeTextarea(descriptionTextarea);
-        }
-
-        // Фокусируемся на поле заголовка
-        const titleInput = document.getElementById('editPostTitle');
-        if (titleInput) {
-            titleInput.focus();
-        }
-        });
-    });
-    </script>
+    <script src = "{% static 'js/posting/edit_post.js' %}"></script>
 
 <!-- Кнопка загрузить еще посты -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const loadMoreBtn = document.getElementById('loadMoreBtn');
-        const loadingSpinner = document.getElementById('loadingSpinner');
-
-        if (!loadMoreBtn) return;
-
-        let page = 1; // Текущая страница
-
-        loadMoreBtn.addEventListener('click', function() {
-            // Показываем спиннер и блокируем кнопку
-            loadMoreBtn.disabled = true;
-            loadMoreBtn.classList.add('d-none');
-            loadingSpinner.classList.remove('d-none');
-
-            // Имитация загрузки данных с сервера
-            setTimeout(function() {
-                // Здесь должен быть AJAX-запрос к серверу для получения новых постов
-                // Например:
-                // fetch('/api/posts?page=' + (++page))
-                //   .then(response => response.json())
-                //   .then(data => {
-                //     if (data.posts.length > 0) {
-                //       appendPosts(data.posts);
-                //     }
-                //     if (data.hasMore === false) {
-                //       loadMoreBtn.remove(); // Удаляем кнопку, если больше нет постов
-                //     }
-                //   })
-                //   .catch(error => console.error('Ошибка загрузки постов:', error))
-                //   .finally(() => {
-                //     loadMoreBtn.disabled = false;
-                //     loadMoreBtn.classList.remove('d-none');
-                //     loadingSpinner.classList.add('d-none');
-                //   });
-
-                // Для демонстрации добавляем клоны существующих постов
-                const postsContainer = document.querySelector('.main-content');
-                const existingPosts = document.querySelectorAll('.post-card');
-
-                if (existingPosts.length > 0) {
-                    // Клонируем несколько существующих постов
-                    for (let i = 0; i < Math.min(3, existingPosts.length); i++) {
-                        const postClone = existingPosts[i].cloneNode(true);
-                        postsContainer.insertBefore(postClone, document.querySelector('.load-more-container'));
-                    }
-
-                    // Если это последняя страница, удаляем кнопку
-                    if (page >= 3) {
-                        loadMoreBtn.remove();
-                        loadingSpinner.remove();
-
-                        // Добавляем сообщение о том, что больше постов нет
-                        const endMessage = document.createElement('div');
-                        endMessage.className = 'text-center text-muted my-5';
-                        endMessage.innerHTML = 'Больше постов нет';
-                        document.querySelector('.load-more-container').appendChild(endMessage);
-                    } else {
-                        // Иначе разблокируем кнопку и скрываем спиннер
-                        loadMoreBtn.disabled = false;
-                        loadMoreBtn.classList.remove('d-none');
-                        loadingSpinner.classList.add('d-none');
-                        page++;
-                    }
-                } else {
-                    // Если постов нет, показываем сообщение
-                    const noPostsMessage = document.createElement('div');
-                    noPostsMessage.className = 'alert alert-info';
-                    noPostsMessage.textContent = 'Посты не найдены';
-                    postsContainer.appendChild(noPostsMessage);
-
-                    loadMoreBtn.remove();
-                    loadingSpinner.remove();
-                }
-            }, 1000); // Имитация задержки загрузки
-        });
-
-        // Функция для добавления новых постов
-        function appendPosts(posts) {
-            const postsContainer = document.querySelector('.main-content');
-
-            posts.forEach(post => {
-                // Создаем HTML для нового поста
-                const postHTML = `
-                    <div class="card mb-4 post-card">
-                        <div class="row g-0">
-                            <div class="col-md-3 position-relative">
-                                <img src="${post.image}" class="img-fluid rounded-start post-image" alt="${post.title}">
-                                <span class="post-status status-${post.status}">${getStatusText(post.status)}</span>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="card-body d-flex flex-column h-100">
-                                    <div class="post-meta mb-2">
-                                        <span class="platform-badge platform-${post.platform}">${getPlatformText(post.platform)}</span>
-                                        <span class="post-time"><i class="ph ph-clock me-1"></i> ${post.date}</span>
-                                    </div>
-                                    <h5 class="card-title mb-2">${post.title}</h5>
-                                    <p class="card-text post-description">${post.description}</p>
-                                    <div class="post-actions mt-auto">
-                                        <button class="btn-edit" data-post-id="${post.id}">Редактировать</button>
-                                        <button class="btn-delete" data-post-id="${post.id}">Удалить</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-
-                // Вставляем HTML перед контейнером кнопки "Загрузить еще"
-                postsContainer.insertAdjacentHTML('beforeend', postHTML);
-            });
-        }
-
-        // Вспомогательные функции для получения текста статуса и платформы
-        function getStatusText(status) {
-            switch(status) {
-                case 'published': return 'Опубликовано';
-                case 'draft': return 'Черновик';
-                case 'queued': return 'В очереди';
-                default: return 'Неизвестно';
-            }
-        }
-
-        function getPlatformText(platform) {
-            switch(platform) {
-                case 'linkedin': return 'LinkedIn';
-                case 'facebook': return 'Facebook';
-                case 'instagram': return 'Instagram';
-                case 'twitter': return 'Twitter';
-                default: return 'Другое';
-            }
-        }
-    });
-    </script>
+    <script src = "{% static 'js/posting/upload_posts.js' %}"></script>
     <!-- Phosphor Icons JavaScript -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 

@@ -339,7 +339,7 @@ body {
 .platform-blog {
     background-color: #2A9D8F; /* Бирюзовый цвет для блога */
 }
-/*
+
 .platform-linkedin {
     background-color: #0077B5;
 }
@@ -354,7 +354,7 @@ body {
 
 .platform-twitter {
     background-color: #1DA1F2;
-} */
+}
 
 .post-time {
     color: var(--gray-color);
