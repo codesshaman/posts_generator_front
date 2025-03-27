@@ -287,6 +287,7 @@
 <!--                </div>-->
 
                 <!-- Пример поста для Блога -->
+        <div id="posts-list">
             {% for post in posts %}
                 <div class="card mb-4 post-card">
                     <div class="row g-0">
@@ -300,11 +301,11 @@
                                     <span class="platform-badge platform-blog">{{ article.category_id }}</span>
                                     <span class="post-time"><i class="ph ph-clock me-1"></i> 15.05.2023, 11:30</span>
                                 </div>
-                                <h5 class="card-title mb-2">Как создать эффективный контент-план на месяц</h5>
-                                <p class="card-text post-description">Подробное руководство по планированию контента для вашего блога. Узнайте, как составить эффективный контент-план и повысить вовлеченность аудитории...</p>
+                                <h5 class="card-title mb-2">{{ post.title }}</h5>
+                                <p class="card-text post-description">{{ post.description }}</p>
                                 <div class="post-actions mt-auto">
-                                    <button class="btn-edit">Редактировать</button>
-                                    <button class="btn-delete">Удалить</button>
+                                    <button class="btn-edit">{{ edit_button }}</button>
+                                    <button class="btn-delete">{{ delete_button }}</button>
                                 </div>
                             </div>
                         </div>
@@ -317,7 +318,7 @@
                 <div class="load-more-container text-center my-5">
                     <button id="loadMoreBtn" class="btn btn-load-more">
                         <i class="ph ph-arrow-down me-2"></i>
-                        Загрузить еще
+                        {{ load_more_text }}
                     </button>
                     <!-- Заменяем стандартный спиннер Bootstrap на кастомный -->
                     <div id="loadingSpinner" class="custom-spinner d-none">
@@ -328,6 +329,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <!-- JavaScript для работы с мобильным меню -->
@@ -423,6 +425,15 @@
 
     <script src = "{% static 'js/posting/edit_post.js' %}"></script>
 
+    <script>
+    window.translations = {
+        editButton: "{{ edit_button }}",
+        deleteButton: "{{ delete_button }}",
+        loadMoreText: "{{ load_more_text }}",
+        noMorePostsText: "{{ no_more_posts_text }}",
+        PublishText: "{{ publish_text }}"
+    };
+    </script>
 <!-- Кнопка загрузить еще посты -->
     <script src = "{% static 'js/posting/upload_posts.js' %}"></script>
     <!-- Phosphor Icons JavaScript -->

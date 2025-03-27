@@ -48,27 +48,27 @@ def posts(request):
         "no_more_posts_text": translate("Больше постов нет", lang),
     })
 
-def load_more_articles(request):
+def load_more_posts(request):
     """AJAX-обработчик для подгрузки следующих статей"""
     page = int(request.GET.get('page', 0))  # Номер страницы, начинаем с 0
-    articles_per_page = 3
-    start = page * articles_per_page  # Убираем смещение +3
-    end = start + articles_per_page
-    next_articles = posts_data[start:end]
+    posts_per_page = 3
+    start = page * posts_per_page  # Убираем смещение +3
+    end = start + posts_per_page
+    next_posts = posts_data[start:end]
 
     has_more = end < len(posts_data)
 
-    articles_list = [{
-        "publish_date": article["publish_date"].strftime("%d.%m.%Y %H:%M"),
-        "title": article["title"],
-        "category_id": article["category_id"],
-        "description": article["description"],
-        "content": article["content"],
-        "author_id": article["author_id"],
-        "image": article["image"]
-    } for article in next_articles]
+    posts_list = [{
+        "publish_date": post["publish_date"].strftime("%d.%m.%Y %H:%M"),
+        "title": post["title"],
+        "category_id": post["category_id"],
+        "description": post["description"],
+        "content": post["content"],
+        "author_id": post["author_id"],
+        "image": post["image"]
+    } for post in next_posts]
 
     return JsonResponse({
-        "articles": articles_list,
+        "posts": posts_list,
         "has_more": has_more
     })

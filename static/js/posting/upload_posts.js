@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (!loadMoreBtn) return;
 
-        let page = 1; // Текущая страница
+        let page = 0; // Текущая страница
 
         loadMoreBtn.addEventListener('click', function() {
             // Показываем спиннер и блокируем кнопку
@@ -12,72 +12,33 @@ document.addEventListener('DOMContentLoaded', function() {
             loadMoreBtn.classList.add('d-none');
             loadingSpinner.classList.remove('d-none');
 
-            // Имитация загрузки данных с сервера
-            setTimeout(function() {
-                // Здесь должен быть AJAX-запрос к серверу для получения новых постов
-                // Например:
-                // fetch('/api/posts?page=' + (++page))
-                //   .then(response => response.json())
-                //   .then(data => {
-                //     if (data.posts.length > 0) {
-                //       appendPosts(data.posts);
-                //     }
-                //     if (data.hasMore === false) {
-                //       loadMoreBtn.remove(); // Удаляем кнопку, если больше нет постов
-                //     }
-                //   })
-                //   .catch(error => console.error('Ошибка загрузки постов:', error))
-                //   .finally(() => {
-                //     loadMoreBtn.disabled = false;
-                //     loadMoreBtn.classList.remove('d-none');
-                //     loadingSpinner.classList.add('d-none');
-                //   });
-
-                // Для демонстрации добавляем клоны существующих постов
-                const postsContainer = document.querySelector('.main-content');
-                const existingPosts = document.querySelectorAll('.post-card');
-
-                if (existingPosts.length > 0) {
-                    // Клонируем несколько существующих постов
-                    for (let i = 0; i < Math.min(3, existingPosts.length); i++) {
-                        const postClone = existingPosts[i].cloneNode(true);
-                        postsContainer.insertBefore(postClone, document.querySelector('.load-more-container'));
-                    }
-
-                    // Если это последняя страница, удаляем кнопку
-                    if (page >= 3) {
-                        loadMoreBtn.remove();
-                        loadingSpinner.remove();
-
-                        // Добавляем сообщение о том, что больше постов нет
-                        const endMessage = document.createElement('div');
-                        endMessage.className = 'text-center text-muted my-5';
-                        endMessage.innerHTML = 'Больше постов нет';
-                        document.querySelector('.load-more-container').appendChild(endMessage);
-                    } else {
-                        // Иначе разблокируем кнопку и скрываем спиннер
-                        loadMoreBtn.disabled = false;
-                        loadMoreBtn.classList.remove('d-none');
-                        loadingSpinner.classList.add('d-none');
-                        page++;
-                    }
-                } else {
-                    // Если постов нет, показываем сообщение
-                    const noPostsMessage = document.createElement('div');
-                    noPostsMessage.className = 'alert alert-info';
-                    noPostsMessage.textContent = 'Посты не найдены';
-                    postsContainer.appendChild(noPostsMessage);
-
+        page += 1; // Увеличиваем страницу
+        fetch(`/load-more-posts/?page=${page}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.posts.length > 0) {
+                    appendPosts(data.posts);
+                }
+                if (!data.has_more) {
                     loadMoreBtn.remove();
                     loadingSpinner.remove();
+                    const endMessage = document.createElement('div');
+                    endMessage.className = 'card mb-4 post-card text-center';
+                    endMessage.innerHTML = window.translations.noMorePostsText;
+                    document.querySelector('.load-more-container').appendChild(endMessage);
+                } else {
+                    loadMoreBtn.disabled = false;
+                    loadMoreBtn.classList.remove('d-none');
+                    loadingSpinner.classList.add('d-none');
                 }
-            }, 1000); // Имитация задержки загрузки
+            })
+            .catch(error => console.error('Ошибка загрузки:', error));
+            // Имитация загрузки данных с сервера
+            setTimeout(function() {}, 1000); // Имитация задержки загрузки
         });
 
         // Функция для добавления новых постов
         function appendPosts(posts) {
-            const postsContainer = document.querySelector('.main-content');
-
             posts.forEach(post => {
                 // Создаем HTML для нового поста
                 const postHTML = `
@@ -104,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                     </div>
                 `;
-
                 // Вставляем HTML перед контейнером кнопки "Загрузить еще"
                 postsContainer.insertAdjacentHTML('beforeend', postHTML);
             });
