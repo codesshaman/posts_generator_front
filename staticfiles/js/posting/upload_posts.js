@@ -39,6 +39,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Функция для добавления новых постов
         function appendPosts(posts) {
+            const postsContainer = document.querySelector('.main-content');
+
             posts.forEach(post => {
                 // Создаем HTML для нового поста
                 const postHTML = `
