@@ -25,6 +25,7 @@
 ^Опубликовано^Published^
 ^Черновик^Draft^
 ^В очереди^In the queue^
+^Неизвестно^Unknown^
 ^Редактировать^Edit^
 ^Удалить^Delete^
 ^Создать пост^Create post^
