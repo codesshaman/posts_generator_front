@@ -48,48 +48,27 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="row g-0">
                             <div class="col-md-3 position-relative">
                                 <img src="${post.image}" class="img-fluid rounded-start post-image" alt="${post.title}">
-                                <span class="post-status status-${post.status}">${getStatusText(post.status)}</span>
+                                <span class="post-status ${post.category_style}">${post.category_text}</span>
                             </div>
                             <div class="col-md-9">
                                 <div class="card-body d-flex flex-column h-100">
                                     <div class="post-meta mb-2">
-                                        <span class="platform-badge platform-${post.platform}">${getPlatformText(post.platform)}</span>
-                                        <span class="post-time"><i class="ph ph-clock me-1"></i> ${post.date}</span>
+                                        <span class="platform-badge ${post.platform_style}">${post.platform_text}</span>
+                                        <span class="post-time"><i class="ph ph-clock me-1"></i>${post.date}</span>
                                     </div>
                                     <h5 class="card-title mb-2">${post.title}</h5>
                                     <p class="card-text post-description">${post.description}</p>
                                     <div class="post-actions mt-auto">
-                                        <button class="btn-edit" data-post-id="${post.id}">Редактировать</button>
-                                        <button class="btn-delete" data-post-id="${post.id}">Удалить</button>
+                                        <button class="btn-edit" data-post-id="${post.id}">${window.translations.editButton}</button>
+                                        <button class="btn-delete" data-post-id="${post.id}">${window.translations.deleteButton}</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 `;
-
                 // Вставляем HTML перед контейнером кнопки "Загрузить еще"
                 postsContainer.insertAdjacentHTML('beforeend', postHTML);
             });
-        }
-
-        // Вспомогательные функции для получения текста статуса и платформы
-        function getStatusText(status) {
-            switch(status) {
-                case 'published': return 'Опубликовано';
-                case 'draft': return 'Черновик';
-                case 'queued': return 'В очереди';
-                default: return 'Неизвестно';
-            }
-        }
-
-        function getPlatformText(platform) {
-            switch(platform) {
-                case 'linkedin': return 'LinkedIn';
-                case 'facebook': return 'Facebook';
-                case 'instagram': return 'Instagram';
-                case 'twitter': return 'Twitter';
-                default: return 'Другое';
-            }
         }
     });

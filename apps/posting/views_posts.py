@@ -6,7 +6,7 @@ from datetime import datetime
 import os
 
 # Устанавливаем язык
-lang = "ru"
+lang = "en"
 
 # Загружаем .env файл
 load_dotenv()
@@ -34,18 +34,38 @@ def get_category_style(category_id):
     else:
         return "status-draft".strip()
 
+def get_platform_text(category_id):
+    if category_id == 1:
+        return "vk"
+    elif category_id == 2:
+        return "boosty"
+    elif category_id == 3:
+        return "telegram"
+    else:
+        return "email"
+
+def get_platform_style(category_id):
+    if category_id == 1:
+        return "platform-vk".strip()
+    elif category_id == 2:
+        return "platform-email".strip()
+    elif category_id == 3:
+        return "platform-telegram".strip()
+    else:
+        return "platform-blog".strip()
+
 # Эмулированные данные статей
 posts_data = [
-    {"publish_date": datetime(2023, 10, 1, 12, 30), "title": "Первая статья", "category_id": 1, "category_style": get_category_style(1), "category_text":get_category_text(1), "description": "Статья о методах повышения конверсии веб-сайтов с практическими советами и рекомендациями для бизнеса любого размера. Узнайте, как улучшить показатели...", "content": "Полный текст первой статьи.", "author_id": 1, "image": "https://venyoo.ru/blog/wp-content/uploads/2017/04/10_Yml6ZXNwcm9jZXNz.jpg"},
-    {"publish_date": datetime(2023, 10, 2, 15, 45), "title": "Вторая статья", "category_id": 2, "category_style": get_category_style(2), "category_text":get_category_text(2), "description": "Обзор последних трендов использования ИИ в маркетинговых стратегиях. Как искусственный интеллект меняет подход к взаимодействию с клиентами...", "content": "Текст второй статьи.", "author_id": 2, "image": "https://s0.rbk.ru/v6_top_pics/media/img/2/34/347186930962342.png"},
-    {"publish_date": datetime(2023, 10, 3, 9, 15), "title": "Третья статья", "category_id": 3, "category_style": get_category_style(3), "category_text":get_category_text(3), "description": "Руководство по созданию эффективных email-кампаний для вашего бизнеса. Узнайте, как повысить открываемость писем и конверсию...", "content": "Подробности третьей статьи.", "author_id": 1, "image": "https://sberbs.ru/uploads/models/announcement/announcement_image/70/0._Image_by_Freepik.jpg"},
-    {"publish_date": datetime(2023, 10, 4, 14, 20), "title": "Четвертая статья", "category_id": 4, "category_style": get_category_style(4), "category_text":get_category_text(4), "description": "Подробное руководство по планированию контента для вашего блога. Узнайте, как составить эффективный контент-план и повысить вовлеченность аудитории...", "content": "Текст четвертой статьи.", "author_id": 2, "image": "https://venyoo.ru/blog/wp-content/uploads/2017/04/10_Yml6ZXNwcm9jZXNz.jpg"},
-    {"publish_date": datetime(2023, 10, 5, 10, 10), "title": "Пятая статья", "category_id": 1, "category_style": get_category_style(1), "category_text":get_category_text(1), "description": "Описание пятой статьи", "content": "Текст пятой статьи.", "author_id": 1, "image": "https://s0.rbk.ru/v6_top_pics/media/img/2/34/347186930962342.png"},
-    {"publish_date": datetime(2023, 10, 6, 16, 50), "title": "Шестая статья", "category_id": 2, "category_style": get_category_style(2), "category_text":get_category_text(2), "description": "Описание шестой статьи", "content": "Текст шестой статьи.", "author_id": 2, "image": "https://sberbs.ru/uploads/models/announcement/announcement_image/70/0._Image_by_Freepik.jpg"},
-    {"publish_date": datetime(2023, 10, 4, 14, 20), "title": "Седьмая статья", "category_id": 2, "category_style": get_category_style(2), "category_text":get_category_text(2), "description": "Описание седьмой статьи", "content": "Текст седьмой статьи.", "author_id": 2, "image": "https://venyoo.ru/blog/wp-content/uploads/2017/04/10_Yml6ZXNwcm9jZXNz.jpg"},
-    {"publish_date": datetime(2023, 10, 5, 10, 10), "title": "Восьмая статья", "category_id": 3, "category_style": get_category_style(3), "category_text":get_category_text(3), "description": "Описание восьмой статьи", "content": "Текст восьмой статьи.", "author_id": 1, "image": "https://s0.rbk.ru/v6_top_pics/media/img/2/34/347186930962342.png"},
-    {"publish_date": datetime(2023, 10, 6, 16, 50), "title": "Девятая статья", "category_id": 1, "category_style": get_category_style(1), "category_text":get_category_text(1), "description": "Описание девятой статьи", "content": "Текст девятой статьи.", "author_id": 2, "image": "https://sberbs.ru/uploads/models/announcement/announcement_image/70/0._Image_by_Freepik.jpg"},
-    {"publish_date": datetime(2023, 10, 6, 16, 50), "title": "Десятая статья", "category_id": 3, "category_style": get_category_style(3), "category_text":get_category_text(3), "description": "Описание десятой статьи", "content": "Текст десятой статьи.", "author_id": 2, "image": "https://sberbs.ru/uploads/models/announcement/announcement_image/70/0._Image_by_Freepik.jpg"}
+    {"publish_date": datetime(2023, 10, 1, 12, 30), "title": "Первая статья", "category_id": 1, "category_style": get_category_style(1), "category_text":get_category_text(1), "platform_style": get_platform_style(1), "platform_text": get_platform_text(1), "description": "Статья о методах повышения конверсии веб-сайтов с практическими советами и рекомендациями для бизнеса любого размера. Узнайте, как улучшить показатели...", "content": "Полный текст первой статьи.", "author_id": 1, "image": "https://venyoo.ru/blog/wp-content/uploads/2017/04/10_Yml6ZXNwcm9jZXNz.jpg"},
+    {"publish_date": datetime(2023, 10, 2, 15, 45), "title": "Вторая статья", "category_id": 2, "category_style": get_category_style(2), "category_text":get_category_text(2), "platform_style": get_platform_style(2), "platform_text": get_platform_text(2), "description": "Обзор последних трендов использования ИИ в маркетинговых стратегиях. Как искусственный интеллект меняет подход к взаимодействию с клиентами...", "content": "Текст второй статьи.", "author_id": 2, "image": "https://s0.rbk.ru/v6_top_pics/media/img/2/34/347186930962342.png"},
+    {"publish_date": datetime(2023, 10, 3, 9, 15), "title": "Третья статья", "category_id": 3, "category_style": get_category_style(3), "category_text":get_category_text(3), "platform_style": get_platform_style(3), "platform_text": get_platform_text(3), "description": "Руководство по созданию эффективных email-кампаний для вашего бизнеса. Узнайте, как повысить открываемость писем и конверсию...", "content": "Подробности третьей статьи.", "author_id": 1, "image": "https://sberbs.ru/uploads/models/announcement/announcement_image/70/0._Image_by_Freepik.jpg"},
+    {"publish_date": datetime(2023, 10, 4, 14, 20), "title": "Четвертая статья", "category_id": 4, "category_style": get_category_style(4), "category_text":get_category_text(4), "platform_style": get_platform_style(4), "platform_text": get_platform_text(4), "description": "Подробное руководство по планированию контента для вашего блога. Узнайте, как составить эффективный контент-план и повысить вовлеченность аудитории...", "content": "Текст четвертой статьи.", "author_id": 2, "image": "https://venyoo.ru/blog/wp-content/uploads/2017/04/10_Yml6ZXNwcm9jZXNz.jpg"},
+    {"publish_date": datetime(2023, 10, 5, 10, 10), "title": "Пятая статья", "category_id": 1, "category_style": get_category_style(1), "category_text":get_category_text(1), "platform_style": get_platform_style(1), "platform_text": get_platform_text(1), "description": "Описание пятой статьи", "content": "Текст пятой статьи.", "author_id": 1, "image": "https://s0.rbk.ru/v6_top_pics/media/img/2/34/347186930962342.png"},
+    {"publish_date": datetime(2023, 10, 6, 16, 50), "title": "Шестая статья", "category_id": 2, "category_style": get_category_style(2), "category_text":get_category_text(2), "platform_style": get_platform_style(2), "platform_text": get_platform_text(2), "description": "Описание шестой статьи", "content": "Текст шестой статьи.", "author_id": 2, "image": "https://sberbs.ru/uploads/models/announcement/announcement_image/70/0._Image_by_Freepik.jpg"},
+    {"publish_date": datetime(2023, 10, 4, 14, 20), "title": "Седьмая статья", "category_id": 2, "category_style": get_category_style(2), "category_text":get_category_text(2), "platform_style": get_platform_style(3), "platform_text": get_platform_text(3), "description": "Описание седьмой статьи", "content": "Текст седьмой статьи.", "author_id": 2, "image": "https://venyoo.ru/blog/wp-content/uploads/2017/04/10_Yml6ZXNwcm9jZXNz.jpg"},
+    {"publish_date": datetime(2023, 10, 5, 10, 10), "title": "Восьмая статья", "category_id": 3, "category_style": get_category_style(3), "category_text":get_category_text(3), "platform_style": get_platform_style(1), "platform_text": get_platform_text(1), "description": "Описание восьмой статьи", "content": "Текст восьмой статьи.", "author_id": 1, "image": "https://s0.rbk.ru/v6_top_pics/media/img/2/34/347186930962342.png"},
+    {"publish_date": datetime(2023, 10, 6, 16, 50), "title": "Девятая статья", "category_id": 1, "category_style": get_category_style(1), "category_text":get_category_text(1), "platform_style": get_platform_style(2), "platform_text": get_platform_text(2), "description": "Описание девятой статьи", "content": "Текст девятой статьи.", "author_id": 2, "image": "https://sberbs.ru/uploads/models/announcement/announcement_image/70/0._Image_by_Freepik.jpg"},
+    {"publish_date": datetime(2023, 10, 6, 16, 50), "title": "Десятая статья", "category_id": 3, "category_style": get_category_style(3), "category_text":get_category_text(3), "platform_style": get_platform_style(3), "platform_text": get_platform_text(3), "description": "Описание десятой статьи", "content": "Текст десятой статьи.", "author_id": 2, "image": "https://sberbs.ru/uploads/models/announcement/announcement_image/70/0._Image_by_Freepik.jpg"}
 ]
 
 host = os.getenv('PUBLIC_HOST')
@@ -62,8 +82,9 @@ def posts(request):
         "has_more": has_more,
         "title": translate("Мои посты", lang),
         "h2_text": translate("Мои посты", lang),
+        "delete_button": translate("Удалить", lang),
         "publish_text": translate("Публикация: ", lang),
-        "read_button": translate("Читать статью", lang),
+        "edit_button": translate("Редактировать", lang),
         "load_more_text": translate("Загрузить ещё", lang),
         "no_more_posts_text": translate("Больше постов нет", lang),
     })
@@ -83,6 +104,8 @@ def load_more_posts(request):
         "title": post["title"],
         "category_style": post["category_style"],
         "category_text": post["category_text"],
+        "platform_style": post["platform_style"],
+        "platform_text": post["platform_text"],
         "description": post["description"],
         "content": post["content"],
         "author_id": post["author_id"],
