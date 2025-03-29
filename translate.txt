@@ -3,7 +3,7 @@
 ### apps/articles/views.py ###
 ##############################
 ^Статьи^Articles^
-^Публикация: ^Publication: ^
+^Публикация^Publication^
 ^Читать статью^Read the article^
 ^Больше постов нет^Has no more posts^
 ^Загрузить ещё^Load more^
@@ -12,6 +12,7 @@
 ##################################
 ^Мои посты^My posts^
 ^По дате^By date^
+^Все даты^All dates^
 ^Сегодня^Today^
 ^Последние 7 дней^Last 7 days^
 ^Последние 30 дней^Last 30 days^
@@ -21,6 +22,7 @@
 ^Все платформы^All platforms^
 ^Вконтакте^VK.com^
 ^Телеграм^Telegram^
+^Бусти^Boosty^
 ^Все статусы^All statuses^
 ^Опубликовано^Published^
 ^Черновик^Draft^
@@ -30,6 +32,12 @@
 ^Удалить^Delete^
 ^Создать пост^Create post^
 ^Очередь публикаций^Publication queue^
+^Автогенерация постов^Posts auto-generation^
+^Моя подписка^My subscription^
+^Настройки^Settings^
+^Коины^Coins^
+^Использовано^Used^
+^Купить коины^Purchase coins^
 ^Бусти^Boosty^
 ^Бусти^Boosty^
 ^Бусти^Boosty^

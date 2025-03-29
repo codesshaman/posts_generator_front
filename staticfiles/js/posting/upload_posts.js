@@ -54,7 +54,9 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <div class="card-body d-flex flex-column h-100">
                                     <div class="post-meta mb-2">
                                         <span class="platform-badge ${post.platform_style}">${post.platform_text}</span>
-                                        <span class="post-time"><i class="ph ph-clock me-1"></i>${post.date}</span>
+                                        <span class="post-time"><i class="ph ph-clock me-1"></i>
+                                            ${window.translations.PublishText}: ${post.publish_date}
+                                        </span>
                                     </div>
                                     <h5 class="card-title mb-2">${post.title}</h5>
                                     <p class="card-text post-description">${post.description}</p>

@@ -80,32 +80,32 @@
                         <ul class="nav nav-pills flex-column mb-auto">
                             <li class="nav-item">
                                 <a href="index.html" class="nav-link d-flex active align-items-center">
-                                    <i class="ph ph-file-text me-3"></i> Мои посты
+                                    <i class="ph ph-file-text me-3"></i>{{ h2_text }}
                                 </a>
                             </li>
                             <li class="nav-item mt-3">
                                 <a href="create-post.html" class="nav-link  d-flex align-items-center">
-                                    <i class="ph ph-plus-circle me-3"></i> Создать пост
+                                    <i class="ph ph-plus-circle me-3"></i>{{ create_post }}
                                 </a>
                             </li>
                             <li class="nav-item mt-3">
                                 <a href="queue.html" class="nav-link d-flex align-items-center">
-                                    <i class="ph ph-clock-countdown me-3"></i> Очередь публикаций
+                                    <i class="ph ph-clock-countdown me-3"></i>{{ pub_queque }}
                                 </a>
                             </li>
                             <li class="nav-item mt-3">
                                 <a href="autogeneration.html" class="nav-link d-flex align-items-center">
-                                    <i class="ph ph-magic-wand me-3"></i> Автогенерация постов
+                                    <i class="ph ph-magic-wand me-3"></i>{{ autogen }}
                                 </a>
                             </li>
                             <li class="nav-item mt-3">
                                 <a href="autogeneration.html" class="nav-link d-flex align-items-center">
-                                    <i class="ph ph-wallet me-3"></i> Моя подписка
+                                    <i class="ph ph-wallet me-3"></i>{{ my_subscr }}
                                 </a>
                             </li>
                             <li class="nav-item mt-3">
                                 <a href="#" class="nav-link d-flex align-items-center">
-                                    <i class="ph ph-gear me-3"></i> Настройки
+                                    <i class="ph ph-gear me-3"></i>{{ settings }}
                                 </a>
                             </li>
                         </ul>
@@ -117,13 +117,13 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-2 text-indigo-600">
                                     <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
                                 </svg>
-                                <span class="fw-bold">Токены</span>
+                                <span class="fw-bold">{{ coins }}</span>
                             </div>
 
                             <!-- Вторая строка: "Использовано" и счетчик токенов -->
                             <div class="d-flex align-items-center mb-2">
-                                <small class="text-muted me-1">Использовано:</small>
-                                <span class="fw-bold small m-lg-auto">2,450 / 5,000</span>
+                                <small class="text-muted me-1">{{ used }}:</small>
+                                <span class="fw-bold small m-lg-auto">{{ coins_used }} / {{ coins_balance }}</span>
 
                             </div>
 
@@ -131,7 +131,7 @@
                             <div class="progress token-progress mb-3">
                                 <div class="progress-bar" role="progressbar" style="width: 49%" aria-valuenow="49" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                            <button class="btn btn-indigo w-100">Купить токены</button>
+                            <button class="btn btn-indigo w-100">{{ purchase }}</button>
 
                         </div>
 
@@ -173,40 +173,40 @@
                     <div class="d-flex flex-wrap">
                         <div class="dropdown mb-2 mb-md-0">
                             <button class="btn btn-light dropdown-toggle" type="button" id="dateDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                По дате
+                                {{ by_date }}
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dateDropdown">
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-calendar me-2"></i> Все даты</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-check me-2"></i> Сегодня</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-blank me-2"></i> Последние 7 дней</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-plus me-2"></i> Последние 30 дней</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-x me-2"></i> Последние 90 дней</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="ph ph-calendar me-2"></i>{{ all_dates }}</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-check me-2"></i>{{ today }}</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-blank me-2"></i>{{ last_7_days }}</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-plus me-2"></i>{{ last_30_days }}</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-x me-2"></i>{{ last_90_days }}</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-sort-ascending me-2"></i> Сначала новые</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-sort-descending me-2"></i> Сначала старые</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="ph ph-sort-ascending me-2"></i>{{ new_first }}</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="ph ph-sort-descending me-2"></i>{{ old_first }}</a></li>
                             </ul>
                         </div>
                         <div class="dropdown me-2 mb-2 mb-md-0">
                             <button class="btn btn-light dropdown-toggle" type="button" id="platformDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                Все платформы
+                                {{ all_platforms }}
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="platformDropdown">
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-globe me-2"></i> Все платформы</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-vk-logo me-2"></i> ВКонтакте</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-telegram-logo me-2"></i> Telegram</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-envelope-simple me-2"></i> Email</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-newspaper me-2"></i> Блог</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="ph ph-globe me-2"></i>{{ all_platforms }}</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="ph ph-vk-logo me-2"></i>{{ vk }}</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="ph ph-telegram-logo me-2"></i>{{ tg }}</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="ph ph-envelope-simple me-2"></i>{{ email }}</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="ph ph-newspaper me-2"></i>{{ boosty }}</a></li>
                             </ul>
                         </div>
                         <div class="dropdown me-2 mb-2 mb-md-0">
                             <button class="btn btn-light dropdown-toggle" type="button" id="statusDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                Все статусы
+                                {{ all_statuses }}
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="statusDropdown">
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-list me-2"></i> Все статусы</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-check-circle me-2"></i> Опубликовано</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-note-pencil me-2"></i> Черновик</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-clock me-2"></i> В очереди</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="ph ph-list me-2"></i>{{ all_statuses }}</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="ph ph-check-circle me-2"></i>{{ publish }}</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="ph ph-note-pencil me-2"></i>{{ draft }}</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="ph ph-clock me-2"></i>{{ queue }}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -300,7 +300,7 @@
                                 <div class="post-meta mb-2">
                                     <span class="platform-badge {{ post.platform_style }}">{{ post.platform_text }}</span>
                                     <span class="post-time"><i class="ph ph-clock me-1"></i>
-                                        {{ publish_text }}{{ post.publish_date|date:"d.m.Y H:i" }}
+                                        {{ publish_text }}: {{ post.publish_date|date:"d.m.Y H:i" }}
                                     </span>
                                 </div>
                                 <h5 class="card-title mb-2">{{ post.title }}</h5>
@@ -314,7 +314,7 @@
                     </div>
                 </div>
             {% empty %}
-                <p>Статей пока нет.</p>
+                <p>{{ no_more_posts_text }}</p>
             {% endfor %}
         </div>
             </div>
