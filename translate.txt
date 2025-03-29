@@ -7,6 +7,7 @@
 ^Читать статью^Read the article^
 ^Больше постов нет^Has no more posts^
 ^Загрузить ещё^Load more^
+^Выйти^Exit^
 ##################################
 ### apps/posting/views_post.py ###
 ##################################
@@ -38,9 +39,15 @@
 ^Коины^Coins^
 ^Использовано^Used^
 ^Купить коины^Purchase coins^
-^Бусти^Boosty^
-^Бусти^Boosty^
-^Бусти^Boosty^
-^Бусти^Boosty^
-^Бусти^Boosty^
-^Бусти^Boosty^
+^Заголовок^Title^
+^Описание^Description^
+^Платформа^Platform^
+^Дата публикации^Publication date^
+^Изображение^Image^
+^Оставьте пустым для немедленной публикации^Leave it blank for immediate publication^
+^Отмена^Cancel^
+^Статус^Status^
+^Сохранить изменения^Save changes^
+^Редактирование поста^Post editing^
+^Вы уверены, что хотите удалить этот пост? Это действие нельзя будет отменить^Are you sure you want to delete this post? This action cannot be undone^
+^Подтверждение удаления^Confirmation of deletion^

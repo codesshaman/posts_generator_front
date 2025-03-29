@@ -84,6 +84,7 @@ def posts(request):
         "coins_balance": "5.000",
         "title": translate("Мои посты", lang),
         "h2_text": translate("Мои посты", lang),
+        "exit": translate("Выйти", lang),
         "by_date": translate("По дате", lang),
         "all_dates": translate("Все даты", lang),
         "today": translate("Сегодня", lang),
@@ -114,6 +115,18 @@ def posts(request):
         "edit_button": translate("Редактировать", lang),
         "load_more_text": translate("Загрузить ещё", lang),
         "no_more_posts_text": translate("Больше постов нет", lang),
+        "post_title": translate("Заголовок", lang),
+        "post_descr": translate("Описание", lang),
+        "platform": translate("Платформа", lang),
+        "pub_date": translate("Дата публикации", lang),
+        "image": translate("Изображение", lang),
+        "status": translate("Статус", lang),
+        "empty": translate("Оставьте пустым для немедленной публикации", lang),
+        "cancel": translate("Отмена", lang),
+        "save_changes": translate("Сохранить изменения", lang),
+        "shure": translate("Вы уверены, что хотите удалить этот пост? Это действие нельзя будет отменить", lang),
+        "del_confirm": translate("Подтверждение удаления", lang),
+        "post_editing": translate("Редактирование поста", lang),
     })
 
 def load_more_posts(request):

@@ -60,7 +60,7 @@
                         <polyline points="16 17 21 12 16 7"></polyline>
                         <line x1="21" x2="9" y1="12" y2="12"></line>
                     </svg>
-                    <span>Выйти</span> <!-- Убираем класс d-none d-sm-inline-block, чтобы текст всегда отображался -->
+                    <span>{{ exit }}</span> <!-- Убираем класс d-none d-sm-inline-block, чтобы текст всегда отображался -->
                 </button>
 
             </div>
@@ -140,7 +140,7 @@
                         <div class=" d-lg-none"> <!-- mt-auto отодвигает блок вниз, d-lg-none скрывает на десктопе -->
                             <hr class="my-3"> <!-- Разделительная линия -->
                             <a href="#" class="nav-link d-flex align-items-center text-danger">
-                                <i class="ph ph-sign-out me-2"></i> Выйти
+                                <i class="ph ph-sign-out me-2"></i>{{ exit }}
                             </a>
                         </div>
                     </div>
@@ -341,15 +341,15 @@
         <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title" id="deleteConfirmModalLabel">Подтверждение удаления</h5>
+            <h5 class="modal-title" id="deleteConfirmModalLabel">{{ del_confirm }}</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <p>Вы уверены, что хотите удалить этот пост? Это действие нельзя будет отменить.</p>
+            <p>{{ shure }}</p>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-            <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Удалить</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ cancel }}</button>
+            <button type="button" class="btn btn-danger" id="confirmDeleteBtn">{{ delete_button }}</button>
             </div>
         </div>
         </div>
@@ -362,7 +362,7 @@
         <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title" id="editPostModalLabel">Редактирование поста</h5>
+            <h5 class="modal-title" id="editPostModalLabel">{{ post_editing }}</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -370,44 +370,44 @@
                 <input type="hidden" id="editPostId">
 
                 <div class="mb-3">
-                <label for="editPostTitle" class="form-label">Заголовок</label>
+                <label for="editPostTitle" class="form-label">{{ post_title }}</label>
                 <input type="text" class="form-control" id="editPostTitle" required>
                 </div>
 
                 <div class="mb-3">
-                <label for="editPostDescription" class="form-label">Описание</label>
+                <label for="editPostDescription" class="form-label">{{ post_descr }}</label>
                 <textarea class="form-control" id="editPostDescription" rows="3" required></textarea>
                 </div>
 
                 <div class="mb-3">
-                <label for="editPostPlatform" class="form-label">Платформа</label>
+                <label for="editPostPlatform" class="form-label">{{ platform }}</label>
                 <select class="form-select" id="editPostPlatform" required>
-                    <option value="vk">ВКонтакте</option>
-                    <option value="telegram">Telegram</option>
-                    <option value="email">Email</option>
-                    <option value="blog">Блог</option>
+                    <option value="vk">{{ vk }}</option>
+                    <option value="telegram">{{ tg }}</option>
+                    <option value="email">{{ email }}</option>
+                    <option value="blog">{{ boosty }}</option>
                 </select>
                 </div>
 
                 <!-- Объединяем статус и дату публикации в одну строку -->
                 <div class="row mb-3">
                 <div class="col-md-6">
-                    <label for="editPostStatus" class="form-label">Статус</label>
+                    <label for="editPostStatus" class="form-label">{{ status }}</label>
                     <select class="form-select" id="editPostStatus" required>
-                        <option value="published">Опубликовано</option>
-                        <option value="draft">Черновик</option>
-                        <option value="queued">В очереди</option>
+                        <option value="published">{{ publish }}</option>
+                        <option value="draft">{{ draft }}</option>
+                        <option value="queued">{{ queue }}</option>
                     </select>
                 </div>
                 <div class="col-md-6">
-                    <label for="editPostPublishDate" class="form-label">Дата публикации</label>
+                    <label for="editPostPublishDate" class="form-label">{{ pub_date }}</label>
                     <input type="datetime-local" class="form-control" id="editPostPublishDate">
-                    <div class="form-text">Оставьте пустым для немедленной публикации</div>
+                    <div class="form-text">{{ empty }}</div>
                 </div>
                 </div>
 
                 <div class="mb-3">
-                <label for="editPostImage" class="form-label">Изображение</label>
+                <label for="editPostImage" class="form-label">{{ image }}</label>
                 <input type="file" class="form-control" id="editPostImage">
                 <div class="mt-2">
                     <img id="currentPostImage" src="" alt="Текущее изображение" class="img-thumbnail" style="max-height: 150px; display: none;">
@@ -416,8 +416,8 @@
             </form>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-            <button type="button" class="btn btn-primary" id="savePostChanges">Сохранить изменения</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ cancel }}</button>
+            <button type="button" class="btn btn-primary" id="savePostChanges">{{ save_changes }}</button>
             </div>
         </div>
         </div>
