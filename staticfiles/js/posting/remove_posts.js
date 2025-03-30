@@ -21,10 +21,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let postToDelete = null;
 
-    // Делегирование событий для кнопок удаления
     postsContainer.addEventListener('click', function(event) {
         const button = event.target.closest('.btn-delete');
-        if (!button) return; // Если клик не по кнопке удаления, выходим
+        if (!button) return;
 
         event.preventDefault();
 
@@ -50,10 +49,43 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     confirmDeleteBtn.addEventListener('click', function() {
-        if (postToDelete) {
-            animateAndRemovePost(postToDelete);
+        if (!postToDelete) return;
+
+        const postId = postToDelete.querySelector('.btn-delete').getAttribute('data-post-id');
+        if (!postId || postId === 'unknown') {
+            console.error('ID поста не определен или некорректен');
+            alert('Ошибка: не удалось определить пост для удаления');
+            return;
         }
-        deleteModal.hide();
+
+        // Отправляем AJAX-запрос на сервер
+        fetch(`/delete-post/${postId}/`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value, // CSRF-токен
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Ошибка сервера: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                animateAndRemovePost(postToDelete); // Удаляем из DOM после успешного ответа
+            } else {
+                throw new Error(data.message || 'Неизвестная ошибка');
+            }
+        })
+        .catch(error => {
+            console.error('Ошибка при удалении:', error);
+            alert('Не удалось удалить пост: ' + error.message);
+        })
+        .finally(() => {
+            deleteModal.hide();
+        });
     });
 
     function animateAndRemovePost(postElement) {
