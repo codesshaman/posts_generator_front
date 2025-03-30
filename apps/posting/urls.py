@@ -10,6 +10,7 @@ urlpatterns = [
     path('posts', posts, name='posts'),
     path('load-more-posts/', load_more_posts, name=''),
     path('delete-post/<int:post_id>/', delete_post, name=''),
+    path('edit-post/<int:post_id>/', edit_post, name=''),
     path('scheduler', scheduler, name='scheduler'),
     path('posting_settings', posting_settings, name='posting_settings'),
     path('autogeneration', autogeneration, name='autogeneration'),

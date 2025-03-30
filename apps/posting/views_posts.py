@@ -159,6 +159,65 @@ def load_more_posts(request):
         "has_more": has_more
     })
 
+@require_http_methods(["POST"])
+def edit_post(request, post_id):
+    global posts_data
+
+    if debug:
+        print(f"Попытка отредактировать пост с ID: {post_id}")
+
+    # Ищем пост по ID
+    post_index = next((i for i, post in enumerate(posts_data) if post["id"] == post_id), -1)
+    if post_index == -1:
+        return JsonResponse({"success": False, "message": "Пост не найден"}, status=404)
+
+    # Получаем данные из запроса
+    title = request.POST.get('title')
+    description = request.POST.get('description')
+    platform = request.POST.get('platform')
+    status = request.POST.get('status')
+    publish_date_str = request.POST.get('publish_date')
+    image = request.FILES.get('image')  # Если загружается новое изображение
+
+    if not title or not description:
+        return JsonResponse({"success": False, "message": "Заголовок и описание обязательны"}, status=400)
+
+    # Обновляем пост
+    post = posts_data[post_index]
+    post["title"] = title
+    post["description"] = description
+    post["platform_text"] = platform
+    post["platform_style"] = get_platform_style(int(platform)) if platform.isdigit() else "platform-" + platform
+    post["category_text"] = status.capitalize()  # Например, "Опубликовано", "Черновик"
+    post["category_style"] = "status-" + status
+    if publish_date_str:
+        try:
+            post["publish_date"] = datetime.strptime(publish_date_str, "%Y-%m-%dT%H:%M")
+        except ValueError:
+            return JsonResponse({"success": False, "message": "Неверный формат даты"}, status=400)
+    if image:
+        # Для эмуляции сохраним URL как строку (в реальной системе нужно обработать загрузку файла)
+        post["image"] = f"/media/uploads/{image.name}"
+
+    if debug:
+        print(f"Пост с ID {post_id} успешно отредактирован.")
+
+    # Возвращаем обновленные данные
+    return JsonResponse({
+        "success": True,
+        "message": "Пост успешно отредактирован",
+        "post": {
+            "id": post["id"],
+            "title": post["title"],
+            "description": post["description"],
+            "platform": platform,
+            "status": status,
+            "publish_date": post["publish_date"].strftime("%Y-%m-%dT%H:%M"),
+            "image": post["image"]
+        }
+    })
+
+
 @require_http_methods(["DELETE"])
 def delete_post(request, post_id):
     global posts_data  # Используем глобальный список

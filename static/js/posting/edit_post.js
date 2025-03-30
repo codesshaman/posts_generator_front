@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
-    // Функция для изменения размера textarea
     function autoResizeTextarea(textarea) {
         if (!textarea) return;
         const scrollPos = window.pageYOffset || document.documentElement.scrollTop;
@@ -60,10 +59,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Делегирование событий для кнопок редактирования
     postsContainer.addEventListener('click', function(event) {
         const button = event.target.closest('.btn-edit');
-        if (!button) return; // Если клик не по кнопке редактирования, выходим
+        if (!button) return;
 
         event.preventDefault();
 
@@ -138,49 +136,84 @@ document.addEventListener('DOMContentLoaded', function() {
         editModal.show();
     });
 
-    const saveButton = document.getElementById('saveChangesBtn'); // Убедитесь, что ID кнопки совпадает
-    if (saveButton) {
-        saveButton.addEventListener('click', function() {
-            const postIdInput = document.getElementById('editPostId');
-            const titleInput = document.getElementById('editPostTitle');
-            const descriptionInput = document.getElementById('editPostDescription');
-            const platformInput = document.getElementById('editPostPlatform');
-            const statusInput = document.getElementById('editPostStatus');
-            const publishDateInput = document.getElementById('editPostPublishDate');
-            const imageInput = document.getElementById('editPostImage');
-            const currentImageElement = document.getElementById('currentPostImage');
-
-            if (!postIdInput || !titleInput || !descriptionInput || !platformInput || !statusInput) {
-                console.error('Не удалось найти необходимые поля формы');
-                return;
-            }
-
-            const postId = postIdInput.value;
-            const title = titleInput.value;
-            const description = descriptionInput.value;
-            const platform = platformInput.value;
-            const status = statusInput.value;
-            const publishDate = publishDateInput ? publishDateInput.value : '';
-            const imageFile = imageInput && imageInput.files.length > 0 ? imageInput.files[0] : null;
-            const currentImage = currentImageElement ? currentImageElement.src : '';
-
-            if (!title || !description) {
-                alert('Пожалуйста, заполните все обязательные поля');
-                return;
-            }
-
-            updatePostInDOM(postId, {
-                title,
-                description,
-                platform,
-                status,
-                publishDate,
-                image: imageFile ? URL.createObjectURL(imageFile) : currentImage
-            });
-
-            editModal.hide();
-        });
+    const saveButton = document.getElementById('saveChangesBtn'); // Убедитесь, что ID совпадает
+    if (!saveButton) {
+        console.error('Кнопка сохранения не найдена');
+        return;
     }
+
+    saveButton.addEventListener('click', function() {
+        const postIdInput = document.getElementById('editPostId');
+        const titleInput = document.getElementById('editPostTitle');
+        const descriptionInput = document.getElementById('editPostDescription');
+        const platformInput = document.getElementById('editPostPlatform');
+        const statusInput = document.getElementById('editPostStatus');
+        const publishDateInput = document.getElementById('editPostPublishDate');
+        const imageInput = document.getElementById('editPostImage');
+        const currentImageElement = document.getElementById('currentPostImage');
+
+        if (!postIdInput || !titleInput || !descriptionInput || !platformInput || !statusInput) {
+            console.error('Не удалось найти необходимые поля формы');
+            return;
+        }
+
+        const postId = postIdInput.value;
+        const title = titleInput.value;
+        const description = descriptionInput.value;
+        const platform = platformInput.value;
+        const status = statusInput.value;
+        const publishDate = publishDateInput ? publishDateInput.value : '';
+        const imageFile = imageInput && imageInput.files.length > 0 ? imageInput.files[0] : null;
+        const currentImage = currentImageElement ? currentImageElement.src : '';
+
+        if (!title || !description) {
+            alert('Пожалуйста, заполните все обязательные поля');
+            return;
+        }
+
+        // Формируем данные для отправки
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('description', description);
+        formData.append('platform', platform);
+        formData.append('status', status);
+        if (publishDate) formData.append('publish_date', publishDate);
+        if (imageFile) formData.append('image', imageFile);
+
+        // Отправляем AJAX-запрос
+        fetch(`/edit-post/${postId}/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            },
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Ошибка сервера: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                updatePostInDOM(postId, {
+                    title: data.post.title,
+                    description: data.post.description,
+                    platform: data.post.platform,
+                    status: data.post.status,
+                    publishDate: data.post.publish_date,
+                    image: data.post.image
+                });
+                editModal.hide();
+            } else {
+                throw new Error(data.message || 'Неизвестная ошибка');
+            }
+        })
+        .catch(error => {
+            console.error('Ошибка при редактировании:', error);
+            alert('Не удалось сохранить изменения: ' + error.message);
+        });
+    });
 
     function updatePostInDOM(postId, postData) {
         const postCards = document.querySelectorAll('.post-card');
