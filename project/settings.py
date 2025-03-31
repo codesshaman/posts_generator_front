@@ -59,6 +59,7 @@ LOGOUT_REDIRECT_URL = '/'
 INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'whitenoise.runserver_nostatic',
+    'apps.basetmp.apps.BasetmpConfig',
     'apps.vkoauth.apps.VKoauthConfig',
     'apps.posting.apps.PostingConfig',
     'apps.articles.apps.ArticlesConfig',
@@ -83,6 +84,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                'apps.basetmp.context_processors.menu_context',
             ],
         },
     },

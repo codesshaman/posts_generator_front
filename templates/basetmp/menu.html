@@ -1,0 +1,71 @@
+<!-- Боковое меню -->
+<div class="col-lg-3 col-md-4 px-0 sidebar-column" style="margin-top: 70px;">
+    <div class="sidebar">
+        <div class="d-flex flex-column flex-shrink-0 p-3 h-100">
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link d-flex active align-items-center">
+                        <i class="ph ph-file-text me-3"></i>{{ h2_text }}
+                    </a>
+                </li>
+                <li class="nav-item mt-3">
+                    <a href="create-post.html" class="nav-link  d-flex align-items-center">
+                        <i class="ph ph-plus-circle me-3"></i>{{ create_post }}
+                    </a>
+                </li>
+                <li class="nav-item mt-3">
+                    <a href="queue.html" class="nav-link d-flex align-items-center">
+                        <i class="ph ph-clock-countdown me-3"></i>{{ pub_queque }}
+                    </a>
+                </li>
+                <li class="nav-item mt-3">
+                    <a href="autogeneration.html" class="nav-link d-flex align-items-center">
+                        <i class="ph ph-magic-wand me-3"></i>{{ autogen }}
+                    </a>
+                </li>
+                <li class="nav-item mt-3">
+                    <a href="autogeneration.html" class="nav-link d-flex align-items-center">
+                        <i class="ph ph-wallet me-3"></i>{{ my_subscr }}
+                    </a>
+                </li>
+                <li class="nav-item mt-3">
+                    <a href="#" class="nav-link d-flex align-items-center">
+                        <i class="ph ph-gear me-3"></i>{{ settings }}
+                    </a>
+                </li>
+            </ul>
+           <hr class="mt-5">
+            <!-- Использование токенов -->
+            <div class="tokens-block mb-3">
+                <!-- Первая строка: иконка и слово "Токены" -->
+                <div class="d-flex align-items-center mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-2 text-indigo-600">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                    <span class="fw-bold">{{ coins }}</span>
+                </div>
+
+                <!-- Вторая строка: "Использовано" и счетчик токенов -->
+                <div class="d-flex align-items-center mb-2">
+                    <small class="text-muted me-1">{{ used }}:</small>
+                    <span class="fw-bold small m-lg-auto">{{ coins_used }} / {{ coins_balance }}</span>
+                </div>
+
+                <!-- Прогресс-бар и кнопка -->
+                <div class="progress token-progress mb-3">
+                    <div class="progress-bar" role="progressbar" style="width: 49%" aria-valuenow="49" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <button class="btn btn-indigo w-100">{{ purchase }}</button>
+            </div>
+
+
+            <!-- Кнопка выхода в мобильной версии (в самом низу) -->
+            <div class=" d-lg-none"> <!-- mt-auto отодвигает блок вниз, d-lg-none скрывает на десктопе -->
+                <hr class="my-3"> <!-- Разделительная линия -->
+                <a href="#" class="nav-link d-flex align-items-center text-danger">
+                    <i class="ph ph-sign-out me-2"></i>{{ exit }}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

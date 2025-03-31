@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head><!-- Шапка сайта -->
+    {% include 'basetmp/head.html' %}
+</head>
+<body>
+    <header>{% include 'basetmp/header.html' %}</header>
+    <!-- Основная область контента -->
+    <div class="container-fluid" style="margin-top: 40px;">
+        <div class="row  g-0">
+            <!-- Левое меню -->
+            {% include 'basetmp/menu.html' %}
+        <!-- Основной контент -->
+        <main>{% block content %} {% endblock %}</main>
+
+        </div>
+    </div>
+    <!-- Футер сайта -->
+    <footer>{% include 'basetmp/footer.html' %}</footer>
+    <!-- Скрипт для работы мобильного меню -->
+    <script src = "{% static 'js/posting/overlay.js' %}"></script>
+</body>
+</html>
