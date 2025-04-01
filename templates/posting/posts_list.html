@@ -1,447 +1,209 @@
+{% extends 'basetmp/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Phosphor Icons - современная библиотека иконок -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Подключение внешнего CSS файла -->
-    <!--<link rel="stylesheet" href="styles.css">-->
-</head>
-<body>
-    {% csrf_token %}
-    <!-- Шапка/Навигация -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-        <div class="container-fluid px-4">
-            <!-- Кнопка мобильного меню -->
-            <button class="btn d-lg-none toggle-sidebar me-2">
-                <i class="ph ph-list"></i>
-            </button>
+{% block content %}
+{% csrf_token %}
 
-            <!-- Логотип -->
-            <a class="navbar-brand d-flex align-items-center" href="#">
-                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="rgb(79, 70, 229)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bot h-8 w-8 me-2">
-                    <path d="M12 8V4H8"></path>
-                    <rect width="16" height="12" x="4" y="8" rx="2"></rect>
-                    <path d="M2 14h2"></path>
-                    <path d="M20 14h2"></path>
-                    <path d="M15 13v2"></path>
-                    <path d="M9 13v2"></path>
-                </svg>
-                <span class="logo-text">ContentAI</span>
-            </a>
-
-
-            <!-- Правая часть навигации -->
-            <div class="navbar-nav ms-auto d-flex align-items-center">
-                <div class="user-profile-container d-flex align-items-center me-3 d-none d-lg-flex">
-                    <!-- Добавлен класс d-none d-lg-flex для скрытия на мобильных устройствах -->
-                    <div class="user-avatar d-flex align-items-center justify-content-center me-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgb(79, 70, 229)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user">
-                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
-                        </svg>
-                    </div>
-                    <div>
-                        <span class="username-text">Иван Иванов</span>
-                    </div>
-                </div>
-                <button class="btn btn-custom-logout d-none d-lg-flex">
-                    <!-- d-none d-lg-flex скрывает на мобильных и показывает на десктопе -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out me-1">
-                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                        <polyline points="16 17 21 12 16 7"></polyline>
-                        <line x1="21" x2="9" y1="12" y2="12"></line>
-                    </svg>
-                    <span>{{ exit }}</span> <!-- Убираем класс d-none d-sm-inline-block, чтобы текст всегда отображался -->
-                </button>
-
-            </div>
-        </div>
-    </nav>
-
-    <!-- Оверлей для мобильного меню -->
-    <div class="overlay"></div>
-
-    <!-- Основная область контента -->
-    <div class="container-fluid" style="margin-top: 40px;">
-        <div class="row g-0">
-            <!-- Боковое меню -->
-            <div class="col-lg-3 col-md-4 px-0 sidebar-column">
-                <div class="sidebar">
-                    <div class="d-flex flex-column flex-shrink-0 p-3 h-100">
-                        <ul class="nav nav-pills flex-column mb-auto">
-                            <li class="nav-item">
-                                <a href="index.html" class="nav-link d-flex active align-items-center">
-                                    <i class="ph ph-file-text me-3"></i>{{ h2_text }}
-                                </a>
-                            </li>
-                            <li class="nav-item mt-3">
-                                <a href="create-post.html" class="nav-link  d-flex align-items-center">
-                                    <i class="ph ph-plus-circle me-3"></i>{{ create_post }}
-                                </a>
-                            </li>
-                            <li class="nav-item mt-3">
-                                <a href="queue.html" class="nav-link d-flex align-items-center">
-                                    <i class="ph ph-clock-countdown me-3"></i>{{ pub_queque }}
-                                </a>
-                            </li>
-                            <li class="nav-item mt-3">
-                                <a href="autogeneration.html" class="nav-link d-flex align-items-center">
-                                    <i class="ph ph-magic-wand me-3"></i>{{ autogen }}
-                                </a>
-                            </li>
-                            <li class="nav-item mt-3">
-                                <a href="autogeneration.html" class="nav-link d-flex align-items-center">
-                                    <i class="ph ph-wallet me-3"></i>{{ my_subscr }}
-                                </a>
-                            </li>
-                            <li class="nav-item mt-3">
-                                <a href="#" class="nav-link d-flex align-items-center">
-                                    <i class="ph ph-gear me-3"></i>{{ settings }}
-                                </a>
-                            </li>
-                        </ul>
-                       <hr class="mt-5">
-                        <!-- Использование токенов -->
-                        <div class="tokens-block mb-3">
-                            <!-- Первая строка: иконка и слово "Токены" -->
-                            <div class="d-flex align-items-center mb-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-2 text-indigo-600">
-                                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                                </svg>
-                                <span class="fw-bold">{{ coins }}</span>
-                            </div>
-
-                            <!-- Вторая строка: "Использовано" и счетчик токенов -->
-                            <div class="d-flex align-items-center mb-2">
-                                <small class="text-muted me-1">{{ used }}:</small>
-                                <span class="fw-bold small m-lg-auto">{{ coins_used }} / {{ coins_balance }}</span>
-
-                            </div>
-
-                            <!-- Прогресс-бар и кнопка -->
-                            <div class="progress token-progress mb-3">
-                                <div class="progress-bar" role="progressbar" style="width: 49%" aria-valuenow="49" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <button class="btn btn-indigo w-100">{{ purchase }}</button>
-
-                        </div>
-
-
-                        <!-- Кнопка выхода в мобильной версии (в самом низу) -->
-                        <div class=" d-lg-none"> <!-- mt-auto отодвигает блок вниз, d-lg-none скрывает на десктопе -->
-                            <hr class="my-3"> <!-- Разделительная линия -->
-                            <a href="#" class="nav-link d-flex align-items-center text-danger">
-                                <i class="ph ph-sign-out me-2"></i>{{ exit }}
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- Основной контент -->
-            <div class="col-lg-9 col-md-9 mt-4  main-content">
-                <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 mt-5">
-                    <!-- Контейнер для заголовка и имени пользователя -->
-                    <div class="d-flex justify-content-between align-items-center mb-3 mb-md-0">
-                        <h2 class="page-title m-0">Мои посты</h2>
-
-                        <!-- Имя пользователя для мобильной версии -->
-                        <div class="user-profile-container d-flex d-lg-none align-items-center">
-                            <div class="user-avatar d-flex align-items-center justify-content-center me-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgb(79, 70, 229)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user">
-                                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-                                    <circle cx="12" cy="7" r="4"></circle>
-                                </svg>
-                            </div>
-                            <div>
-                                <span class="username-text">Иван Иванов</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Фильтры -->
-                    <div class="d-flex flex-wrap">
-                        <div class="dropdown mb-2 mb-md-0">
-                            <button class="btn btn-light dropdown-toggle" type="button" id="dateDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ by_date }}
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dateDropdown">
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-calendar me-2"></i>{{ all_dates }}</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-check me-2"></i>{{ today }}</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-blank me-2"></i>{{ last_7_days }}</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-plus me-2"></i>{{ last_30_days }}</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-x me-2"></i>{{ last_90_days }}</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-sort-ascending me-2"></i>{{ new_first }}</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-sort-descending me-2"></i>{{ old_first }}</a></li>
-                            </ul>
-                        </div>
-                        <div class="dropdown me-2 mb-2 mb-md-0">
-                            <button class="btn btn-light dropdown-toggle" type="button" id="platformDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ all_platforms }}
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="platformDropdown">
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-globe me-2"></i>{{ all_platforms }}</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-vk-logo me-2"></i>{{ vk }}</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-telegram-logo me-2"></i>{{ tg }}</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-envelope-simple me-2"></i>{{ email }}</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-newspaper me-2"></i>{{ boosty }}</a></li>
-                            </ul>
-                        </div>
-                        <div class="dropdown me-2 mb-2 mb-md-0">
-                            <button class="btn btn-light dropdown-toggle" type="button" id="statusDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ all_statuses }}
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="statusDropdown">
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-list me-2"></i>{{ all_statuses }}</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-check-circle me-2"></i>{{ publish }}</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-note-pencil me-2"></i>{{ draft }}</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-clock me-2"></i>{{ queue }}</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-
-<!--                &lt;!&ndash; Список постов &ndash;&gt;-->
-<!--                &lt;!&ndash; Пример поста для ВКонтакте &ndash;&gt;-->
-<!--                <div class="card mb-4 post-card">-->
-<!--                    <div class="row g-0">-->
-<!--                        <div class="col-md-3 position-relative">-->
-<!--                            <img src="https://venyoo.ru/blog/wp-content/uploads/2017/04/10_Yml6ZXNwcm9jZXNz.jpg" class="img-fluid rounded-start post-image" alt="Изображение поста">-->
-<!--                            <span class="post-status status-published">Опубликовано</span>-->
-<!--                        </div>-->
-<!--                        <div class="col-md-9">-->
-<!--                            <div class="card-body d-flex flex-column h-100">-->
-<!--                                <div class="post-meta mb-2">-->
-<!--                                    <span class="platform-badge platform-vk">ВКонтакте</span>-->
-<!--                                    <span class="post-time"><i class="ph ph-clock me-1"></i> 12.05.2023, 14:30</span>-->
-<!--                                </div>-->
-<!--                                <h5 class="card-title mb-2">10 способов увеличить конверсию вашего сайта</h5>-->
-<!--                                <p class="card-text mb-3 post-description">Статья о методах повышения конверсии веб-сайтов с практическими советами и рекомендациями для бизнеса любого размера. Узнайте, как улучшить показатели...</p>-->
-<!--                                <div class="post-actions mt-auto">-->
-<!--                                    <button class="btn-edit">Редактировать</button>-->
-<!--                                    <button class="btn-delete">Удалить</button>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                &lt;!&ndash; Пример поста для Telegram &ndash;&gt;-->
-<!--                <div class="card mb-4 post-card">-->
-<!--                    <div class="row g-0">-->
-<!--                        <div class="col-md-3 position-relative">-->
-<!--                            <img src="https://sberbs.ru/uploads/models/announcement/announcement_image/70/0._Image_by_Freepik.jpg" class="img-fluid rounded-start post-image" alt="Изображение поста">-->
-<!--                            <span class="post-status status-draft">Черновик</span>-->
-<!--                        </div>-->
-<!--                        <div class="col-md-9">-->
-<!--                            <div class="card-body d-flex flex-column h-100">-->
-<!--                                <div class="post-meta mb-2">-->
-<!--                                    <span class="platform-badge platform-telegram">Telegram</span>-->
-<!--                                    <span class="post-time"><i class="ph ph-clock me-1"></i> 08.05.2023, 10:15</span>-->
-<!--                                </div>-->
-<!--                                <h5 class="card-title mb-2">Искусственный интеллект в маркетинге: тренды 2023</h5>-->
-<!--                                <p class="card-text mb-3 post-description">Обзор последних трендов использования ИИ в маркетинговых стратегиях. Как искусственный интеллект меняет подход к взаимодействию с клиентами...</p>-->
-<!--                                <div class="post-actions mt-auto">-->
-<!--                                    <button class="btn-edit">Редактировать</button>-->
-<!--                                    <button class="btn-delete">Удалить</button>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                &lt;!&ndash; Пример поста для Email &ndash;&gt;-->
-<!--                <div class="card mb-4 post-card">-->
-<!--                    <div class="row g-0">-->
-<!--                        <div class="col-md-3 position-relative">-->
-<!--                            <img src="https://s0.rbk.ru/v6_top_pics/media/img/2/34/347186930962342.png" class="img-fluid rounded-start post-image" alt="Изображение поста">-->
-<!--                            <span class="post-status status-queued">В очереди</span>-->
-<!--                        </div>-->
-<!--                        <div class="col-md-9">-->
-<!--                            <div class="card-body d-flex flex-column h-100">-->
-<!--                                <div class="post-meta mb-2">-->
-<!--                                    <span class="platform-badge platform-email">Email</span>-->
-<!--                                    <span class="post-time"><i class="ph ph-clock me-1"></i> Публикация: 20.05.2023, 09:00</span>-->
-<!--                                </div>-->
-<!--                                <h5 class="card-title mb-2">5 эффективных тактик email-маркетинга</h5>-->
-<!--                                <p class="card-text post-description">Руководство по созданию эффективных email-кампаний для вашего бизнеса. Узнайте, как повысить открываемость писем и конверсию...</p>-->
-<!--                                <div class="post-actions mt-auto">-->
-<!--                                    <button class="btn-edit">Редактировать</button>-->
-<!--                                    <button class="btn-delete">Удалить</button>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-                <!-- Пример поста для Блога -->
-        <div id="posts-list">
-            {% for post in posts %}
-                <div class="card mb-4 post-card">
-                    <div class="row g-0">
-                        <div class="col-md-3 position-relative">
-                            <img src="{{ post.image }}" class="img-fluid rounded-start post-image" alt="Изображение поста">
-                            <span class="post-status {{ post.category_style }}">{{ post.category_text }}</span>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="card-body d-flex flex-column h-100">
-                                <div class="post-meta mb-2">
-                                    <span class="platform-badge {{ post.platform_style }}">{{ post.platform_text }}</span>
-                                    <span class="post-time"><i class="ph ph-clock me-1"></i>
-                                        {{ publish_text }}: {{ post.publish_date|date:"d.m.Y H:i" }}
-                                    </span>
-                                </div>
-                                <h5 class="card-title mb-2">{{ post.title }}</h5>
-                                <p class="card-text post-description">{{ post.description }}</p>
-                                <div class="post-actions mt-auto">
-                                    <button class="btn-edit" data-post-id="{{ post.id }}">{{ edit_button }}</button>
-                                    <button class="btn-delete" data-post-id="{{ post.id }}">{{ delete_button }}</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% empty %}
-                <p>{{ no_more_posts_text }}</p>
-            {% endfor %}
-        </div>
-            </div>
-                <div class="load-more-container text-center my-5">
-                <button id="loadMoreBtn" class="btn btn-load-more">
-                    <i class="ph ph-arrow-down me-2"></i>
-                    {{ load_more_text }}
-                </button>
-                <!-- Заменяем стандартный спиннер Bootstrap на кастомный -->
-                <div id="loadingSpinner" class="custom-spinner d-none">
-                    <svg viewBox="0 0 50 50" class="spinner-svg">
-                        <circle class="spinner-path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
-                    </svg>
-                </div>
-            </div>
+<!-- Фильтры -->
+<div class="d-flex flex-wrap">
+    <div class="dropdown mb-2 mb-md-0">
+        <button class="btn btn-light dropdown-toggle" type="button" id="dateDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ by_date }}
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dateDropdown">
+            <li><a class="dropdown-item" href="#"><i class="ph ph-calendar me-2"></i>{{ all_dates }}</a></li>
+            <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-check me-2"></i>{{ today }}</a></li>
+            <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-blank me-2"></i>{{ last_7_days }}</a></li>
+            <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-plus me-2"></i>{{ last_30_days }}</a></li>
+            <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-x me-2"></i>{{ last_90_days }}</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#"><i class="ph ph-sort-ascending me-2"></i>{{ new_first }}</a></li>
+            <li><a class="dropdown-item" href="#"><i class="ph ph-sort-descending me-2"></i>{{ old_first }}</a></li>
+        </ul>
     </div>
+    <div class="dropdown me-2 mb-2 mb-md-0">
+        <button class="btn btn-light dropdown-toggle" type="button" id="platformDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ all_platforms }}
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="platformDropdown">
+            <li><a class="dropdown-item" href="#"><i class="ph ph-globe me-2"></i>{{ all_platforms }}</a></li>
+            <li><a class="dropdown-item" href="#"><i class="ph ph-vk-logo me-2"></i>{{ vk }}</a></li>
+            <li><a class="dropdown-item" href="#"><i class="ph ph-telegram-logo me-2"></i>{{ tg }}</a></li>
+            <li><a class="dropdown-item" href="#"><i class="ph ph-envelope-simple me-2"></i>{{ email }}</a></li>
+            <li><a class="dropdown-item" href="#"><i class="ph ph-newspaper me-2"></i>{{ boosty }}</a></li>
+        </ul>
     </div>
+    <div class="dropdown me-2 mb-2 mb-md-0">
+        <button class="btn btn-light dropdown-toggle" type="button" id="statusDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ all_statuses }}
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="statusDropdown">
+            <li><a class="dropdown-item" href="#"><i class="ph ph-list me-2"></i>{{ all_statuses }}</a></li>
+            <li><a class="dropdown-item" href="#"><i class="ph ph-check-circle me-2"></i>{{ publish }}</a></li>
+            <li><a class="dropdown-item" href="#"><i class="ph ph-note-pencil me-2"></i>{{ draft }}</a></li>
+            <li><a class="dropdown-item" href="#"><i class="ph ph-clock me-2"></i>{{ queue }}</a></li>
+        </ul>
+    </div>
+</div>
+</div>
 
-    <!-- JavaScript для работы с мобильным меню -->
-    <script src = "{% static 'js/posting/overlay.js' %}"></script>
-
-    <!-- Модальное окно подтверждения удаления -->
-    <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="deleteConfirmModalLabel">{{ del_confirm }}</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-            <p>{{ shure }}</p>
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ cancel }}</button>
-            <button type="button" class="btn btn-danger" id="confirmDeleteBtn">{{ delete_button }}</button>
+<!-- Пример поста для Блога -->
+<div id="posts-list">
+    {% for post in posts %}
+        <div class="card mb-4 post-card">
+            <div class="row g-0">
+                <div class="col-md-3 position-relative">
+                    <img src="{{ post.image }}" class="img-fluid rounded-start post-image" alt="Изображение поста">
+                    <span class="post-status {{ post.category_style }}">{{ post.category_text }}</span>
+                </div>
+                <div class="col-md-9">
+                    <div class="card-body d-flex flex-column h-100">
+                        <div class="post-meta mb-2">
+                            <span class="platform-badge {{ post.platform_style }}">{{ post.platform_text }}</span>
+                            <span class="post-time"><i class="ph ph-clock me-1"></i>
+                                {{ publish_text }}: {{ post.publish_date|date:"d.m.Y H:i" }}
+                            </span>
+                        </div>
+                        <h5 class="card-title mb-2">{{ post.title }}</h5>
+                        <p class="card-text post-description">{{ post.description }}</p>
+                        <div class="post-actions mt-auto">
+                            <button class="btn-edit" data-post-id="{{ post.id }}">{{ edit_button }}</button>
+                            <button class="btn-delete" data-post-id="{{ post.id }}">{{ delete_button }}</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    {% empty %}
+        <p>{{ no_more_posts_text }}</p>
+    {% endfor %}
+
+</div>
+    </div>
+        <div class="load-more-container text-center my-5">
+        <button id="loadMoreBtn" class="btn btn-load-more">
+            <i class="ph ph-arrow-down me-2"></i>
+            {{ load_more_text }}
+        </button>
+        <!-- Заменяем стандартный спиннер Bootstrap на кастомный -->
+        <div id="loadingSpinner" class="custom-spinner d-none">
+            <svg viewBox="0 0 50 50" class="spinner-svg">
+                <circle class="spinner-path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+            </svg>
         </div>
     </div>
+</div>
+</div>
 
-    <script src = "{% static 'js/posting/remove_posts.js' %}"></script>
+<!-- JavaScript для работы с мобильным меню -->
+<script src = "{% static 'js/posting/overlay.js' %}"></script>
 
-    <!-- Модальное окно редактирования поста -->
-    <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="editPostModalLabel">{{ post_editing }}</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+<!-- Модальное окно подтверждения удаления -->
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="deleteConfirmModalLabel">{{ del_confirm }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        <p>{{ shure }}</p>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ cancel }}</button>
+        <button type="button" class="btn btn-danger" id="confirmDeleteBtn">{{ delete_button }}</button>
+        </div>
+    </div>
+    </div>
+</div>
+
+<script src = "{% static 'js/posting/remove_posts.js' %}"></script>
+
+<!-- Модальное окно редактирования поста -->
+<div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="editPostModalLabel">{{ post_editing }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        <form id="editPostForm">
+            <input type="hidden" id="editPostId">
+
+            <div class="mb-3">
+            <label for="editPostTitle" class="form-label">{{ post_title }}</label>
+            <input type="text" class="form-control" id="editPostTitle" required>
             </div>
-            <div class="modal-body">
-            <form id="editPostForm">
-                <input type="hidden" id="editPostId">
 
-                <div class="mb-3">
-                <label for="editPostTitle" class="form-label">{{ post_title }}</label>
-                <input type="text" class="form-control" id="editPostTitle" required>
-                </div>
+            <div class="mb-3">
+            <label for="editPostDescription" class="form-label">{{ post_descr }}</label>
+            <textarea class="form-control" id="editPostDescription" rows="3" required></textarea>
+            </div>
 
-                <div class="mb-3">
-                <label for="editPostDescription" class="form-label">{{ post_descr }}</label>
-                <textarea class="form-control" id="editPostDescription" rows="3" required></textarea>
-                </div>
+            <div class="mb-3">
+            <label for="editPostPlatform" class="form-label">{{ platform }}</label>
+            <select class="form-select" id="editPostPlatform" required>
+                <option value="vk">{{ vk }}</option>
+                <option value="telegram">{{ tg }}</option>
+                <option value="email">{{ email }}</option>
+                <option value="blog">{{ boosty }}</option>
+            </select>
+            </div>
 
-                <div class="mb-3">
-                <label for="editPostPlatform" class="form-label">{{ platform }}</label>
-                <select class="form-select" id="editPostPlatform" required>
-                    <option value="vk">{{ vk }}</option>
-                    <option value="telegram">{{ tg }}</option>
-                    <option value="email">{{ email }}</option>
-                    <option value="blog">{{ boosty }}</option>
+            <!-- Объединяем статус и дату публикации в одну строку -->
+            <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="editPostStatus" class="form-label">{{ status }}</label>
+                <select class="form-select" id="editPostStatus" required>
+                    <option value="published">{{ publish }}</option>
+                    <option value="draft">{{ draft }}</option>
+                    <option value="queued">{{ queue }}</option>
                 </select>
-                </div>
-
-                <!-- Объединяем статус и дату публикации в одну строку -->
-                <div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="editPostStatus" class="form-label">{{ status }}</label>
-                    <select class="form-select" id="editPostStatus" required>
-                        <option value="published">{{ publish }}</option>
-                        <option value="draft">{{ draft }}</option>
-                        <option value="queued">{{ queue }}</option>
-                    </select>
-                </div>
-                <div class="col-md-6">
-                    <label for="editPostPublishDate" class="form-label">{{ pub_date }}</label>
-                    <input type="datetime-local" class="form-control" id="editPostPublishDate">
-                    <div class="form-text">{{ empty }}</div>
-                </div>
-                </div>
-
-                <div class="mb-3">
-                <label for="editPostImage" class="form-label">{{ image }}</label>
-                <input type="file" class="form-control" id="editPostImage">
-                <div class="mt-2">
-                    <img id="currentPostImage" src="" alt="Текущее изображение" class="img-thumbnail" style="max-height: 150px; display: none;">
-                </div>
-                </div>
-            </form>
             </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ cancel }}</button>
-            <button type="button" class="btn btn-primary" id="saveChangesBtn">{{ save_changes }}</button>
+            <div class="col-md-6">
+                <label for="editPostPublishDate" class="form-label">{{ pub_date }}</label>
+                <input type="datetime-local" class="form-control" id="editPostPublishDate">
+                <div class="form-text">{{ empty }}</div>
             </div>
+            </div>
+
+            <div class="mb-3">
+            <label for="editPostImage" class="form-label">{{ image }}</label>
+            <input type="file" class="form-control" id="editPostImage">
+            <div class="mt-2">
+                <img id="currentPostImage" src="" alt="Текущее изображение" class="img-thumbnail" style="max-height: 150px; display: none;">
+            </div>
+            </div>
+        </form>
         </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ cancel }}</button>
+        <button type="button" class="btn btn-primary" id="saveChangesBtn">{{ save_changes }}</button>
         </div>
     </div>
+    </div>
+</div>
 
 
-    <script src = "{% static 'js/posting/edit_post.js' %}"></script>
+<script src = "{% static 'js/posting/edit_post.js' %}"></script>
 
-    <script>
-    window.translations = {
-        editButton: "{{ edit_button }}",
-        deleteButton: "{{ delete_button }}",
-        loadMoreText: "{{ load_more_text }}",
-        noMorePostsText: "{{ no_more_posts_text }}",
-        PublishText: "{{ publish_text }}"
-    };
-    </script>
+<script>
+window.translations = {
+    editButton: "{{ edit_button }}",
+    deleteButton: "{{ delete_button }}",
+    loadMoreText: "{{ load_more_text }}",
+    noMorePostsText: "{{ no_more_posts_text }}",
+    PublishText: "{{ publish_text }}"
+};
+</script>
 <!-- Кнопка загрузить еще посты -->
-    <script src = "{% static 'js/posting/upload_posts.js' %}"></script>
-    <!-- Phosphor Icons JavaScript -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+<script src = "{% static 'js/posting/upload_posts.js' %}"></script>
+<!-- Phosphor Icons JavaScript -->
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-    <!-- Bootstrap JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<!-- Bootstrap JS Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+{% endblock %}
