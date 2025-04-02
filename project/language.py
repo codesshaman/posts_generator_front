@@ -1,3 +1,8 @@
+def language(request):
+    accept_language = request.LANGUAGE_CODE
+    return accept_language
+
+
 def load_translations(file_path="translate.txt"):
     translations = {}
     with open(file_path, "r", encoding="utf-8") as f:

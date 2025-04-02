@@ -1,10 +1,8 @@
-from project.language import translate
+from project.language import translate, language
 
-
-# Устанавливаем язык
-lang = "ru"
 
 def all_posts(request):
+    lang = language(request)
     return {
         "title": translate("Мои посты", lang),
         "h2_text": translate("Мои посты", lang),
