@@ -54,3 +54,16 @@
 #######################################
 ### apps/posting/views_autogeneration.py ###
 #######################################
+^Выбор группы^Group selection^
+^Анализ^Analysis^
+^Темы^Topics^
+^Контент-план^Content plan^
+^Выберите группу для анализа^Select a group for analysis^
+^Маркетинг и реклама^Marketing and advertising^
+^Подписчиков^Subscribers^
+^Дизайн интерьера^Interior design^
+^IT и технологии^IT and technologys^
+^Добавить новую группу^Add a new group^
+^Подключите новую группу или страницу для анализа^Connect a new group or page for analysis^
+^Назад к постам^Back to posts^
+^Далее^Next^

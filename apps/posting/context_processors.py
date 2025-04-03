@@ -42,3 +42,27 @@ def all_posts(request):
         "del_confirm": translate("Подтверждение удаления", lang),
         "post_editing": translate("Редактирование поста", lang),
     }
+
+def autogeneration(request):
+    lang = language(request)
+    return {
+        "group_selection": translate("Выбор группы", lang),
+        "analysis": translate("Анализ", lang),
+        "topics": translate("Темы", lang),
+        "content_plan": translate("Контент-план", lang),
+        "posts": translate("Посты", lang),
+        "card_title": translate("Выберите группу для анализа", lang),
+        "analysis": translate("Анализ", lang),
+        "analysis": translate("Анализ", lang),
+        "analysis": translate("Анализ", lang),
+        "analysis": translate("Анализ", lang),
+        "analysis": translate("Анализ", lang),
+        "analysis": translate("Анализ", lang),
+        "analysis": translate("Анализ", lang),
+        "analysis": translate("Анализ", lang),
+        "analysis": translate("Анализ", lang),
+        "analysis": translate("Анализ", lang),
+        "analysis": translate("Анализ", lang),
+        "analysis": translate("Анализ", lang),
+
+    }

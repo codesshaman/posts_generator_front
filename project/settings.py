@@ -89,6 +89,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'apps.basetmp.context_processors.menu_context',
                 'apps.posting.context_processors.all_posts',
+                'apps.posting.context_processors.autogeneration',
             ],
         },
     },
