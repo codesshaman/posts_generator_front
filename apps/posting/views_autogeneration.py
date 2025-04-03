@@ -21,8 +21,8 @@ def autogeneration(request):
     return render(request, "posting/autogeneration.html", {
         # "posts": initial_posts,
         # "has_more": has_more,
-        "title": translate("Статьи", lang),
-        "h2_text": translate("Статьи", lang),
+        "title": translate("Автогенерация постов", lang),
+        "h2_text": translate("Автогенерация постов", lang),
         "publish_text": translate("Публикация: ", lang),
         "read_button": translate("Читать статью", lang),
         "load_more_text": translate("Загрузить ещё", lang),
