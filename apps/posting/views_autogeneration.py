@@ -54,6 +54,13 @@ def analyses_text(lang):
                 and the number of posts. Please do not \
                 close the page during the analysis."
 
+def themes_analysis_complete(lang):
+    if lang == "ru":
+        return "Мы проанализировали контент группы \
+                и определили основные темы"
+    else:
+        return "We analyzed the group's content \
+                and identified the main topics"
 
 # Create your views here.
 def autogeneration(request):
@@ -61,6 +68,7 @@ def autogeneration(request):
     lang = language(request)
     muted_text = get_muted_text(lang)
     getanalysestext = get_analyses_text(lang)
+    themes_analysis = themes_analysis_complete(lang)
     analysestext = analyses_text(lang)
     if debug:
         print("Отображаем страницу автогенерации")
@@ -75,6 +83,10 @@ def autogeneration(request):
         "boosty": "Boosty",
         "getanalysestext": getanalysestext,
         "analyses_text": analysestext,
+        "themes_analysis": themes_analysis,
         "tokens_cost": 150,
         "some_subs_num": "5,432",
+        "subject_1": translate("Маркетинг", lang),
+        "subject_2": translate("Реклама", lang),
+        "subject_3": translate("SMM", lang),
     })

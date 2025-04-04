@@ -74,7 +74,7 @@
 ^Анализ этой группы будет стоить^Analysis of this group will cost^
 ^коинов^coins^
 ^Запустить анализ группы^Run group analysis^
-^Анализ завершён!^Analysis complete!^
+^Анализ завершён!^Analysis completed^
 ^Добавление новой группы^Adding a new group^
 ^Название группы^Group name^
 ^URL группы^Group URL^
@@ -83,12 +83,11 @@
 ^Хештеги^Hashtags^
 ^Разделяйте хештеги пробелами^Separate hashtags with spaces^
 ^Сгенерировать новое изображение^Generate a new image^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
+^Анализ постов группы^Analysis of group posts^
+^Загрузка^Loading^
+^Основные темы группы^Main topics of the group^
+^Маркетинг^Marketing^
+^Реклама^Advertising^
 ^^^
 ^^^
 ^^^
