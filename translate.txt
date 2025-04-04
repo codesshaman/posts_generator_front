@@ -67,3 +67,10 @@
 ^Подключите новую группу или страницу для анализа^Connect a new group or page for analysis^
 ^Назад к постам^Back to posts^
 ^Далее^Next^
+^Анализ группы^Group Analysis^
+^Выбранная группа^Selected group^
+^Стоимость анализа^Cost of analysis^
+^Анализ этой группы будет стоить^Analysis of this group will cost^
+^коинов^coins^
+^Запустить анализ группы^Run group analysis^
+^Анализ завершён!^Analysis complete!^

@@ -27,11 +27,41 @@ def get_muted_text(lang):
                 "connected groups or add a new one."
 
 
+def get_analyses_text(lang):
+    if lang == "ru":
+        return "Мы проанализируем выбранную группу, \
+                чтобы определить основную тематику, \
+                интересы аудитории и наиболее \
+                популярные темы постов. На основе \
+                этого анализа будут предложены темы \
+                для генерации постов."
+    else:
+        return "We will analyze the selected group to \
+                determine the main topics, audience \
+                interests and the most popular post \
+                topics. Based on this analysis, topics \
+                for generating posts will be suggested."
+
+def analyses_text(lang):
+    if lang == "ru":
+        return "Анализ может занять некоторое время \
+                в зависимости от размера группы и \
+                количества постов. Пожалуйста, не \
+                закрывайте страницу во время анализа."
+    else:
+        return "The analysis may take some time \
+                depending on the size of the group \
+                and the number of posts. Please do not \
+                close the page during the analysis."
+
+
 # Create your views here.
 def autogeneration(request):
     """Отображает страницу постов"""
     lang = language(request)
     muted_text = get_muted_text(lang)
+    getanalysestext = get_analyses_text(lang)
+    analysestext = analyses_text(lang)
     if debug:
         print("Отображаем страницу автогенерации")
     return render(request, "posting/autogeneration.html", {
@@ -40,16 +70,11 @@ def autogeneration(request):
         "title": translate("Автогенерация постов", lang),
         "h2_text": translate("Автогенерация постов", lang),
         "muted_text": muted_text,
-        "marketing": translate("Маркетинг и реклама", lang),
-        "interior_design": translate("Дизайн интерьера", lang),
-        "it_and_technologys": translate("IT и технологии", lang),
         "facebook": "Facebook",
         "instagram": "Instagram",
         "boosty": "Boosty",
-        "subscribers": translate("Подписчиков", lang),
+        "getanalysestext": getanalysestext,
+        "analyses_text": analysestext,
+        "tokens_cost": 150,
         "some_subs_num": "5,432",
-        "add_new_group": translate("Добавить новую группу", lang),
-        "add_for_analysis": translate("Подключите новую группу или страницу для анализа", lang),
-        "next": translate("Далее", lang),
-        "back_to_posts": translate("Назад к постам", lang)
     })

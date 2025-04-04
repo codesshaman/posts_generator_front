@@ -111,11 +111,11 @@
 <div id="step2" class="step-content" style="display: none;">
     <div class="card mb-4">
         <div class="card-body">
-            <h3 class="card-title mb-4">Анализ группы</h3>
+            <h3 class="card-title mb-4">{{ group_analysis }}</h3>
             <!-- Информация о выбранной группе -->
             <div class="selected-group-info mb-4">
                 <div class="d-flex align-items-center">
-                    <img id="selectedGroupImage" src="" alt="Выбранная группа" class="me-3" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
+                    <img id="selectedGroupImage" src="" alt="{{ selected_group }}" class="me-3" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
                     <div>
                         <h4 id="selectedGroupName" class="mb-1"></h4>
                         <p id="selectedGroupStats" class="text-muted mb-0"></p>
@@ -125,12 +125,12 @@
 
             <!-- Блок перед анализом -->
             <div id="preAnalysis">
-                <p class="mb-4">Мы проанализируем выбранную группу, чтобы определить основную тематику, интересы аудитории и наиболее популярные темы постов. На основе этого анализа будут предложены темы для генерации постов.</p>
+                <p class="mb-4">{{ getanalysestext }}</p>
 
                 <div class="alert alert-info d-flex align-items-center" role="alert">
                     <i class="ph ph-info me-3" style="font-size: 24px;"></i>
                     <div>
-                        Анализ может занять некоторое время в зависимости от размера группы и количества постов. Пожалуйста, не закрывайте страницу во время анализа.
+                        {{ analyses_text }}
                     </div>
                 </div>
                 <div class="token-cost-info alert alert-info mb-4">
@@ -139,14 +139,15 @@
                             <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
                         </svg>
                         <div>
-                            <h6 class="mb-1">Стоимость анализа</h6>
-                            <p class="mb-0">Анализ этой группы будет стоить <strong id="analysisCost">150</strong> токенов</p>
+                            <h6 class="mb-1">{{ analyses_ }}</h6>
+                            <p class="mb-0">{{ group_cost }} <strong id="analysisCost">{{ tokens_cost }}</strong>
+                                {{ coins }}</p>
                         </div>
                     </div>
                 </div>
 
                 <button id="startAnalysisBtn" class="btn btn-primary mt-3">
-                    <i class="ph ph-chart-line-up me-2"></i> Запустить анализ группы
+                    <i class="ph ph-chart-line-up me-2"></i>{{ run_analysis }}
                 </button>
             </div>
 
@@ -541,7 +542,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
 
 <!-- Подключение скрипта автогенерации -->
-<script src = "{% static 'js/autogeneration.js' %}"></script>
+<script src = "{% static 'js/posting/autogeneration.js' %}"></script>
 
 <!-- Phosphor Icons JavaScript -->
 <script src="https://unpkg.com/@phosphor-icons/web"></script>

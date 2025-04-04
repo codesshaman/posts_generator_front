@@ -1030,5 +1030,3 @@ function setupContentPlanManagement() {
             const loadingOverlay = document.getElementById('loadingOverlay');
             loadingOverlay.style.display = 'none';
         }
-        
-        
