@@ -3,7 +3,6 @@ from .views_posts import *
 from .views_settings import *
 from .views_scheduler import *
 from .views_create_post import *
-from .views_autogeneration import *
 
 
 urlpatterns = [
@@ -13,6 +12,5 @@ urlpatterns = [
     path('edit-post/<int:post_id>/', edit_post, name=''),
     path('scheduler', scheduler, name='scheduler'),
     path('posting_settings', posting_settings, name='posting_settings'),
-    path('autogeneration', autogeneration, name='autogeneration'),
     path('create_post', create_post, name='create_post'),
 ]

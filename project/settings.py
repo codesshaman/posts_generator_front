@@ -63,7 +63,8 @@ INSTALLED_APPS = [
     'apps.vkoauth.apps.VKoauthConfig',
     'apps.posting.apps.PostingConfig',
     'apps.articles.apps.ArticlesConfig',
-    'apps.mainpage.apps.MainpageConfig'
+    'apps.mainpage.apps.MainpageConfig',
+    'apps.generation.apps.GenerationConfig'
 ]
 
 MIDDLEWARE = [
@@ -89,7 +90,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'apps.basetmp.context_processors.menu_context',
                 'apps.posting.context_processors.all_posts',
-                'apps.posting.context_processors.autogeneration',
+                'apps.generation.context_processors.autogeneration',
             ],
         },
     },

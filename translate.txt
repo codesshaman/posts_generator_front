@@ -74,7 +74,7 @@
 ^Анализ этой группы будет стоить^Analysis of this group will cost^
 ^коинов^coins^
 ^Запустить анализ группы^Run group analysis^
-^Анализ завершён!^Analysis completed^
+^Анализ завершён^Analysis completed^
 ^Добавление новой группы^Adding a new group^
 ^Название группы^Group name^
 ^URL группы^Group URL^
@@ -88,11 +88,11 @@
 ^Основные темы группы^Main topics of the group^
 ^Маркетинг^Marketing^
 ^Реклама^Advertising^
-^^^
-^^^
-^^^
-^^^
-^^^
+^Контент^Content^
+^Продажи^Sales^
+^Назад^Back^
+^Темы для постов^Topics for posts^
+^Добавить тему^Add a topic^
 ^^^
 ^^^
 ^^^

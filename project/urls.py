@@ -6,4 +6,5 @@ urlpatterns = [
     path('', include('apps.articles.urls')),    # Страница статей
     path('', include('apps.vkoauth.urls')),     # Аутентификация VK
     path('', include('apps.posting.urls')),     # Страница "Мои посты"
+    path('', include('apps.generation.urls')),  # Страница автогенерации
 ]
