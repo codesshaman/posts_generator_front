@@ -128,15 +128,25 @@
 ^Сохранить как черновик^Save as draft^
 ^Опубликовать^Publish^
 ^Предпросмотр поста^Post preview^
-^Содержание поста будет отображаться здесь^Почтовое содержание будет здесь^
+^Содержание поста будет отображаться здесь^Post content will appear here^
 ^Закрыть^Close^
 ^Генерация поста с помощью ИИ^Post generation using AI^
 ^Опишите, какой пост вы хотите создать^Describe what kind of post you want to create^
 ^Параметры генерации^Generation parameters^
 ^Стиль^Style^
 ^Профессиональный^Professional^
-^^^
-^^^
+^Дружелюбный^Friendly^
+^Неформальный^Informal^
+^Энтузиастичный^Enthusiastic^
+^Информативный^Informative^
+^Длина^Lenght^
+^Короткий (100-200 слов)^Short (100-200 words)^
+^Средний (200-400 слов)^Medium (200-400 words)^
+^Длинный (400-600 слов)^Long (400-600 words)^
+^Генерация поста^Post generation^
+^Сгенерированный пост^Generated post^
+^Использовать^Use^
+^Использовано коинов^Coins used^
 ^^^
 ^^^
 ^^^

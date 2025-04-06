@@ -27,4 +27,5 @@ def create_post(request):
         "read_button": translate("Читать статью", lang),
         "load_more_text": translate("Загрузить ещё", lang),
         "no_more_posts_text": translate("Больше постов нет", lang),
+        "max_coins": "5,000",
     })
