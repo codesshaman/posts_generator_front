@@ -128,10 +128,4 @@ def create_post(request):
         "image_gen": translate("Генерация изображения", lang),
         "30_second_to_mars": translate("Это может занять до 30 секунд", lang),
         "use_image": translate("Использовать изображение", lang),
-        "ratio": translate("Результат", lang),
-        "ratio": translate("Результат", lang),
-        "ratio": translate("Результат", lang),
-        "ratio": translate("Результат", lang),
-        "ratio": translate("Результат", lang),
-        "ratio": translate("Результат", lang),
     }

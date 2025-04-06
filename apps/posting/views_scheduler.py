@@ -21,8 +21,8 @@ def scheduler(request):
     return render(request, "posting/scheduler.html", {
         # "posts": initial_posts,
         # "has_more": has_more,
-        "title": translate("Статьи", lang),
-        "h2_text": translate("Статьи", lang),
+        "title": translate("Очередь публикаций", lang),
+        "h2_text": translate("Очередь публикаций", lang),
         "publish_text": translate("Публикация: ", lang),
         "read_button": translate("Читать статью", lang),
         "load_more_text": translate("Загрузить ещё", lang),
