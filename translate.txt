@@ -93,16 +93,16 @@
 ^Назад^Back^
 ^Темы для постов^Topics for posts^
 ^Добавить тему^Add a topic^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
+^Сгенерировать контент-план^Generate content plan^
+^Совет^Advice^
+^Сгенерированные посты^Generated posts^
+^Сгенерировать посты^Generate posts^
+^Сгенерировать заново^Regenerate^
+^Готово^Ready^
+^Запланировать всё^Plan everything^
+^Сохранить всё^Save everything^
+^Пожалуйста, подождите^Please, wait ^
+^Посты^Posts^
 ^^^
 ^^^
 ^^^

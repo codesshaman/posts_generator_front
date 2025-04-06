@@ -23,6 +23,11 @@ def autogeneration(request):
     themes_analysis = themes_analysis_complete(lang)
     analysestext = analyses_text(lang)
     postanalysis = get_postanalysis_text(lang)
+    topics_text = get_topics_text(lang)
+    advice_text = get_advice(lang)
+    generate_images = get_generate(lang)
+    generated_text = get_generated_text(lang)
+    succes_generated = get_succes_generated(lang)
     if debug:
         print("Отображаем страницу автогенерации")
     return render(request, "posting/autogeneration.html", {
@@ -37,6 +42,12 @@ def autogeneration(request):
         "getanalysestext": getanalysestext,
         "analyses_text": analysestext,
         "themes_analysis": themes_analysis,
+        "get_topics_text": topics_text,
+        "postanalysis": postanalysis,
+        "get_advice_text": advice_text,
+        "generate_images": generate_images,
+        "generated_text": generated_text,
+        "succes_generated": succes_generated,
         "tokens_cost": 150,
         "some_subs_num": "5,432",
         "subject_1": translate("Маркетинг", lang),
@@ -51,5 +62,5 @@ def autogeneration(request):
         "percent_4": 14,
         "percent_5": 11,
         "percent_6": 9,
-        "postanalysis": postanalysis,
+
     })

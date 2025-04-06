@@ -279,7 +279,7 @@
             <i class="ph ph-arrow-left me-2"></i>{{ back }}
         </button>
         <button id="generateContentPlanBtn" class="btn btn-primary btn-next-step" data-next-step="4">
-            Сгенерировать контент-план <i class="ph ph-arrow-right ms-2"></i>
+            {{ generate_content_plan }} <i class="ph ph-arrow-right ms-2"></i>
         </button>
     </div>
 </div>
@@ -288,13 +288,13 @@
 <div id="step4" class="step-content" style="display: none;">
     <div class="card mb-4">
         <div class="card-body">
-            <h3 class="card-title mb-4">Контент-план</h3>
-            <p class="text-muted mb-4">Мы создали контент-план на основе выбранных тем. Вы можете изменить порядок постов, перетаскивая их, отредактировать заголовки или удалить ненужные посты.</p>
+            <h3 class="card-title mb-4">{{ content_plan }}</h3>
+            <p class="text-muted mb-4">{{ get_topics_text }}</p>
 
             <div class="alert alert-info d-flex align-items-center mb-4" role="alert">
                 <i class="ph ph-info me-3" style="font-size: 24px;"></i>
                 <div>
-                    <strong>Совет:</strong> Вы можете изменить порядок постов, перетаскивая их за иконку <i class="ph ph-dots-six-vertical"></i>
+                    <strong>{{ advice }}:</strong> {{ get_advice_text }} <i class="ph ph-dots-six-vertical"></i>
                 </div>
             </div>
 
@@ -305,7 +305,7 @@
             <div class="form-check mb-3">
                 <input class="form-check-input" type="checkbox" id="autoGenerateImages" checked>
                 <label class="form-check-label" for="autoGenerateImages">
-                    Автоматически сгенерировать изображения для постов
+                    {{ generate_images }}
                 </label>
             </div>
         </div>
@@ -317,10 +317,10 @@
         </button>
         <div>
             <button id="regenerateContentPlanBtn" class="btn btn-outline-primary me-2">
-                <i class="ph ph-arrows-clockwise me-2"></i> Сгенерировать заново
+                <i class="ph ph-arrows-clockwise me-2"></i> {{ regenerate }}
             </button>
             <button id="generatePostsBtn" class="btn btn-primary btn-next-step" data-next-step="5">
-                Сгенерировать посты <i class="ph ph-arrow-right ms-2"></i>
+                {{ generate_post }} <i class="ph ph-arrow-right ms-2"></i>
             </button>
         </div>
     </div>
@@ -330,13 +330,13 @@
 <div id="step5" class="step-content" style="display: none;">
     <div class="card mb-4">
         <div class="card-body">
-            <h3 class="card-title mb-4">Сгенерированные посты</h3>
-            <p class="text-muted mb-4">Мы сгенерировали посты на основе вашего контент-плана. Вы можете отредактировать каждый пост, изменить время публикации или сгенерировать пост заново.</p>
+            <h3 class="card-title mb-4">{{ generated_post }}</h3>
+            <p class="text-muted mb-4">{{ generated_text }}</p>
 
             <div class="alert alert-success d-flex align-items-center mb-4" role="alert">
                 <i class="ph ph-check-circle me-3" style="font-size: 24px;"></i>
                 <div>
-                    <strong>Готово!</strong> Все посты успешно сгенерированы. Вы можете запланировать их публикацию или сохранить как черновики.
+                    <strong>{{ ready }}!</strong> {{ succes_generated }}
                 </div>
             </div>
 
@@ -352,10 +352,10 @@
         </button>
         <div>
             <button id="scheduleAllBtn" class="btn btn-outline-primary me-2">
-                <i class="ph ph-calendar-plus me-2"></i> Запланировать все
+                <i class="ph ph-calendar-plus me-2"></i> {{ plan_everything }}
             </button>
             <button id="saveAllBtn" class="btn btn-primary">
-                <i class="ph ph-check me-2"></i> Сохранить все
+                <i class="ph ph-check me-2"></i> {{ save_everything }}
             </button>
         </div>
     </div>
@@ -368,9 +368,9 @@
 <div id="loadingOverlay" style="display: none;">
     <div class="d-flex flex-column align-items-center">
         <div class="spinner-border text-primary mb-3" style="width: 3rem; height: 3rem;" role="status">
-            <span class="visually-hidden">Загрузка...</span>
+            <span class="visually-hidden">{{ loading }}...</span>
         </div>
-        <h5 id="loadingMessage">Пожалуйста, подождите...</h5>
+        <h5 id="loadingMessage">{{ wait }}...</h5>
     </div>
 </div>
 
