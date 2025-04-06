@@ -213,7 +213,7 @@
                     <div class="preview-platform-badge" id="previewPlatformBadge">LinkedIn</div>
                     <h3 class="preview-title" id="previewTitle">{{ post_title }}</h3>
                     <div class="preview-image-container" id="previewImageContainer">
-                        <img src="" alt="Изображение поста" id="previewPostImage">
+                        <img src="" alt="{{ post_image }}" id="previewPostImage">
                     </div>
                     <div class="preview-content" id="previewContent">
                         {{ post_content_here }}...
@@ -468,7 +468,7 @@
 
             // Проверка размера файла (5MB максимум)
             if (file.size > 5 * 1024 * 1024) {
-                alert('Размер файла не должен превышать 5MB');
+                alert('{{ size_must }}');
                 return;
             }
 
@@ -886,12 +886,12 @@
             const content = document.getElementById('postContent').value.trim();
 
             if (title === '') {
-                alert('Пожалуйста, введите заголовок поста');
+                alert('{{ enter_title }}');
                 return false;
             }
 
             if (content === '') {
-                alert('Пожалуйста, введите содержание поста');
+                alert('{{ enter_content }}');
                 return false;
             }
 
@@ -915,7 +915,7 @@
 
                 // Проверяем, что дата в будущем
                 if (publishDate <= new Date()) {
-                    alert('Дата публикации должна быть в будущем');
+                    alert('{{ incorrect_pub_date }}');
                     return;
                 }
             }
@@ -976,17 +976,17 @@
 
             switch(status) {
                 case 'published':
-                    message = 'Пост успешно опубликован!';
+                    message = '{{ success_publish }}!';
                     icon = '<i class="ph ph-check-circle"></i>';
                     notification.classList.add('notification-success');
                     break;
                 case 'draft':
-                    message = 'Черновик успешно сохранен!';
+                    message = '{{ draft_saved }}!';
                     icon = '<i class="ph ph-note-pencil"></i>';
                     notification.classList.add('notification-info');
                     break;
                 case 'scheduled':
-                    message = 'Пост запланирован к публикации!';
+                    message = '{{ planed }}.';
                     icon = '<i class="ph ph-clock"></i>';
                     notification.classList.add('notification-info');
                     break;

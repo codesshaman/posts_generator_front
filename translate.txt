@@ -147,6 +147,35 @@
 ^Сгенерированный пост^Generated post^
 ^Использовать^Use^
 ^Использовано коинов^Coins used^
+^Размер файла не должен превышать 5MB^File size must not exceed 5MB^
+^Пожалуйста, введите заголовок поста^Please enter a post title^
+^ожалуйста, введите содержание поста^Please enter a post content^
+^Дата публикации не верна^The publication date is incorrect^
+^Пост успешно опубликован^Post successfully published^
+^Черновик успешно сохранён^Draft saved successfully^
+^Пост запланирован к публикации^Post scheduled for publication^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
 ^^^
 ^^^
 ^^^
