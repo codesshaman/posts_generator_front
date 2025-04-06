@@ -8,9 +8,15 @@
 <link rel="stylesheet" href="{% static 'css/icons.css' %}">
 <!-- Основная таблица стилей -->
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% if request.resolver_match.view_name == 'create_post' %}
+<link rel="stylesheet" href="{% static 'css/create-post.css' %}">
+{% endif %}
+{% if request.resolver_match.view_name == 'autogeneration' %}
 <link rel="stylesheet" href="{% static 'css/autogeneration.css' %}">
+{% endif %}
 <!-- Google Fonts - наборы шрифтов -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/regular/style.css">
 {% block head %} {% endblock %}

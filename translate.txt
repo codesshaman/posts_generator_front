@@ -52,9 +52,9 @@
 ^Редактирование поста^Post editing^
 ^Вы уверены, что хотите удалить этот пост? Это действие нельзя будет отменить^Are you sure you want to delete this post? This action cannot be undone^
 ^Подтверждение удаления^Confirmation of deletion^
-#######################################
+############################################
 ### apps/posting/views_autogeneration.py ###
-#######################################
+############################################
 ^Выбор группы^Group selection^
 ^Анализ^Analysis^
 ^Темы^Topics^
@@ -103,35 +103,38 @@
 ^Сохранить всё^Save everything^
 ^Пожалуйста, подождите^Please, wait ^
 ^Посты^Posts^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
+#########################################
+### apps/posting/views_create_post.py ###
+#########################################
+^Заголовок поста^Post title^
+^Заголовок должен быть информативным и привлекательным^The title should be informative and attractive^
+^Максимальная длина^Max length^
+^символов для^characters for^
+^Изображение поста^Post image^
+^Перетащите изображение сюда или^Drag an image here or^
+^выберите файл^select file^
+^или^or^
+^максимум^maximum^
+^Сгенерировать с помощью ИИ^Generate with AI^
+^Или выберите из предложенных^Or choose from the suggested ones^
+^Настройки публикации^Publishing settings^
+^Запланировать публикацию^Schedule a post^
+^Сохранить как черновик^Save as draft^
+^Разрешить комментарии^Allow comments^
+^Хэштеги^Hashtags^
+^Добавьте релевантные хэштеги для увеличения охвата^Add relevant hashtags to increase your reach^
+^Предпросмотр^Preview^
+^Сгенерировать^Generate^
+^Сохранить как черновик^Save as draft^
+^Опубликовать^Publish^
+^Предпросмотр поста^Post preview^
+^Содержание поста будет отображаться здесь^Почтовое содержание будет здесь^
+^Закрыть^Close^
+^Генерация поста с помощью ИИ^Post generation using AI^
+^Опишите, какой пост вы хотите создать^Describe what kind of post you want to create^
+^Параметры генерации^Generation parameters^
+^Стиль^Style^
+^Профессиональный^Professional^
 ^^^
 ^^^
 ^^^
