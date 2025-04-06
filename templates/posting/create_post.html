@@ -1070,14 +1070,14 @@
 
                 <!-- Контейнер для отображения результата генерации -->
                 <div id="imageGenerationResult" class="mt-4" style="display: none;">
-                    <h6>Результат генерации:</h6>
+                    <h6>{{ gen_result }}:</h6>
                     <div class="image-generation-container">
                         <div id="imageGenerationLoading" class="text-center py-4">
                             <div class="spinner-border text-primary" role="status">
-                                <span class="visually-hidden">Загрузка...</span>
+                                <span class="visually-hidden">{{ loading }}...</span>
                             </div>
-                            <p class="mt-2">Генерация изображения...</p>
-                            <small class="text-muted">Это может занять до 30 секунд</small>
+                            <p class="mt-2">{{ image_gen }}...</p>
+                            <small class="text-muted">{{ 30_second_to_mars }}</small>
                         </div>
                         <div id="generatedImageContainer" style="display: none;">
                             <img id="generatedImage" src="" alt="Сгенерированное изображение" class="img-fluid rounded">
@@ -1086,7 +1086,7 @@
 
                     <!-- Информация об использовании токенов -->
                     <div class="token-usage mt-3">
-                        <small class="text-muted">Использовано токенов: <span id="imageTokensUsed">0</span> / 5,000</small>
+                        <small class="text-muted">{{ сoins_used }}: <span id="imageTokensUsed">0</span> / {{ max_coins }}</small>
                         <div class="progress token-progress mt-1">
                             <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
@@ -1094,9 +1094,11 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                <button type="button" class="btn btn-primary" id="generateImageBtnSubmit">Сгенерировать</button>
-                <button type="button" class="btn btn-success" id="useGeneratedImageBtn" style="display: none;">Использовать изображение</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ cancel }}</button>
+                <button type="button" class="btn btn-primary" id="generateImageBtnSubmit">{{ generate }}</button>
+                <button type="button" class="btn btn-success" id="useGeneratedImageBtn" style="display: none;">
+                    {{ use_image }}
+                </button>
             </div>
         </div>
     </div>

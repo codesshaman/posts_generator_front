@@ -122,6 +122,16 @@ def create_post(request):
         "enter_description": translate("Пожалуйста, введите описание для генерации изображения", lang),
         "enter_post_title": translate("Введите заголовок поста", lang),
         "enter_post_content": translate("Введите содержание поста", lang),
-        "ratio_16_9": '16x9',
-        "ratio_4_3": '4x3'
+        "ratio_16_9": '16:9',
+        "ratio_4_3": '4:3',
+        "gen_result": translate("Результат генерации", lang),
+        "image_gen": translate("Генерация изображения", lang),
+        "30_second_to_mars": translate("Это может занять до 30 секунд", lang),
+        "use_image": translate("Использовать изображение", lang),
+        "ratio": translate("Результат", lang),
+        "ratio": translate("Результат", lang),
+        "ratio": translate("Результат", lang),
+        "ratio": translate("Результат", lang),
+        "ratio": translate("Результат", lang),
+        "ratio": translate("Результат", lang),
     }
