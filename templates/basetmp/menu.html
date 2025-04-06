@@ -4,32 +4,32 @@
         <div class="d-flex flex-column flex-shrink-0 p-3 h-100">
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                    <a href="#" class="nav-link d-flex active align-items-center">
+                    <a href="/posts" class="nav-link d-flex {% if request.resolver_match.view_name == 'posts' %}active{% endif %} align-items-center">
                         <i class="ph ph-file-text me-3"></i>{{ my_posts_menu }}
                     </a>
                 </li>
                 <li class="nav-item mt-3">
-                    <a href="#" class="nav-link  d-flex align-items-center">
+                    <a href="/create_post" class="nav-link  d-flex {% if request.resolver_match.view_name == 'create_post' %}active{% endif %} align-items-center">
                         <i class="ph ph-plus-circle me-3"></i>{{ create_post_menu }}
                     </a>
                 </li>
                 <li class="nav-item mt-3">
-                    <a href="#" class="nav-link d-flex align-items-center">
+                    <a href="/scheduler" class="nav-link d-flex {% if request.resolver_match.view_name == 'scheduler' %}active{% endif %} align-items-center">
                         <i class="ph ph-clock-countdown me-3"></i>{{ pub_queque_menu }}
                     </a>
                 </li>
                 <li class="nav-item mt-3">
-                    <a href="#" class="nav-link d-flex align-items-center">
+                    <a href="/autogeneration" class="nav-link d-flex {% if request.resolver_match.view_name == 'autogeneration' %}active{% endif %} align-items-center">
                         <i class="ph ph-magic-wand me-3"></i>{{ autogen_menu }}
                     </a>
                 </li>
                 <li class="nav-item mt-3">
-                    <a href="#" class="nav-link d-flex align-items-center">
+                    <a href="/my_subscribe" class="nav-link d-flex {% if request.resolver_match.view_name == 'my_subscribe' %}active{% endif %} align-items-center">
                         <i class="ph ph-wallet me-3"></i>{{ my_subscr_menu }}
                     </a>
                 </li>
                 <li class="nav-item mt-3">
-                    <a href="#" class="nav-link d-flex align-items-center">
+                    <a href="/posting_settings" class="nav-link d-flex {% if request.resolver_match.view_name == 'posting_settings' %}active{% endif %} align-items-center">
                         <i class="ph ph-gear me-3"></i>{{ settings_menu }}
                     </a>
                 </li>

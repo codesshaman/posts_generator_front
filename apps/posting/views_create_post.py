@@ -1,11 +1,9 @@
-from project.language import translate
+from project.language import translate, language
 from django.shortcuts import render
 from dotenv import load_dotenv
 from datetime import datetime
 import os
 
-# Устанавливаем язык
-lang = "en"
 
 # Загружаем .env файл
 load_dotenv()
@@ -15,14 +13,15 @@ debug = os.getenv('DEBUG')
 
 # Create your views here.
 def create_post(request):
+    lang = language(request)
     """Отображает страницу постов"""
     if debug:
         print("Отображаем страницу постов")
     return render(request, "posting/create_post.html", {
         # "posts": initial_posts,
         # "has_more": has_more,
-        "title": translate("Статьи", lang),
-        "h2_text": translate("Статьи", lang),
+        "title": translate("Создать пост", lang),
+        "h2_text": translate("Создать пост", lang),
         "publish_text": translate("Публикация: ", lang),
         "read_button": translate("Читать статью", lang),
         "load_more_text": translate("Загрузить ещё", lang),

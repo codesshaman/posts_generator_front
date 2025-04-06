@@ -154,12 +154,12 @@
 ^Пост успешно опубликован^Post successfully published^
 ^Черновик успешно сохранён^Draft saved successfully^
 ^Пост запланирован к публикации^Post scheduled for publication^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
+^Генерация изображения с ИИ^AI image generation^
+^Опишите желаемое изображение^Describe the desired image^
+^Например: Профессиональный бизнесмен^For example: Professional businessman^
+^в офисе работает за компьютером,^working at the computer in the office,^
+^современный стиль, яркие цвета^modern style, bright colors^
+^Стиль изображения^Image style^
 ^^^
 ^^^
 ^^^

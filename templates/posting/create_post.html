@@ -1019,13 +1019,13 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="imageGeneratorModalLabel">Генерация изображения с ИИ</h5>
+                <h5 class="modal-title" id="imageGeneratorModalLabel">{{ ai_image_gen }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="mb-3">
-                    <label for="imagePrompt" class="form-label">Опишите желаемое изображение</label>
-                    <textarea class="form-control" id="imagePrompt" rows="3" placeholder="Например: Профессиональный бизнесмен в офисе работает за компьютером, современный стиль, яркие цвета"></textarea>
+                    <label for="imagePrompt" class="form-label">{{ describe }}</label>
+                    <textarea class="form-control" id="imagePrompt" rows="3" placeholder="{{ example_1 }} {{ example_2 }} {{ example_3 }}"></textarea>
                 </div>
 
                 <div class="mb-3">
