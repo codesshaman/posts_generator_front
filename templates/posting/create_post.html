@@ -16,7 +16,7 @@
             <!-- Заголовок поста -->
             <div class="mb-4">
                 <label for="postTitle" class="form-label">{{ post_title_2 }}</label>
-                <input type="text" class="form-control" id="postTitle" placeholder="Введите заголовок поста" required>
+                <input type="text" class="form-control" id="postTitle" placeholder="{{ enter_post_title }}" required>
                 <div class="form-text">{{ should_be }}</div>
             </div>
 
@@ -89,7 +89,7 @@
                         <i class="ph ph-smiley"></i>
                     </button>
                 </div>
-                <textarea class="form-control content-editor" id="postContent" rows="8" placeholder="Введите содержание поста..." required></textarea>
+                <textarea class="form-control content-editor" id="postContent" rows="8" placeholder="{{ enter_post_content }}..." required></textarea>
 <!--                <div class="form-text"><p>{{ max_length }}: {{ max_length_num }} {{ characters_for }} {{ network }}</p></div>-->
             </div>
 
@@ -172,7 +172,7 @@
                 <label for="postTags" class="form-label">{{ hashtags }}</label>
                 <div class="tags-input-container">
                     <div class="tags-container" id="tagsContainer"></div>
-                    <input type="text" class="form-control tags-input" id="postTags" placeholder="Добавьте хэштег и нажмите Enter">
+                    <input type="text" class="form-control tags-input" id="postTags" placeholder="{{ add_hashtag }}">
                 </div>
                 <div class="form-text">{{ add_hashtags }}</div>
             </div>
@@ -625,7 +625,7 @@
         generateBtn.addEventListener('click', function() {
             const prompt = aiPrompt.value.trim();
             if (prompt === '') {
-                alert('Пожалуйста, введите запрос для генерации');
+                alert('{{ add_request }}');
                 return;
             }
 
@@ -790,7 +790,7 @@
                     formattedText = selectedText.split('\n').map((line, index) => `${index + 1}. ${line}`).join('\n');
                     break;
                 case 'link':
-                    const url = prompt('Введите URL:', 'https://');
+                    const url = prompt('{{ enter_url }}:', 'https://');
                     if (url) {
                         formattedText = `[${selectedText}](${url})`;
                     } else {
@@ -1029,19 +1029,19 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Стиль изображения</label>
+                    <label class="form-label">{{ image_style }}</label>
                     <div class="d-flex flex-wrap gap-2">
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="imageStyle" id="styleRealistic" value="realistic" checked>
-                            <label class="form-check-label" for="styleRealistic">Реалистичный</label>
+                            <label class="form-check-label" for="styleRealistic">{{ realistic }}</label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="imageStyle" id="styleCartoon" value="cartoon">
-                            <label class="form-check-label" for="styleCartoon">Мультяшный</label>
+                            <label class="form-check-label" for="styleCartoon">{{ cartoon }}</label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="imageStyle" id="styleAbstract" value="abstract">
-                            <label class="form-check-label" for="styleAbstract">Абстрактный</label>
+                            <label class="form-check-label" for="styleAbstract">{{ abstract }}</label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="imageStyle" id="style3D" value="3d">
@@ -1051,19 +1051,19 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Соотношение сторон</label>
+                    <label class="form-label">{{ ratio }}</label>
                     <div class="d-flex flex-wrap gap-2">
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="imageRatio" id="ratio1x1" value="1:1" checked>
-                            <label class="form-check-label" for="ratio1x1">1:1 (квадрат)</label>
+                            <label class="form-check-label" for="ratio1x1">{{ square }}</label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="imageRatio" id="ratio4x3" value="4:3">
-                            <label class="form-check-label" for="ratio4x3">4:3</label>
+                            <label class="form-check-label" for="ratio4x3">{{ ratio_4_3 }}</label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="imageRatio" id="ratio16x9" value="16:9">
-                            <label class="form-check-label" for="ratio16x9">16:9</label>
+                            <label class="form-check-label" for="ratio16x9">{{ ratio_16_9 }}</label>
                         </div>
                     </div>
                 </div>
@@ -1164,7 +1164,7 @@
         generateImageBtnSubmit.addEventListener('click', function() {
             const prompt = imagePrompt.value.trim();
             if (prompt === '') {
-                alert('Пожалуйста, введите описание для генерации изображения');
+                alert('{{ enter_description }}');
                 return;
             }
 

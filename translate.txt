@@ -149,7 +149,7 @@
 ^Использовано коинов^Coins used^
 ^Размер файла не должен превышать 5MB^File size must not exceed 5MB^
 ^Пожалуйста, введите заголовок поста^Please enter a post title^
-^ожалуйста, введите содержание поста^Please enter a post content^
+^Пожалуйста, введите содержание поста^Please enter a post content^
 ^Дата публикации не верна^The publication date is incorrect^
 ^Пост успешно опубликован^Post successfully published^
 ^Черновик успешно сохранён^Draft saved successfully^
@@ -160,17 +160,17 @@
 ^в офисе работает за компьютером,^working at the computer in the office,^
 ^современный стиль, яркие цвета^modern style, bright colors^
 ^Стиль изображения^Image style^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
+^Реалистичный^Realistic^
+^Мультяшный^Cartoon^
+^Абстрактный^Abstract^
+^Соотношение сторон^Aspect Ratio^
+^1:1 (квадрат)^1:1 (square)^
+^Добавьте хэштег и нажмите Enter^Add a hashtag and press Enter^
+^Пожалуйста, введите запрос для генерации^Please enter a request to generate^
+^Введите URL^Enter URL^
+^Пожалуйста, введите описание для генерации изображения^Please enter a description to generate the image^
+^Введите заголовок поста^Enter a post title^
+^Введите содержание поста^Enter post content^
 ^^^
 ^^^
 ^^^
