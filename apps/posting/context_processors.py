@@ -160,15 +160,5 @@ def scheduler(request):
         "monthly": translate("Ежемесячно", lang),
         "save": translate("Сохранить", lang),
         "right_now": translate("Вы уверены, что хотите опубликовать этот пост прямо сейчас?", lang),
-        "style": translate("Стиль", lang),
-        "style": translate("Стиль", lang),
-        "style": translate("Стиль", lang),
-        "style": translate("Стиль", lang),
-        "style": translate("Стиль", lang),
-        "style": translate("Стиль", lang),
-        "style": translate("Стиль", lang),
-        "style": translate("Стиль", lang),
-        "style": translate("Стиль", lang),
-        "style": translate("Стиль", lang),
     }
 
