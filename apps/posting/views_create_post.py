@@ -14,9 +14,9 @@ debug = os.getenv('DEBUG')
 # Create your views here.
 def create_post(request):
     lang = language(request)
-    """Отображает страницу постов"""
+    """Отображает страницу создания постов"""
     if debug:
-        print("Отображаем страницу постов")
+        print("Отображаем страницу создания постов")
     return render(request, "posting/create_post.html", {
         # "posts": initial_posts,
         # "has_more": has_more,

@@ -5,560 +5,538 @@
 {% block content %}
 {% csrf_token %}
 
-            </div>
+</div>
 
-            <!-- Основной контент -->
-            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 mt-5">
-                    <!-- Контейнер для заголовка и имени пользователя -->
-                    <div class="d-flex justify-content-between align-items-center mb-3 mb-md-0">
+<!-- Основной контент -->
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 mt-5">
+<!-- Контейнер для заголовка и имени пользователя -->
+<div class="d-flex justify-content-between align-items-center mb-3 mb-md-0">
 <!--                        <h2 class="page-title m-0">Очередь публикаций</h2>-->
 
-                        <!-- Имя пользователя для мобильной версии -->
-                        <div class="user-profile-container d-flex d-lg-none align-items-center">
-                            <div class="user-avatar d-flex align-items-center justify-content-center me-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgb(79, 70, 229)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user">
-                                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-                                    <circle cx="12" cy="7" r="4"></circle>
-                                </svg>
-                            </div>
-                            <div>
-                                <span class="username-text">Иван Иванов</span>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Имя пользователя для мобильной версии -->
+    <div class="user-profile-container d-flex d-lg-none align-items-center">
+        <div class="user-avatar d-flex align-items-center justify-content-center me-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgb(79, 70, 229)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user">
+                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+        </div>
+        <div>
+            <span class="username-text">Иван Иванов</span>
+        </div>
+    </div>
+</div>
 
-                    <!-- Фильтры -->
-                    <div class="d-flex flex-wrap">
-                        <div class="dropdown mb-2 mb-md-0 me-2">
-                            <button class="btn btn-light dropdown-toggle" type="button" id="dateDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ by_pub_date }}
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dateDropdown">
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-calendar me-2"></i> Все даты</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-check me-2"></i> Сегодня</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-blank me-2"></i> Завтра</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-plus me-2"></i> Эта неделя</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-x me-2"></i> Следующая неделя</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-sort-ascending me-2"></i> Сначала ближайшие</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-sort-descending me-2"></i> Сначала дальние</a></li>
-                            </ul>
-                        </div>
-                        <div class="dropdown me-2 mb-2 mb-md-0">
-                            <button class="btn btn-light dropdown-toggle" type="button" id="platformDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                Все платформы
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="platformDropdown">
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-globe me-2"></i> Все платформы</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-facebook-logo me-2"></i> Facebook</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-instagram-logo me-2"></i> Instagram</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-twitter-logo me-2"></i> Twitter</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ph ph-linkedin-logo me-2"></i> LinkedIn</a></li>
-                            </ul>
-                        </div>
-                        <button class="btn btn-primary">
-                            <i class="ph ph-plus me-2"></i> Добавить в очередь
-                        </button>
-                    </div>
-                </div>
+<!-- Фильтры -->
+<div class="d-flex flex-wrap">
+    <div class="dropdown mb-2 mb-md-0 me-2">
+        <button class="btn btn-light dropdown-toggle" type="button" id="dateDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ by_pub_date }}
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dateDropdown">
+            <li><a class="dropdown-item" href="#"><i class="ph ph-calendar me-2"></i> {{ all_dates }}</a></li>
+            <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-check me-2"></i> {{ today }}</a></li>
+            <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-blank me-2"></i> {{ tomorrow }}</a></li>
+            <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-plus me-2"></i> {{ this_week }}</a></li>
+            <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-x me-2"></i> {{ next_week }}</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#"><i class="ph ph-sort-ascending me-2"></i> {{ nearest_first }}</a></li>
+            <li><a class="dropdown-item" href="#"><i class="ph ph-sort-descending me-2"></i> {{ latest_first }}</a></li>
+        </ul>
+    </div>
+    <div class="dropdown me-2 mb-2 mb-md-0">
+        <button class="btn btn-light dropdown-toggle" type="button" id="platformDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ all_platforms }}
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="platformDropdown">
+            <li><a class="dropdown-item" href="#"><i class="ph ph-globe me-2"></i> {{ all_platforms }}</a></li>
+            <li><a class="dropdown-item" href="#"><i class="ph ph-facebook-logo me-2"></i> {{ vk }}</a></li>
+            <li><a class="dropdown-item" href="#"><i class="ph ph-instagram-logo me-2"></i> {{ tg }}</a></li>
+            <li><a class="dropdown-item" href="#"><i class="ph ph-twitter-logo me-2"></i> {{ email }}</a></li>
+            <li><a class="dropdown-item" href="#"><i class="ph ph-linkedin-logo me-2"></i> {{ boosty }}</a></li>
+        </ul>
+    </div>
+    <button class="btn btn-primary">
+        <i class="ph ph-plus me-2"></i> {{ add_to_queue }}
+    </button>
+</div>
+</div>
 
-                <!-- Календарь публикаций -->
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title mb-3">Календарь публикаций</h5>
-                        <div class="row">
-                            <!-- Здесь можно добавить компонент календаря или временную шкалу -->
-                            <div class="col-12">
-                                <div class="alert alert-light border">
-                                    <i class="ph ph-info me-2"></i> Здесь будет отображаться календарь запланированных публикаций
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Список запланированных постов -->
-                <h5 class="mb-3">Ближайшие публикации</h5>
-
-                <!-- Пост 1 -->
-                <div class="card mb-4 post-card">
-                    <div class="row g-0">
-                        <div class="col-md-3 position-relative">
-                            <img src="https://s0.rbk.ru/v6_top_pics/media/img/2/34/347186930962342.png" class="img-fluid rounded-start post-image" alt="Изображение поста">
-                            <span class="post-status status-queued">В очереди</span>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="card-body d-flex flex-column h-100">
-                                <div class="post-meta mb-2">
-                                    <span class="platform-badge platform-instagram">Instagram</span>
-                                    <span class="post-time"><i class="ph ph-clock me-1"></i> Публикация: 20.05.2023, 09:00</span>
-                                </div>
-                                <h5 class="card-title mb-2">5 эффективных тактик email-маркетинга</h5>
-                                <p class="card-text post-description">Руководство по созданию эффективных email-кампаний для вашего бизнеса. Узнайте, как повысить открываемость писем и конверсию...</p>
-                                <div class="post-actions mt-auto">
-                                    <button class="btn-edit">Редактировать</button>
-                                    <button class="btn-delete">Удалить</button>
-                                    <button class="btn-reschedule"><i class="ph ph-calendar-plus me-1"></i> Изменить дату</button>
-                                    <button class="btn-publish-now"><i class="ph ph-paper-plane-right me-1"></i> Опубликовать сейчас</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Пост 2 -->
-                <div class="card mb-4 post-card">
-                    <div class="row g-0">
-                        <div class="col-md-3 position-relative">
-                            <img src="https://www.unisender.com/ru/blog/wp-content/uploads/2022/03/email-marketing-strategy.png" class="img-fluid rounded-start post-image" alt="Изображение поста">
-                            <span class="post-status status-queued">В очереди</span>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="card-body d-flex flex-column h-100">
-                                <div class="post-meta mb-2">
-                                    <span class="platform-badge platform-facebook">Facebook</span>
-                                    <span class="post-time"><i class="ph ph-clock me-1"></i> Публикация: 21.05.2023, 12:30</span>
-                                </div>
-                                <h5 class="card-title mb-2">Как создать эффективную стратегию контент-маркетинга</h5>
-                                <p class="card-text post-description">Подробное руководство по разработке контент-стратегии, которая привлечет целевую аудиторию и повысит конверсию. Узнайте, какие типы контента работают лучше всего...</p>
-                                <div class="post-actions mt-auto">
-                                    <button class="btn-edit">Редактировать</button>
-                                    <button class="btn-delete">Удалить</button>
-                                    <button class="btn-reschedule"><i class="ph ph-calendar-plus me-1"></i> Изменить дату</button>
-                                    <button class="btn-publish-now"><i class="ph ph-paper-plane-right me-1"></i> Опубликовать сейчас</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Пост 3 -->
-                <div class="card mb-4 post-card">
-                    <div class="row g-0">
-                        <div class="col-md-3 position-relative">
-                            <img src="https://blog.depositphotos.com/wp-content/uploads/2019/03/Depositphotos_200181716_xl-2015.jpg" class="img-fluid rounded-start post-image" alt="Изображение поста">
-                            <span class="post-status status-queued">В очереди</span>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="card-body d-flex flex-column h-100">
-                                <div class="post-meta mb-2">
-                                    <span class="platform-badge platform-linkedin">LinkedIn</span>
-                                    <span class="post-time"><i class="ph ph-clock me-1"></i> Публикация: 22.05.2023, 15:00</span>
-                                </div>
-                                <h5 class="card-title mb-2">10 трендов в digital-маркетинге на 2023 год</h5>
-                                <p class="card-text post-description">Анализ последних тенденций в цифровом маркетинге и рекомендации по их внедрению в вашу стратегию. От искусственного интеллекта до персонализации...</p>
-                                <div class="post-actions mt-auto">
-                                    <button class="btn-edit">Редактировать</button>
-                                    <button class="btn-delete">Удалить</button>
-                                    <button class="btn-reschedule"><i class="ph ph-calendar-plus me-1"></i> Изменить дату</button>
-                                    <button class="btn-publish-now"><i class="ph ph-paper-plane-right me-1"></i> Опубликовать сейчас</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Раздел с более поздними публикациями -->
-                <h5 class="mb-3 mt-5">Запланировано на следующую неделю</h5>
-
-                <!-- Пост 4 -->
-                <div class="card mb-4 post-card">
-                    <div class="row g-0">
-                        <div class="col-md-3 position-relative">
-                            <img src="https://www.unisender.com/ru/blog/wp-content/uploads/2022/03/seo-strategy.jpg" class="img-fluid rounded-start post-image" alt="Изображение поста">
-                            <span class="post-status status-queued">В очереди</span>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="card-body d-flex flex-column h-100">
-                                <div class="post-meta mb-2">
-                                    <span class="platform-badge platform-twitter">Twitter</span>
-                                    <span class="post-time"><i class="ph ph-clock me-1"></i> Публикация: 25.05.2023, 10:00</span>
-                                </div>
-                                <h5 class="card-title mb-2">SEO-оптимизация для начинающих: с чего начать</h5>
-                                <p class="card-text post-description">Базовое руководство по оптимизации сайта для поисковых систем. Узнайте, как правильно подбирать ключевые слова и оптимизировать контент...</p>
-                                <div class="post-actions mt-auto">
-                                    <button class="btn-edit">Редактировать</button>
-                                    <button class="btn-delete">Удалить</button>
-                                    <button class="btn-reschedule"><i class="ph ph-calendar-plus me-1"></i> Изменить дату</button>
-                                    <button class="btn-publish-now"><i class="ph ph-paper-plane-right me-1"></i> Опубликовать сейчас</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!-- Календарь публикаций -->
+<div class="card mb-4">
+<div class="card-body">
+    <h5 class="card-title mb-3">{{ pub_cal }}</h5>
+    <div class="row">
+        <!-- Здесь можно добавить компонент календаря или временную шкалу -->
+        <div class="col-12">
+            <div class="alert alert-light border">
+                <i class="ph ph-info me-2"></i> {{ schad_pub }}
             </div>
         </div>
     </div>
+</div>
+</div>
 
-    <!-- Модальное окно изменения даты публикации -->
-    <div class="modal fade" id="rescheduleModal" tabindex="-1" aria-labelledby="rescheduleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="rescheduleModalLabel">Изменить дату публикации</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="rescheduleForm">
-                        <input type="hidden" id="reschedulePostId">
+<!-- Список запланированных постов -->
+<h5 class="mb-3">{{ up_pub }}</h5>
 
-                        <div class="mb-3">
-                            <label for="publishDateTime" class="form-label">Дата и время публикации</label>
-                            <input type="datetime-local" class="form-control" id="publishDateTime" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Повторять публикацию</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="repeatOption" id="repeatNone" value="none" checked>
-                                <label class="form-check-label" for="repeatNone">
-                                    Не повторять
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="repeatOption" id="repeatDaily" value="daily">
-                                <label class="form-check-label" for="repeatDaily">
-                                    Ежедневно
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="repeatOption" id="repeatWeekly" value="weekly">
-                                <label class="form-check-label" for="repeatWeekly">
-                                    Еженедельно
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="repeatOption" id="repeatMonthly" value="monthly">
-                                <label class="form-check-label" for="repeatMonthly">
-                                    Ежемесячно
-                                </label>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary" id="saveRescheduleBtn">Сохранить</button>
-                </div>
+<!-- Пост 1 -->
+<div class="card mb-4 post-card">
+<div class="row g-0">
+    <div class="col-md-3 position-relative">
+        <img src="https://s0.rbk.ru/v6_top_pics/media/img/2/34/347186930962342.png" class="img-fluid rounded-start post-image" alt="{{ post_image }}">
+        <span class="post-status status-queued">{{ queue }}</span>
+    </div>
+    <div class="col-md-9">
+        <div class="card-body d-flex flex-column h-100">
+            <div class="post-meta mb-2">
+                <span class="platform-badge platform-instagram">Instagram</span>
+                <span class="post-time"><i class="ph ph-clock me-1"></i> {{ publish_text }}: {{ publish_date }}, {{ publish_time }}</span>
+            </div>
+            <h5 class="card-title mb-2">5 эффективных тактик email-маркетинга</h5>
+            <p class="card-text post-description">Руководство по созданию эффективных email-кампаний для вашего бизнеса. Узнайте, как повысить открываемость писем и конверсию...</p>
+            <div class="post-actions mt-auto">
+                <button class="btn-edit">{{ edit_button }}</button>
+                <button class="btn-delete">{{ delete_button }}</button>
+                <button class="btn-reschedule"><i class="ph ph-calendar-plus me-1"></i> {{ change_date }}</button>
+                <button class="btn-publish-now"><i class="ph ph-paper-plane-right me-1"></i> {{ publish_now }}</button>
             </div>
         </div>
     </div>
+</div>
+</div>
 
-    <!-- Модальное окно подтверждения публикации -->
-    <div class="modal fade" id="publishNowModal" tabindex="-1" aria-labelledby="publishNowModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="publishNowModalLabel">Опубликовать сейчас</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Вы уверены, что хотите опубликовать этот пост прямо сейчас?</p>
-                    <p>Пост будет немедленно отправлен на выбранную платформу.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary" id="confirmPublishBtn">Опубликовать</button>
-                </div>
+<!-- Раздел с более поздними публикациями -->
+<h5 class="mb-3 mt-5">{{ planed }} {{ for_next_week }}</h5>
+
+<!-- Пост 4 -->
+<div class="card mb-4 post-card">
+<div class="row g-0">
+    <div class="col-md-3 position-relative">
+        <img src="https://www.unisender.com/ru/blog/wp-content/uploads/2022/03/seo-strategy.jpg" class="img-fluid rounded-start post-image" alt="{{ without_image }}">
+        <span class="post-status status-queued">{{ queue }}</span>
+    </div>
+    <div class="col-md-9">
+        <div class="card-body d-flex flex-column h-100">
+            <div class="post-meta mb-2">
+                <span class="platform-badge platform-twitter">Twitter</span>
+                <span class="post-time"><i class="ph ph-clock me-1"></i> {{ publish_text }}: {{ publish_date }}, {{ publish_time }}</span>
+            </div>
+            <h5 class="card-title mb-2">SEO-оптимизация для начинающих: с чего начать</h5>
+            <p class="card-text post-description">Базовое руководство по оптимизации сайта для поисковых систем. Узнайте, как правильно подбирать ключевые слова и оптимизировать контент...</p>
+            <div class="post-actions mt-auto">
+                <button class="btn-edit">{{ edit_button }}</button>
+                <button class="btn-delete">{{ delete_button }}</button>
+                <button class="btn-reschedule"><i class="ph ph-calendar-plus me-1"></i> {{ change_date }}</button>
+                <button class="btn-publish-now"><i class="ph ph-paper-plane-right me-1"></i> {{ publish_now }}</button>
             </div>
         </div>
     </div>
+</div>
+</div>
 
-    <!-- JavaScript для работы с мобильным меню -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const toggleButton = document.querySelector('.toggle-sidebar');
-            const sidebar = document.querySelector('.sidebar');
-            const overlay = document.querySelector('.overlay');
+<!-- Раздел с более поздними публикациями -->
+<h5 class="mb-3 mt-5">{{ planed }} {{ for_next_month }}</h5>
 
-            if (toggleButton) {
-                toggleButton.addEventListener('click', function() {
-                    sidebar.classList.toggle('show');
-                    if (sidebar.classList.contains('show')) {
-                        overlay.style.display = 'block';
-                    } else {
-                        overlay.style.display = 'none';
-                    }
-                });
-            }
+<!-- Пост 4 -->
+<div class="card mb-4 post-card">
+<div class="row g-0">
+    <div class="col-md-3 position-relative">
+        <img src="https://www.unisender.com/ru/blog/wp-content/uploads/2022/03/seo-strategy.jpg" class="img-fluid rounded-start post-image" alt="{{ without_image }}">
+        <span class="post-status status-queued">{{ queue }}</span>
+    </div>
+    <div class="col-md-9">
+        <div class="card-body d-flex flex-column h-100">
+            <div class="post-meta mb-2">
+                <span class="platform-badge platform-twitter">Twitter</span>
+                <span class="post-time"><i class="ph ph-clock me-1"></i> {{ publish_text }}: {{ publish_date }}, {{ publish_time }}</span>
+            </div>
+            <h5 class="card-title mb-2">SEO-оптимизация для начинающих: с чего начать</h5>
+            <p class="card-text post-description">Базовое руководство по оптимизации сайта для поисковых систем. Узнайте, как правильно подбирать ключевые слова и оптимизировать контент...</p>
+            <div class="post-actions mt-auto">
+                <button class="btn-edit">{{ edit_button }}</button>
+                <button class="btn-delete">{{ delete_button }}</button>
+                <button class="btn-reschedule"><i class="ph ph-calendar-plus me-1"></i> {{ change_date }}</button>
+                <button class="btn-publish-now"><i class="ph ph-paper-plane-right me-1"></i> {{ publish_now }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 
-            if (overlay) {
-                overlay.addEventListener('click', function() {
-                    sidebar.classList.remove('show');
-                    overlay.style.display = 'none';
-                });
-            }
+</div>
+</div>
+</div>
 
-            // Обработчики для кнопок изменения даты
-            const rescheduleButtons = document.querySelectorAll('.btn-reschedule');
-            const rescheduleModal = new bootstrap.Modal(document.getElementById('rescheduleModal'));
+<!-- Модальное окно изменения даты публикации -->
+<div class="modal fade" id="rescheduleModal" tabindex="-1" aria-labelledby="rescheduleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="rescheduleModalLabel">Изменить дату публикации</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form id="rescheduleForm">
+                <input type="hidden" id="reschedulePostId">
 
-            rescheduleButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Получаем информацию о посте
-                    const postCard = this.closest('.post-card');
-                    const postTitle = postCard.querySelector('.card-title').textContent;
-                    const postTimeText = postCard.querySelector('.post-time').textContent;
+                <div class="mb-3">
+                    <label for="publishDateTime" class="form-label">{{ pub_date_time }}</label>
+                    <input type="datetime-local" class="form-control" id="publishDateTime" required>
+                </div>
 
-                    // Устанавливаем заголовок модального окна
-                    document.getElementById('rescheduleModalLabel').textContent = 'Изменить дату публикации: ' + postTitle;
-
-                    // Извлекаем текущую дату публикации из текста
-                    const dateMatch = postTimeText.match(/Публикация:\s*(\d{2})\.(\d{2})\.(\d{4}),\s*(\d{2}):(\d{2})/);
-                    if (dateMatch) {
-                        // Преобразуем в формат для input type="datetime-local": YYYY-MM-DDThh:mm
-                        const formattedDate = `${dateMatch[3]}-${dateMatch[2]}-${dateMatch[1]}T${dateMatch[4]}:${dateMatch[5]}`;
-                        document.getElementById('publishDateTime').value = formattedDate;
-                    } else {
-                        // Если дата не найдена, устанавливаем текущую дату + 1 день
-                        const tomorrow = new Date();
-                        tomorrow.setDate(tomorrow.getDate() + 1);
-                        tomorrow.setHours(10, 0, 0, 0); // Устанавливаем время на 10:00
-
-                        const year = tomorrow.getFullYear();
-                        const month = String(tomorrow.getMonth() + 1).padStart(2, '0');
-                        const day = String(tomorrow.getDate()).padStart(2, '0');
-                        const hours = String(tomorrow.getHours()).padStart(2, '0');
-                        const minutes = String(tomorrow.getMinutes()).padStart(2, '0');
-
-                        document.getElementById('publishDateTime').value = `${year}-${month}-${day}T${hours}:${minutes}`;
-                    }
-
-                    // Показываем модальное окно
-                    rescheduleModal.show();
-                });
-            });
-
-            // Обработчик для кнопки сохранения изменений даты
-            document.getElementById('saveRescheduleBtn').addEventListener('click', function() {
-                const publishDateTime = document.getElementById('publishDateTime').value;
-                const repeatOption = document.querySelector('input[name="repeatOption"]:checked').value;
-
-                if (!publishDateTime) {
-                    alert('Пожалуйста, выберите дату и время публикации');
-                    return;
-                }
-
-                // Преобразуем дату в удобочитаемый формат
-                const date = new Date(publishDateTime);
-                const formattedDate = `${String(date.getDate()).padStart(2, '0')}.${String(date.getMonth() + 1).padStart(2, '0')}.${date.getFullYear()}, ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
-
-                // Здесь можно добавить AJAX-запрос для сохранения изменений на сервере
-
-                // Для демонстрации просто обновляем текст в DOM
-                const postCard = document.querySelector('.post-card'); // В реальном приложении нужно найти конкретную карточку
-                const postTimeElement = postCard.querySelector('.post-time');
-                postTimeElement.innerHTML = `<i class="ph ph-clock me-1"></i> Публикация: ${formattedDate}`;
-
-                // Добавляем информацию о повторении, если выбрано
-                if (repeatOption !== 'none') {
-                    let repeatText = '';
-                    switch (repeatOption) {
-                        case 'daily':
-                            repeatText = ' (ежедневно)';
-                            break;
-                        case 'weekly':
-                            repeatText = ' (еженедельно)';
-                            break;
-                        case 'monthly':
-                            repeatText = ' (ежемесячно)';
-                            break;
-                    }
-                    postTimeElement.innerHTML += `<span class="ms-2 badge bg-info">${repeatText}</span>`;
-                }
-
-                // Закрываем модальное окно
-                rescheduleModal.hide();
-
-                // Показываем уведомление об успешном изменении
-                showNotification('Дата публикации успешно изменена');
-            });
-
-            // Обработчики для кнопок публикации сейчас
-            const publishNowButtons = document.querySelectorAll('.btn-publish-now');
-            const publishNowModal = new bootstrap.Modal(document.getElementById('publishNowModal'));
-
-            publishNowButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Получаем информацию о посте
-                    const postCard = this.closest('.post-card');
-                    const postTitle = postCard.querySelector('.card-title').textContent;
-
-                    // Устанавливаем заголовок модального окна
-                    document.getElementById('publishNowModalLabel').textContent = 'Опубликовать сейчас: ' + postTitle;
-
-                    // Показываем модальное окно
-                    publishNowModal.show();
-                });
-            });
-
-            // Обработчик для кнопки подтверждения публикации
-            document.getElementById('confirmPublishBtn').addEventListener('click', function() {
-                // Здесь можно добавить AJAX-запрос для публикации поста
-
-                // Для демонстрации просто обновляем статус в DOM
-                const postCard = document.querySelector('.post-card'); // В реальном приложении нужно найти конкретную карточку
-                const statusElement = postCard.querySelector('.post-status');
-                statusElement.className = 'post-status status-published';
-                statusElement.textContent = 'Опубликовано';
-
-                // Обновляем время публикации
-                const now = new Date();
-                const formattedDate = `${String(now.getDate()).padStart(2, '0')}.${String(now.getMonth() + 1).padStart(2, '0')}.${now.getFullYear()}, ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
-
-                const postTimeElement = postCard.querySelector('.post-time');
-                postTimeElement.innerHTML = `<i class="ph ph-clock me-1"></i> ${formattedDate}`;
-
-                // Закрываем модальное окно
-                publishNowModal.hide();
-
-                // Показываем уведомление об успешной публикации
-                showNotification('Пост успешно опубликован');
-            });
-
-            // Функция для отображения уведомлений
-            function showNotification(message) {
-                // Создаем элемент уведомления
-                const notification = document.createElement('div');
-                notification.className = 'notification';
-                notification.innerHTML = `
-                    <div class="notification-content">
-                        <i class="ph ph-check-circle notification-icon"></i>
-                        <span>${message}</span>
+                <div class="mb-3">
+                    <label class="form-label">{{ repeat_pub }}</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="repeatOption" id="repeatNone" value="none" checked>
+                        <label class="form-check-label" for="repeatNone">
+                            {{ not_repeat }}
+                        </label>
                     </div>
-                `;
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="repeatOption" id="repeatDaily" value="daily">
+                        <label class="form-check-label" for="repeatDaily">
+                            {{ daily }}
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="repeatOption" id="repeatWeekly" value="weekly">
+                        <label class="form-check-label" for="repeatWeekly">
+                            {{ weekly }}
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="repeatOption" id="repeatMonthly" value="monthly">
+                        <label class="form-check-label" for="repeatMonthly">
+                            {{ monthly }}
+                        </label>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ cancel }}</button>
+            <button type="button" class="btn btn-primary" id="saveRescheduleBtn">{{ save }}</button>
+        </div>
+    </div>
+</div>
+</div>
 
-                // Добавляем стили для уведомления, если их еще нет
-                if (!document.getElementById('notification-styles')) {
-                    const style = document.createElement('style');
-                    style.id = 'notification-styles';
-                    style.textContent = `
-                        .notification {
-                            position: fixed;
-                            top: 20px;
-                            right: 20px;
-                            z-index: 9999;
-                            animation: slideIn 0.3s ease-out forwards, fadeOut 0.5s ease-out 2.5s forwards;
-                        }
+<!-- Модальное окно подтверждения публикации -->
+<div class="modal fade" id="publishNowModal" tabindex="-1" aria-labelledby="publishNowModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="publishNowModalLabel">{{ publish_now }}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p>{{ right_now }}</p>
+<!--            <p>Пост будет немедленно отправлен на выбранную платформу.</p>-->
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+            <button type="button" class="btn btn-primary" id="confirmPublishBtn">Опубликовать</button>
+        </div>
+    </div>
+</div>
+</div>
 
-                        .notification-content {
-                            background-color: #4caf50;
-                            color: white;
-                            padding: 12px 20px;
-                            border-radius: 8px;
-                            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-                            display: flex;
-                            align-items: center;
-                        }
+<!-- JavaScript для работы с мобильным меню -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleButton = document.querySelector('.toggle-sidebar');
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.querySelector('.overlay');
 
-                        .notification-icon {
-                            margin-right: 10px;
-                            font-size: 20px;
-                        }
-
-                        @keyframes slideIn {
-                            from { transform: translateX(100%); opacity: 0; }
-                            to { transform: translateX(0); opacity: 1; }
-                        }
-
-                        @keyframes fadeOut {
-                            from { opacity: 1; }
-                            to { opacity: 0; visibility: hidden; }
-                        }
-                    `;
-                    document.head.appendChild(style);
-                }
-
-                // Добавляем уведомление в DOM
-                document.body.appendChild(notification);
-
-                // Удаляем уведомление через 3 секунды
-                setTimeout(() => {
-                    notification.remove();
-                }, 3000);
+    if (toggleButton) {
+        toggleButton.addEventListener('click', function() {
+            sidebar.classList.toggle('show');
+            if (sidebar.classList.contains('show')) {
+                overlay.style.display = 'block';
+            } else {
+                overlay.style.display = 'none';
             }
         });
-    </script>
+    }
 
-    <!-- Добавляем стили для новых кнопок -->
-    <style>
-        .btn-reschedule,
-        .btn-publish-now {
-            /* Базовые стили кнопки */
-            border: none;
-            background-color: transparent;
-            padding: 0.375rem 0.75rem;
-            cursor: pointer;
+    if (overlay) {
+        overlay.addEventListener('click', function() {
+            sidebar.classList.remove('show');
+            overlay.style.display = 'none';
+        });
+    }
 
-            /* Шрифт */
-            font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-            font-size: 14px;
+    // Обработчики для кнопок изменения даты
+    const rescheduleButtons = document.querySelectorAll('.btn-reschedule');
+    const rescheduleModal = new bootstrap.Modal(document.getElementById('rescheduleModal'));
 
-            /* Интервалы */
-            line-height: 20px;
-            vertical-align: baseline;
-            letter-spacing: normal;
-            word-spacing: 0px;
+    rescheduleButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Получаем информацию о посте
+            const postCard = this.closest('.post-card');
+            const postTitle = postCard.querySelector('.card-title').textContent;
+            const postTimeText = postCard.querySelector('.post-time').textContent;
 
-            /* Стилизация */
-            font-weight: 500;
-            font-style: normal;
-            font-variant: normal;
-            text-transform: none;
-            text-decoration: none;
-            text-align: left;
-            text-indent: 0px;
+            // Устанавливаем заголовок модального окна
+            document.getElementById('rescheduleModalLabel').textContent = '{{ change_pub_date }}: ' + postTitle;
 
-            /* Переходы */
-            transition: color 0.2s ease;
+            // Извлекаем текущую дату публикации из текста
+            const dateMatch = postTimeText.match(/Публикация:\s*(\d{2})\.(\d{2})\.(\d{4}),\s*(\d{2}):(\d{2})/);
+            if (dateMatch) {
+                // Преобразуем в формат для input type="datetime-local": YYYY-MM-DDThh:mm
+                const formattedDate = `${dateMatch[3]}-${dateMatch[2]}-${dateMatch[1]}T${dateMatch[4]}:${dateMatch[5]}`;
+                document.getElementById('publishDateTime').value = formattedDate;
+            } else {
+                // Если дата не найдена, устанавливаем текущую дату + 1 день
+                const tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                tomorrow.setHours(10, 0, 0, 0); // Устанавливаем время на 10:00
+
+                const year = tomorrow.getFullYear();
+                const month = String(tomorrow.getMonth() + 1).padStart(2, '0');
+                const day = String(tomorrow.getDate()).padStart(2, '0');
+                const hours = String(tomorrow.getHours()).padStart(2, '0');
+                const minutes = String(tomorrow.getMinutes()).padStart(2, '0');
+
+                document.getElementById('publishDateTime').value = `${year}-${month}-${day}T${hours}:${minutes}`;
+            }
+
+            // Показываем модальное окно
+            rescheduleModal.show();
+        });
+    });
+
+    // Обработчик для кнопки сохранения изменений даты
+    document.getElementById('saveRescheduleBtn').addEventListener('click', function() {
+        const publishDateTime = document.getElementById('publishDateTime').value;
+        const repeatOption = document.querySelector('input[name="repeatOption"]:checked').value;
+
+        if (!publishDateTime) {
+            alert('Пожалуйста, выберите дату и время публикации');
+            return;
         }
 
-        .btn-reschedule {
-            color: #6366f1; /* Индиго */
+        // Преобразуем дату в удобочитаемый формат
+        const date = new Date(publishDateTime);
+        const formattedDate = `${String(date.getDate()).padStart(2, '0')}.${String(date.getMonth() + 1).padStart(2, '0')}.${date.getFullYear()}, ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+
+        // Здесь можно добавить AJAX-запрос для сохранения изменений на сервере
+
+        // Для демонстрации просто обновляем текст в DOM
+        const postCard = document.querySelector('.post-card'); // В реальном приложении нужно найти конкретную карточку
+        const postTimeElement = postCard.querySelector('.post-time');
+        postTimeElement.innerHTML = `<i class="ph ph-clock me-1"></i> Публикация: ${formattedDate}`;
+
+        // Добавляем информацию о повторении, если выбрано
+        if (repeatOption !== 'none') {
+            let repeatText = '';
+            switch (repeatOption) {
+                case 'daily':
+                    repeatText = ' (ежедневно)';
+                    break;
+                case 'weekly':
+                    repeatText = ' (еженедельно)';
+                    break;
+                case 'monthly':
+                    repeatText = ' (ежемесячно)';
+                    break;
+            }
+            postTimeElement.innerHTML += `<span class="ms-2 badge bg-info">${repeatText}</span>`;
         }
 
-        .btn-reschedule:hover,
-        .btn-reschedule:focus {
-            color: #4f46e5; /* Темнее при наведении */
-            background-color: transparent;
-            text-decoration: none;
-            box-shadow: none;
-            outline: none;
+        // Закрываем модальное окно
+        rescheduleModal.hide();
+
+        // Показываем уведомление об успешном изменении
+        showNotification('Дата публикации успешно изменена');
+    });
+
+    // Обработчики для кнопок публикации сейчас
+    const publishNowButtons = document.querySelectorAll('.btn-publish-now');
+    const publishNowModal = new bootstrap.Modal(document.getElementById('publishNowModal'));
+
+    publishNowButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Получаем информацию о посте
+            const postCard = this.closest('.post-card');
+            const postTitle = postCard.querySelector('.card-title').textContent;
+
+            // Устанавливаем заголовок модального окна
+            document.getElementById('publishNowModalLabel').textContent = '{{ publish_now }}: ' + postTitle;
+
+            // Показываем модальное окно
+            publishNowModal.show();
+        });
+    });
+
+    // Обработчик для кнопки подтверждения публикации
+    document.getElementById('confirmPublishBtn').addEventListener('click', function() {
+        // Здесь можно добавить AJAX-запрос для публикации поста
+
+        // Для демонстрации просто обновляем статус в DOM
+        const postCard = document.querySelector('.post-card'); // В реальном приложении нужно найти конкретную карточку
+        const statusElement = postCard.querySelector('.post-status');
+        statusElement.className = 'post-status status-published';
+        statusElement.textContent = 'Опубликовано';
+
+        // Обновляем время публикации
+        const now = new Date();
+        const formattedDate = `${String(now.getDate()).padStart(2, '0')}.${String(now.getMonth() + 1).padStart(2, '0')}.${now.getFullYear()}, ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+        const postTimeElement = postCard.querySelector('.post-time');
+        postTimeElement.innerHTML = `<i class="ph ph-clock me-1"></i> ${formattedDate}`;
+
+        // Закрываем модальное окно
+        publishNowModal.hide();
+
+        // Показываем уведомление об успешной публикации
+        showNotification('{{ success_publish }}');
+    });
+
+    // Функция для отображения уведомлений
+    function showNotification(message) {
+        // Создаем элемент уведомления
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        notification.innerHTML = `
+            <div class="notification-content">
+                <i class="ph ph-check-circle notification-icon"></i>
+                <span>${message}</span>
+            </div>
+        `;
+
+        // Добавляем стили для уведомления, если их еще нет
+        if (!document.getElementById('notification-styles')) {
+            const style = document.createElement('style');
+            style.id = 'notification-styles';
+            style.textContent = `
+                .notification {
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    z-index: 9999;
+                    animation: slideIn 0.3s ease-out forwards, fadeOut 0.5s ease-out 2.5s forwards;
+                }
+
+                .notification-content {
+                    background-color: #4caf50;
+                    color: white;
+                    padding: 12px 20px;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                    display: flex;
+                    align-items: center;
+                }
+
+                .notification-icon {
+                    margin-right: 10px;
+                    font-size: 20px;
+                }
+
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+
+                @keyframes fadeOut {
+                    from { opacity: 1; }
+                    to { opacity: 0; visibility: hidden; }
+                }
+            `;
+            document.head.appendChild(style);
         }
 
-        .btn-publish-now {
-            color: #10b981; /* Зеленый */
-        }
+        // Добавляем уведомление в DOM
+        document.body.appendChild(notification);
 
-        .btn-publish-now:hover,
-        .btn-publish-now:focus {
-            color: #059669; /* Темнее при наведении */
-            background-color: transparent;
-            text-decoration: none;
-            box-shadow: none;
-            outline: none;
-        }
+        // Удаляем уведомление через 3 секунды
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+    }
+});
+</script>
 
-        /* Стили для календаря публикаций */
-        .calendar-container {
-            overflow-x: auto;
-            padding: 10px 0;
-        }
+<!-- Добавляем стили для новых кнопок -->
+<style>
+.btn-reschedule,
+.btn-publish-now {
+    /* Базовые стили кнопки */
+    border: none;
+    background-color: transparent;
+    padding: 0.375rem 0.75rem;
+    cursor: pointer;
 
-        /* Стили для бейджа повторения */
-        .badge.bg-info {
-            background-color: #3b82f6 !important;
-            font-size: 11px;
-            padding: 3px 6px;
-            border-radius: 4px;
-        }
-    </style>
+    /* Шрифт */
+    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 14px;
 
-    <!-- Phosphor Icons JavaScript -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    /* Интервалы */
+    line-height: 20px;
+    vertical-align: baseline;
+    letter-spacing: normal;
+    word-spacing: 0px;
 
-    <!-- Bootstrap JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    /* Стилизация */
+    font-weight: 500;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+    text-decoration: none;
+    text-align: left;
+    text-indent: 0px;
+
+    /* Переходы */
+    transition: color 0.2s ease;
+}
+
+.btn-reschedule {
+    color: #6366f1; /* Индиго */
+}
+
+.btn-reschedule:hover,
+.btn-reschedule:focus {
+    color: #4f46e5; /* Темнее при наведении */
+    background-color: transparent;
+    text-decoration: none;
+    box-shadow: none;
+    outline: none;
+}
+
+.btn-publish-now {
+    color: #10b981; /* Зеленый */
+}
+
+.btn-publish-now:hover,
+.btn-publish-now:focus {
+    color: #059669; /* Темнее при наведении */
+    background-color: transparent;
+    text-decoration: none;
+    box-shadow: none;
+    outline: none;
+}
+
+/* Стили для календаря публикаций */
+.calendar-container {
+    overflow-x: auto;
+    padding: 10px 0;
+}
+
+/* Стили для бейджа повторения */
+.badge.bg-info {
+    background-color: #3b82f6 !important;
+    font-size: 11px;
+    padding: 3px 6px;
+    border-radius: 4px;
+}
+</style>
+
+<!-- Phosphor Icons JavaScript -->
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+<!-- Bootstrap JS Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 
 

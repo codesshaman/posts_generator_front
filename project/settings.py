@@ -91,6 +91,7 @@ TEMPLATES = [
                 'apps.basetmp.context_processors.menu_context',
                 'apps.posting.context_processors.all_posts',
                 'apps.posting.context_processors.create_post',
+                'apps.posting.context_processors.scheduler',
                 'apps.generation.context_processors.autogeneration',
             ],
         },

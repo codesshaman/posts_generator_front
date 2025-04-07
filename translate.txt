@@ -179,17 +179,30 @@
 ### apps/posting/views_scheduler.py ###
 #######################################
 ^По дате публикации^By publication date^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
+^Завтра^Tomorrow^
+^Эта неделя^This week^
+^Следующая неделя^Next week^
+^Сначала ближайшие^Nearest first^
+^Сначала последние^Latest first^
+^Добавить в очередь^Add to queue^
+^Календарь публикаций^Publication calendar^
+^Календарь запланированных публикаций^Calendar of scheduled publications^
+^Ближайшие публикации^Upcoming publications^
+^Запланировано^Planned^
+^на следующую неделю^for next week^
+^на следующий месяц^for next month^
+^Без изображения^Without image^
+^Изменить дату^Change date^
+^Опубликовать сейчас^Publish now^
+^Изменить дату публикации^Change publication date^
+^Дата и время публикации^Date and time of publication^
+^Повторять публикацию^Repeat publication^
+^Не повторять^Don't repeat^
+^Ежедневно^Daily^
+^Еженедельно^Weekly^
+^Ежемесячно^Monthly^
+^Сохранить^Save^
+^Вы уверены, что хотите опубликовать этот пост прямо сейчас?^Are you sure you want to publish this post right now?^
 ^^^
 ^^^
 ^^^

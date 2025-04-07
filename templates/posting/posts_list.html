@@ -38,7 +38,7 @@
         </button>
         <ul class="dropdown-menu" aria-labelledby="statusDropdown">
             <li><a class="dropdown-item" href="#"><i class="ph ph-list me-2"></i>{{ all_statuses }}</a></li>
-            <li><a class="dropdown-item" href="#"><i class="ph ph-check-circle me-2"></i>{{ publish }}</a></li>
+            <li><a class="dropdown-item" href="#"><i class="ph ph-check-circle me-2"></i>{{ published }}</a></li>
             <li><a class="dropdown-item" href="#"><i class="ph ph-note-pencil me-2"></i>{{ draft }}</a></li>
             <li><a class="dropdown-item" href="#"><i class="ph ph-clock me-2"></i>{{ queue }}</a></li>
         </ul>
@@ -156,7 +156,7 @@
             <div class="col-md-6">
                 <label for="editPostStatus" class="form-label">{{ status }}</label>
                 <select class="form-select" id="editPostStatus" required>
-                    <option value="published">{{ publish }}</option>
+                    <option value="published">{{ published }}</option>
                     <option value="draft">{{ draft }}</option>
                     <option value="queued">{{ queue }}</option>
                 </select>
