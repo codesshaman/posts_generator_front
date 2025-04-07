@@ -129,3 +129,46 @@ def create_post(request):
         "30_second_to_mars": translate("Это может занять до 30 секунд", lang),
         "use_image": translate("Использовать изображение", lang),
     }
+
+
+def scheduler(request):
+    lang = language(request)
+    return {
+        "by_pub_date": translate("По дате публикации", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+        "style": translate("Стиль", lang),
+    }
+
