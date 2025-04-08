@@ -67,22 +67,22 @@
                         <h6 class="mb-2">{{ consumption }}:</h6>
 
                         <div class="d-flex justify-content-between mb-2">
-                            <span>Генерация постов:</span>
-                            <span>1,850 токенов</span>
+                            <span>{{ posts_gen }}:</span>
+                            <span>{{ posts_gen_sum }} {{ coins }}</span>
                         </div>
                         <div class="d-flex justify-content-between mb-2">
-                            <span>Анализ групп:</span>
-                            <span>450 токенов</span>
+                            <span>{{ groups_an }}:</span>
+                            <span>{{ groups_an_sum }} {{ coins }}</span>
                         </div>
                         <div class="d-flex justify-content-between mb-2">
-                            <span>Генерация изображений:</span>
-                            <span>150 токенов</span>
+                            <span>{{ images_gen }}:</span>
+                            <span>150 {{ coins }}</span>
                         </div>
                     </div>
 
                     <div class="mt-4">
                         <button class="btn btn-outline-primary w-100">
-                            <i class="ph ph-plus-circle me-2"></i> Купить дополнительные токены
+                            <i class="ph ph-plus-circle me-2"></i> {{ add_coins }}
                         </button>
                     </div>
                 </div>
@@ -91,10 +91,10 @@
 
         <div class="mt-4 d-flex justify-content-end">
             <button class="btn btn-outline-danger me-2">
-                <i class="ph ph-x me-2"></i> Отменить подписку
+                <i class="ph ph-x me-2"></i> {{ cancel_subs }}
             </button>
             <button class="btn btn-outline-primary">
-                <i class="ph ph-pencil-simple me-2"></i> Изменить тариф
+                <i class="ph ph-pencil-simple me-2"></i> {{ change_plan }}
             </button>
         </div>
     </div>
@@ -104,16 +104,16 @@
 <div class="card mb-4">
     <div class="card-body">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h3 class="card-title mb-0">Доступные тарифы</h3>
+            <h3 class="card-title mb-0">{{ available_planes }}</h3>
 
             <!-- Переключатель периода оплаты -->
             <div class="billing-toggle">
-                <span class="billing-period-text me-2">Ежемесячно</span>
+                <span class="billing-period-text me-2">{{ monthly }}</span>
                 <div class="form-check form-switch d-inline-block">
                     <input class="form-check-input" type="checkbox" id="billingPeriodSwitch">
                     <label class="form-check-label" for="billingPeriodSwitch"></label>
                 </div>
-                <span class="billing-period-text ms-2">Ежегодно <span class="badge bg-success ms-1">-20%</span></span>
+                <span class="billing-period-text ms-2">{{ annually }} <span class="badge bg-success ms-1">-20%</span></span>
             </div>
         </div>
 
@@ -123,21 +123,24 @@
                 <div class="card h-100 plan-card">
                     <div class="card-body d-flex flex-column">
                         <div class="plan-header mb-4">
-                            <h4 class="plan-title">Профи</h4>
+                            <h4 class="plan-title">{{ profi }}</h4>
                             <div class="tokens-amount mb-2">
                                 <i class="ph ph-lightning me-1 text-warning"></i>
-                                <span class="fw-bold">10,000 токенов</span>
+                                <span class="fw-bold">{{ profi_coins }} {{ coins }}</span>
                             </div>
                             <div class="plan-price">
-                                <span class="price" id="profi-price">990 ₽</span>
-                                <span class="period">/месяц</span>
+                                <span class="price" id="profi-price">{{ profi_price }} {{ сurrency }}</span>
+                                <span class="period">/{{ month }}</span>
                             </div>
-                            <p class="text-muted billing-period-text-monthly">Ежемесячная оплата</p>
-                            <p class="text-muted billing-period-text-yearly" style="display: none;">Ежегодная оплата (скидка 20%)</p>
+                            <p class="text-muted billing-period-text-monthly">{{ monthly_payment }}</p>
+                            <p class="text-muted billing-period-text-yearly" style="display: none;">
+                                {{ annual_payment }} ({{ discount }} {{ discount_percent }}%)
+                            </p>
                         </div>
 
                         <div class="mt-auto">
-                            <button class="btn btn-outline-primary w-100 update-btn" data-monthly="990" data-yearly="11880">Обновить до Профи</button>
+                            <button class="btn btn-outline-primary w-100 update-btn" data-monthly="990" data-yearly="11880">
+                                {{ upgrade_to }} {{ profi }}</button>
                         </div>
                     </div>
                 </div>
@@ -155,7 +158,7 @@
                             <h4 class="plan-title">Про 50</h4>
                             <div class="tokens-amount mb-2">
                                 <i class="ph ph-lightning me-1 text-warning"></i>
-                                <span class="fw-bold">25,000 токенов</span>
+                                <span class="fw-bold">25,000 {{ coins }}</span>
                             </div>
                             <div class="plan-price">
                                 <div class="d-flex align-items-center mb-1">
@@ -170,7 +173,7 @@
                         </div>
 
                         <div class="mt-auto">
-                            <button class="btn btn-outline-primary w-100 update-btn" data-monthly="2290" data-yearly="27480">Обновить до Про 50</button>
+                            <button class="btn btn-outline-primary w-100 update-btn" data-monthly="2290" data-yearly="27480">{{ upgrade_to }} Про 50</button>
                         </div>
                     </div>
                 </div>
@@ -184,7 +187,7 @@
                             <h4 class="plan-title">Про 100</h4>
                             <div class="tokens-amount mb-2">
                                 <i class="ph ph-lightning me-1 text-warning"></i>
-                                <span class="fw-bold">50,000 токенов</span>
+                                <span class="fw-bold">50,000 {{ coins }}</span>
                             </div>
                             <div class="plan-price">
                                 <div class="d-flex align-items-center mb-1">
@@ -199,7 +202,7 @@
                         </div>
 
                         <div class="mt-auto">
-                            <button class="btn btn-outline-primary w-100 update-btn" data-monthly="4350" data-yearly="52200">Обновить до Про 100</button>
+                            <button class="btn btn-outline-primary w-100 update-btn" data-monthly="4350" data-yearly="52200">{{ upgrade_to }} Про 100</button>
                         </div>
                     </div>
                 </div>
@@ -217,7 +220,7 @@
                             <h4 class="plan-title">Про 200</h4>
                             <div class="tokens-amount mb-2">
                                 <i class="ph ph-lightning me-1 text-warning"></i>
-                                <span class="fw-bold">100,000 токенов</span>
+                                <span class="fw-bold">100,000 {{ coins }}</span>
                             </div>
                             <div class="plan-price">
                                 <div class="d-flex align-items-center mb-1">
@@ -232,11 +235,74 @@
                         </div>
 
                         <div class="mt-auto">
-                            <button class="btn btn-outline-primary w-100 update-btn" data-monthly="7990" data-yearly="95880">Обновить до Про 200</button>
+                            <button class="btn btn-outline-primary w-100 update-btn" data-monthly="7990" data-yearly="95880">{{ upgrade_to }} Про 200</button>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Тариф Про 100 -->
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 plan-card">
+                    <div class="card-body d-flex flex-column">
+                        <div class="plan-header mb-4">
+                            <h4 class="plan-title">Про 100</h4>
+                            <div class="tokens-amount mb-2">
+                                <i class="ph ph-lightning me-1 text-warning"></i>
+                                <span class="fw-bold">50,000 {{ coins }}</span>
+                            </div>
+                            <div class="plan-price">
+                                <div class="d-flex align-items-center mb-1">
+                                    <span class="original-price text-decoration-line-through text-muted me-2">4,950 ₽</span>
+                                    <span class="savings-badge">Экономия 12%</span>
+                                </div>
+                                <span class="price" id="pro100-price">4,350 ₽</span>
+                                <span class="period">/месяц</span>
+                            </div>
+                            <p class="text-muted billing-period-text-monthly">Ежемесячная оплата</p>
+                            <p class="text-muted billing-period-text-yearly" style="display: none;">Ежегодная оплата (скидка 20%)</p>
+                        </div>
+
+                        <div class="mt-auto">
+                            <button class="btn btn-outline-primary w-100 update-btn" data-monthly="4350" data-yearly="52200">{{ upgrade_to }} Про 100</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Тариф Про 200 -->
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 plan-card">
+                    <div class="card-body d-flex flex-column">
+                        <div class="plan-badge">
+                            <span class="badge bg-warning">Максимум возможностей</span>
+                        </div>
+
+                        <div class="plan-header mb-4">
+                            <h4 class="plan-title">Про 200</h4>
+                            <div class="tokens-amount mb-2">
+                                <i class="ph ph-lightning me-1 text-warning"></i>
+                                <span class="fw-bold">100,000 {{ coins }}</span>
+                            </div>
+                            <div class="plan-price">
+                                <div class="d-flex align-items-center mb-1">
+                                    <span class="original-price text-decoration-line-through text-muted me-2">9,900 ₽</span>
+                                    <span class="savings-badge">Экономия 20%</span>
+                                </div>
+                                <span class="price" id="pro200-price">7,990 ₽</span>
+                                <span class="period">/месяц</span>
+                            </div>
+                            <p class="text-muted billing-period-text-monthly">Ежемесячная оплата</p>
+                            <p class="text-muted billing-period-text-yearly" style="display: none;">Ежегодная оплата (скидка 20%)</p>
+                        </div>
+
+                        <div class="mt-auto">
+                            <button class="btn btn-outline-primary w-100 update-btn" data-monthly="7990" data-yearly="95880">{{ upgrade_to }} Про 200</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <!-- Дополнительная информация о тарифах -->
@@ -244,14 +310,16 @@
             <div class="alert alert-info d-flex align-items-center" role="alert">
                 <i class="ph ph-info me-3" style="font-size: 24px;"></i>
                 <div>
-                    <strong>Примечание:</strong> Все тарифы включают неограниченное количество запросов в пределах доступных токенов. При оплате за год предоставляется дополнительная скидка 20%.
+                    <strong>{{ note }}:</strong>
+                    {{ all_plans_include }} {{ number_of_requests }} {{ within_limits }}.
+                    {{ paying_annually }} {{ discount_provided }} {{ discount_percent }}%.
                 </div>
             </div>
 
             <div class="text-center mt-4">
-                <p class="text-muted">Нужен индивидуальный тариф для вашей компании?</p>
+                <p class="text-muted">{{ individual_rate }} {{ for_your_company }}?</p>
                 <a href="#" class="btn btn-outline-primary">
-                    <i class="ph ph-buildings me-2"></i> Получить корпоративное предложение
+                    <i class="ph ph-buildings me-2"></i> {{ corporate_offer }}
                 </a>
             </div>
         </div>
@@ -267,70 +335,70 @@
 <!-- История платежей -->
 <div class="card mb-4">
     <div class="card-body">
-        <h3 class="card-title mb-4">История платежей</h3>
+        <h3 class="card-title mb-4">{{ payment_history }}</h3>
 
         <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>Дата</th>
-                        <th>Описание</th>
-                        <th>Сумма</th>
-                        <th>Статус</th>
-                        <th>Чек</th>
+                        <th>{{ date }}</th>
+                        <th>{{ post_descr }}</th>
+                        <th>{{ sum }}</th>
+                        <th>{{ status }}</th>
+                        <th>{{ check }}</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>15.03.2023</td>
-                        <td>Подписка "Профессиональный", апрель 2023</td>
+                        <td>{{ subscription }} "{{ professional }}", {{ subscr_month }} {{ subscr_year }}</td>
                         <td>2,990 ₽</td>
-                        <td><span class="badge bg-success">Оплачено</span></td>
+                        <td><span class="badge bg-success">{{ paid }}</span></td>
                         <td><a href="#" class="text-decoration-none"><i class="ph ph-receipt me-1"></i> PDF</a></td>
                     </tr>
-                    <tr>
-                        <td>15.02.2023</td>
-                        <td>Подписка "Профессиональный", март 2023</td>
-                        <td>2,990 ₽</td>
-                        <td><span class="badge bg-success">Оплачено</span></td>
-                        <td><a href="#" class="text-decoration-none"><i class="ph ph-receipt me-1"></i> PDF</a></td>
-                    </tr>
-                    <tr>
-                        <td>15.01.2023</td>
-                        <td>Подписка "Профессиональный", февраль 2023</td>
-                        <td>2,990 ₽</td>
-                        <td><span class="badge bg-success">Оплачено</span></td>
-                        <td><a href="#" class="text-decoration-none"><i class="ph ph-receipt me-1"></i> PDF</a></td>
-                    </tr>
-                    <tr>
-                        <td>15.12.2022</td>
-                        <td>Подписка "Базовый", январь 2023</td>
-                        <td>990 ₽</td>
-                        <td><span class="badge bg-success">Оплачено</span></td>
-                        <td><a href="#" class="text-decoration-none"><i class="ph ph-receipt me-1"></i> PDF</a></td>
-                    </tr>
-                    <tr>
-                        <td>10.12.2022</td>
-                        <td>Дополнительные токены (1,000)</td>
-                        <td>590 ₽</td>
-                        <td><span class="badge bg-success">Оплачено</span></td>
-                        <td><a href="#" class="text-decoration-none"><i class="ph ph-receipt me-1"></i> PDF</a></td>
-                    </tr>
+<!--                    <tr>-->
+<!--                        <td>15.02.2023</td>-->
+<!--                        <td>Подписка "Профессиональный", март 2023</td>-->
+<!--                        <td>2,990 ₽</td>-->
+<!--                        <td><span class="badge bg-success">Оплачено</span></td>-->
+<!--                        <td><a href="#" class="text-decoration-none"><i class="ph ph-receipt me-1"></i> PDF</a></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>15.01.2023</td>-->
+<!--                        <td>Подписка "Профессиональный", февраль 2023</td>-->
+<!--                        <td>2,990 ₽</td>-->
+<!--                        <td><span class="badge bg-success">Оплачено</span></td>-->
+<!--                        <td><a href="#" class="text-decoration-none"><i class="ph ph-receipt me-1"></i> PDF</a></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>15.12.2022</td>-->
+<!--                        <td>Подписка "Базовый", январь 2023</td>-->
+<!--                        <td>990 ₽</td>-->
+<!--                        <td><span class="badge bg-success">Оплачено</span></td>-->
+<!--                        <td><a href="#" class="text-decoration-none"><i class="ph ph-receipt me-1"></i> PDF</a></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>10.12.2022</td>-->
+<!--                        <td>Дополнительные коины (1,000)</td>-->
+<!--                        <td>590 ₽</td>-->
+<!--                        <td><span class="badge bg-success">Оплачено</span></td>-->
+<!--                        <td><a href="#" class="text-decoration-none"><i class="ph ph-receipt me-1"></i> PDF</a></td>-->
+<!--                    </tr>-->
                 </tbody>
             </table>
         </div>
 
         <div class="d-flex justify-content-center mt-3">
-            <nav aria-label="История платежей, навигация">
+            <nav aria-label="{{ paid_his }}">
                 <ul class="pagination">
                     <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Предыдущая</a>
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">{{ prew }}</a>
                     </li>
                     <li class="page-item active"><a class="page-link" href="#">1</a></li>
                     <li class="page-item"><a class="page-link" href="#">2</a></li>
                     <li class="page-item"><a class="page-link" href="#">3</a></li>
                     <li class="page-item">
-                        <a class="page-link" href="#">Следующая</a>
+                        <a class="page-link" href="#">{{ next }}</a>
                     </li>
                 </ul>
             </nav>
@@ -342,9 +410,9 @@
 <div class="card mb-4">
     <div class="card-body">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h3 class="card-title mb-0">Способы оплаты</h3>
+            <h3 class="card-title mb-0">{{ payment_methods }}</h3>
             <button class="btn btn-outline-primary btn-sm" id="addPaymentMethodBtn">
-                <i class="ph ph-plus me-1"></i> Добавить способ оплаты
+                <i class="ph ph-plus me-1"></i> {{ add_payment_method }}
             </button>
         </div>
 
@@ -359,19 +427,23 @@
                                     <i class="ph ph-credit-card" style="font-size: 24px;"></i>
                                 </div>
                                 <div>
-                                    <h5 class="mb-1">Visa •••• 4582</h5>
-                                    <p class="text-muted mb-0">Срок действия: 05/25</p>
+                                    <h5 class="mb-1">{{ card_type_visa }} •••• {{ last_card_nums }}</h5>
+                                    <p class="text-muted mb-0">{{ validity_period }}: {{ month_date }}</p>
                                 </div>
                             </div>
                             <div class="payment-actions">
-                                <span class="badge bg-primary me-2">Основная</span>
+                                <span class="badge bg-primary me-2">{{ main }}</span>
                                 <div class="dropdown d-inline-block">
                                     <button class="btn btn-sm btn-light" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="ph ph-dots-three-vertical"></i>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item" href="#"><i class="ph ph-pencil me-2"></i> Редактировать</a></li>
-                                        <li><a class="dropdown-item text-danger" href="#"><i class="ph ph-trash me-2"></i> Удалить</a></li>
+                                        <li><a class="dropdown-item" href="#"><i class="ph ph-pencil me-2"></i>
+                                            {{ edit_button }}
+                                        </a></li>
+                                        <li><a class="dropdown-item text-danger" href="#"><i class="ph ph-trash me-2"></i>
+                                            {{ delete_button }}
+                                        </a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -390,19 +462,23 @@
                                     <i class="ph ph-credit-card" style="font-size: 24px;"></i>
                                 </div>
                                 <div>
-                                    <h5 class="mb-1">MasterCard •••• 7891</h5>
-                                    <p class="text-muted mb-0">Срок действия: 11/24</p>
+                                    <h5 class="mb-1">{{ card_type_mc }} •••• {{ last_card_nums }}</h5>
+                                    <p class="text-muted mb-0">{{ validity_period }}: {{ month_date }}</p>
                                 </div>
                             </div>
                             <div class="payment-actions">
-                                <button class="btn btn-sm btn-outline-primary me-2">Сделать основной</button>
+                                <button class="btn btn-sm btn-outline-primary me-2">{{ make_main }}</button>
                                 <div class="dropdown d-inline-block">
                                     <button class="btn btn-sm btn-light" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="ph ph-dots-three-vertical"></i>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                                        <li><a class="dropdown-item" href="#"><i class="ph ph-pencil me-2"></i> Редактировать</a></li>
-                                        <li><a class="dropdown-item text-danger" href="#"><i class="ph ph-trash me-2"></i> Удалить</a></li>
+                                        <li><a class="dropdown-item" href="#"><i class="ph ph-pencil me-2"></i>
+                                            {{ edit_button }}
+                                        </a></li>
+                                        <li><a class="dropdown-item text-danger" href="#"><i class="ph ph-trash me-2"></i>
+                                            {{ delete_button }}
+                                        </a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -417,18 +493,18 @@
 <!-- Часто задаваемые вопросы -->
 <div class="card mb-4">
     <div class="card-body">
-        <h3 class="card-title mb-4">Часто задаваемые вопросы</h3>
+        <h3 class="card-title mb-4">{{ faq }}</h3>
 
         <div class="accordion" id="faqAccordion">
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Как работает система токенов?
+                        {{ how_coins_work }}
                     </button>
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                        Токены — это внутренняя валюта ContentAI, которая используется для оплаты различных функций сервиса. Каждый тариф включает определенное количество токенов в месяц. Токены расходуются на генерацию постов, анализ групп, создание изображений и другие функции. Если вам не хватает токенов, вы всегда можете приобрести дополнительные.
+                        коины — это внутренняя валюта ContentAI, которая используется для оплаты различных функций сервиса. Каждый тариф включает определенное количество коинов в месяц. коины расходуются на генерацию постов, анализ групп, создание изображений и другие функции. Если вам не хватает коинов, вы всегда можете приобрести дополнительные.
                     </div>
                 </div>
             </div>
@@ -462,12 +538,12 @@
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingFour">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                        Переносятся ли неиспользованные токены на следующий месяц?
+                        Переносятся ли неиспользованные коины на следующий месяц?
                     </button>
                 </h2>
                 <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                        Неиспользованные токены не переносятся на следующий месяц. В начале каждого расчетного периода ваш баланс токенов обновляется до количества, предусмотренного вашим тарифом. Мы рекомендуем использовать все доступные токены до конца месяца для максимальной эффективности.
+                        Неиспользованные коины не переносятся на следующий месяц. В начале каждого расчетного периода ваш баланс коинов обновляется до количества, предусмотренного вашим тарифом. Мы рекомендуем использовать все доступные коины до конца месяца для максимальной эффективности.
                     </div>
                 </div>
             </div>
@@ -673,7 +749,7 @@ if (cancelSubscriptionBtn) {
             if (statusBadge) {
                 statusBadge.classList.remove('bg-warning');
                 statusBadge.classList.add('bg-success');
-                statusBadge.textContent = '{{ active }}';
+                statusBadge.textContent = {{ active }};
             }
 
             // Возвращаем исходный вид кнопки
@@ -785,7 +861,7 @@ if (billingSwitch) {
 document.querySelectorAll('.update-btn').forEach(button => {
     button.addEventListener('click', function() {
         const isYearly = billingSwitch ? billingSwitch.checked : false;
-        const planName = this.textContent.replace('Обновить до ', '').replace(' (годовой план)', '');
+        const planName = this.textContent.replace('{{ upgrade_to }} ', '').replace(' ({{ annual_plan }})', '');
         const price = isYearly ? this.getAttribute('data-yearly') : this.getAttribute('data-monthly');
         const periodText = isYearly ? 'год' : 'месяц';
         const formattedPrice = new Intl.NumberFormat('ru-RU').format(price);
@@ -858,11 +934,11 @@ function updatePricesBasedOnPeriod(isYearly) {
 // Функция для обновления текста на кнопках
 function updateButtonText(isYearly) {
     document.querySelectorAll('.update-btn').forEach(button => {
-        const planName = button.textContent.replace('Обновить до ', '').replace(' (годовой план)', '');
+        const planName = button.textContent.replace('{{ upgrade_to }} ', '').replace(' ({{ annual_plan }})', '');
         if (isYearly) {
-            button.textContent = `Обновить до ${planName} (годовой план)`;
+            button.textContent = `{{ upgrade_to }} ${planName} ({{ annual_plan }})`;
         } else {
-            button.textContent = `Обновить до ${planName}`;
+            button.textContent = `{{ upgrade_to }} ${planName}`;
         }
     });
 }

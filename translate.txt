@@ -219,6 +219,46 @@
 ^Использование коинов^Using coins^
 ^Доступно коинов^Available coins^
 ^Расход коинов^Coin consumption^
+^Генерация постов^Posts generation^
+^Анализ групп^Groups Analysis^
+^Генерация изображений^Generating Images^
+^Купить дополнительные коины^Buy additional coins^
+^Отменить подписку^Cancel subscription^
+^Изменить тариф^Change paln^
+^Доступные тарифы^Available planes^
+^Ежегодно^Annually^
+^Профи^Profi^
+^Ежемесячная оплата^Monthly payment^
+^Ежегодная оплата^Annual payment^
+^скидка^discount^
+^Обновить до^Upgrade to^
+^годовой план^annual plan^
+^Примечание^Note^
+^Все тарифы включают неограниченное^All plans include an unlimited^
+^количество запросов^number of requests^
+^в пределах доступных коинов^within the limits of available coins^
+^При оплате за год предоставляется^An additional discount is provided^
+^дополнительная скидка^when paying annually^
+^Нужен индивидуальный тариф^Need an individual rate^
+^для вашей компании^for your company^
+^Получить корпоративное предложение^Get a corporate offer^
+^История платежей^Payment history^
+^Дата^^
+^Сумма^Sum^
+^Статус^Status^
+^Чек^Check^
+^Подписка^Subscription^
+^Оплачено^Paid^
+^История платежей, навигация^Payment history, navigation^
+^Предыдущая^Previous^
+^Следующая^Next^
+^Способы оплаты^Payment methods^
+^Добавить способ оплаты^Add a payment method^
+^Срок действия^Validity period^
+^Основная^Main^
+^Сделать основной^Make main^
+^Часто задаваемые вопросы^Frequently Asked Questions^
+^Как работает система коинов?^How does the coin system work?^
 ^^^
 ^^^
 ^^^
