@@ -4,6 +4,7 @@ from project.language import translate, language
 def menu_context(request):
     lang = language(request)
     return {
+        "project_name": "ContentAI",
         "my_posts_menu": translate("Мои посты", lang),
         "create_post_menu": translate("Создать пост", lang),
         "pub_queque_menu": translate("Очередь публикаций", lang),

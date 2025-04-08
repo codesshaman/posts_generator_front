@@ -352,7 +352,7 @@
                     <tr>
                         <td>15.03.2023</td>
                         <td>{{ subscription }} "{{ professional }}", {{ subscr_month }} {{ subscr_year }}</td>
-                        <td>2,990 ₽</td>
+                        <td>{{ subscription_price }} {{ сurrency }}</td>
                         <td><span class="badge bg-success">{{ paid }}</span></td>
                         <td><a href="#" class="text-decoration-none"><i class="ph ph-receipt me-1"></i> PDF</a></td>
                     </tr>
@@ -504,7 +504,9 @@
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                        коины — это внутренняя валюта ContentAI, которая используется для оплаты различных функций сервиса. Каждый тариф включает определенное количество коинов в месяц. коины расходуются на генерацию постов, анализ групп, создание изображений и другие функции. Если вам не хватает коинов, вы всегда можете приобрести дополнительные.
+                        {{ internal_currency }} {{ project_name }}, {{ which_is_used }} {{ various_functions }}. {{ plan_includes }}
+                        {{ certain_number}}. {{ сoins_spent_on }} {{ generation_of_posts }}, {{ group_analysis }},
+                        {{ image_creation }} {{ and_other_functions }}. {{ have_enough_coins }}, {{ purchase_additional }}.
                     </div>
                 </div>
             </div>
@@ -512,12 +514,12 @@
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingTwo">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Как изменить тариф подписки?
+                        {{ how_can_change }}
                     </button>
                 </h2>
                 <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                        Вы можете изменить тариф подписки в любое время. Для повышения тарифа нажмите кнопку "Повысить до..." рядом с выбранным тарифом. Изменения вступят в силу немедленно, а разница в стоимости будет рассчитана пропорционально оставшемуся времени текущего периода. Для понижения тарифа нажмите "Изменить тариф" в блоке текущей подписки.
+                        {{ you_can_change }}
                     </div>
                 </div>
             </div>
@@ -525,12 +527,12 @@
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingThree">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Как отменить подписку?
+                        {{ howto_cancel_subscription }}
                     </button>
                 </h2>
                 <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                        Для отмены подписки нажмите кнопку "Отменить подписку" в блоке текущей подписки. Ваша подписка будет активна до конца оплаченного периода, после чего автоматически не продлится. Вы сможете использовать все функции сервиса до окончания срока действия подписки.
+                        {{ how_to_cancel }}
                     </div>
                 </div>
             </div>
@@ -538,12 +540,12 @@
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingFour">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                        Переносятся ли неиспользованные коины на следующий месяц?
+                        {{ roll_over }}
                     </button>
                 </h2>
                 <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                        Неиспользованные коины не переносятся на следующий месяц. В начале каждого расчетного периода ваш баланс коинов обновляется до количества, предусмотренного вашим тарифом. Мы рекомендуем использовать все доступные коины до конца месяца для максимальной эффективности.
+                        {{ unused_coins }}
                     </div>
                 </div>
             </div>
@@ -551,12 +553,12 @@
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingFive">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                        Как получить счет-фактуру для бухгалтерии?
+                        {{ invoice_for_accounting }}
                     </button>
                 </h2>
                 <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                        Для получения счета-фактуры или других бухгалтерских документов, пожалуйста, обратитесь в службу поддержки через раздел "Настройки" > "Поддержка". Укажите ваши реквизиты и период, за который вам нужны документы. Мы подготовим все необходимые документы в течение 2 рабочих дней.
+                        {{ accounting }}
                     </div>
                 </div>
             </div>
@@ -569,14 +571,14 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-6">
-                <h3 class="card-title mb-4">Нужна помощь?</h3>
-                <p class="mb-4">Если у вас возникли вопросы по подписке или оплате, наша команда поддержки всегда готова помочь.</p>
+                <h3 class="card-title mb-4">{{ need_help }}</h3>
+                <p class="mb-4">{{ support_team }}</p>
                 <div class="d-grid gap-2 d-md-flex">
                     <a href="#" class="btn btn-primary">
-                        <i class="ph ph-chats me-2"></i> Написать в поддержку
+                        <i class="ph ph-chats me-2"></i> {{ write_to_support }}
                     </a>
                     <a href="#" class="btn btn-outline-secondary">
-                        <i class="ph ph-book-open me-2"></i> Центр помощи
+                        <i class="ph ph-book-open me-2"></i> {{ help_center }}
                     </a>
                 </div>
             </div>
@@ -594,18 +596,18 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addPaymentMethodModalLabel">Добавление способа оплаты</h5>
+                <h5 class="modal-title" id="addPaymentMethodModalLabel">{{ adding_payment_method }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="addPaymentMethodForm">
                     <div class="mb-3">
-                        <label for="cardNumber" class="form-label">Номер карты</label>
+                        <label for="cardNumber" class="form-label">{{ card_num }}</label>
                         <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456" required>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label for="expiryDate" class="form-label">Срок действия</label>
+                            <label for="expiryDate" class="form-label">{{ validity_period }}</label>
                             <input type="text" class="form-control" id="expiryDate" placeholder="ММ/ГГ" required>
                         </div>
                         <div class="col-md-6">
@@ -614,20 +616,20 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="cardholderName" class="form-label">Имя владельца карты</label>
+                        <label for="cardholderName" class="form-label">{{ cardholder_name }}</label>
                         <input type="text" class="form-control" id="cardholderName" placeholder="IVAN IVANOV" required>
                     </div>
                     <div class="form-check mb-3">
                         <input class="form-check-input" type="checkbox" id="makeDefaultCard">
                         <label class="form-check-label" for="makeDefaultCard">
-                            Сделать основным способом оплаты
+                            {{ make_main_payment_method }}
                         </label>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                <button type="button" class="btn btn-primary" id="savePaymentMethodBtn">Добавить</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ cancel }}</button>
+                <button type="button" class="btn btn-primary" id="savePaymentMethodBtn">{{ add }}</button>
             </div>
         </div>
     </div>
@@ -638,43 +640,43 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="cancelSubscriptionModalLabel">Отмена подписки</h5>
+                <h5 class="modal-title" id="cancelSubscriptionModalLabel">{{ cancel_subscription }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="text-center mb-4">
                     <i class="ph ph-warning-circle text-warning" style="font-size: 64px;"></i>
-                    <h4 class="mt-3">Вы уверены, что хотите отменить подписку?</h4>
+                    <h4 class="mt-3">{{ cancel_subscription_confirm }}</h4>
                 </div>
 
-                <p>При отмене подписки:</p>
+                <p>{{ cancel_subscription_options }}:</p>
                 <ul>
-                    <li>Ваша подписка будет активна до 15.04.2023</li>
-                    <li>Автоматическое продление будет отключено</li>
-                    <li>Вы сможете использовать все функции до окончания срока действия</li>
-                    <li>Вы можете возобновить подписку в любое время</li>
+                    <li>{{ will_be_active_until }} {{ subscr_end_date }}</li>
+                    <li>{{ automatic_renewal_disabled }}</li>
+                    <li>{{ use_all_functions }} {{ before_expiration }}</li>
+                    <li>{{ renew_subscription }}</li>
                 </ul>
 
                 <div class="form-group mt-4">
-                    <label for="cancellationReason" class="form-label">Причина отмены (необязательно)</label>
+                    <label for="cancellationReason" class="form-label">{{ reason_for_cancel }}</label>
                     <select class="form-select" id="cancellationReason">
-                        <option value="" selected>Выберите причину...</option>
-                        <option value="too_expensive">Слишком дорого</option>
-                        <option value="not_using">Не использую сервис</option>
-                        <option value="missing_features">Не хватает функций</option>
-                        <option value="found_alternative">Нашел альтернативу</option>
-                        <option value="other">Другое</option>
+                        <option value="" selected>{{ select_reason }}...</option>
+                        <option value="too_expensive">{{ too_expensive }}</option>
+                        <option value="not_using">{{ not_use_service }}</option>
+                        <option value="missing_features">{{ missing_features }}</option>
+                        <option value="found_alternative">{{ found_alternative }}</option>
+                        <option value="other">{{ other }}</option>
                     </select>
                 </div>
 
                 <div class="form-group mt-3" id="otherReasonContainer" style="display: none;">
-                    <label for="otherReason" class="form-label">Укажите причину</label>
+                    <label for="otherReason" class="form-label">{{ write_reason }}</label>
                     <textarea class="form-control" id="otherReason" rows="3"></textarea>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                <button type="button" class="btn btn-danger" id="confirmCancelSubscriptionBtn">Подтвердить отмену</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ cancel }}</button>
+                <button type="button" class="btn btn-danger" id="confirmCancelSubscriptionBtn">{{ сonfirm_unsubscription }}</button>
             </div>
         </div>
     </div>
@@ -761,7 +763,7 @@ if (cancelSubscriptionBtn) {
             isSubscriptionCancelled = false;
 
             // Показываем уведомление о возобновлении подписки
-            showAlert('Ваша подписка успешно возобновлена', 'success');
+            showAlert('{{ successfully_renewed }}', 'success');
         }
     }
 
@@ -776,13 +778,13 @@ if (cancelSubscriptionBtn) {
             let reasonText = '';
 
             if (reason === 'too_expensive') {
-                reasonText = 'Слишком дорого';
+                reasonText = '{{ too_expensive }}';
             } else if (reason === 'not_using') {
-                reasonText = 'Не использую сервис';
+                reasonText = '{{ not_use_service }}';
             } else if (reason === 'missing_features') {
-                reasonText = 'Не хватает функций';
+                reasonText = '{{ missing_features }}';
             } else if (reason === 'found_alternative') {
-                reasonText = 'Нашел альтернативу';
+                reasonText = '{{ found_alternative }}';
             } else if (reason === 'other') {
                 reasonText = document.getElementById('otherReason').value || 'Другое';
             }
@@ -797,7 +799,7 @@ if (cancelSubscriptionBtn) {
                 // Меняем цвет и текст бейджа
                 statusBadge.classList.remove('bg-success');
                 statusBadge.classList.add('bg-warning');
-                statusBadge.textContent = 'Будет отменена 15.04.2023';
+                statusBadge.textContent = '{{ will_cancelled }} 15.04.2023';
             }
 
             // Меняем внешний вид кнопки
@@ -809,7 +811,7 @@ if (cancelSubscriptionBtn) {
             isSubscriptionCancelled = true;
 
             // Показать уведомление
-            showAlert('Ваша подписка будет отменена по окончании текущего периода. Причина: ' + reasonText, 'info');
+            showAlert('{{ will_be_cancelled }}. {{ reason }}: ' + reasonText, 'info');
         });
     }
 }

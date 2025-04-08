@@ -259,26 +259,51 @@
 ^Сделать основной^Make main^
 ^Часто задаваемые вопросы^Frequently Asked Questions^
 ^Как работает система коинов?^How does the coin system work?^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
-^^^
+^Коины — это внутренняя валюта^Coins are an internal currency of^
+^которая используется для оплаты^which is used for payment^
+^различных функций сервиса^of various service functions^
+^Каждый тариф включает^Each plan includes a^
+^определенное количество коинов в месяц^certain number of coins per month^
+^Коины расходуются на^Coins are spent on^
+^генерацию постов^generation of posts^
+^анализ групп^group analysis^
+^создание изображений^image creation^
+^и другие функции^and other functions^
+^Если вам не хватает коинов^If you don't have enough coins^
+^вы всегда можете приобрести дополнительные^you can always purchase additional ones^
+^Как изменить тариф подписки?^How can I change my subscription rate?^
+^Как отменить подписку?^How can I cancel my subscription?^
+^Для отмены подписки нажмите кнопку^To cancel your subscription, click the button^
+^Переносятся ли неиспользованные коины на следующий месяц?^Do unused coins roll over to the next month?^
+^Как получить счет-фактуру для бухгалтерии?^How to get an invoice for accounting?^
+^Нужна помощь?^Need help?^
+^Написать в поддержку^Write to support^
+^Центр помощи^Help Center^
+^Добавление способа оплаты^Adding a payment method^
+^Номер карты^Card number^
+^Имя владельца карты^cardholder_name^
+^Сделать основным способом оплаты^Make it your primary payment method^
+^Добавить^Add^
+^Отмена подписки^Cancel Subscription^
+^Вы уверены, что хотите отменить подписку?^Are you sure you want to cancel your subscription?^
+^При отмене подписки^When you cancel your subscription^
+^Ваша подписка будет активна до^Your subscription will be active until^
+^Автоматическое продление будет отключено^Automatic renewal will be disabled^
+^Вы сможете использовать все функции^You will be able to use all the functions^
+^до окончания срока действия^before the expiration date^
+^Вы можете возобновить подписку в любое время^You can renew your subscription at any time^
+^Причина отмены (необязательно)^Reason for cancellation (optional)^
+^Выберите причину^Select a reason^
+^Слишком дорого^Too expensive^
+^Не использую сервис^I don't use the service^
+^Не хватает функций^Lacks features^
+^Нашёл альтернативу^Found an alternative^
+^Другое^Other^
+^Укажите причину^Please write the reason^
+^Подтвердить отмену подписки^Confirm unsubscription^
+^Ваша подписка успешно возобновлена^Your subscription has been successfully renewed^
+^Ваша подписка будет отменена по окончании текущего периода^Your subscription will be cancelled at the end of the current period^
+^Причина^Reason^
+^Будет отменена^Will be cancelled^
+^апрель^april^
 ^^^
