@@ -1,0 +1,1004 @@
+{% extends 'basetmp/base.html' %}
+{% load static %}
+{% block content %}
+{% csrf_token %}
+
+</div>
+
+
+<!-- Текущая подписка -->
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="card-title mb-0">{{ current_sub }}</h3>
+            <span class="badge bg-success py-2 px-3">{{ active_status }}</span>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="current-plan-info">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="plan-icon me-3">
+                            <i class="ph ph-crown text-warning" style="font-size: 32px;"></i>
+                        </div>
+                        <div>
+                            <h4 class="mb-0">{{ plan }} "{{ professional }}"</h4>
+                            <p class="text-muted mb-0">{{ tokens_prof }} {{ coins_per_month }}</p>
+                        </div>
+                    </div>
+
+                    <div class="plan-details mt-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>{{ start_date }}:</span>
+                            <span class="fw-bold">{{ start_date_text }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>{{ next_payment }}:</span>
+                            <span class="fw-bold">{{ next_payment_text }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>{{ price }}:</span>
+                            <span class="fw-bold">{{ price_sum }} {{ сurrency }}/{{ month }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>{{ payment }}:</span>
+                            <span class="fw-bold">
+                                <i class="ph ph-credit-card me-1"></i> •••• {{ last_card_nums }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="usage-stats p-3 rounded" style="background-color: #f8f9fa;">
+                    <h5 class="mb-3">{{ coins_using }}</h5>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>{{ coins_aval }}:</span>
+                        <span class="fw-bold">{{ сurrent_expenses }} / {{ coins_available }}</span>
+                    </div>
+
+                    <div class="progress mb-4" style="height: 10px;">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 49%" aria-valuenow="49" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+
+                    <div class="token-usage-breakdown">
+                        <h6 class="mb-2">{{ consumption }}:</h6>
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Генерация постов:</span>
+                            <span>1,850 токенов</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Анализ групп:</span>
+                            <span>450 токенов</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Генерация изображений:</span>
+                            <span>150 токенов</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <button class="btn btn-outline-primary w-100">
+                            <i class="ph ph-plus-circle me-2"></i> Купить дополнительные токены
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4 d-flex justify-content-end">
+            <button class="btn btn-outline-danger me-2">
+                <i class="ph ph-x me-2"></i> Отменить подписку
+            </button>
+            <button class="btn btn-outline-primary">
+                <i class="ph ph-pencil-simple me-2"></i> Изменить тариф
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Доступные тарифы с переключателем периода оплаты -->
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="card-title mb-0">Доступные тарифы</h3>
+
+            <!-- Переключатель периода оплаты -->
+            <div class="billing-toggle">
+                <span class="billing-period-text me-2">Ежемесячно</span>
+                <div class="form-check form-switch d-inline-block">
+                    <input class="form-check-input" type="checkbox" id="billingPeriodSwitch">
+                    <label class="form-check-label" for="billingPeriodSwitch"></label>
+                </div>
+                <span class="billing-period-text ms-2">Ежегодно <span class="badge bg-success ms-1">-20%</span></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Тариф Профи -->
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 plan-card">
+                    <div class="card-body d-flex flex-column">
+                        <div class="plan-header mb-4">
+                            <h4 class="plan-title">Профи</h4>
+                            <div class="tokens-amount mb-2">
+                                <i class="ph ph-lightning me-1 text-warning"></i>
+                                <span class="fw-bold">10,000 токенов</span>
+                            </div>
+                            <div class="plan-price">
+                                <span class="price" id="profi-price">990 ₽</span>
+                                <span class="period">/месяц</span>
+                            </div>
+                            <p class="text-muted billing-period-text-monthly">Ежемесячная оплата</p>
+                            <p class="text-muted billing-period-text-yearly" style="display: none;">Ежегодная оплата (скидка 20%)</p>
+                        </div>
+
+                        <div class="mt-auto">
+                            <button class="btn btn-outline-primary w-100 update-btn" data-monthly="990" data-yearly="11880">Обновить до Профи</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Тариф Про 50 -->
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 plan-card">
+                    <div class="card-body d-flex flex-column">
+                        <div class="plan-badge">
+                            <span class="badge bg-primary">Самый популярный</span>
+                        </div>
+
+                        <div class="plan-header mb-4">
+                            <h4 class="plan-title">Про 50</h4>
+                            <div class="tokens-amount mb-2">
+                                <i class="ph ph-lightning me-1 text-warning"></i>
+                                <span class="fw-bold">25,000 токенов</span>
+                            </div>
+                            <div class="plan-price">
+                                <div class="d-flex align-items-center mb-1">
+                                    <span class="original-price text-decoration-line-through text-muted me-2">2,475 ₽</span>
+                                    <span class="savings-badge">Экономия 7.5%</span>
+                                </div>
+                                <span class="price" id="pro50-price">2,290 ₽</span>
+                                <span class="period">/месяц</span>
+                            </div>
+                            <p class="text-muted billing-period-text-monthly">Ежемесячная оплата</p>
+                            <p class="text-muted billing-period-text-yearly" style="display: none;">Ежегодная оплата (скидка 20%)</p>
+                        </div>
+
+                        <div class="mt-auto">
+                            <button class="btn btn-outline-primary w-100 update-btn" data-monthly="2290" data-yearly="27480">Обновить до Про 50</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Тариф Про 100 -->
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 plan-card">
+                    <div class="card-body d-flex flex-column">
+                        <div class="plan-header mb-4">
+                            <h4 class="plan-title">Про 100</h4>
+                            <div class="tokens-amount mb-2">
+                                <i class="ph ph-lightning me-1 text-warning"></i>
+                                <span class="fw-bold">50,000 токенов</span>
+                            </div>
+                            <div class="plan-price">
+                                <div class="d-flex align-items-center mb-1">
+                                    <span class="original-price text-decoration-line-through text-muted me-2">4,950 ₽</span>
+                                    <span class="savings-badge">Экономия 12%</span>
+                                </div>
+                                <span class="price" id="pro100-price">4,350 ₽</span>
+                                <span class="period">/месяц</span>
+                            </div>
+                            <p class="text-muted billing-period-text-monthly">Ежемесячная оплата</p>
+                            <p class="text-muted billing-period-text-yearly" style="display: none;">Ежегодная оплата (скидка 20%)</p>
+                        </div>
+
+                        <div class="mt-auto">
+                            <button class="btn btn-outline-primary w-100 update-btn" data-monthly="4350" data-yearly="52200">Обновить до Про 100</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Тариф Про 200 -->
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 plan-card">
+                    <div class="card-body d-flex flex-column">
+                        <div class="plan-badge">
+                            <span class="badge bg-warning">Максимум возможностей</span>
+                        </div>
+
+                        <div class="plan-header mb-4">
+                            <h4 class="plan-title">Про 200</h4>
+                            <div class="tokens-amount mb-2">
+                                <i class="ph ph-lightning me-1 text-warning"></i>
+                                <span class="fw-bold">100,000 токенов</span>
+                            </div>
+                            <div class="plan-price">
+                                <div class="d-flex align-items-center mb-1">
+                                    <span class="original-price text-decoration-line-through text-muted me-2">9,900 ₽</span>
+                                    <span class="savings-badge">Экономия 20%</span>
+                                </div>
+                                <span class="price" id="pro200-price">7,990 ₽</span>
+                                <span class="period">/месяц</span>
+                            </div>
+                            <p class="text-muted billing-period-text-monthly">Ежемесячная оплата</p>
+                            <p class="text-muted billing-period-text-yearly" style="display: none;">Ежегодная оплата (скидка 20%)</p>
+                        </div>
+
+                        <div class="mt-auto">
+                            <button class="btn btn-outline-primary w-100 update-btn" data-monthly="7990" data-yearly="95880">Обновить до Про 200</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Дополнительная информация о тарифах -->
+        <div class="mt-4">
+            <div class="alert alert-info d-flex align-items-center" role="alert">
+                <i class="ph ph-info me-3" style="font-size: 24px;"></i>
+                <div>
+                    <strong>Примечание:</strong> Все тарифы включают неограниченное количество запросов в пределах доступных токенов. При оплате за год предоставляется дополнительная скидка 20%.
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <p class="text-muted">Нужен индивидуальный тариф для вашей компании?</p>
+                <a href="#" class="btn btn-outline-primary">
+                    <i class="ph ph-buildings me-2"></i> Получить корпоративное предложение
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<!-- История платежей -->
+<div class="card mb-4">
+    <div class="card-body">
+        <h3 class="card-title mb-4">История платежей</h3>
+
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Дата</th>
+                        <th>Описание</th>
+                        <th>Сумма</th>
+                        <th>Статус</th>
+                        <th>Чек</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>15.03.2023</td>
+                        <td>Подписка "Профессиональный", апрель 2023</td>
+                        <td>2,990 ₽</td>
+                        <td><span class="badge bg-success">Оплачено</span></td>
+                        <td><a href="#" class="text-decoration-none"><i class="ph ph-receipt me-1"></i> PDF</a></td>
+                    </tr>
+                    <tr>
+                        <td>15.02.2023</td>
+                        <td>Подписка "Профессиональный", март 2023</td>
+                        <td>2,990 ₽</td>
+                        <td><span class="badge bg-success">Оплачено</span></td>
+                        <td><a href="#" class="text-decoration-none"><i class="ph ph-receipt me-1"></i> PDF</a></td>
+                    </tr>
+                    <tr>
+                        <td>15.01.2023</td>
+                        <td>Подписка "Профессиональный", февраль 2023</td>
+                        <td>2,990 ₽</td>
+                        <td><span class="badge bg-success">Оплачено</span></td>
+                        <td><a href="#" class="text-decoration-none"><i class="ph ph-receipt me-1"></i> PDF</a></td>
+                    </tr>
+                    <tr>
+                        <td>15.12.2022</td>
+                        <td>Подписка "Базовый", январь 2023</td>
+                        <td>990 ₽</td>
+                        <td><span class="badge bg-success">Оплачено</span></td>
+                        <td><a href="#" class="text-decoration-none"><i class="ph ph-receipt me-1"></i> PDF</a></td>
+                    </tr>
+                    <tr>
+                        <td>10.12.2022</td>
+                        <td>Дополнительные токены (1,000)</td>
+                        <td>590 ₽</td>
+                        <td><span class="badge bg-success">Оплачено</span></td>
+                        <td><a href="#" class="text-decoration-none"><i class="ph ph-receipt me-1"></i> PDF</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="d-flex justify-content-center mt-3">
+            <nav aria-label="История платежей, навигация">
+                <ul class="pagination">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Предыдущая</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Следующая</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- Способы оплаты -->
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="card-title mb-0">Способы оплаты</h3>
+            <button class="btn btn-outline-primary btn-sm" id="addPaymentMethodBtn">
+                <i class="ph ph-plus me-1"></i> Добавить способ оплаты
+            </button>
+        </div>
+
+        <div class="row">
+            <!-- Карта 1 -->
+            <div class="col-md-6 mb-3">
+                <div class="card payment-method-card active">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <div class="payment-icon me-3">
+                                    <i class="ph ph-credit-card" style="font-size: 24px;"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Visa •••• 4582</h5>
+                                    <p class="text-muted mb-0">Срок действия: 05/25</p>
+                                </div>
+                            </div>
+                            <div class="payment-actions">
+                                <span class="badge bg-primary me-2">Основная</span>
+                                <div class="dropdown d-inline-block">
+                                    <button class="btn btn-sm btn-light" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="ph ph-dots-three-vertical"></i>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li><a class="dropdown-item" href="#"><i class="ph ph-pencil me-2"></i> Редактировать</a></li>
+                                        <li><a class="dropdown-item text-danger" href="#"><i class="ph ph-trash me-2"></i> Удалить</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Карта 2 -->
+            <div class="col-md-6 mb-3">
+                <div class="card payment-method-card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <div class="payment-icon me-3">
+                                    <i class="ph ph-credit-card" style="font-size: 24px;"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">MasterCard •••• 7891</h5>
+                                    <p class="text-muted mb-0">Срок действия: 11/24</p>
+                                </div>
+                            </div>
+                            <div class="payment-actions">
+                                <button class="btn btn-sm btn-outline-primary me-2">Сделать основной</button>
+                                <div class="dropdown d-inline-block">
+                                    <button class="btn btn-sm btn-light" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="ph ph-dots-three-vertical"></i>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                        <li><a class="dropdown-item" href="#"><i class="ph ph-pencil me-2"></i> Редактировать</a></li>
+                                        <li><a class="dropdown-item text-danger" href="#"><i class="ph ph-trash me-2"></i> Удалить</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Часто задаваемые вопросы -->
+<div class="card mb-4">
+    <div class="card-body">
+        <h3 class="card-title mb-4">Часто задаваемые вопросы</h3>
+
+        <div class="accordion" id="faqAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Как работает система токенов?
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Токены — это внутренняя валюта ContentAI, которая используется для оплаты различных функций сервиса. Каждый тариф включает определенное количество токенов в месяц. Токены расходуются на генерацию постов, анализ групп, создание изображений и другие функции. Если вам не хватает токенов, вы всегда можете приобрести дополнительные.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Как изменить тариф подписки?
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Вы можете изменить тариф подписки в любое время. Для повышения тарифа нажмите кнопку "Повысить до..." рядом с выбранным тарифом. Изменения вступят в силу немедленно, а разница в стоимости будет рассчитана пропорционально оставшемуся времени текущего периода. Для понижения тарифа нажмите "Изменить тариф" в блоке текущей подписки.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Как отменить подписку?
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Для отмены подписки нажмите кнопку "Отменить подписку" в блоке текущей подписки. Ваша подписка будет активна до конца оплаченного периода, после чего автоматически не продлится. Вы сможете использовать все функции сервиса до окончания срока действия подписки.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingFour">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        Переносятся ли неиспользованные токены на следующий месяц?
+                    </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Неиспользованные токены не переносятся на следующий месяц. В начале каждого расчетного периода ваш баланс токенов обновляется до количества, предусмотренного вашим тарифом. Мы рекомендуем использовать все доступные токены до конца месяца для максимальной эффективности.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingFive">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                        Как получить счет-фактуру для бухгалтерии?
+                    </button>
+                </h2>
+                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Для получения счета-фактуры или других бухгалтерских документов, пожалуйста, обратитесь в службу поддержки через раздел "Настройки" > "Поддержка". Укажите ваши реквизиты и период, за который вам нужны документы. Мы подготовим все необходимые документы в течение 2 рабочих дней.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Поддержка -->
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="card-title mb-4">Нужна помощь?</h3>
+                <p class="mb-4">Если у вас возникли вопросы по подписке или оплате, наша команда поддержки всегда готова помочь.</p>
+                <div class="d-grid gap-2 d-md-flex">
+                    <a href="#" class="btn btn-primary">
+                        <i class="ph ph-chats me-2"></i> Написать в поддержку
+                    </a>
+                    <a href="#" class="btn btn-outline-secondary">
+                        <i class="ph ph-book-open me-2"></i> Центр помощи
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6 d-flex align-items-center justify-content-center">
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Модальное окно добавления способа оплаты -->
+<div class="modal fade" id="addPaymentMethodModal" tabindex="-1" aria-labelledby="addPaymentMethodModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addPaymentMethodModalLabel">Добавление способа оплаты</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addPaymentMethodForm">
+                    <div class="mb-3">
+                        <label for="cardNumber" class="form-label">Номер карты</label>
+                        <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="expiryDate" class="form-label">Срок действия</label>
+                            <input type="text" class="form-control" id="expiryDate" placeholder="ММ/ГГ" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="cvv" class="form-label">CVV</label>
+                            <input type="text" class="form-control" id="cvv" placeholder="123" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cardholderName" class="form-label">Имя владельца карты</label>
+                        <input type="text" class="form-control" id="cardholderName" placeholder="IVAN IVANOV" required>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="makeDefaultCard">
+                        <label class="form-check-label" for="makeDefaultCard">
+                            Сделать основным способом оплаты
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-primary" id="savePaymentMethodBtn">Добавить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно отмены подписки -->
+<div class="modal fade" id="cancelSubscriptionModal" tabindex="-1" aria-labelledby="cancelSubscriptionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cancelSubscriptionModalLabel">Отмена подписки</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center mb-4">
+                    <i class="ph ph-warning-circle text-warning" style="font-size: 64px;"></i>
+                    <h4 class="mt-3">Вы уверены, что хотите отменить подписку?</h4>
+                </div>
+
+                <p>При отмене подписки:</p>
+                <ul>
+                    <li>Ваша подписка будет активна до 15.04.2023</li>
+                    <li>Автоматическое продление будет отключено</li>
+                    <li>Вы сможете использовать все функции до окончания срока действия</li>
+                    <li>Вы можете возобновить подписку в любое время</li>
+                </ul>
+
+                <div class="form-group mt-4">
+                    <label for="cancellationReason" class="form-label">Причина отмены (необязательно)</label>
+                    <select class="form-select" id="cancellationReason">
+                        <option value="" selected>Выберите причину...</option>
+                        <option value="too_expensive">Слишком дорого</option>
+                        <option value="not_using">Не использую сервис</option>
+                        <option value="missing_features">Не хватает функций</option>
+                        <option value="found_alternative">Нашел альтернативу</option>
+                        <option value="other">Другое</option>
+                    </select>
+                </div>
+
+                <div class="form-group mt-3" id="otherReasonContainer" style="display: none;">
+                    <label for="otherReason" class="form-label">Укажите причину</label>
+                    <textarea class="form-control" id="otherReason" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-danger" id="confirmCancelSubscriptionBtn">Подтвердить отмену</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Контейнер для уведомлений -->
+<div id="alertsContainer"></div>
+
+<!-- JavaScript для работы с мобильным меню -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+// Переменные для элементов UI
+const toggleButton = document.querySelector('.toggle-sidebar');
+const sidebar = document.querySelector('.sidebar');
+const overlay = document.querySelector('.overlay');
+const addPaymentMethodBtn = document.getElementById('addPaymentMethodBtn');
+const cancelSubscriptionBtn = document.querySelector('.btn-outline-danger');
+const cancellationReason = document.getElementById('cancellationReason');
+const otherReasonContainer = document.getElementById('otherReasonContainer');
+const confirmCancelSubscriptionBtn = document.getElementById('confirmCancelSubscriptionBtn');
+const savePaymentMethodBtn = document.getElementById('savePaymentMethodBtn');
+const billingSwitch = document.getElementById('billingPeriodSwitch');
+
+// Обработчик для мобильного меню
+if (toggleButton) {
+    toggleButton.addEventListener('click', function() {
+        sidebar.classList.toggle('show');
+        if (sidebar.classList.contains('show')) {
+            overlay.style.display = 'block';
+        } else {
+            overlay.style.display = 'none';
+        }
+    });
+}
+
+if (overlay) {
+    overlay.addEventListener('click', function() {
+        sidebar.classList.remove('show');
+        overlay.style.display = 'none';
+    });
+}
+
+// Инициализация модальных окон
+if (addPaymentMethodBtn) {
+    addPaymentMethodBtn.addEventListener('click', function() {
+        const modal = new bootstrap.Modal(document.getElementById('addPaymentMethodModal'));
+        modal.show();
+    });
+}
+
+// Обработчик для кнопки отмены подписки
+if (cancelSubscriptionBtn) {
+    // Сохраняем оригинальный HTML кнопки
+    const originalButtonHTML = cancelSubscriptionBtn.innerHTML;
+    const originalButtonClass = 'btn-outline-danger';
+    const renewButtonClass = 'btn-outline-success';
+
+    // Флаг для отслеживания состояния подписки
+    let isSubscriptionCancelled = false;
+
+    // Функция для обработки клика на кнопку отмены/возобновления
+    function handleSubscriptionButtonClick() {
+        if (!isSubscriptionCancelled) {
+            // Если подписка активна - показываем модальное окно отмены
+            const modal = new bootstrap.Modal(document.getElementById('cancelSubscriptionModal'));
+            modal.show();
+        } else {
+            // Если подписка уже отменена - возобновляем её
+
+            // Находим бейдж статуса подписки
+            const statusBadge = document.querySelector('.card-body .badge.bg-warning');
+            if (statusBadge) {
+                statusBadge.classList.remove('bg-warning');
+                statusBadge.classList.add('bg-success');
+                statusBadge.textContent = '{{ active }}';
+            }
+
+            // Возвращаем исходный вид кнопки
+            cancelSubscriptionBtn.classList.remove(renewButtonClass);
+            cancelSubscriptionBtn.classList.add(originalButtonClass);
+            cancelSubscriptionBtn.innerHTML = originalButtonHTML;
+
+            // Обновляем флаг состояния
+            isSubscriptionCancelled = false;
+
+            // Показываем уведомление о возобновлении подписки
+            showAlert('Ваша подписка успешно возобновлена', 'success');
+        }
+    }
+
+    // Добавляем обработчик события клика
+    cancelSubscriptionBtn.addEventListener('click', handleSubscriptionButtonClick);
+
+    // Обработчик для подтверждения отмены подписки
+    if (confirmCancelSubscriptionBtn) {
+        confirmCancelSubscriptionBtn.addEventListener('click', function() {
+            // Получаем выбранную причину отмены
+            const reason = cancellationReason ? cancellationReason.value : '';
+            let reasonText = '';
+
+            if (reason === 'too_expensive') {
+                reasonText = 'Слишком дорого';
+            } else if (reason === 'not_using') {
+                reasonText = 'Не использую сервис';
+            } else if (reason === 'missing_features') {
+                reasonText = 'Не хватает функций';
+            } else if (reason === 'found_alternative') {
+                reasonText = 'Нашел альтернативу';
+            } else if (reason === 'other') {
+                reasonText = document.getElementById('otherReason').value || 'Другое';
+            }
+
+            // Закрываем модальное окно
+            const modal = bootstrap.Modal.getInstance(document.getElementById('cancelSubscriptionModal'));
+            modal.hide();
+
+            // Находим бейдж статуса подписки
+            const statusBadge = document.querySelector('.card-body .badge.bg-success');
+            if (statusBadge) {
+                // Меняем цвет и текст бейджа
+                statusBadge.classList.remove('bg-success');
+                statusBadge.classList.add('bg-warning');
+                statusBadge.textContent = 'Будет отменена 15.04.2023';
+            }
+
+            // Меняем внешний вид кнопки
+            cancelSubscriptionBtn.classList.remove(originalButtonClass);
+            cancelSubscriptionBtn.classList.add(renewButtonClass);
+            cancelSubscriptionBtn.innerHTML = '<i class="ph ph-arrows-clockwise me-2"></i> Возобновить подписку';
+
+            // Обновляем флаг состояния
+            isSubscriptionCancelled = true;
+
+            // Показать уведомление
+            showAlert('Ваша подписка будет отменена по окончании текущего периода. Причина: ' + reasonText, 'info');
+        });
+    }
+}
+
+// Показ поля для другой причины отмены
+if (cancellationReason && otherReasonContainer) {
+    cancellationReason.addEventListener('change', function() {
+        if (this.value === 'other') {
+            otherReasonContainer.style.display = 'block';
+        } else {
+            otherReasonContainer.style.display = 'none';
+        }
+    });
+}
+
+// Обработчик для сохранения способа оплаты
+if (savePaymentMethodBtn) {
+    savePaymentMethodBtn.addEventListener('click', function() {
+        // Здесь будет логика сохранения способа оплаты
+        // Для демонстрации просто закроем модальное окно и покажем уведомление
+        const modal = bootstrap.Modal.getInstance(document.getElementById('addPaymentMethodModal'));
+        modal.hide();
+
+        // Показать уведомление
+        showAlert('Способ оплаты успешно добавлен', 'success');
+    });
+}
+
+// Обработчик для переключателя периода оплаты
+if (billingSwitch) {
+    billingSwitch.addEventListener('change', function() {
+        const isYearly = this.checked;
+
+        // Обновляем цены в зависимости от выбранного периода
+        updatePricesBasedOnPeriod(isYearly);
+
+        // Показываем/скрываем соответствующие тексты периода
+        document.querySelectorAll('.billing-period-text-monthly').forEach(el => {
+            el.style.display = isYearly ? 'none' : 'block';
+        });
+
+        document.querySelectorAll('.billing-period-text-yearly').forEach(el => {
+            el.style.display = isYearly ? 'block' : 'none';
+        });
+    });
+}
+
+// Обработчик для кнопок "Обновить"
+document.querySelectorAll('.update-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        const isYearly = billingSwitch ? billingSwitch.checked : false;
+        const planName = this.textContent.replace('Обновить до ', '').replace(' (годовой план)', '');
+        const price = isYearly ? this.getAttribute('data-yearly') : this.getAttribute('data-monthly');
+        const periodText = isYearly ? 'год' : 'месяц';
+        const formattedPrice = new Intl.NumberFormat('ru-RU').format(price);
+
+        // Показываем модальное окно подтверждения
+        showPlanConfirmation(planName, formattedPrice, periodText);
+    });
+});
+});
+
+// Функция для обновления цен в зависимости от выбранного периода
+function updatePricesBasedOnPeriod(isYearly) {
+    // Получаем элементы цен
+    const profiPrice = document.getElementById('profi-price');
+    const pro50Price = document.getElementById('pro50-price');
+    const pro100Price = document.getElementById('pro100-price');
+    const pro200Price = document.getElementById('pro200-price');
+
+    if (!profiPrice || !pro50Price || !pro100Price || !pro200Price) {
+        return; // Если элементы не найдены, выходим из функции
+    }
+
+    // Массив элементов цен для анимации
+    const priceElements = [profiPrice, pro50Price, pro100Price, pro200Price];
+
+    // Добавляем класс анимации
+    priceElements.forEach(el => {
+        el.classList.add('price-changed');
+
+        // Удаляем класс анимации после завершения
+        setTimeout(() => {
+            el.classList.remove('price-changed');
+        }, 500);
+    });
+
+    if (isYearly) {
+        // Применяем скидку 20% для годовой оплаты
+        profiPrice.textContent = '792 ₽';
+        pro50Price.textContent = '1,832 ₽';
+        pro100Price.textContent = '3,480 ₽';
+        pro200Price.textContent = '6,392 ₽';
+
+        // Обновляем перечеркнутые цены для годовой подписки
+        const originalPrices = document.querySelectorAll('.original-price');
+        if (originalPrices.length >= 3) {
+            originalPrices[0].textContent = '1,980 ₽';
+            originalPrices[1].textContent = '3,960 ₽';
+            originalPrices[2].textContent = '7,920 ₽';
+        }
+    } else {
+        // Возвращаем обычные цены для месячной оплаты
+        profiPrice.textContent = '990 ₽';
+        pro50Price.textContent = '2,290 ₽';
+        pro100Price.textContent = '4,350 ₽';
+        pro200Price.textContent = '7,990 ₽';
+
+        // Возвращаем перечеркнутые цены для месячной подписки
+        const originalPrices = document.querySelectorAll('.original-price');
+        if (originalPrices.length >= 3) {
+            originalPrices[0].textContent = '2,475 ₽';
+            originalPrices[1].textContent = '4,950 ₽';
+            originalPrices[2].textContent = '9,900 ₽';
+        }
+    }
+
+    // Обновляем текст на кнопках
+    updateButtonText(isYearly);
+}
+
+// Функция для обновления текста на кнопках
+function updateButtonText(isYearly) {
+    document.querySelectorAll('.update-btn').forEach(button => {
+        const planName = button.textContent.replace('Обновить до ', '').replace(' (годовой план)', '');
+        if (isYearly) {
+            button.textContent = `Обновить до ${planName} (годовой план)`;
+        } else {
+            button.textContent = `Обновить до ${planName}`;
+        }
+    });
+}
+
+// Добавляем модальное окно для подтверждения обновления тарифа
+function showPlanConfirmation(planName, price, period) {
+    // Создаем HTML для модального окна
+    const modalHTML = `
+    <div class="modal fade" id="planConfirmationModal" tabindex="-1" aria-labelledby="planConfirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="planConfirmationModalLabel">Подтверждение обновления тарифа</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <i class="ph ph-check-circle text-success" style="font-size: 64px;"></i>
+                        <h4 class="mt-3">Вы выбрали тариф "${planName}"</h4>
+                    </div>
+
+                    <div class="plan-details p-3 rounded" style="background-color: #f8f9fa;">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Стоимость:</span>
+                            <span class="fw-bold">${price} ₽/${period}</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Период оплаты:</span>
+                            <span class="fw-bold">${period === 'месяц' ? 'Ежемесячно' : 'Ежегодно'}</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Дата следующего списания:</span>
+                            <span class="fw-bold">${getNextBillingDate(period)}</span>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info mt-3">
+                        <small>Нажимая "Подтвердить", вы соглашаетесь с условиями использования сервиса и подтверждаете, что с вашей карты будет списана указанная сумма.</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                                      <button type="button" class="btn btn-primary" id="confirmPlanUpdateBtn">Подтвердить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    `;
+
+    // Удаляем существующее модальное окно, если оно есть
+    const existingModal = document.getElementById('planConfirmationModal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+
+    // Добавляем модальное окно в DOM
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+    // Инициализируем модальное окно
+    const modal = new bootstrap.Modal(document.getElementById('planConfirmationModal'));
+    modal.show();
+
+    // Обработчик для кнопки подтверждения
+    document.getElementById('confirmPlanUpdateBtn').addEventListener('click', function() {
+        // Здесь будет логика обновления тарифа
+        modal.hide();
+
+        // Удаляем модальное окно из DOM после закрытия
+        document.getElementById('planConfirmationModal').addEventListener('hidden.bs.modal', function() {
+            this.remove();
+        });
+
+        // Показываем уведомление об успешном обновлении
+        showAlert(`Тариф успешно обновлен до "${planName}"`, 'success');
+    });
+
+    // Удаляем модальное окно из DOM после закрытия
+    document.getElementById('planConfirmationModal').addEventListener('hidden.bs.modal', function() {
+        this.remove();
+    });
+}
+
+// Функция для получения даты следующего списания
+function getNextBillingDate(period) {
+    const today = new Date();
+    let nextDate = new Date(today);
+
+    if (period === 'месяц') {
+        nextDate.setMonth(today.getMonth() + 1);
+    } else {
+        nextDate.setFullYear(today.getFullYear() + 1);
+    }
+
+    return nextDate.toLocaleDateString('ru-RU');
+}
+
+// Функция для показа уведомлений
+function showAlert(message, type = 'info') {
+    const alertsContainer = document.getElementById('alertsContainer');
+    if (!alertsContainer) return;
+
+    const alertId = Date.now();
+
+    const alertElement = document.createElement('div');
+    alertElement.className = `alert alert-${type} alert-dismissible fade show`;
+    alertElement.role = 'alert';
+    alertElement.id = `alert-${alertId}`;
+
+    alertElement.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+
+    alertsContainer.appendChild(alertElement);
+
+    // Автоматическое скрытие уведомления через 5 секунд
+    setTimeout(() => {
+        const alert = document.getElementById(`alert-${alertId}`);
+        if (alert) {
+            const bsAlert = new bootstrap.Alert(alert);
+            bsAlert.close();
+        }
+    }, 5000);
+}
+
+
+
+
+
+
+    </script>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Phosphor Icons JavaScript -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+{% endblock %}

@@ -203,13 +203,32 @@
 ^Ежемесячно^Monthly^
 ^Сохранить^Save^
 ^Вы уверены, что хотите опубликовать этот пост прямо сейчас?^Are you sure you want to publish this post right now?^
+##########################################
+### apps/posting/views_subscription.py ###
+##########################################
+^Текущая подписка^Current subscription^
+^Активна^Active^
+^Не aктивна^Not active^
+^Тариф^Plan^
+^коинов в месяц^coins per month^
+^Дата начала^Start date^
+^Следующее списание^Next write-off^
+^Стоимость^Price^
+^Способ оплаты^Payment method^
+^месяц^month^
+^Использование коинов^Using coins^
+^Доступно коинов^Available coins^
+^Расход коинов^Coin consumption^
 ^^^
 ^^^
 ^^^
 ^^^
-#########################################
-### apps/posting/views_create_post.py ###
-#########################################
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
 ^^^
 ^^^
 ^^^

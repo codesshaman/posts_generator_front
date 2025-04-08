@@ -162,3 +162,24 @@ def scheduler(request):
         "right_now": translate("Вы уверены, что хотите опубликовать этот пост прямо сейчас?", lang),
     }
 
+
+def subscription(request):
+    lang = language(request)
+    return {
+        "current_sub": translate("Текущая подписка", lang),
+        "plan": translate("Тариф", lang),
+        "coins_per_month": translate("коинов в месяц", lang),
+        "start_date": translate("Дата начала", lang),
+        "next_payment": translate("Следующее списание", lang),
+        "price": translate("Стоимость", lang),
+        "payment": translate("Способ оплаты", lang),
+        "month": translate("месяц", lang),
+        "coins_using": translate("Использование коинов", lang),
+        "coins_aval": translate("Доступно коинов", lang),
+        "consumption": translate("Расход коинов", lang),
+        "active": translate("Активна", lang),
+        "tomorrow": translate("Завтра", lang),
+        "tomorrow": translate("Завтра", lang),
+        "tomorrow": translate("Завтра", lang),
+        "tomorrow": translate("Завтра", lang),
+    }

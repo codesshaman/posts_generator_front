@@ -1,11 +1,9 @@
-from project.language import translate
+from project.language import translate, language
 from django.shortcuts import render
 from dotenv import load_dotenv
 from datetime import datetime
 import os
 
-# Устанавливаем язык
-lang = "en"
 
 # Загружаем .env файл
 load_dotenv()
@@ -16,6 +14,7 @@ debug = os.getenv('DEBUG')
 # Create your views here.
 def scheduler(request):
     """Отображает страницу расписания постов"""
+    lang = language(request)
     if debug:
         print("Отображаем страницу расписания постов")
     return render(request, "posting/scheduler.html", {

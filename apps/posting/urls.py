@@ -3,7 +3,7 @@ from .views_posts import *
 from .views_settings import *
 from .views_scheduler import *
 from .views_create_post import *
-
+from .views_subscription import *
 
 urlpatterns = [
     path('posts', posts, name='posts'),
@@ -13,4 +13,5 @@ urlpatterns = [
     path('scheduler', scheduler, name='scheduler'),
     path('posting_settings', posting_settings, name='posting_settings'),
     path('create_post', create_post, name='create_post'),
+    path('subscription', subscription, name='subscription'),
 ]
