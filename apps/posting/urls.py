@@ -11,7 +11,7 @@ urlpatterns = [
     path('delete-post/<int:post_id>/', delete_post, name=''),
     path('edit-post/<int:post_id>/', edit_post, name=''),
     path('scheduler', scheduler, name='scheduler'),
-    path('posting_settings', posting_settings, name='posting_settings'),
     path('create_post', create_post, name='create_post'),
     path('subscription', subscription, name='subscription'),
+    path('settings', settings, name='settings'),
 ]

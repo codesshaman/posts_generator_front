@@ -1,0 +1,119 @@
+/* Стили для страницы настроек */
+
+/* Стили для вкладок */
+.settings-tabs .nav-link {
+    color: #6B7280;
+    border: none;
+    padding: 0.75rem 1.25rem;
+    font-weight: 500;
+    border-radius: 0;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.settings-tabs .nav-link:hover {
+    color: #4338ca;
+    background-color: transparent;
+    border-bottom-color: #E5E7EB;
+}
+
+.settings-tabs .nav-link.active {
+    color: #4338ca;
+    background-color: transparent;
+    border-bottom-color: #4338ca;
+}
+
+/* Стили для карточек групп */
+.group-card .card {
+    transition: all 0.2s ease;
+    border: 1px solid #E5E7EB;
+}
+
+.group-card .card:hover {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/* Стили для загрузки аватара */
+.avatar-preview {
+    border: 2px dashed #E5E7EB;
+    transition: all 0.2s ease;
+}
+
+.avatar-preview:hover {
+    border-color: #4338ca;
+    cursor: pointer;
+}
+
+/* Стили для фильтров групп */
+.groups-filters .form-control,
+.groups-filters .form-select {
+    border-radius: 8px;
+}
+
+.groups-filters .input-group-text {
+    border-radius: 8px 0 0 8px;
+}
+
+/* Стили для бейджей статуса */
+.badge.bg-success {
+    background-color: #10B981 !important;
+}
+
+.badge.bg-warning {
+    background-color: #F59E0B !important;
+}
+
+.badge.bg-danger {
+    background-color: #EF4444 !important;
+}
+
+/* Стили для модальных окон */
+.modal-content {
+    border-radius: 12px;
+    border: none;
+}
+
+.modal-header {
+    border-bottom: 1px solid #F3F4F6;
+}
+
+.modal-footer {
+    border-top: 1px solid #F3F4F6;
+}
+
+/* Стили для переключателей */
+.form-switch .form-check-input {
+    width: 2.5em;
+    height: 1.25em;
+}
+
+.form-switch .form-check-input:checked {
+    background-color: #4338ca;
+    border-color: #4338ca;
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+    .settings-tabs .nav-link {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
+    }
+    
+    .group-actions {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+    
+    .group-actions .badge {
+        margin-bottom: 0.5rem;
+    }
+}
+/* Добавьте этот стиль в settings.css */
+.settings-tabs .nav-link.active,
+.settings-tabs .nav-pills .nav-link.active,
+.settings-tabs .nav-pills .show > .nav-link {
+    color: #4338ca !important;
+    background-color: transparent !important;
+    border-bottom-color: #4338ca !important;
+    box-shadow: none !important;
+}

@@ -17,6 +17,9 @@
 {% if request.resolver_match.view_name == 'subscription' %}
 <link rel="stylesheet" href="{% static 'css/subscription.css' %}">
 {% endif %}
+{% if request.resolver_match.view_name == 'settings' %}
+<link rel="stylesheet" href="{% static 'css/settings.css' %}">
+{% endif %}
 <!-- Google Fonts - наборы шрифтов -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

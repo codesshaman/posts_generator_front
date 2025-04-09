@@ -14,15 +14,15 @@ load_dotenv()
 debug = os.getenv('DEBUG')
 
 # Create your views here.
-def posting_settings(request):
-    """Отображает страницу постов"""
+def settings(request):
+    """Отображает страницу настроек"""
     if debug:
-        print("Отображаем страницу постов")
+        print("Отображаем страницу настроек")
     return render(request, "posting/settings.html", {
         # "posts": initial_posts,
         # "has_more": has_more,
-        "title": translate("Статьи", lang),
-        "h2_text": translate("Статьи", lang),
+        "title": translate("Настройки", lang),
+        "h2_text": translate("Настройки", lang),
         "publish_text": translate("Публикация: ", lang),
         "read_button": translate("Читать статью", lang),
         "load_more_text": translate("Загрузить ещё", lang),

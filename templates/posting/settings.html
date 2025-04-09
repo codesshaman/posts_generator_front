@@ -1,0 +1,777 @@
+{% extends 'basetmp/base.html' %}
+{% load static %}
+{% block content %}
+{% csrf_token %}
+
+</div>
+
+
+<!-- Горизонтальное меню настроек -->
+<div class="card mb-4">
+<div class="card-body">
+<ul class="nav nav-tabs settings-tabs" id="settingsTabs" role="tablist">
+<li class="nav-item" role="presentation">
+<button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="true">
+    <i class="ph ph-user me-2"></i>Профиль
+</button>
+</li>
+<li class="nav-item" role="presentation">
+<button class="nav-link" id="groups-tab" data-bs-toggle="tab" data-bs-target="#groups-tab-pane" type="button" role="tab" aria-controls="groups-tab-pane" aria-selected="false">
+    <i class="ph ph-users-three me-2"></i>Группы
+</button>
+</li>
+<li class="nav-item" role="presentation">
+<button class="nav-link" id="notifications-tab" data-bs-toggle="tab" data-bs-target="#notifications-tab-pane" type="button" role="tab" aria-controls="notifications-tab-pane" aria-selected="false">
+    <i class="ph ph-bell me-2"></i>Уведомления
+</button>
+</li>
+</ul>
+
+<div class="tab-content mt-4" id="settingsTabsContent">
+<!-- Вкладка Профиль -->
+<div class="tab-pane fade show active" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+<h4 class="mb-4">Личная информация</h4>
+
+<form id="profileForm">
+    <div class="row mb-4">
+        <div class="col-md-2 text-center">
+            <div class="avatar-upload mb-3">
+                <div class="avatar-preview rounded-circle mx-auto" style="width: 100px; height: 100px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                    <i class="ph ph-user" style="font-size: 48px; color: #aaa;"></i>
+                </div>
+                <div class="mt-2">
+                    <button type="button" class="btn btn-sm btn-outline-primary">Изменить фото</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="firstName" class="form-label">Имя</label>
+                    <input type="text" class="form-control" id="firstName" value="Иван">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="lastName" class="form-label">Фамилия</label>
+                    <input type="text" class="form-control" id="lastName" value="Иванов">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" value="ivan.ivanov@example.com">
+            </div>
+
+            <div class="mb-3">
+                <label for="phone" class="form-label">Телефон</label>
+                <input type="tel" class="form-control" id="phone" value="+7 (999) 123-45-67">
+            </div>
+        </div>
+        <div class="mt-4 text-end">
+            <button type="button" class="btn btn-outline-secondary me-2">Отмена</button>
+            <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+        </div>
+    </div>
+
+    <hr class="my-4">
+    <h4 class="mb-4">Изменение пароля</h4>
+
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <label for="currentPassword" class="form-label">Текущий пароль</label>
+            <input type="password" class="form-control" id="currentPassword">
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="newPassword" class="form-label">Новый пароль</label>
+            <input type="password" class="form-control" id="newPassword">
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="confirmPassword" class="form-label">Подтверждение пароля</label>
+            <input type="password" class="form-control" id="confirmPassword">
+        </div>
+    </div>
+
+    <div class="password-requirements mb-4">
+        <p class="text-muted mb-2">Требования к паролю:</p>
+        <ul class="text-muted small">
+            <li>Минимум 8 символов</li>
+            <li>Хотя бы одна заглавная буква</li>
+            <li>Хотя бы одна цифра</li>
+            <li>Хотя бы один специальный символ</li>
+        </ul>
+    </div>
+    <div class="mt-4 text-end">
+        <button type="button" class="btn btn-outline-secondary me-2">Отмена</button>
+        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+    </div>
+
+
+    <hr class="my-4">
+
+    <h4 class="mb-4">Настройки аккаунта</h4>
+
+    <div class="mb-3">
+        <label for="language" class="form-label">Язык интерфейса</label>
+        <select class="form-select" id="language">
+            <option value="ru" selected>Русский</option>
+            <option value="en">English</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="timezone" class="form-label">Часовой пояс</label>
+        <select class="form-select" id="timezone">
+            <option value="Europe/Moscow" selected>Москва (GMT+3)</option>
+            <option value="Europe/Kaliningrad">Калининград (GMT+2)</option>
+            <option value="Europe/Samara">Самара (GMT+4)</option>
+            <option value="Asia/Yekaterinburg">Екатеринбург (GMT+5)</option>
+            <option value="Asia/Omsk">Омск (GMT+6)</option>
+            <option value="Asia/Krasnoyarsk">Красноярск (GMT+7)</option>
+            <option value="Asia/Irkutsk">Иркутск (GMT+8)</option>
+            <option value="Asia/Yakutsk">Якутск (GMT+9)</option>
+            <option value="Asia/Vladivostok">Владивосток (GMT+10)</option>
+            <option value="Asia/Magadan">Магадан (GMT+11)</option>
+            <option value="Asia/Kamchatka">Камчатка (GMT+12)</option>
+        </select>
+    </div>
+
+    <div class="form-check form-switch mb-3">
+        <input class="form-check-input" type="checkbox" id="darkModeSwitch">
+        <label class="form-check-label" for="darkModeSwitch">Темная тема</label>
+    </div>
+
+    <div class="mt-4 text-end">
+        <button type="button" class="btn btn-outline-secondary me-2">Отмена</button>
+        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+    </div>
+</form>
+</div>
+
+<!-- Вкладка Группы -->
+<div class="tab-pane fade" id="groups-tab-pane" role="tabpanel" aria-labelledby="groups-tab" tabindex="0">
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="mb-0">Подключенные группы</h4>
+    <div>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addGroupModal">
+            <i class="ph ph-plus me-2"></i>Добавить группу
+        </button>
+    </div>
+</div>
+
+<!-- Фильтры для групп -->
+<div class="groups-filters mb-4">
+    <div class="row g-2">
+        <div class="col-md-4">
+            <div class="input-group">
+                <span class="input-group-text bg-light border-end-0">
+                    <i class="ph ph-magnifying-glass"></i>
+                </span>
+                <input type="text" class="form-control border-start-0" placeholder="Поиск по названию" id="groupSearch">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <select class="form-select" id="platformFilter">
+                <option value="all" selected>Все платформы</option>
+                <option value="vk">ВКонтакте</option>
+                <option value="telegram">Telegram</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <select class="form-select" id="statusFilter">
+                <option value="all" selected>Все статусы</option>
+                <option value="active">Активные</option>
+                <option value="inactive">Неактивные</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-outline-secondary w-100" id="resetFilters">
+                Сбросить
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Список подключенных групп -->
+<div class="connected-groups">
+<!-- ВКонтакте группы -->
+<div class="group-card mb-3">
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <div class="platform-icon me-3">
+                    <i class="ph ph-vk-logo" style="font-size: 32px; color: #4C75A3;"></i>
+                </div>
+                <div>
+                    <h5 class="mb-1">Технологии будущего</h5>
+                    <p class="text-muted mb-0">ID: club123456789 • 15,432 подписчика</p>
+                </div>
+            </div>
+            <div class="group-actions">
+                <span class="badge bg-success me-2">Активна</span>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-primary">
+                        <i class="ph ph-pencil"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-danger">
+                        <i class="ph ph-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="group-card mb-3">
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <div class="platform-icon me-3">
+                    <i class="ph ph-vk-logo" style="font-size: 32px; color: #4C75A3;"></i>
+                </div>
+                <div>
+                    <h5 class="mb-1">Бизнес идеи</h5>
+                    <p class="text-muted mb-0">ID: club987654321 • 8,765 подписчиков</p>
+                </div>
+            </div>
+            <div class="group-actions">
+                <span class="badge bg-success me-2">Активна</span>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-primary">
+                        <i class="ph ph-pencil"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-danger">
+                        <i class="ph ph-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Telegram группы -->
+<div class="group-card mb-3">
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <div class="platform-icon me-3">
+                    <i class="ph ph-telegram-logo" style="font-size: 32px; color: #0088cc;"></i>
+                </div>
+                <div>
+                    <h5 class="mb-1">IT Новости</h5>
+                    <p class="text-muted mb-0">@it_news • 5,678 подписчиков</p>
+                </div>
+            </div>
+            <div class="group-actions">
+                <span class="badge bg-success me-2">Активна</span>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-primary">
+                        <i class="ph ph-pencil"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-danger">
+                        <i class="ph ph-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="group-card mb-3">
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <div class="platform-icon me-3">
+                    <i class="ph ph-telegram-logo" style="font-size: 32px; color: #0088cc;"></i>
+                </div>
+                <div>
+                    <h5 class="mb-1">Маркетинг сегодня</h5>
+                    <p class="text-muted mb-0">@marketing_today • 3,210 подписчиков</p>
+                </div>
+            </div>
+            <div class="group-actions">
+                <span class="badge bg-warning me-2">Требует подтверждения</span>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-primary">
+                        <i class="ph ph-pencil"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-danger">
+                        <i class="ph ph-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+<!-- Пагинация -->
+<nav aria-label="Навигация по группам" class="mt-4">
+    <ul class="pagination justify-content-center">
+        <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Предыдущая</a>
+        </li>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item">
+            <a class="page-link" href="#">Следующая</a>
+        </li>
+    </ul>
+</nav>
+</div>
+
+<!-- Вкладка Уведомления -->
+<div class="tab-pane fade" id="notifications-tab-pane" role="tabpanel" aria-labelledby="notifications-tab" tabindex="0">
+<h4 class="mb-4">Настройки уведомлений</h4>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="mb-3">Email уведомления</h5>
+
+        <div class="form-check form-switch mb-3">
+            <input class="form-check-input" type="checkbox" id="emailNewPostSwitch" checked>
+            <label class="form-check-label" for="emailNewPostSwitch">Новые посты</label>
+            <small class="text-muted d-block mt-1">Получать уведомления о новых сгенерированных постах</small>
+        </div>
+        <div class="form-check form-switch mb-3">
+            <input class="form-check-input" type="checkbox" id="emailPostPublishedSwitch" checked>
+            <label class="form-check-label" for="emailPostPublishedSwitch">Публикация постов</label>
+            <small class="text-muted d-block mt-1">Получать уведомления о публикации постов в группах</small>
+        </div>
+
+        <div class="form-check form-switch mb-3">
+            <input class="form-check-input" type="checkbox" id="emailTokensSwitch" checked>
+            <label class="form-check-label" for="emailTokensSwitch">Использование токенов</label>
+            <small class="text-muted d-block mt-1">Получать уведомления о низком балансе токенов (менее 10%)</small>
+        </div>
+
+        <div class="form-check form-switch mb-3">
+            <input class="form-check-input" type="checkbox" id="emailBillingSwitch" checked>
+            <label class="form-check-label" for="emailBillingSwitch">Платежи и подписка</label>
+            <small class="text-muted d-block mt-1">Получать уведомления о платежах и изменениях в подписке</small>
+        </div>
+
+        <div class="form-check form-switch mb-3">
+            <input class="form-check-input" type="checkbox" id="emailNewsSwitch">
+            <label class="form-check-label" for="emailNewsSwitch">Новости и обновления</label>
+            <small class="text-muted d-block mt-1">Получать информацию о новых функциях и обновлениях сервиса</small>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="mb-3">Браузерные уведомления</h5>
+
+        <div class="form-check form-switch mb-3">
+            <input class="form-check-input" type="checkbox" id="browserNotificationsSwitch">
+            <label class="form-check-label" for="browserNotificationsSwitch">Включить браузерные уведомления</label>
+            <small class="text-muted d-block mt-1">Разрешить отправку уведомлений в браузере</small>
+        </div>
+
+        <div class="browser-notifications-settings mt-3" style="display: none;">
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" id="browserNewPostCheck" checked>
+                <label class="form-check-label" for="browserNewPostCheck">Новые посты</label>
+            </div>
+
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" id="browserPostPublishedCheck" checked>
+                <label class="form-check-label" for="browserPostPublishedCheck">Публикация постов</label>
+            </div>
+
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" id="browserTokensCheck" checked>
+                <label class="form-check-label" for="browserTokensCheck">Использование токенов</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="mb-3">Telegram уведомления</h5>
+
+        <div class="mb-3">
+            <label for="telegramUsername" class="form-label">Ваш Telegram</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="telegramUsername" placeholder="@username">
+                <button class="btn btn-outline-primary" type="button">Подключить</button>
+            </div>
+            <small class="text-muted">Подключите ваш Telegram для получения мгновенных уведомлений</small>
+        </div>
+
+        <div class="telegram-notifications-settings mt-4" style="display: none;">
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" id="telegramNewPostCheck" checked>
+                <label class="form-check-label" for="telegramNewPostCheck">Новые посты</label>
+            </div>
+
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" id="telegramPostPublishedCheck" checked>
+                <label class="form-check-label" for="telegramPostPublishedCheck">Публикация постов</label>
+            </div>
+
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" id="telegramTokensCheck" checked>
+                <label class="form-check-label" for="telegramTokensCheck">Использование токенов</label>
+            </div>
+
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" id="telegramBillingCheck" checked>
+                <label class="form-check-label" for="telegramBillingCheck">Платежи и подписка</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4 text-end">
+    <button type="button" class="btn btn-outline-secondary me-2">Отмена</button>
+    <button type="button" class="btn btn-primary" id="saveNotificationsBtn">Сохранить настройки</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Модальное окно добавления группы -->
+<div class="modal fade" id="addGroupModal" tabindex="-1" aria-labelledby="addGroupModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header">
+    <h5 class="modal-title" id="addGroupModalLabel">Добавление группы</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+    <div class="platform-selection mb-4">
+        <label class="form-label">Выберите платформу</label>
+        <div class="d-flex">
+            <div class="form-check form-check-inline me-4">
+                <input class="form-check-input" type="radio" name="platformRadio" id="vkRadio" value="vk" checked>
+                <label class="form-check-label" for="vkRadio">
+                    <i class="ph ph-vk-logo me-1" style="color: #4C75A3;"></i> ВКонтакте
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="platformRadio" id="telegramRadio" value="telegram">
+                <label class="form-check-label" for="telegramRadio">
+                    <i class="ph ph-telegram-logo me-1" style="color: #0088cc;"></i> Telegram
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Форма для ВКонтакте -->
+    <div id="vkForm">
+        <div class="mb-3">
+            <label for="vkGroupId" class="form-label">ID группы или адрес</label>
+            <input type="text" class="form-control" id="vkGroupId" placeholder="club123456789 или vk.com/groupname">
+            <small class="text-muted">Укажите ID группы или полный адрес страницы</small>
+        </div>
+
+        <div class="mb-3">
+            <label for="vkGroupName" class="form-label">Название группы (опционально)</label>
+            <input type="text" class="form-control" id="vkGroupName" placeholder="Название для удобства">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Авторизация</label>
+            <div class="d-grid">
+                <button type="button" class="btn btn-primary" id="vkAuthBtn">
+                    <i class="ph ph-vk-logo me-2"></i>Авторизоваться через ВКонтакте
+                </button>
+            </div>
+            <small class="text-muted mt-2">Необходимо для публикации постов в группе</small>
+        </div>
+
+        <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="vkAdminCheck">
+            <label class="form-check-label" for="vkAdminCheck">
+                Я являюсь администратором этой группы
+            </label>
+        </div>
+    </div>
+
+    <!-- Форма для Telegram -->
+    <div id="telegramForm" style="display: none;">
+        <div class="mb-3">
+            <label for="telegramChannelName" class="form-label">Имя канала или группы</label>
+            <input type="text" class="form-control" id="telegramChannelName" placeholder="@channel_name">
+            <small class="text-muted">Укажите имя канала или группы с символом @</small>
+        </div>
+
+        <div class="mb-3">
+            <label for="telegramBotToken" class="form-label">Токен бота</label>
+            <input type="text" class="form-control" id="telegramBotToken" placeholder="123456789:ABCDefGhIJKlmNoPQRsTUVwxyZ">
+            <small class="text-muted">Создайте бота через @BotFather и вставьте полученный токен</small>
+        </div>
+
+        <div class="alert alert-info">
+            <i class="ph ph-info me-2"></i>
+            <small>Не забудьте добавить созданного бота в качестве администратора вашего канала или группы</small>
+        </div>
+
+        <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="telegramAdminCheck">
+            <label class="form-check-label" for="telegramAdminCheck">
+                Я являюсь администратором этого канала/группы
+            </label>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+    <button type="button" class="btn btn-primary" id="saveGroupBtn">Добавить группу</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Контейнер для уведомлений -->
+<div id="alertsContainer"></div>
+
+<!-- JavaScript для работы с мобильным меню -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+// Мобильное меню
+const toggleButton = document.querySelector('.toggle-sidebar');
+const sidebar = document.querySelector('.sidebar');
+const overlay = document.querySelector('.overlay');
+
+if (toggleButton) {
+    toggleButton.addEventListener('click', function() {
+        sidebar.classList.toggle('show');
+        if (sidebar.classList.contains('show')) {
+            overlay.style.display = 'block';
+        } else {
+            overlay.style.display = 'none';
+        }
+    });
+}
+
+if (overlay) {
+    overlay.addEventListener('click', function() {
+        sidebar.classList.remove('show');
+        overlay.style.display = 'none';
+    });
+}
+
+// Переключение между формами ВК и Телеграм
+const vkRadio = document.getElementById('vkRadio');
+const telegramRadio = document.getElementById('telegramRadio');
+const vkForm = document.getElementById('vkForm');
+const telegramForm = document.getElementById('telegramForm');
+
+if (vkRadio && telegramRadio) {
+    vkRadio.addEventListener('change', function() {
+        if (this.checked) {
+            vkForm.style.display = 'block';
+            telegramForm.style.display = 'none';
+        }
+    });
+
+    telegramRadio.addEventListener('change', function() {
+        if (this.checked) {
+            vkForm.style.display = 'none';
+            telegramForm.style.display = 'block';
+        }
+    });
+}
+
+// Обработчик для кнопки сохранения группы
+const saveGroupBtn = document.getElementById('saveGroupBtn');
+if (saveGroupBtn) {
+    saveGroupBtn.addEventListener('click', function() {
+        // Определяем, какая платформа выбрана
+        const isVk = document.getElementById('vkRadio').checked;
+
+        // Собираем данные в зависимости от выбранной платформы
+        let groupData = {};
+
+        if (isVk) {
+            groupData = {
+                platform: 'vk',
+                groupId: document.getElementById('vkGroupId').value,
+                groupName: document.getElementById('vkGroupName').value,
+                isAdmin: document.getElementById('vkAdminCheck').checked
+            };
+        } else {
+            groupData = {
+                platform: 'telegram',
+                channelName: document.getElementById('telegramChannelName').value,
+                botToken: document.getElementById('telegramBotToken').value,
+                isAdmin: document.getElementById('telegramAdminCheck').checked
+            };
+        }
+
+        // Здесь будет логика сохранения группы
+        // Для демонстрации просто закроем модальное окно и покажем уведомление
+        const modal = bootstrap.Modal.getInstance(document.getElementById('addGroupModal'));
+        modal.hide();
+
+        // Показать уведомление
+        showAlert(`Группа успешно добавлена`, 'success');
+
+        // В реальном приложении здесь был бы AJAX-запрос к серверу
+        console.log('Сохраняем группу:', groupData);
+    });
+}
+
+// Обработчик для кнопки сохранения настроек уведомлений
+const saveNotificationsBtn = document.getElementById('saveNotificationsBtn');
+if (saveNotificationsBtn) {
+    saveNotificationsBtn.addEventListener('click', function() {
+        // Здесь будет логика сохранения настроек уведомлений
+        // Для демонстрации просто покажем уведомление
+        showAlert('Настройки уведомлений сохранены', 'success');
+    });
+}
+
+// Обработчик для переключателя браузерных уведомлений
+const browserNotificationsSwitch = document.getElementById('browserNotificationsSwitch');
+const browserNotificationsSettings = document.querySelector('.browser-notifications-settings');
+
+if (browserNotificationsSwitch && browserNotificationsSettings) {
+    browserNotificationsSwitch.addEventListener('change', function() {
+        if (this.checked) {
+            // Запрашиваем разрешение на отправку уведомлений
+            if ('Notification' in window) {
+                Notification.requestPermission().then(function(permission) {
+                    if (permission === 'granted') {
+                        browserNotificationsSettings.style.display = 'block';
+                        showAlert('Браузерные уведомления включены', 'success');
+                    } else {
+                        browserNotificationsSwitch.checked = false;
+                        showAlert('Необходимо разрешить уведомления в настройках браузера', 'warning');
+                    }
+                });
+            } else {
+                browserNotificationsSwitch.checked = false;
+                showAlert('Ваш браузер не поддерживает уведомления', 'warning');
+            }
+        } else {
+            browserNotificationsSettings.style.display = 'none';
+        }
+    });
+}
+
+// Фильтрация групп
+const groupSearch = document.getElementById('groupSearch');
+const platformFilter = document.getElementById('platformFilter');
+const statusFilter = document.getElementById('statusFilter');
+const resetFilters = document.getElementById('resetFilters');
+const groupCards = document.querySelectorAll('.group-card');
+
+if (groupSearch && platformFilter && statusFilter && resetFilters) {
+    // Функция фильтрации групп
+    function filterGroups() {
+        const searchValue = groupSearch.value.toLowerCase();
+        const platformValue = platformFilter.value;
+        const statusValue = statusFilter.value;
+
+        groupCards.forEach(card => {
+            const title = card.querySelector('h5').textContent.toLowerCase();
+            const isVk = card.querySelector('.ph-vk-logo') !== null;
+            const isTelegram = card.querySelector('.ph-telegram-logo') !== null;
+            const isActive = card.querySelector('.badge.bg-success') !== null;
+
+            // Проверяем соответствие поисковому запросу
+            const matchesSearch = searchValue === '' || title.includes(searchValue);
+
+            // Проверяем соответствие фильтру платформы
+            let matchesPlatform = true;
+            if (platformValue === 'vk') {
+                matchesPlatform = isVk;
+            } else if (platformValue === 'telegram') {
+                matchesPlatform = isTelegram;
+            }
+
+            // Проверяем соответствие фильтру статуса
+            let matchesStatus = true;
+            if (statusValue === 'active') {
+                matchesStatus = isActive;
+            } else if (statusValue === 'inactive') {
+                matchesStatus = !isActive;
+            }
+
+            // Отображаем или скрываем карточку
+            if (matchesSearch && matchesPlatform && matchesStatus) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // Добавляем обработчики событий для фильтров
+    groupSearch.addEventListener('input', filterGroups);
+    platformFilter.addEventListener('change', filterGroups);
+    statusFilter.addEventListener('change', filterGroups);
+
+    // Сброс фильтров
+    resetFilters.addEventListener('click', function() {
+        groupSearch.value = '';
+        platformFilter.value = 'all';
+        statusFilter.value = 'all';
+        filterGroups();
+    });
+}
+
+// Обработчик для формы профиля
+const profileForm = document.getElementById('profileForm');
+if (profileForm) {
+    profileForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Здесь будет логика сохранения профиля
+        // Для демонстрации просто покажем уведомление
+        showAlert('Профиль успешно обновлен', 'success');
+    });
+}
+});
+
+// Функция для показа уведомлений
+function showAlert(message, type = 'info') {
+const alertsContainer = document.getElementById('alertsContainer');
+const alertId = Date.now();
+
+const alertElement = document.createElement('div');
+alertElement.className = `alert alert-${type} alert-dismissible fade show`;
+alertElement.role = 'alert';
+alertElement.id = `alert-${alertId}`;
+
+alertElement.innerHTML = `
+    ${message}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+`;
+
+alertsContainer.appendChild(alertElement);
+
+// Автоматическое скрытие уведомления через 5 секунд
+setTimeout(() => {
+    const alert = document.getElementById(`alert-${alertId}`);
+    if (alert) {
+        const bsAlert = new bootstrap.Alert(alert);
+        bsAlert.close();
+    }
+}, 5000);
+}
+</script>
+
+<!-- Bootstrap JS Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Phosphor Icons JavaScript -->
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+{% endblock %}
