@@ -306,4 +306,110 @@
 ^Причина^Reason^
 ^Будет отменена^Will be cancelled^
 ^апрель^april^
+######################################
+### apps/posting/views_settings.py ###
+######################################
+^Профиль^Profile^
+^Группы^Groups^
+^Уведомления^Notifications^
+^Личная информация^Personal information^
+^Изменить фото^Change photo^
+^Имя^Name^
+^Фамилия^Surname^
+^Телефон^Phone^
+^Изменение пароля^Change password^
+^Текущий пароль^Current Password^
+^Новый пароль^New Password^
+^Подтверждение пароля^Confirm Password^
+^Требования к паролю^Password requirements^
+^Минимум 8 символов^Minimum 8 characters^
+^Хотя бы одна заглавная буква^At least one capital letter^
+^Хотя бы одна цифра^At least one digit^
+^Хотя бы один специальный символ^At least one special character^
+^Настройки аккаунта^Account settings^
+^Язык интерфейса^Interface language^
+^Русский^Russian^
+^Часовой пояс^Time zone^
+^Москва^Moscow^
+^Калининград^Kaliningrad^
+^Самара^Samara^
+^Екатеринбург^Yekaterinburg^
+^Омск^Omsk^
+^Красноярск^Krasnoyarsk^
+^Иркутск^Irkutsk^
+^Якутск^Yakutsk^
+^Владивосток^Vladivostok^
+^Магадан^Magadan^
+^Камчатка^Kamchatka^
+^Тёмная тема^Dark mode^
+^Подключённые группы^Connected groups^
+^Активные^Active^
+^Неактивные^Inactive^
+^Сбросить^Reset^
+^Поиск по названию^Search by name^
+^Настройки уведомлений^Notification settings^
+^Email уведомления^Email notifications^
+^Новые посты^New posts^
+^Получать уведомления о новых сгенерированных постах^Receive notifications about new generated posts^
+^Публикация постов^Publishing posts^
+^Получать уведомления о публикации постов в группах^Receive notifications about publication of posts in publics^
+^Получать уведомления о низком балансе^Receive low balance notifications^
+^Платежи и подписка^Payments and Subscription^
+^Получать уведомления о платежах и изменениях в подписке^Receive notifications about payments and subscription changes^
+^Новости и обновления^News and updates^
+^Получать информацию о новых функциях и обновлениях сервиса^Receive information about new features and service updates^
+^Браузерные уведомления^Browser notifications^
+^Включить браузерные уведомления^Enable browser notifications^
+^Разрешить отправку уведомлений в браузере^Allow sending notifications in the browser^
+^Telegram уведомления^Telegram notifications^
+^Ваш Telegram^Your Telegram^
+^Подключить^Connect^
+^Подключите ваш Telegram для получения мгновенных уведомлений^Connect your Telegram to receive instant notifications^
+^Сохранить настройки^Save settings^
+^Добавление группы^Adding a public^
+^Выберите платформу^Select platform^
+^ID группы или адрес^Group ID or address^
+^Укажите ID группы или полный адрес страницы^Please provide the group ID or full page address^
+^Название группы (опционально)^Group name (optional)^
+^Авторизация^Authorization^
+^Авторизоваться через ВКонтакте^Login via VKontakte^
+^Необходимо для публикации постов в группе^Required to publish posts in the group^
+^Я являюсь администратором этой группы^I am the administrator of this group^
+^Имя канала или группы^Channel or public name^
+^Укажите имя канала или группы с символом @^Please enter the channel or group name with the @ symbol^
+^Токен бота^Bot token^
+^Создайте бота через @BotFather и вставьте полученный токен^Create a bot via @BotFather and paste the received token^
+^Не забудьте добавить созданного бота в качестве администратора вашего канала или группы^Don't forget to add the created bot as an administrator of your channel or public^
+^Название для удобства^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
+^^^
 ^^^

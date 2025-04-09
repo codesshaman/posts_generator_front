@@ -12,17 +12,17 @@
 <ul class="nav nav-tabs settings-tabs" id="settingsTabs" role="tablist">
 <li class="nav-item" role="presentation">
 <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="true">
-    <i class="ph ph-user me-2"></i>Профиль
+    <i class="ph ph-user me-2"></i>{{ profile }}
 </button>
 </li>
 <li class="nav-item" role="presentation">
 <button class="nav-link" id="groups-tab" data-bs-toggle="tab" data-bs-target="#groups-tab-pane" type="button" role="tab" aria-controls="groups-tab-pane" aria-selected="false">
-    <i class="ph ph-users-three me-2"></i>Группы
+    <i class="ph ph-users-three me-2"></i>{{ groups }}
 </button>
 </li>
 <li class="nav-item" role="presentation">
 <button class="nav-link" id="notifications-tab" data-bs-toggle="tab" data-bs-target="#notifications-tab-pane" type="button" role="tab" aria-controls="notifications-tab-pane" aria-selected="false">
-    <i class="ph ph-bell me-2"></i>Уведомления
+    <i class="ph ph-bell me-2"></i>{{ notifications }}
 </button>
 </li>
 </ul>
@@ -30,7 +30,7 @@
 <div class="tab-content mt-4" id="settingsTabsContent">
 <!-- Вкладка Профиль -->
 <div class="tab-pane fade show active" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-<h4 class="mb-4">Личная информация</h4>
+<h4 class="mb-4">{{ personal_info }}</h4>
 
 <form id="profileForm">
     <div class="row mb-4">
@@ -40,7 +40,7 @@
                     <i class="ph ph-user" style="font-size: 48px; color: #aaa;"></i>
                 </div>
                 <div class="mt-2">
-                    <button type="button" class="btn btn-sm btn-outline-primary">Изменить фото</button>
+                    <button type="button" class="btn btn-sm btn-outline-primary">{{ change_photo }}</button>
                 </div>
             </div>
         </div>
@@ -48,101 +48,101 @@
         <div class="col-md-10">
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label for="firstName" class="form-label">Имя</label>
+                    <label for="firstName" class="form-label">{{ name }}</label>
                     <input type="text" class="form-control" id="firstName" value="Иван">
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label for="lastName" class="form-label">Фамилия</label>
+                    <label for="lastName" class="form-label">{{ surname }}</label>
                     <input type="text" class="form-control" id="lastName" value="Иванов">
                 </div>
             </div>
 
             <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
+                <label for="email" class="form-label">{{ email }}</label>
                 <input type="email" class="form-control" id="email" value="ivan.ivanov@example.com">
             </div>
 
             <div class="mb-3">
-                <label for="phone" class="form-label">Телефон</label>
+                <label for="phone" class="form-label">{{ phone }}</label>
                 <input type="tel" class="form-control" id="phone" value="+7 (999) 123-45-67">
             </div>
         </div>
         <div class="mt-4 text-end">
-            <button type="button" class="btn btn-outline-secondary me-2">Отмена</button>
-            <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+            <button type="button" class="btn btn-outline-secondary me-2">{{ cancel }}</button>
+            <button type="submit" class="btn btn-primary">{{ save_changes }}</button>
         </div>
     </div>
 
     <hr class="my-4">
-    <h4 class="mb-4">Изменение пароля</h4>
+    <h4 class="mb-4">{{ change_password }}</h4>
 
     <div class="row">
         <div class="col-md-4 mb-3">
-            <label for="currentPassword" class="form-label">Текущий пароль</label>
+            <label for="currentPassword" class="form-label">{{ current_password }}</label>
             <input type="password" class="form-control" id="currentPassword">
         </div>
         <div class="col-md-4 mb-3">
-            <label for="newPassword" class="form-label">Новый пароль</label>
+            <label for="newPassword" class="form-label">{{ new_password }}</label>
             <input type="password" class="form-control" id="newPassword">
         </div>
         <div class="col-md-4 mb-3">
-            <label for="confirmPassword" class="form-label">Подтверждение пароля</label>
+            <label for="confirmPassword" class="form-label">{{ confirm_password }}</label>
             <input type="password" class="form-control" id="confirmPassword">
         </div>
     </div>
 
     <div class="password-requirements mb-4">
-        <p class="text-muted mb-2">Требования к паролю:</p>
+        <p class="text-muted mb-2">{{ pwd_requirements }}:</p>
         <ul class="text-muted small">
-            <li>Минимум 8 символов</li>
-            <li>Хотя бы одна заглавная буква</li>
-            <li>Хотя бы одна цифра</li>
-            <li>Хотя бы один специальный символ</li>
+            <li>{{ minimum_characters }}</li>
+            <li>{{ capital_letter }}</li>
+            <li>{{ at_least_one_digit }}</li>
+            <li>{{ special_character }}</li>
         </ul>
     </div>
     <div class="mt-4 text-end">
-        <button type="button" class="btn btn-outline-secondary me-2">Отмена</button>
-        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+        <button type="button" class="btn btn-outline-secondary me-2">{{ cancel }}</button>
+        <button type="submit" class="btn btn-primary">{{ save_changes }}</button>
     </div>
 
 
     <hr class="my-4">
 
-    <h4 class="mb-4">Настройки аккаунта</h4>
+    <h4 class="mb-4">{{ account_settings }}</h4>
 
     <div class="mb-3">
-        <label for="language" class="form-label">Язык интерфейса</label>
+        <label for="language" class="form-label">{{ interface_language }}</label>
         <select class="form-select" id="language">
-            <option value="ru" selected>Русский</option>
-            <option value="en">English</option>
+            <option value="ru" selected>{{ russian }}</option>
+            <option value="en">{{ english }}</option>
         </select>
     </div>
 
     <div class="mb-3">
-        <label for="timezone" class="form-label">Часовой пояс</label>
+        <label for="timezone" class="form-label">{{ time_zone }}</label>
         <select class="form-select" id="timezone">
-            <option value="Europe/Moscow" selected>Москва (GMT+3)</option>
-            <option value="Europe/Kaliningrad">Калининград (GMT+2)</option>
-            <option value="Europe/Samara">Самара (GMT+4)</option>
-            <option value="Asia/Yekaterinburg">Екатеринбург (GMT+5)</option>
-            <option value="Asia/Omsk">Омск (GMT+6)</option>
-            <option value="Asia/Krasnoyarsk">Красноярск (GMT+7)</option>
-            <option value="Asia/Irkutsk">Иркутск (GMT+8)</option>
-            <option value="Asia/Yakutsk">Якутск (GMT+9)</option>
-            <option value="Asia/Vladivostok">Владивосток (GMT+10)</option>
-            <option value="Asia/Magadan">Магадан (GMT+11)</option>
-            <option value="Asia/Kamchatka">Камчатка (GMT+12)</option>
+            <option value="Europe/Moscow" selected>{{ moscow }} (GMT+3)</option>
+            <option value="Europe/Kaliningrad">{{ kaliningrad }} (GMT+2)</option>
+            <option value="Europe/Samara">{{ samara }} (GMT+4)</option>
+            <option value="Asia/Yekaterinburg">{{ ekaterinburg }} (GMT+5)</option>
+            <option value="Asia/Omsk">{{ omsk }} (GMT+6)</option>
+            <option value="Asia/Krasnoyarsk">{{ krasnoyarsk }} (GMT+7)</option>
+            <option value="Asia/Irkutsk">{{ irkutsk }} (GMT+8)</option>
+            <option value="Asia/Yakutsk">{{ yakutsk }} (GMT+9)</option>
+            <option value="Asia/Vladivostok">{{ vladivostok }} (GMT+10)</option>
+            <option value="Asia/Magadan">{{ magadan }} (GMT+11)</option>
+            <option value="Asia/Kamchatka">{{ kamchatka }} (GMT+12)</option>
         </select>
     </div>
 
     <div class="form-check form-switch mb-3">
         <input class="form-check-input" type="checkbox" id="darkModeSwitch">
-        <label class="form-check-label" for="darkModeSwitch">Темная тема</label>
+        <label class="form-check-label" for="darkModeSwitch">{{ dark_mode }}</label>
     </div>
 
     <div class="mt-4 text-end">
-        <button type="button" class="btn btn-outline-secondary me-2">Отмена</button>
-        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+        <button type="button" class="btn btn-outline-secondary me-2">{{ cancel }}</button>
+        <button type="submit" class="btn btn-primary">{{ save_changes }}</button>
     </div>
 </form>
 </div>
@@ -150,10 +150,10 @@
 <!-- Вкладка Группы -->
 <div class="tab-pane fade" id="groups-tab-pane" role="tabpanel" aria-labelledby="groups-tab" tabindex="0">
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h4 class="mb-0">Подключенные группы</h4>
+    <h4 class="mb-0">{{ connected_groups }}</h4>
     <div>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addGroupModal">
-            <i class="ph ph-plus me-2"></i>Добавить группу
+            <i class="ph ph-plus me-2"></i>{{ add_group }}
         </button>
     </div>
 </div>
@@ -171,21 +171,21 @@
         </div>
         <div class="col-md-3">
             <select class="form-select" id="platformFilter">
-                <option value="all" selected>Все платформы</option>
-                <option value="vk">ВКонтакте</option>
-                <option value="telegram">Telegram</option>
+                <option value="all" selected>{{ all_platforms }}</option>
+                <option value="vk">{{ vk }}</option>
+                <option value="telegram">{{ tg }}</option>
             </select>
         </div>
         <div class="col-md-3">
             <select class="form-select" id="statusFilter">
-                <option value="all" selected>Все статусы</option>
-                <option value="active">Активные</option>
-                <option value="inactive">Неактивные</option>
+                <option value="all" selected>{{ all_statuses }}</option>
+                <option value="active">{{ active }}</option>
+                <option value="inactive">{{ inactive }}</option>
             </select>
         </div>
         <div class="col-md-2">
             <button type="button" class="btn btn-outline-secondary w-100" id="resetFilters">
-                Сбросить
+                {{ reset }}
             </button>
         </div>
     </div>
@@ -195,6 +195,7 @@
 <div class="connected-groups">
 <!-- ВКонтакте группы -->
 <div class="group-card mb-3">
+
 <div class="card">
     <div class="card-body">
         <div class="d-flex justify-content-between align-items-center">
@@ -223,64 +224,64 @@
 </div>
 </div>
 
-<div class="group-card mb-3">
-<div class="card">
-    <div class="card-body">
-        <div class="d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center">
-                <div class="platform-icon me-3">
-                    <i class="ph ph-vk-logo" style="font-size: 32px; color: #4C75A3;"></i>
-                </div>
-                <div>
-                    <h5 class="mb-1">Бизнес идеи</h5>
-                    <p class="text-muted mb-0">ID: club987654321 • 8,765 подписчиков</p>
-                </div>
-            </div>
-            <div class="group-actions">
-                <span class="badge bg-success me-2">Активна</span>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-primary">
-                        <i class="ph ph-pencil"></i>
-                    </button>
-                    <button type="button" class="btn btn-sm btn-outline-danger">
-                        <i class="ph ph-trash"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
+<!--<div class="group-card mb-3">-->
+<!--<div class="card">-->
+<!--    <div class="card-body">-->
+<!--        <div class="d-flex justify-content-between align-items-center">-->
+<!--            <div class="d-flex align-items-center">-->
+<!--                <div class="platform-icon me-3">-->
+<!--                    <i class="ph ph-vk-logo" style="font-size: 32px; color: #4C75A3;"></i>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <h5 class="mb-1">Бизнес идеи</h5>-->
+<!--                    <p class="text-muted mb-0">ID: club987654321 • 8,765 подписчиков</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="group-actions">-->
+<!--                <span class="badge bg-success me-2">Активна</span>-->
+<!--                <div class="btn-group">-->
+<!--                    <button type="button" class="btn btn-sm btn-outline-primary">-->
+<!--                        <i class="ph ph-pencil"></i>-->
+<!--                    </button>-->
+<!--                    <button type="button" class="btn btn-sm btn-outline-danger">-->
+<!--                        <i class="ph ph-trash"></i>-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</div>-->
 
 <!-- Telegram группы -->
-<div class="group-card mb-3">
-<div class="card">
-    <div class="card-body">
-        <div class="d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center">
-                <div class="platform-icon me-3">
-                    <i class="ph ph-telegram-logo" style="font-size: 32px; color: #0088cc;"></i>
-                </div>
-                <div>
-                    <h5 class="mb-1">IT Новости</h5>
-                    <p class="text-muted mb-0">@it_news • 5,678 подписчиков</p>
-                </div>
-            </div>
-            <div class="group-actions">
-                <span class="badge bg-success me-2">Активна</span>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-primary">
-                        <i class="ph ph-pencil"></i>
-                    </button>
-                    <button type="button" class="btn btn-sm btn-outline-danger">
-                        <i class="ph ph-trash"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
+<!--<div class="group-card mb-3">-->
+<!--<div class="card">-->
+<!--    <div class="card-body">-->
+<!--        <div class="d-flex justify-content-between align-items-center">-->
+<!--            <div class="d-flex align-items-center">-->
+<!--                <div class="platform-icon me-3">-->
+<!--                    <i class="ph ph-telegram-logo" style="font-size: 32px; color: #0088cc;"></i>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <h5 class="mb-1">IT Новости</h5>-->
+<!--                    <p class="text-muted mb-0">@it_news • 5,678 подписчиков</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="group-actions">-->
+<!--                <span class="badge bg-success me-2">Активна</span>-->
+<!--                <div class="btn-group">-->
+<!--                    <button type="button" class="btn btn-sm btn-outline-primary">-->
+<!--                        <i class="ph ph-pencil"></i>-->
+<!--                    </button>-->
+<!--                    <button type="button" class="btn btn-sm btn-outline-danger">-->
+<!--                        <i class="ph ph-trash"></i>-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</div>-->
 
 <div class="group-card mb-3">
 <div class="card">
@@ -329,67 +330,67 @@
 
 <!-- Вкладка Уведомления -->
 <div class="tab-pane fade" id="notifications-tab-pane" role="tabpanel" aria-labelledby="notifications-tab" tabindex="0">
-<h4 class="mb-4">Настройки уведомлений</h4>
+<h4 class="mb-4">{{ notification_settings }}</h4>
 
 <div class="card mb-4">
     <div class="card-body">
-        <h5 class="mb-3">Email уведомления</h5>
+        <h5 class="mb-3">{{ email_notifications }}</h5>
 
         <div class="form-check form-switch mb-3">
             <input class="form-check-input" type="checkbox" id="emailNewPostSwitch" checked>
-            <label class="form-check-label" for="emailNewPostSwitch">Новые посты</label>
-            <small class="text-muted d-block mt-1">Получать уведомления о новых сгенерированных постах</small>
+            <label class="form-check-label" for="emailNewPostSwitch">{{ new_posts }}</label>
+            <small class="text-muted d-block mt-1">{{ new_generated_posts }}</small>
         </div>
         <div class="form-check form-switch mb-3">
             <input class="form-check-input" type="checkbox" id="emailPostPublishedSwitch" checked>
-            <label class="form-check-label" for="emailPostPublishedSwitch">Публикация постов</label>
-            <small class="text-muted d-block mt-1">Получать уведомления о публикации постов в группах</small>
+            <label class="form-check-label" for="emailPostPublishedSwitch">{{ publishing_posts }}</label>
+            <small class="text-muted d-block mt-1">{{ notifications_about_publication }}</small>
         </div>
 
         <div class="form-check form-switch mb-3">
             <input class="form-check-input" type="checkbox" id="emailTokensSwitch" checked>
-            <label class="form-check-label" for="emailTokensSwitch">Использование токенов</label>
-            <small class="text-muted d-block mt-1">Получать уведомления о низком балансе токенов (менее 10%)</small>
+            <label class="form-check-label" for="emailTokensSwitch">{{ using_coins }}</label>
+            <small class="text-muted d-block mt-1">{{ low_balance }}</small>
         </div>
 
         <div class="form-check form-switch mb-3">
             <input class="form-check-input" type="checkbox" id="emailBillingSwitch" checked>
-            <label class="form-check-label" for="emailBillingSwitch">Платежи и подписка</label>
-            <small class="text-muted d-block mt-1">Получать уведомления о платежах и изменениях в подписке</small>
+            <label class="form-check-label" for="emailBillingSwitch">{{ payments_and_subscription }}</label>
+            <small class="text-muted d-block mt-1">{{ subscription_changes }}</small>
         </div>
 
         <div class="form-check form-switch mb-3">
             <input class="form-check-input" type="checkbox" id="emailNewsSwitch">
-            <label class="form-check-label" for="emailNewsSwitch">Новости и обновления</label>
-            <small class="text-muted d-block mt-1">Получать информацию о новых функциях и обновлениях сервиса</small>
+            <label class="form-check-label" for="emailNewsSwitch">{{ news_and_updates }}</label>
+            <small class="text-muted d-block mt-1">{{ service_updates }}</small>
         </div>
     </div>
 </div>
 
 <div class="card mb-4">
     <div class="card-body">
-        <h5 class="mb-3">Браузерные уведомления</h5>
+        <h5 class="mb-3">{{ browser_notifications }}</h5>
 
         <div class="form-check form-switch mb-3">
             <input class="form-check-input" type="checkbox" id="browserNotificationsSwitch">
-            <label class="form-check-label" for="browserNotificationsSwitch">Включить браузерные уведомления</label>
-            <small class="text-muted d-block mt-1">Разрешить отправку уведомлений в браузере</small>
+            <label class="form-check-label" for="browserNotificationsSwitch">{{ enable_browser_notifications }}</label>
+            <small class="text-muted d-block mt-1">{{ allow_sending_notifications }}</small>
         </div>
 
         <div class="browser-notifications-settings mt-3" style="display: none;">
             <div class="form-check mb-2">
                 <input class="form-check-input" type="checkbox" id="browserNewPostCheck" checked>
-                <label class="form-check-label" for="browserNewPostCheck">Новые посты</label>
+                <label class="form-check-label" for="browserNewPostCheck">{{ new_posts }}</label>
             </div>
 
             <div class="form-check mb-2">
                 <input class="form-check-input" type="checkbox" id="browserPostPublishedCheck" checked>
-                <label class="form-check-label" for="browserPostPublishedCheck">Публикация постов</label>
+                <label class="form-check-label" for="browserPostPublishedCheck">{{ publishing_posts }}</label>
             </div>
 
             <div class="form-check mb-2">
                 <input class="form-check-input" type="checkbox" id="browserTokensCheck" checked>
-                <label class="form-check-label" for="browserTokensCheck">Использование токенов</label>
+                <label class="form-check-label" for="browserTokensCheck">{{ coins_using }}</label>
             </div>
         </div>
     </div>
@@ -397,44 +398,44 @@
 
 <div class="card mb-4">
     <div class="card-body">
-        <h5 class="mb-3">Telegram уведомления</h5>
+        <h5 class="mb-3">{{ telegram_notifications }}</h5>
 
         <div class="mb-3">
-            <label for="telegramUsername" class="form-label">Ваш Telegram</label>
+            <label for="telegramUsername" class="form-label">{{ your_telegram }}</label>
             <div class="input-group">
                 <input type="text" class="form-control" id="telegramUsername" placeholder="@username">
-                <button class="btn btn-outline-primary" type="button">Подключить</button>
+                <button class="btn btn-outline-primary" type="button">{{ connect }}</button>
             </div>
-            <small class="text-muted">Подключите ваш Telegram для получения мгновенных уведомлений</small>
+            <small class="text-muted">{{ instant_notifications }}</small>
         </div>
 
         <div class="telegram-notifications-settings mt-4" style="display: none;">
             <div class="form-check mb-2">
                 <input class="form-check-input" type="checkbox" id="telegramNewPostCheck" checked>
-                <label class="form-check-label" for="telegramNewPostCheck">Новые посты</label>
+                <label class="form-check-label" for="telegramNewPostCheck">{{ new_posts }}</label>
             </div>
 
             <div class="form-check mb-2">
                 <input class="form-check-input" type="checkbox" id="telegramPostPublishedCheck" checked>
-                <label class="form-check-label" for="telegramPostPublishedCheck">Публикация постов</label>
+                <label class="form-check-label" for="telegramPostPublishedCheck">{{ publishing_posts }}</label>
             </div>
 
             <div class="form-check mb-2">
                 <input class="form-check-input" type="checkbox" id="telegramTokensCheck" checked>
-                <label class="form-check-label" for="telegramTokensCheck">Использование токенов</label>
+                <label class="form-check-label" for="telegramTokensCheck">{{ coins_using }}</label>
             </div>
 
             <div class="form-check mb-2">
                 <input class="form-check-input" type="checkbox" id="telegramBillingCheck" checked>
-                <label class="form-check-label" for="telegramBillingCheck">Платежи и подписка</label>
+                <label class="form-check-label" for="telegramBillingCheck">{{ payments_and_subscription }}</label>
             </div>
         </div>
     </div>
 </div>
 
 <div class="mt-4 text-end">
-    <button type="button" class="btn btn-outline-secondary me-2">Отмена</button>
-    <button type="button" class="btn btn-primary" id="saveNotificationsBtn">Сохранить настройки</button>
+    <button type="button" class="btn btn-outline-secondary me-2">{{ cancel }}</button>
+    <button type="button" class="btn btn-primary" id="saveNotificationsBtn">{{ save_settings }}</button>
 </div>
 </div>
 </div>
@@ -449,23 +450,23 @@
 <div class="modal-dialog modal-dialog-centered">
 <div class="modal-content">
 <div class="modal-header">
-    <h5 class="modal-title" id="addGroupModalLabel">Добавление группы</h5>
+    <h5 class="modal-title" id="addGroupModalLabel">{{ adding_public }}</h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
 <div class="modal-body">
     <div class="platform-selection mb-4">
-        <label class="form-label">Выберите платформу</label>
+        <label class="form-label">{{ select_platform }}</label>
         <div class="d-flex">
             <div class="form-check form-check-inline me-4">
                 <input class="form-check-input" type="radio" name="platformRadio" id="vkRadio" value="vk" checked>
                 <label class="form-check-label" for="vkRadio">
-                    <i class="ph ph-vk-logo me-1" style="color: #4C75A3;"></i> ВКонтакте
+                    <i class="ph ph-vk-logo me-1" style="color: #4C75A3;"></i> {{ vk }}
                 </label>
             </div>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="platformRadio" id="telegramRadio" value="telegram">
                 <label class="form-check-label" for="telegramRadio">
-                    <i class="ph ph-telegram-logo me-1" style="color: #0088cc;"></i> Telegram
+                    <i class="ph ph-telegram-logo me-1" style="color: #0088cc;"></i> {{ tg }}
                 </label>
             </div>
         </div>
@@ -474,30 +475,30 @@
     <!-- Форма для ВКонтакте -->
     <div id="vkForm">
         <div class="mb-3">
-            <label for="vkGroupId" class="form-label">ID группы или адрес</label>
-            <input type="text" class="form-control" id="vkGroupId" placeholder="club123456789 или vk.com/groupname">
-            <small class="text-muted">Укажите ID группы или полный адрес страницы</small>
+            <label for="vkGroupId" class="form-label">{{ group_id_address }}</label>
+            <input type="text" class="form-control" id="vkGroupId" placeholder="club123456789 {{ or }} vk.com/groupname">
+            <small class="text-muted">{{ full_page_address }}</small>
         </div>
 
         <div class="mb-3">
-            <label for="vkGroupName" class="form-label">Название группы (опционально)</label>
+            <label for="vkGroupName" class="form-label">{{ group_name_optional }}</label>
             <input type="text" class="form-control" id="vkGroupName" placeholder="Название для удобства">
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Авторизация</label>
+            <label class="form-label">{{ authorization }}</label>
             <div class="d-grid">
                 <button type="button" class="btn btn-primary" id="vkAuthBtn">
-                    <i class="ph ph-vk-logo me-2"></i>Авторизоваться через ВКонтакте
+                    <i class="ph ph-vk-logo me-2"></i>{{ vk_login }}
                 </button>
             </div>
-            <small class="text-muted mt-2">Необходимо для публикации постов в группе</small>
+            <small class="text-muted mt-2">{{ required_to_publish }}</small>
         </div>
 
         <div class="form-check mb-3">
             <input class="form-check-input" type="checkbox" id="vkAdminCheck">
             <label class="form-check-label" for="vkAdminCheck">
-                Я являюсь администратором этой группы
+                {{ i_am_the_admin }}
             </label>
         </div>
     </div>
@@ -505,33 +506,33 @@
     <!-- Форма для Telegram -->
     <div id="telegramForm" style="display: none;">
         <div class="mb-3">
-            <label for="telegramChannelName" class="form-label">Имя канала или группы</label>
+            <label for="telegramChannelName" class="form-label">{{ public_name }}</label>
             <input type="text" class="form-control" id="telegramChannelName" placeholder="@channel_name">
-            <small class="text-muted">Укажите имя канала или группы с символом @</small>
+            <small class="text-muted">{{ with_the_symbol }}</small>
         </div>
 
         <div class="mb-3">
-            <label for="telegramBotToken" class="form-label">Токен бота</label>
+            <label for="telegramBotToken" class="form-label">{{ bot_token }}</label>
             <input type="text" class="form-control" id="telegramBotToken" placeholder="123456789:ABCDefGhIJKlmNoPQRsTUVwxyZ">
-            <small class="text-muted">Создайте бота через @BotFather и вставьте полученный токен</small>
+            <small class="text-muted">{{ paste_received_token }}</small>
         </div>
 
         <div class="alert alert-info">
             <i class="ph ph-info me-2"></i>
-            <small>Не забудьте добавить созданного бота в качестве администратора вашего канала или группы</small>
+            <small>{{ bot_is_admin_your_channel }}</small>
         </div>
 
         <div class="form-check mb-3">
             <input class="form-check-input" type="checkbox" id="telegramAdminCheck">
             <label class="form-check-label" for="telegramAdminCheck">
-                Я являюсь администратором этого канала/группы
+                {{ i_am_the_admin }}
             </label>
         </div>
     </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-    <button type="button" class="btn btn-primary" id="saveGroupBtn">Добавить группу</button>
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ cancel }}</button>
+    <button type="button" class="btn btn-primary" id="saveGroupBtn">{{ add_group }}</button>
 </div>
 </div>
 </div>
