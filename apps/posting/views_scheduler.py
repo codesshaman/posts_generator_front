@@ -1,4 +1,5 @@
-from project.language import translate, language, set_cookie_if_not_exists
+from project.cookies import set_cookie_if_not_exists
+from project.language import translate, language
 from django.shortcuts import render
 from dotenv import load_dotenv
 from datetime import datetime

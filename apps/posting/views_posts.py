@@ -1,4 +1,5 @@
 from django.views.decorators.http import require_http_methods
+from project.cookies import set_cookie_if_not_exists
 from project.language import translate
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -71,7 +72,7 @@ posts_data = [
 
 host = os.getenv('PUBLIC_HOST')
 
-# Create your views here.
+@set_cookie_if_not_exists("user_language", lambda request: request.LANGUAGE_CODE or 'en')
 def posts(request):
     """Отображает страницу постов"""
     if debug:

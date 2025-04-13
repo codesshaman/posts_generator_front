@@ -1,13 +1,11 @@
-from project.language import translate
+from project.cookies import set_cookie_if_not_exists
+from project.language import translate, language
 from django.http import JsonResponse
 from django.shortcuts import render
 from dotenv import load_dotenv
 from datetime import datetime
 import os
 
-
-# Устанавливаем язык
-lang = "en"
 
 # Загружаем .env файл
 load_dotenv()
@@ -44,10 +42,12 @@ article = articles_data[2]
 
 host = os.getenv('PUBLIC_HOST')
 
+@set_cookie_if_not_exists("user_language", lambda request: request.LANGUAGE_CODE or 'en')
 def articles(request):
     """Отображает страницу статей"""
     if debug:
         print("Отображаем страницу статей")
+    lang = language(request)
     initial_articles = articles_data[:3]  # Первые 3 статьи (индексы 0-2)
     has_more = len(articles_data) > 3
     return render(request, "articles/articles_list.html", {

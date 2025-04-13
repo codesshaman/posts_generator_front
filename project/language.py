@@ -1,41 +1,10 @@
-from functools import wraps
-
-def set_cookie_if_not_exists(cookie_name, cookie_value_func, max_age=365 * 24 * 60 * 60):
-    """Возвращает декоратор для установки cookie, если его нет."""
-    def decorator(view_func):
-        @wraps(view_func)
-        def wrapper(request, *args, **kwargs):
-            response = view_func(request, *args, **kwargs)
-            print(f"Проверяю cookie: {cookie_name} в {request.COOKIES}")
-            if cookie_name not in request.COOKIES:
-                # Вызываем функцию для получения значения куки
-                cookie_value = cookie_value_func(request) if callable(cookie_value_func) else cookie_value_func
-                print(f"Устанавливаю cookie: {cookie_name}={cookie_value}")
-                response.set_cookie(
-                    cookie_name,
-                    cookie_value,
-                    max_age=max_age,
-                    path='/',
-                    secure=False,  # Для локальной разработки, в продакшене установите True
-                    httponly=True,
-                    samesite='Lax'
-                )
-            else:
-                print(f"Cookie {cookie_name} уже существует: {request.COOKIES[cookie_name]}")
-            return response
-        return wrapper
-    return decorator
-
 def language(request):
     """Возвращает язык из куки или устанавливает новый."""
     print("Cookies в запросе:", request.COOKIES)
     if "user_language" not in request.COOKIES:
-        print("Задаю язык в cookies")
         accept_language = request.LANGUAGE_CODE or 'en'  # Запасное значение
-        print(f"Выбранный язык: {accept_language}")
         return accept_language
     else:
-        print("Возвращаю язык из cookies")
         return request.COOKIES.get('user_language')
 
 

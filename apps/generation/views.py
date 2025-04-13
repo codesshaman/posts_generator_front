@@ -1,3 +1,4 @@
+from project.cookies import set_cookie_if_not_exists
 from project.language import translate, language
 from django.shortcuts import render
 from dotenv import load_dotenv
@@ -14,7 +15,7 @@ load_dotenv()
 # Устанавливаем debug mode
 debug = os.getenv('DEBUG')
 
-# Create your views here.
+@set_cookie_if_not_exists("user_language", lambda request: request.LANGUAGE_CODE or 'en')
 def autogeneration(request):
     """Отображает страницу постов"""
     lang = language(request)

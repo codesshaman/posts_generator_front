@@ -1,3 +1,4 @@
+from project.cookies import set_cookie_if_not_exists
 from project.language import translate, language
 from django.shortcuts import render
 from dotenv import load_dotenv
@@ -89,7 +90,7 @@ def support_team(lang):
                 or payment, our support team is always ready to help."
 
 
-# Create your views here.
+@set_cookie_if_not_exists("user_language", lambda request: request.LANGUAGE_CODE or 'en')
 def subscription(request):
     lang = language(request)
     you_can_change = you_can_change_plan(lang)
