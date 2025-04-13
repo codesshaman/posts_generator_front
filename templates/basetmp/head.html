@@ -20,9 +20,10 @@
 {% if request.resolver_match.view_name == 'settings' %}
 <link rel="stylesheet" href="{% static 'css/settings.css' %}">
 {% endif %}
+<!-- Favicon 48x48 -->
+<link rel="icon" type="image/x-icon" sizes="48x48" href="{% static 'favicon.ico' %}">
 <!-- Google Fonts - наборы шрифтов -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/regular/style.css">
 {% block head %} {% endblock %}
