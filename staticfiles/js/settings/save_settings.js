@@ -33,3 +33,43 @@ if (profileForm) {
         });
     });
 }
+
+// Функция для показа уведомления (предполагается, что она у вас есть)
+function showAlert(message, type) {
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
+    alertDiv.role = 'alert';
+    alertDiv.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+    document.body.prepend(alertDiv);
+    setTimeout(() => alertDiv.remove(), 3000);  // Удаляем через 3 секунды
+}
+
+// Функция для показа уведомлений
+function showAlert(message, type = 'info') {
+const alertsContainer = document.getElementById('alertsContainer');
+const alertId = Date.now();
+
+const alertElement = document.createElement('div');
+alertElement.className = `alert alert-${type} alert-dismissible fade show`;
+alertElement.role = 'alert';
+alertElement.id = `alert-${alertId}`;
+
+alertElement.innerHTML = `
+    ${message}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+`;
+
+alertsContainer.appendChild(alertElement);
+
+// Автоматическое скрытие уведомления через 5 секунд
+setTimeout(() => {
+    const alert = document.getElementById(`alert-${alertId}`);
+    if (alert) {
+        const bsAlert = new bootstrap.Alert(alert);
+        bsAlert.close();
+    }
+}, 5000);
+}

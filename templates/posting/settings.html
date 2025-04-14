@@ -778,6 +778,33 @@ setTimeout(() => {
     }
 }, 5000);
 }
+
+
+
+function showAlert(message, type = 'info') {
+    const alertId = `alert-${Date.now()}`;
+    const alertElement = document.createElement('div');
+    alertElement.id = alertId;
+    alertElement.className = `alert alert-${type} alert-dismissible fade show`;
+    alertElement.role = 'alert';
+    alertElement.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+    const alertsContainer = document.getElementById('alertsContainer');
+    if (alertsContainer) {
+        alertsContainer.appendChild(alertElement);
+    } else {
+        document.body.appendChild(alertElement);
+    }
+    setTimeout(() => {
+        const alertToClose = document.getElementById(alertId);
+        if (alertToClose) {
+            const bsAlert = new bootstrap.Alert(alertToClose);
+            bsAlert.close();
+        }
+    }, 3000);
+}
 </script>
 
 <!-- Bootstrap JS Bundle with Popper -->
