@@ -1,6 +1,5 @@
 def language(request):
     """Возвращает язык из куки или устанавливает новый."""
-    print("Cookies в запросе:", request.COOKIES)
     if "user_language" not in request.COOKIES:
         accept_language = request.LANGUAGE_CODE or 'en'  # Запасное значение
         return accept_language

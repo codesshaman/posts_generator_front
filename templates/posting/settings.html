@@ -32,7 +32,7 @@
 <div class="tab-pane fade show active" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
 <h4 class="mb-4">{{ personal_info }}</h4>
 
-<form id="profileForm">
+<form id="profileForm2">
     <div class="row mb-4">
         <div class="col-md-2 text-center">
             <div class="avatar-upload mb-3">
@@ -108,11 +108,15 @@
 
     <hr class="my-4">
 
+    </form>
+    <form id="profileForm" action="/settings/update/" method="post">
+
+    {% csrf_token %}
     <h4 class="mb-4">{{ account_settings }}</h4>
 
     <div class="mb-3">
         <label for="language" class="form-label">{{ interface_language }}</label>
-        <select class="form-select" id="language">
+        <select class="form-select" name="language" id="language">
             <option value="ru" selected>{{ russian }}</option>
             <option value="en">{{ english }}</option>
         </select>
@@ -120,7 +124,7 @@
 
     <div class="mb-3">
         <label for="timezone" class="form-label">{{ time_zone }}</label>
-        <select class="form-select" id="timezone">
+        <select class="form-select" name="timezone" id="timezone">
             <option value="Europe/Moscow" selected>{{ moscow }} (GMT+3)</option>
             <option value="Europe/Kaliningrad">{{ kaliningrad }} (GMT+2)</option>
             <option value="Europe/Samara">{{ samara }} (GMT+4)</option>
@@ -136,7 +140,7 @@
     </div>
 
     <div class="form-check form-switch mb-3">
-        <input class="form-check-input" type="checkbox" id="darkModeSwitch">
+        <input class="form-check-input" type="checkbox" name="dark_mode" id="darkModeSwitch">
         <label class="form-check-label" for="darkModeSwitch">{{ dark_mode }}</label>
     </div>
 
@@ -736,13 +740,48 @@ const profileForm = document.getElementById('profileForm');
 if (profileForm) {
     profileForm.addEventListener('submit', function(e) {
         e.preventDefault();
+        console.log("Форма перехвачена");
+        // Собираем данные формы
+        const formData = new FormData(profileForm);
 
-        // Здесь будет логика сохранения профиля
-        // Для демонстрации просто покажем уведомление
-        showAlert('Профиль успешно обновлен', 'success');
+        // Отправляем данные через AJAX
+        fetch(profileForm.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',  // Указываем, что это AJAX-запрос
+            },
+        })
+        .then(response => response.json())  // Ожидаем JSON-ответ от сервера
+        .then(data => {
+            if (data.status === 'success') {
+                showAlert(data.message, 'success');
+                // Переадресация на страницу /settings
+                window.location.href = '/settings';
+            } else {
+                // Показываем сообщение об ошибке
+                showAlert(data.message, 'danger');
+            }
+        })
+        .catch(error => {
+            console.error('Ошибка:', error);
+            showAlert('Произошла ошибка при сохранении настроек', 'danger');
+        });
     });
 }
-});
+
+// Функция для показа уведомления (предполагается, что она у вас есть)
+function showAlert(message, type) {
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
+    alertDiv.role = 'alert';
+    alertDiv.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+    document.body.prepend(alertDiv);
+    setTimeout(() => alertDiv.remove(), 3000);  // Удаляем через 3 секунды
+}
 
 // Функция для показа уведомлений
 function showAlert(message, type = 'info') {

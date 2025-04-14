@@ -14,4 +14,5 @@ urlpatterns = [
     path('create_post', create_post, name='create_post'),
     path('subscription', subscription, name='subscription'),
     path('settings', settings, name='settings'),
+    path('settings/update/', update_settings, name='update_settings'),
 ]

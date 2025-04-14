@@ -19,14 +19,10 @@ def set_cookie_if_not_exists(cookie_name, cookie_value_func, max_age=365 * 24 * 
                     httponly=True,
                     samesite='Lax'
                 )
-            else:
-                print(f"Cookie {cookie_name} уже существует: {request.COOKIES[cookie_name]}")
             return response
         return wrapper
     return decorator
 
-
-from functools import wraps
 
 def replace_cookie_if_not_exists(cookie_name, cookie_value_func, max_age=365 * 24 * 60 * 60):
     """Возвращает декоратор для установки или замены cookie."""
@@ -36,7 +32,6 @@ def replace_cookie_if_not_exists(cookie_name, cookie_value_func, max_age=365 * 2
             response = view_func(request, *args, **kwargs)
             # Вызываем функцию для получения значения куки
             cookie_value = cookie_value_func(request) if callable(cookie_value_func) else cookie_value_func
-            print(f"Устанавливаю/заменяю cookie: {cookie_name}={cookie_value}")
             response.set_cookie(
                 cookie_name,
                 cookie_value,
@@ -49,3 +44,20 @@ def replace_cookie_if_not_exists(cookie_name, cookie_value_func, max_age=365 * 2
             return response
         return wrapper
     return decorator
+
+
+def set_cookies(response, cookie_name, cookie_value, max_age=365 * 24 * 60 * 60):
+    """Возвращает декоратор для установки или замены cookie."""
+    # Вызываем функцию для получения значения куки
+    print(f"Устанавливаю/заменяю cookie: {cookie_name}={cookie_value}")
+    response.set_cookie(
+        cookie_name,
+        cookie_value,
+        max_age=max_age,
+        path='/',
+        secure=False,
+        httponly=True,
+        samesite='Lax'
+    )
+    return response
+
