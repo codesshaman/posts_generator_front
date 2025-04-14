@@ -548,6 +548,8 @@
 <!-- JavaScript для работы с мобильным меню -->
 <script src = "{% static 'js/mobile_menu.js' %}"></script>
 
+<!-- JavaScript для работы с мобильным меню -->
+<script src = "{% static 'js/settings/save_settings.js' %}"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -735,40 +737,7 @@ if (groupSearch && platformFilter && statusFilter && resetFilters) {
     });
 }
 
-// Обработчик для формы профиля
-const profileForm = document.getElementById('profileForm');
-if (profileForm) {
-    profileForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        console.log("Форма перехвачена");
-        // Собираем данные формы
-        const formData = new FormData(profileForm);
 
-        // Отправляем данные через AJAX
-        fetch(profileForm.action, {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',  // Указываем, что это AJAX-запрос
-            },
-        })
-        .then(response => response.json())  // Ожидаем JSON-ответ от сервера
-        .then(data => {
-            if (data.status === 'success') {
-                showAlert(data.message, 'success');
-                // Переадресация на страницу /settings
-                window.location.href = '/settings';
-            } else {
-                // Показываем сообщение об ошибке
-                showAlert(data.message, 'danger');
-            }
-        })
-        .catch(error => {
-            console.error('Ошибка:', error);
-            showAlert('Произошла ошибка при сохранении настроек', 'danger');
-        });
-    });
-}
 
 // Функция для показа уведомления (предполагается, что она у вас есть)
 function showAlert(message, type) {

@@ -3,6 +3,7 @@ from django.views.decorators.http import require_POST
 from project.language import translate, language
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.urls import reverse
 from dotenv import load_dotenv
 from datetime import datetime
 import os
@@ -31,7 +32,8 @@ def update_settings(request):
         # Устанавливаем куки
         response = JsonResponse({
             "status": "success",
-            "message": "Настройки успешно обновлены"
+            "message": "Настройки успешно обновлены",
+            "redirect_url": reverse("settings")
         })
         print("Настройки успешно обновлены")
         set_cookies(response, "user_language", languadge)
