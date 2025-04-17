@@ -117,31 +117,31 @@
     <div class="mb-3">
         <label for="language" class="form-label">{{ interface_language }}</label>
         <select class="form-select" name="language" id="language">
-            <option value="ru" selected>{{ russian }}</option>
-            <option value="en">{{ english }}</option>
+            <option value="ru" {% if selected_language == 'ru' %}selected{% endif %}>{{ russian }}</option>
+    <option value="en" {% if selected_language == 'en' %}selected{% endif %}>{{ english }}</option>
         </select>
     </div>
 
     <div class="mb-3">
         <label for="timezone" class="form-label">{{ time_zone }}</label>
         <select class="form-select" name="timezone" id="timezone">
-            <option value="Europe/Moscow" selected>{{ moscow }} (GMT+3)</option>
-            <option value="Europe/Kaliningrad">{{ kaliningrad }} (GMT+2)</option>
-            <option value="Europe/Samara">{{ samara }} (GMT+4)</option>
-            <option value="Asia/Yekaterinburg">{{ ekaterinburg }} (GMT+5)</option>
-            <option value="Asia/Omsk">{{ omsk }} (GMT+6)</option>
-            <option value="Asia/Krasnoyarsk">{{ krasnoyarsk }} (GMT+7)</option>
-            <option value="Asia/Irkutsk">{{ irkutsk }} (GMT+8)</option>
-            <option value="Asia/Yakutsk">{{ yakutsk }} (GMT+9)</option>
-            <option value="Asia/Vladivostok">{{ vladivostok }} (GMT+10)</option>
-            <option value="Asia/Magadan">{{ magadan }} (GMT+11)</option>
-            <option value="Asia/Kamchatka">{{ kamchatka }} (GMT+12)</option>
+            <option value="Europe/Moscow" {% if selected_timezone == 'Europe/Moscow' %}selected{% endif %}>{{ moscow }} (GMT+3)</option>
+    <option value="Europe/Kaliningrad" {% if selected_timezone == 'Europe/Kaliningrad' %}selected{% endif %}>{{ kaliningrad }} (GMT+2)</option>
+    <option value="Europe/Samara" {% if selected_timezone == 'Europe/Samara' %}selected{% endif %}>{{ samara }} (GMT+4)</option>
+    <option value="Asia/Yekaterinburg" {% if selected_timezone == 'Asia/Yekaterinburg' %}selected{% endif %}>{{ ekaterinburg }} (GMT+5)</option>
+            <option value="Asia/Omsk" {%  if selected_timezone == 'Asia/Omsk' %}selected{% endif %}>{{ omsk }} (GMT+6)</option>
+            <option value="Asia/Krasnoyarsk" {%  if selected_timezone == 'Asia/Krasnoyarsk' %}selected{% endif %}>{{ krasnoyarsk }} (GMT+7)</option>
+            <option value="Asia/Irkutsk" {%  if selected_timezone == 'Asia/Irkutsk' %}selected{% endif %}>{{ irkutsk }} (GMT+8)</option>
+            <option value="Asia/Yakutsk" {%  if selected_timezone == 'Asia/Yakutsk' %}selected{% endif %}>{{ yakutsk }} (GMT+9)</option>
+            <option value="Asia/Vladivostok" {%  if selected_timezone == 'Asia/Vladivostok' %}selected{% endif %}>{{ vladivostok }} (GMT+10)</option>
+            <option value="Asia/Magadan" {%  if selected_timezone == 'Asia/Magadan' %}selected{% endif %}>{{ magadan }} (GMT+11)</option>
+            <option value="Asia/Kamchatka" {%  if selected_timezone == 'Asia/Kamchatka' %}selected{% endif %}>{{ kamchatka }} (GMT+12)</option>
         </select>
     </div>
 
     <div class="form-check form-switch mb-3">
-        <input class="form-check-input" type="checkbox" name="dark_mode" id="darkModeSwitch">
-        <label class="form-check-label" for="darkModeSwitch">{{ dark_mode }}</label>
+        <input class="form-check-input" type="checkbox" name="dark_mode" id="darkModeSwitch" {% if selected_darkmode %}checked{% endif %}>
+        <label class="form-check-label">{{ dark_mode }}</label>
     </div>
 
     <div class="mt-4 text-end">

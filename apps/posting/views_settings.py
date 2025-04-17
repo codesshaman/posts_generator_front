@@ -52,9 +52,15 @@ def settings(request):
     if debug:
         print("Отображаем страницу настроек")
     lang = language(request)
+    selected_language = request.COOKIES.get('user_language', 'en')
+    selected_timezone = request.COOKIES.get('user_timezone', 'Europe/Moscow')
+    selected_darkmode = request.COOKIES.get('dark_mode', 'false')
     return render(request, "posting/settings.html", {
         # "posts": initial_posts,
         # "has_more": has_more,
         "title": translate("Настройки", lang),
         "h2_text": translate("Настройки", lang),
+        'selected_language': selected_language,
+        'selected_timezone': selected_timezone,
+        'selected_darkmode': selected_darkmode,
     })
