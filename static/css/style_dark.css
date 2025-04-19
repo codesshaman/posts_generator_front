@@ -30,9 +30,9 @@ body {
 }
 
 .sidebar {
-    background-color: #FFFFFF;
+    background-color: #424242;
     box-shadow: 2px 0 5px rgba(0,0,0,0.02);
-    border-right: 1px solid rgba(0, 0, 0, 0.05);
+    border-right: 1px solid rgba(255, 255, 255, 50.05);
     position: sticky;
     top: 120px;
     height: auto;
@@ -150,6 +150,7 @@ body {
 
 .card-body {
     padding: 20px;
+    background-color: #414141;
 }
 
 .badge {
@@ -160,10 +161,12 @@ body {
 
 .badge.bg-success {
     background-color: var(--success-color) !important;
+    color: #424242;
 }
 
 .badge.bg-warning {
     background-color: var(--warning-color) !important;
+    color: #424242;
 }
 
 .badge.bg-info {
