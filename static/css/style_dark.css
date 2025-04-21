@@ -20,7 +20,7 @@ body {
 }
 
 .navbar {
-    background-color: #FFFFFF !important;
+    background-color: #424242 !important;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     height: 70px;
 }
@@ -71,7 +71,7 @@ body {
     text-decoration: none;
     text-align: left; /* Заменил 'none solid rgb(67, 56, 202)' на 'left' */
     text-indent: 0px;
-    color: var(--dark-color); /* Цвет для неактивных пунктов меню */
+    color: #fff; /* Цвет для неактивных пунктов меню */
     transition: all 0.3s ease;
 }
 
