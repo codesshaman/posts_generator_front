@@ -37,55 +37,6 @@
     padding: 2rem 1rem;
 }
 
-.nav-link {
-    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-size: 16px;
-    line-height: 24px;
-    vertical-align: baseline;
-    letter-spacing: normal;
-    word-spacing: 0px;
-    font-weight: 500;
-    font-style: normal;
-    font-variant: normal;
-    text-transform: none;
-    text-decoration: none;
-    text-align: left;
-    text-indent: 0px;
-    color: var(--dark-color);
-    transition: all 0.3s ease;
-}
-
-.username-text {
-    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-size: 16px;
-    color: #4338ca;
-    background-color: transparent;
-    line-height: 24px;
-    vertical-align: baseline;
-    letter-spacing: normal;
-    word-spacing: 0px;
-    font-weight: 500;
-    font-style: normal;
-    font-variant: normal;
-    text-transform: none;
-    text-decoration: none;
-    text-align: left;
-    text-indent: 0px;
-    display: block;
-}
-
-.nav-link.active {
-    background-color: #EEF2FF;
-    color: white !important;
-    box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
-}
-
-.user-profile-container {
-    background-color: #EEF2FF;
-    border-radius: 30px;
-    padding: 7px 17px;
-}
-
 .btn-custom-logout {
     border: none !important;
     background-color: transparent !important;
@@ -107,21 +58,6 @@
     text-indent: 0px;
     transition: color 0.2s ease;
 }
-
-.sidebar .nav-pills .nav-link.active,
-.sidebar .nav-pills .show > .nav-link,
-.nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
-    background-color: #EEF2FF !important;
-    color: #4338ca !important;
-    box-shadow: 0 4px 10px rgba(67, 97, 238, 0.1) !important;
-}
-
-.nav-link:hover {
-    background-color: #f8f8fc !important;
-    color: inherit;
-}
-
 
 /* Стили для карточек тарифов */
 .plan-card {
@@ -192,20 +128,9 @@
     background-color: var(--primary-color);
 }
 
-/* Стили для кнопок */
-.btn-indigo {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-.btn-indigo:hover {
-    background-color: rgb(67, 56, 202);
-    color: white;
-}
-
 /* Стили для кнопок действий */
 .btn-outline-secondary {
-    color: #6B7280;
+    color: #fff;
     border-color: #D1D5DB;
 }
 
@@ -226,9 +151,9 @@
 }
 
 .btn-light {
-    background-color: #F9FAFB;
+    background-color: #5B5B5B;
     border-color: #E5E7EB;
-    color: #4B5563;
+    color: #E5E7EB;
 }
 
 .btn-light:hover {
@@ -372,9 +297,7 @@
     color: #111827;
 }
 
-.card-body {
-    padding: 20px;
-}
+
 
 /* Стили для фокуса на элементах */
 :focus {
@@ -421,6 +344,93 @@
     }
 }
 
+/* Адаптивность для мобильных устройств (из styles.css) */
+@media (max-width: 992px) {
+    .sidebar {
+        position: fixed;
+        z-index: 999;
+        width: 100%;
+        left: -100%;
+        transition: all 0.3s;
+        height: calc(100vh - 70px);
+        top: 70px;
+        border-radius: 0;
+        overflow-y: auto;
+    }
+
+    .sidebar.show {
+        left: 0;
+    }
+
+    .sidebar > div {
+        max-width: 100%;
+        padding: 20px;
+    }
+
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.4);
+        z-index: 998;
+    }
+
+    .toggle-sidebar {
+        display: block !important;
+    }
+
+    .user-profile-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        width: auto;
+        margin-left: auto;
+    }
+
+    .btn-custom-logout {
+        padding: 0.25rem 0.5rem;
+    }
+
+    .navbar-nav {
+        flex-direction: row;
+        width: auto;
+    }
+
+    .navbar-brand {
+        margin-right: auto;
+        margin-left: 0;
+    }
+
+    .user-profile-container {
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
+        padding: 5px 10px;
+    }
+
+    .username-text {
+        display: inline-block;
+        margin-bottom: 0;
+        vertical-align: middle;
+    }
+
+    .btn-custom-logout {
+        padding: 0.25rem 0.5rem;
+        display: inline-flex;
+        align-items: center;
+        vertical-align: middle;
+    }
+
+    .navbar .navbar-nav {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-left: auto;
+    }
+}
 
 /* Для очень маленьких экранов можно скрыть имя пользователя */
 @media (max-width: 400px) {

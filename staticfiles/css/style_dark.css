@@ -1,7 +1,7 @@
 :root {
-    --primary-color: #4361ee;
+    --primary-color: #3a86ff;
     --primary-light: #eef2ff;
-    --secondary-color: #3a86ff;
+    --secondary-color: #1e75ff;
     --accent-color: #7209b7;
     --success-color: #06d6a0;
     --warning-color: #ffd166;
@@ -59,6 +59,7 @@ body {
 
 .nav-link {
     font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    background-color: #282828 !important;
     font-size: 16px;
     line-height: 24px;
     vertical-align: baseline;
@@ -95,14 +96,14 @@ body {
 }
 
 .nav-link.active {
-    background-color:  #EEF2FF;
+    background-color:  #292929;
     color: white !important;
     box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
 }
 
 .btn-primary {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
+    background-color: #424242;
+    border-color: #fff;
     box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
     transition: all 0.3s ease;
 }
@@ -150,7 +151,7 @@ body {
 
 .card-body {
     padding: 20px;
-    background-color: #414141;
+    background-color: #333;
 }
 
 .badge {
@@ -188,8 +189,8 @@ body {
 }
 
 .dropdown-item:hover {
-    background-color: var(--primary-light);
-    color: var(--primary-color);
+    background-color: #1e75ff;
+    color: #fff;
 }
 
 /* Анимации */
@@ -360,7 +361,7 @@ body {
 }
 
 .post-time {
-    color: var(--gray-color);
+    color: #d5d5d5;
     font-size: 13px;
 }
 
@@ -446,7 +447,7 @@ body {
     margin-right: auto;
 }
 .logo-text {
-    color: rgb(31, 41, 55);
+    color: #87898c;
     font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
     font-size: 20px;
     font-weight: bold;
@@ -470,7 +471,7 @@ body {
     font-size: 16px;
 
     /* Цвет */
-    color: #4338ca; /* или rgb(67, 56, 202) */
+    color: #fff; /* или rgb(67, 56, 202) */
     background-color: transparent; /* rgba(0, 0, 0, 0) */
 
     /* Интервалы */
@@ -492,7 +493,7 @@ body {
     display: block;
 }
 .user-profile-container {
-    background-color: #EEF2FF;
+    background-color: #535353;
     border-radius: 30px; /* Закругление фона */
     padding: 7px 17px; /* Добавляем отступы для лучшего вида */
 }
@@ -507,7 +508,7 @@ body {
     font-size: 16px !important;
 
     /* Цвет */
-    color: #4b5563 !important; /* rgb(75, 85, 99) */
+    color: #b6b6b8 !important; /* rgb(75, 85, 99) */
     background-color: transparent !important; /* rgba(0, 0, 0, 0) */
 
     /* Интервалы */
@@ -532,14 +533,14 @@ body {
 .btn-custom-logout:hover,
 .btn-custom-logout:focus {
     background-color: transparent !important;
-    color: #4338ca !important; /* Индиго цвет при наведении */
+    color: #fff !important; /* Индиго цвет при наведении */
     box-shadow: none !important;
     text-decoration: none !important;
 }
 
 /* Убедимся, что иконка тоже соответствует стилям */
 .btn-custom-logout i {
-    color: #4b5563;
+    color: #fff;
     font-size: 16px;
     line-height: 24px;
     transition: color 0.2s ease;
@@ -547,7 +548,7 @@ body {
 
 .btn-custom-logout:hover i,
 .btn-custom-logout:focus i {
-    color: #4338ca;
+    color: #6690fb;
 }
 .page-title {
     /* Шрифт */
@@ -595,7 +596,7 @@ body {
     font-size: 14px;
 
     /* Цвет */
-    color: #4f46e5; /* rgb(79, 70, 229) */
+    color: #45aaff; /* rgb(79, 70, 229) */
     background-color: transparent; /* rgba(0, 0, 0, 0) */
 
     /* Интервалы */
@@ -619,7 +620,7 @@ body {
 
 .btn-edit:hover,
 .btn-edit:focus {
-    color: #4338ca; /* Немного темнее при наведении */
+    color: #5c86fd; /* Немного темнее при наведении */
     background-color: transparent;
     text-decoration: none;
     box-shadow: none;
@@ -637,7 +638,7 @@ body {
     font-size: 14px;
 
     /* Цвет */
-    color: #6b7280; /* rgb(107, 114, 128) */
+    color: #87898c; /* rgb(107, 114, 128) */
     background-color: transparent; /* rgba(0, 0, 0, 0) */
 
     /* Интервалы */
@@ -673,7 +674,7 @@ body {
     /* Основные стили */
     font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
     font-size: 16px !important;
-    color: #4b5563 !important;
+    color: #fff !important;
     line-height: 24px !important;
 
     /* Жесткое ограничение текста */
@@ -725,6 +726,7 @@ body {
     /* Уменьшаем размер имени пользователя в мобильной версии */
     .user-profile-container.d-lg-none .username-text {
         font-size: 14px;
+        color: #fff;
     }
 
     /* Уменьшаем размер аватара в мобильной версии */
@@ -764,18 +766,18 @@ body {
 .sidebar .nav-pills .show > .nav-link,
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
-    background-color: #EEF2FF !important;
-    color: #4338ca !important;
+    background-color: #1e75ff !important;
+    color: #eaeaea !important;
     box-shadow: 0 4px 10px rgba(67, 97, 238, 0.1) !important;
 }
 .nav-link:hover {
-    background-color: #f8f8fc !important; /* Цвет фона при наведении */
-    color: inherit; /* Наследует цвет текста от обычного состояния */
+    background-color: #1e75ff !important; /* Цвет фона при наведении */
+    color: #fff; /* Наследует цвет текста от обычного состояния */
 }
 /* Стили для блока с токенами */
 .tokens-block,
 .sidebar .mt-4 {
-    background-color: #F2F3FF;
+    background-color: #535353;
     padding: 15px;
     border-radius: 10px;
     margin-bottom: 15px;
@@ -786,14 +788,14 @@ body {
 
 .btn-indigo {
     background-color: #4F46E5;
-    border-color: #4F46E5;
+    border-color: #fff;
     color: white;
 }
 
 .btn-indigo:hover,
 .btn-indigo:focus {
     background-color: #4338ca; /* Немного темнее при наведении */
-    border-color: #4338ca;
+    border-color: #3d31d4;
     color: white;
 }
 hr {
@@ -844,8 +846,8 @@ body.menu-open {
     /* Базовые стили кнопки */
     padding: 10px 24px;
     border-radius: 8px;
-    border: 1px solid rgba(79, 70, 229, 0.2);
-    background-color: var(--primary-light);
+    border: 1px solid #fff;
+    background-color: #424242;
 
     /* Шрифт */
     font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -853,7 +855,7 @@ body.menu-open {
     font-weight: 500;
 
     /* Цвет */
-    color: #4338ca;
+    color: #fff;
 
     /* Эффекты */
     transition: all 0.3s ease;

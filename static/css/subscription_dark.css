@@ -37,55 +37,6 @@
     padding: 2rem 1rem;
 }
 
-.nav-link {
-    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-size: 16px;
-    line-height: 24px;
-    vertical-align: baseline;
-    letter-spacing: normal;
-    word-spacing: 0px;
-    font-weight: 500;
-    font-style: normal;
-    font-variant: normal;
-    text-transform: none;
-    text-decoration: none;
-    text-align: left;
-    text-indent: 0px;
-    color: var(--dark-color);
-    transition: all 0.3s ease;
-}
-
-.username-text {
-    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-size: 16px;
-    color: #4338ca;
-    background-color: transparent;
-    line-height: 24px;
-    vertical-align: baseline;
-    letter-spacing: normal;
-    word-spacing: 0px;
-    font-weight: 500;
-    font-style: normal;
-    font-variant: normal;
-    text-transform: none;
-    text-decoration: none;
-    text-align: left;
-    text-indent: 0px;
-    display: block;
-}
-
-.nav-link.active {
-    background-color: #EEF2FF;
-    color: white !important;
-    box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
-}
-
-.user-profile-container {
-    background-color: #EEF2FF;
-    border-radius: 30px;
-    padding: 7px 17px;
-}
-
 .btn-custom-logout {
     border: none !important;
     background-color: transparent !important;
@@ -106,28 +57,6 @@
     text-align: left;
     text-indent: 0px;
     transition: color 0.2s ease;
-}
-
-.sidebar .nav-pills .nav-link.active,
-.sidebar .nav-pills .show > .nav-link,
-.nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
-    background-color: #EEF2FF !important;
-    color: #4338ca !important;
-    box-shadow: 0 4px 10px rgba(67, 97, 238, 0.1) !important;
-}
-
-.nav-link:hover {
-    background-color: #f8f8fc !important;
-    color: inherit;
-}
-
-.tokens-block,
-.sidebar .mt-4 {
-    background-color: #F2F3FF;
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 15px;
 }
 
 /* Стили для карточек тарифов */
@@ -199,20 +128,9 @@
     background-color: var(--primary-color);
 }
 
-/* Стили для кнопок */
-.btn-indigo {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-.btn-indigo:hover {
-    background-color: rgb(67, 56, 202);
-    color: white;
-}
-
 /* Стили для кнопок действий */
 .btn-outline-secondary {
-    color: #6B7280;
+    color: #fff;
     border-color: #D1D5DB;
 }
 
@@ -233,9 +151,9 @@
 }
 
 .btn-light {
-    background-color: #F9FAFB;
+    background-color: #5B5B5B;
     border-color: #E5E7EB;
-    color: #4B5563;
+    color: #E5E7EB;
 }
 
 .btn-light:hover {
@@ -379,9 +297,7 @@
     color: #111827;
 }
 
-.card-body {
-    padding: 20px;
-}
+
 
 /* Стили для фокуса на элементах */
 :focus {

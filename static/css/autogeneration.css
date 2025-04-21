@@ -373,28 +373,6 @@
     }
 }
 
-/* Стили для кнопки "Индиго" */
-.btn-indigo {
-    background-color: #4F46E5;
-    border-color: #4F46E5;
-    color: white;
-}
-
-.btn-indigo:hover, 
-.btn-indigo:focus {
-    background-color: #4338ca;
-    border-color: #4338ca;
-    color: white;
-}
-
-/* Стили для токенов */
-.tokens-block {
-    background-color: #F2F3FF;
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 15px;
-}
-
 .text-indigo-600 {
     color: #4f46e5;
 }
