@@ -1,7 +1,7 @@
 /* Стили для страницы настроек */
 
 /* Стили для вкладок */
-.settings-tabs .nav-link {
+.settings-tabs .nav-set-link {
     color: #6B7280;
     border: none;
     padding: 0.75rem 1.25rem;
@@ -11,13 +11,13 @@
     transition: all 0.2s ease;
 }
 
-.settings-tabs .nav-link:hover {
+.settings-tabs .nav-set-link:hover {
     color: #4338ca;
     background-color: transparent;
     border-bottom-color: #E5E7EB;
 }
 
-.settings-tabs .nav-link.active {
+.settings-tabs .nav-set-link.active {
     color: #4338ca;
     background-color: transparent;
     border-bottom-color: #4338ca;
@@ -94,7 +94,7 @@
 
 /* Адаптивные стили */
 @media (max-width: 768px) {
-    .settings-tabs .nav-link {
+    .settings-tabs .nav-set-link {
         padding: 0.5rem 0.75rem;
         font-size: 0.9rem;
     }
@@ -109,9 +109,9 @@
     }
 }
 /* Добавьте этот стиль в settings.css */
-.settings-tabs .nav-link.active,
-.settings-tabs .nav-pills .nav-link.active,
-.settings-tabs .nav-pills .show > .nav-link {
+.settings-tabs .nav-set-link.active,
+.settings-tabs .nav-pills .nav-set-link.active,
+.settings-tabs .nav-pills .show > .nav-set-link {
     color: #4338ca !important;
     background-color: transparent !important;
     border-bottom-color: #4338ca !important;
