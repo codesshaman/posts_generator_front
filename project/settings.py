@@ -94,6 +94,7 @@ TEMPLATES = [
                 'apps.posting.context_processors.all_posts',
                 'apps.posting.context_processors.create_post',
                 'apps.posting.context_processors.subscription',
+                'project.context_processors.dark_mode',
                 'apps.generation.context_processors.autogeneration',
             ],
         },
