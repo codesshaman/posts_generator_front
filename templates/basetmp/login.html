@@ -1,0 +1,15 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head><!-- Шапка сайта -->
+    {% include 'basetmp/head.html' %}
+</head>
+<body>
+    <!-- Основной контент -->
+    <main>{% block content %} {% endblock %}</main>
+    <!-- Футер сайта -->
+    <footer>{% include 'basetmp/footer.html' %}</footer>
+    <!-- Скрипт для работы мобильного меню -->
+    <script src = "{% static 'js/posting/overlay.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,488 @@
+/* Основные стили для страниц авторизации */
+body {
+    background-color: #f9fafb;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.auth-container {
+    max-width: 900px;
+    width: 100%;
+    padding: 20px;
+}
+
+.auth-card {
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+    border: none;
+    overflow: hidden;
+}
+
+.auth-header {
+    text-align: center;
+    padding: 30px 20px 20px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: 700;
+    margin-left: 10px;
+    color: #333;
+}
+
+.auth-tabs {
+    display: flex;
+    margin-bottom: 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.auth-tab {
+    flex: 1;
+    text-align: center;
+    padding: 15px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #6b7280;
+    transition: all 0.3s ease;
+}
+
+.auth-tab.active {
+    color: rgb(79, 70, 229);
+    border-bottom: 2px solid rgb(79, 70, 229);
+}
+
+/* Новый двухколоночный макет */
+.auth-content {
+    display: flex;
+    flex-direction: row;
+}
+
+.social-auth-column {
+    width: 35%;
+    padding: 30px 20px;
+    background-color: #f8f9ff;
+    border-right: 1px solid #e5e7eb;
+}
+
+.auth-forms-column {
+    width: 65%;
+}
+
+.social-auth-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #4b5563;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.social-auth-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.auth-social-btn {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    background-color: white;
+    font-weight: 500;
+    color: #4b5563;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.auth-social-btn:hover {
+    background-color: #f9fafb;
+    border-color: #d1d5db;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.auth-social-btn i {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+/* Преимущества авторизации */
+.auth-benefits {
+    margin-top: 40px;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.benefit-item i {
+    color: rgb(79, 70, 229);
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.auth-form {
+    padding: 30px;
+}
+
+.form-label {
+    font-weight: 500;
+    color: #4b5563;
+    margin-bottom: 6px;
+}
+
+/* Поля ввода с иконками */
+.input-with-icon {
+    position: relative;
+}
+
+.input-with-icon i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    font-size: 18px;
+}
+
+.input-with-icon input {
+    padding-left: 45px;
+}
+
+.form-control {
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: rgb(79, 70, 229);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+.btn-primary {
+    background-color: rgb(79, 70, 229);
+    border-color: rgb(79, 70, 229);
+    padding: 12px 20px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: rgb(67, 56, 202);
+    border-color: rgb(67, 56, 202);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(79, 70, 229, 0.2);
+}
+
+.auth-footer {
+    text-align: center;
+    padding: 20px;
+    color: #6b7280;
+    font-size: 14px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.forgot-password, .terms-link, .back-link, #resendLink {
+    color: rgb(79, 70, 229);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.forgot-password:hover, .terms-link:hover, .back-link:hover, #resendLink:hover {
+    text-decoration: underline;
+    color: rgb(67, 56, 202);
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+}
+
+.back-link i {
+    margin-right: 5px;
+}
+
+.form-check-input:checked {
+    background-color: rgb(79, 70, 229);
+    border-color: rgb(79, 70, 229);
+}
+
+.form-check-label {
+    font-size: 14px;
+    color: #4b5563;
+}
+
+.auth-form-container {
+    display: none;
+}
+
+.auth-form-container.active {
+    display: block;
+}
+
+.password-field {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #9ca3af;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.toggle-password:hover {
+    color: #4b5563;
+}
+
+/* Индикатор силы пароля */
+.password-strength {
+    margin-top: 8px;
+}
+
+.strength-bar {
+    height: 4px;
+    background-color: #e5e7eb;
+    border-radius: 2px;
+    margin-bottom: 6px;
+}
+
+.strength-progress {
+    height: 100%;
+    width: 0;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.strength-text {
+    color: #9ca3af;
+    font-size: 12px;
+}
+
+/* Классы для разных уровней силы пароля */
+.strength-weak .strength-progress {
+    width: 30%;
+    background-color: #ef4444;
+}
+
+.strength-medium .strength-progress {
+    width: 60%;
+    background-color: #f59e0b;
+}
+
+.strength-strong .strength-progress {
+    width: 100%;
+    background-color: #10b981;
+}
+
+/* Стили для уведомлений */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    transform: translateX(120%);
+    transition: transform 0.3s ease;
+    z-index: 1050;
+}
+
+.notification.show {
+    transform: translateX(0);
+}
+
+.notification-success {
+    border-left: 4px solid #10b981;
+}
+
+.notification-error {
+    border-left: 4px solid #ef4444;
+}
+
+.notification-info {
+    border-left: 4px solid #3b82f6;
+}
+
+.notification i {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.notification-success i {
+    color: #10b981;
+}
+
+.notification-error i {
+    color: #ef4444;
+}
+
+.notification-info i {
+    color: #3b82f6;
+}
+
+/* Стили для страницы восстановления пароля */
+.success-icon {
+    font-size: 48px;
+    color: #10b981;
+    margin-bottom: 20px;
+}
+
+.success-icon i {
+    background-color: rgba(16, 185, 129, 0.1);
+    border-radius: 50%;
+    padding: 15px;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .auth-content {
+        flex-direction: column;
+    }
+
+    .social-auth-column, .auth-forms-column {
+        width: 100%;
+    }
+
+    .social-auth-column {
+        border-right: none;
+        border-bottom: 1px solid #e5e7eb;
+        padding: 20px;
+    }
+
+    .auth-social-btn {
+        padding: 10px;
+    }
+
+    .auth-form {
+        padding: 20px;
+    }
+
+    .auth-benefits {
+        display: none;
+    }
+}
+
+/* Стили для страницы восстановления пароля */
+#reset-step1, #reset-step2, #reset-step3, #reset-step4 {
+    padding: 30px;
+}
+
+/* Дополнительные стили для корректного отображения форм */
+.auth-form-container .auth-form {
+    padding: 30px;
+}
+
+/* Исправление для отображения иконок в полях с паролем */
+.input-with-icon.password-field .toggle-password {
+    right: 12px;
+}
+
+.input-with-icon.password-field input {
+    padding-right: 40px;
+}
+
+/* Дополнительные стили для кнопок социальных сетей */
+.auth-social-btn i.ph-google-logo {
+    color: #EA4335;
+}
+
+.auth-social-btn i.ph-vk-logo {
+    color: #4C75A3;
+}
+
+.auth-social-btn i.ph-telegram-logo {
+    color: #0088cc;
+}
+
+/* Улучшение стилей для мобильных устройств */
+@media (max-width: 576px) {
+    .auth-container {
+        padding: 10px;
+    }
+
+    .auth-header {
+        padding: 20px 15px 15px;
+    }
+
+    .auth-tab {
+        padding: 12px 8px;
+        font-size: 14px;
+    }
+
+    .auth-form {
+        padding: 20px 15px;
+    }
+
+    .form-control {
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+
+    .btn-primary {
+        padding: 10px 16px;
+    }
+
+    .auth-social-btn {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    .auth-social-btn i {
+        font-size: 18px;
+    }
+
+    .social-auth-title {
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+}
+
+/* Исправление для страницы восстановления пароля */
+.auth-form-container#reset-step1,
+.auth-form-container#reset-step2,
+.auth-form-container#reset-step3,
+.auth-form-container#reset-step4 {
+    max-width: 100%;
+}
+
+/* Дополнительные стили для улучшения внешнего вида */
+.auth-header h4 {
+    margin-bottom: 10px;
+    color: #1f2937;
+}
+
+.auth-header p {
+    color: #6b7280;
+    margin-bottom: 0;
+}

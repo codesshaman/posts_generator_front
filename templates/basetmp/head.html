@@ -18,6 +18,22 @@
 {% if set_dark_mode %}
     <link rel="stylesheet" href="{% static 'css/style_dark.css' %}">
 {% endif %}
+{% if request.resolver_match.view_name == 'login' %}
+    {% if not set_dark_mode %}
+        <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+    {% endif %}
+    {% if set_dark_mode %}
+        <link rel="stylesheet" href="{% static 'css/auth_dark.css' %}">
+    {% endif %}
+{% endif %}
+{% if request.resolver_match.view_name == 'reset-password' %}
+    {% if not set_dark_mode %}
+        <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+    {% endif %}
+    {% if set_dark_mode %}
+        <link rel="stylesheet" href="{% static 'css/auth_dark.css' %}">
+    {% endif %}
+{% endif %}
 {% if request.resolver_match.view_name == 'create_post' %}
     {% if not set_dark_mode %}
         <link rel="stylesheet" href="{% static 'css/create-post.css' %}">

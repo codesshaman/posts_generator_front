@@ -58,6 +58,7 @@ LOGOUT_REDIRECT_URL = '/'
 
 INSTALLED_APPS = [
     'django.contrib.staticfiles',
+    'apps.login.apps.LoginConfig',
     'whitenoise.runserver_nostatic',
     'apps.basetmp.apps.BasetmpConfig',
     'apps.vkoauth.apps.VKoauthConfig',

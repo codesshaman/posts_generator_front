@@ -3,6 +3,7 @@ from django.urls import path, include
 from django.conf import settings
 
 urlpatterns = [
+    path('', include('apps.login.urls')),       # Страница входа
     path('', include('apps.basetmp.urls')),     # Базовый шаблон
     path('', include('apps.mainpage.urls')),    # Заглавная страница
     path('', include('apps.articles.urls')),    # Страница статей
