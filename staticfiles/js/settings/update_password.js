@@ -41,3 +41,22 @@ document.getElementById('passwordForm').addEventListener('submit', async functio
         form.parentNode.insertBefore(alertDiv, form);
     }
 });
+
+
+// Переключение видимости пароля
+function togglePasswordVisibility(inputId, toggleId) {
+    const input = document.getElementById(inputId);
+    const toggle = document.getElementById(toggleId);
+
+    toggle.addEventListener('click', function() {
+        const isPassword = input.type === 'password';
+        input.type = isPassword ? 'text' : 'password';
+        toggle.classList.toggle('bi-eye', !isPassword);
+        toggle.classList.toggle('bi-eye-slash', isPassword);
+    });
+}
+
+// Применяем переключение для всех полей
+togglePasswordVisibility('currentPassword', 'toggleCurrentPassword');
+togglePasswordVisibility('newPassword', 'toggleNewPassword');
+togglePasswordVisibility('confirmPassword', 'toggleConfirmPassword');

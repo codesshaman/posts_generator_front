@@ -74,22 +74,38 @@
     </div>
 </form><hr class="my-4">
 
+{% load i18n %}
 <form id="passwordForm" action="{% url 'update_password' %}" method="post">
     {% csrf_token %}
     <h4 class="mb-4">{{ change_password }}</h4>
-    {% load i18n %}
+
     <div class="row">
         <div class="col-md-4 mb-3">
             <label for="currentPassword" class="form-label">{{ current_password }}</label>
-            <input type="password" class="form-control" id="currentPassword" name="current_password" required>
+            <div class="input-group">
+                <input type="password" class="form-control" id="currentPassword" name="current_password" required>
+                <span class="input-group-text password-toggle">
+                    <i class="bi bi-eye" id="toggleCurrentPassword"></i>
+                </span>
+            </div>
         </div>
         <div class="col-md-4 mb-3">
             <label for="newPassword" class="form-label">{{ new_password }}</label>
-            <input type="password" class="form-control" id="newPassword" name="new_password" required>
+            <div class="input-group">
+                <input type="password" class="form-control" id="newPassword" name="new_password" required>
+                <span class="input-group-text password-toggle">
+                    <i class="bi bi-eye" id="toggleNewPassword"></i>
+                </span>
+            </div>
         </div>
         <div class="col-md-4 mb-3">
             <label for="confirmPassword" class="form-label">{{ confirm_password }}</label>
-            <input type="password" class="form-control" id="confirmPassword" name="confirm_password" required>
+            <div class="input-group">
+                <input type="password" class="form-control" id="confirmPassword" name="confirm_password" required>
+                <span class="input-group-text password-toggle">
+                    <i class="bi bi-eye" id="toggleConfirmPassword"></i>
+                </span>
+            </div>
         </div>
     </div>
 
@@ -109,6 +125,7 @@
 
     <hr class="my-4">
 </form>
+
 <form id="TimeLangDark" action="/settings/update/" method="post">
 
     {% csrf_token %}
@@ -549,8 +566,8 @@
 <script src = "{% static 'js/mobile_menu.js' %}"></script>
 
 <!-- JavaScript для работы с настройками -->
-<script src = "{% static 'js/settings/save_time_lang_dark.js' %}"></script>
 <script src = "{% static 'js/settings/update_password.js' %}"></script>
+<script src = "{% static 'js/settings/save_time_lang_dark.js' %}"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
