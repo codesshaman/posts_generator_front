@@ -140,7 +140,7 @@
     </div>
 
     <div class="form-check form-switch mb-3">
-        <input class="form-check-input" type="checkbox" name="dark_mode" id="darkModeSwitch" {% if selected_darkmode %}checked{% endif %}>
+        <input class="form-check-input" type="checkbox" name="dark_mode" id="darkModeSwitch" {% if selected_darkmode == 'true' %}checked{% endif %}>
         <label class="form-check-label">{{ dark_mode }}</label>
     </div>
 
@@ -549,7 +549,7 @@
 <script src = "{% static 'js/mobile_menu.js' %}"></script>
 
 <!-- JavaScript для работы с мобильным меню -->
-<!--<script src = "{% static 'js/settings/save_settings.js' %}"></script>-->
+<script src = "{% static 'js/settings/save_settings.js' %}"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
