@@ -1,5 +1,5 @@
 // Обработчик для формы профиля
-const profileForm = document.getElementById('profileForm');
+const profileForm = document.getElementById('TimeLangDark');
 if (profileForm) {
     profileForm.addEventListener('submit', function(e) {
         e.preventDefault();

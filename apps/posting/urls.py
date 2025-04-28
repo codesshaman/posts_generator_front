@@ -15,4 +15,5 @@ urlpatterns = [
     path('subscription', subscription, name='subscription'),
     path('settings', settings, name='settings'),
     path('settings/update/', update_settings, name='update_settings'),
+    path('settings/update-password/', update_password, name='update_password'),
 ]
