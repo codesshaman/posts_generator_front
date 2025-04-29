@@ -424,6 +424,23 @@ body {
     padding-right: 40px;
 }
 
+.input-with-icon.password-field {
+        position: relative;
+    }
+
+.input-with-icon .ph-lock {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+    z-index: 2;
+}
+.input-with-icon .form-control {
+    padding-left: 35px; /* Учитываем иконку замка */
+    padding-right: 40px; /* Учитываем кнопку глаза */
+}
+
 /* Дополнительные стили для кнопок социальных сетей */
 .auth-social-btn i.ph-google-logo {
     color: #EA4335;

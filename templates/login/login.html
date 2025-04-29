@@ -126,14 +126,15 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="registerPassword" class="form-label">Пароль</label>
+                                <label for="loginPassword" class="form-label">Пароль</label>
                                 <div class="input-with-icon password-field">
                                     <i class="ph ph-lock"></i>
-                                    <input type="password" class="form-control" id="registerPassword" placeholder="Создайте пароль" required>
-                                    <button type="button" class="toggle-password" data-target="registerPassword">
+                                    <input type="password" class="form-control" id="loginPassword" placeholder="Введите ваш пароль" required>
+                                    <button type="button" class="toggle-password" data-target="loginPassword">
                                         <i class="ph ph-eye"></i>
                                     </button>
                                 </div>
+                            </div>
                                 <div class="password-strength" id="passwordStrength">
                                     <div class="strength-bar">
                                         <div class="strength-progress"></div>
@@ -172,6 +173,26 @@
 
 <!-- Подключение JS файла для авторизации -->
 <script src="{% static 'js/login/auth.js"></script>
+
+<script src="{% static 'js/login/auth_tabs.js"></script>
+
+<script>
+document.querySelectorAll('.toggle-password').forEach(button => {
+    button.addEventListener('click', function() {
+        const targetId = this.getAttribute('data-target');
+        const input = document.getElementById(targetId);
+        const icon = this.querySelector('i');
+
+        // Переключаем тип поля
+        const isPassword = input.type === 'password';
+        input.type = isPassword ? 'text' : 'password';
+
+        // Переключаем иконку
+        icon.classList.toggle('ph-eye', !isPassword);
+        icon.classList.toggle('ph-eye-slash', isPassword);
+    });
+});
+</script>
 
 
 {% endblock %}
