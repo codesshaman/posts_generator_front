@@ -409,6 +409,24 @@
 ^условиями использования^terms of use^
 ^Зарегистрироваться^Register^
 ^Все права защищены^All rights reserved^
+###########################
+### apps/login/views.py ###
+###########################
+^Восстановление пароля^Password recovery^
+^Введите ваш email для получения инструкций по восстановлению пароля^Enter your email address for instructions on password recovery^
+^Отправить инструкции^Send instructions^
+^Вернуться к авторизации^Go back to authorization^
+^Инструкции отправлены^Instructions have been sent^
+^Мы отправили инструкции по восстановлению пароля на ваш email. Пожалуйста, проверьте вашу почту^We have sent password recovery instructions to your email. Please check your email^
+^Не получили письмо^Did you not receive the email^
+^Отправить повторно^Resend^
+^Введите новый пароль^Enter a new password^
+^Подтвердите новый пароль^Confirm the new password^
+^Сохранить новый пароль^Save a new password^
+^Пароль успешно изменён^Password changed successfully^
+^Ваш пароль был успешно изменен. Теперь вы можете войти в систему, используя новый пароль^Your password has been successfully changed. You can now log in using a new password^
+^Перейти к авторизации^Go to authorization^
+^ContentAI^ContentAI^
 ^ContentAI^ContentAI^
 ^ContentAI^ContentAI^
 ^ContentAI^ContentAI^

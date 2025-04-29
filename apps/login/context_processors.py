@@ -4,8 +4,6 @@ from project.language import translate, language
 def login_page(request):
     lang = language(request)
     return {
-        "title": translate("Страница входа", lang),
-        "h2_text": translate("Вход/Регистрация", lang),
         "site_name": translate("ContentAI", lang),
         "entrance_text": translate("Войдите в свой аккаунт или создайте новый", lang),
         "login_text": translate("Вход", lang),
@@ -37,13 +35,22 @@ def login_page(request):
 def reset_page(request):
     lang = language(request)
     return {
-        "post_title_2": translate("Сброс пароля", lang),
-        "h2_text": translate("Мосты", lang),
-        "h2_text": translate("Мосты", lang),
-        "h2_text": translate("Мосты", lang),
-        "h2_text": translate("Мосты", lang),
-        "h2_text": translate("Мосты", lang),
-        "h2_text": translate("Мосты", lang),
+        "pwd_recov": translate("Восстановление пароля", lang),
+        "email_for_rec": translate("Введите ваш email для получения инструкций по восстановлению пароля", lang),
+        "send_instr": translate("Отправить инструкции", lang),
+        "go_back": translate("Вернуться к авторизации", lang),
+        "instr_send": translate("Инструкции отправлены", lang),
+        "we_send": translate("Мы отправили инструкции по восстановлению пароля на ваш email. Пожалуйста, проверьте вашу почту", lang),
+        "not_receive": translate("Не получили письмо", lang),
+        "resend": translate("Отправить повторно", lang),
+        "new_pwd": translate("Новый пароль", lang),
+        "enter_new_pwd": translate("Введите новый пароль", lang),
+        "confirm_new_pwd": translate("Подтвердите новый пароль", lang),
+        "pwd_confirmation": translate("Подтверждение пароля", lang),
+        "save_new_pwd": translate("Сохранить новый пароль", lang),
+        "suc_chng": translate("Пароль успешно изменён", lang),
+        "your_pwd_chng": translate("Ваш пароль был успешно изменен. Теперь вы можете войти в систему, используя новый пароль", lang),
+        "go_to_auth": translate("Перейти к авторизации", lang),
         "h2_text": translate("Мосты", lang),
         "h2_text": translate("Мосты", lang),
     }

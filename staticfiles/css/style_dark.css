@@ -268,7 +268,7 @@ body {
 }
 /* Стили для нового формата постов */
 .post-card {
-    background-color: #FFFFFF;
+    background-color: #333;
     border: none;
     border-radius: 12px;
     overflow: hidden;
