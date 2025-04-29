@@ -380,4 +380,10 @@
 ^Токен бота^Bot token^
 ^Создайте бота через @BotFather и вставьте полученный токен^Create a bot via @BotFather and paste the received token^
 ^Не забудьте добавить созданного бота в качестве администратора вашего канала или группы^Don't forget to add the created bot as an administrator of your channel or public^
-^Название для удобства^^
+^Название для удобства^Alias^
+###########################
+### apps/login/views.py ###
+###########################
+^Страница входа^Login page^
+^Сброс пароля^Reset password^
+^ContentAI^ContentAI^
