@@ -86,7 +86,7 @@
 
 .plan-title {
     font-weight: 600;
-    color: #111827;
+    color: #fff;
 }
 
 .plan-price {
@@ -113,6 +113,10 @@
     border: 1px solid #E5E7EB;
     transition: all 0.2s ease;
     border-radius: 12px;
+}
+
+.usage-stats{
+    background-color: #787878;
 }
 
 .payment-method-card:hover {
@@ -254,7 +258,7 @@
 .current-plan-info {
     padding: 20px;
     border-radius: 8px;
-    background-color: #6B6F73;
+    background-color: #608a78;
 }
 
 /* Стили для модальных окон */

@@ -128,6 +128,10 @@
     transition: color 0.2s ease;
 }
 
+.usage-stats{
+    background-color: #dbd9d9;
+}
+
 .sidebar .nav-pills .nav-link.active,
 .sidebar .nav-pills .show > .nav-link,
 .nav-pills .nav-link.active,
@@ -356,7 +360,7 @@
 .current-plan-info {
     padding: 20px;
     border-radius: 8px;
-    background-color: #F9FAFB;
+    background-color: #c9ffcf;
 }
 
 /* Стили для модальных окон */
