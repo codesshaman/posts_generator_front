@@ -387,3 +387,30 @@
 ^Страница входа^Login page^
 ^Сброс пароля^Reset password^
 ^ContentAI^ContentAI^
+^Добро пожаловать^Welcome^
+^Войдите в свой аккаунт или создайте новый^Log in to your account or create a new one^
+^Вход^Login^
+^Регистрация^Register^
+^Вход/Регистрация^Login/Register^
+^Быстрый вход через^Quick login via^
+^Email^Email^
+^Пароль^Password^
+^Безопасная авторизация^Secure authorization^
+^Быстрый доступ^Quick access^
+^Без дополнительной регистрации^Without additional registration^
+^Запомнить меня^Remember me^
+^Забыли пароль^Forgot your password^
+^Войти^Enter^
+^Введите ваш email^Enter your email address^
+^Введите ваш пароль^Enter your password^
+^Введите ваше имя^Enter your name^
+^Минимум 8 символов, включая буквы и цифры^Minimum of 8 characters, including letters and numbers^
+^Я согласен с^I agree with^
+^условиями использования^terms of use^
+^Зарегистрироваться^Register^
+^Все права защищены^All rights reserved^
+^ContentAI^ContentAI^
+^ContentAI^ContentAI^
+^ContentAI^ContentAI^
+^ContentAI^ContentAI^
+^ContentAI^ContentAI^
