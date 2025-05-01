@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 
 
-sers_db = {
+users_db = {
     "testuser@mail.ru": "test123WS$"  # Пример: имя пользователя и пароль
 }
 
