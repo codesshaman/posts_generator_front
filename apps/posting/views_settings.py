@@ -1,4 +1,5 @@
 from project.cookies import set_cookie_if_not_exists, set_cookies
+from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_POST
 from project.language import translate, language
 from django.http import JsonResponse
@@ -48,25 +49,54 @@ def update_settings(request):
     except Exception as e:
         return JsonResponse({"status": "error", "message": f"Ошибка: {str(e)}"}, status=500)
 
-
+@ensure_csrf_cookie
 @set_cookie_if_not_exists("user_language", lambda request: request.LANGUAGE_CODE or 'en')
 def settings(request):
     """Отображает страницу настроек"""
     if debug:
         print("Отображаем страницу настроек")
+    """Отображение формы с захардкоженными данными."""
+    user_data = {
+        "first_name": "Никита",
+        "last_name": "Джигурда",
+        "email": "n.jigurda@zdorovenniy.yaz",
+        "phone": "+7 (999) 123-45-67",
+    }
     lang = language(request)
     selected_language = request.COOKIES.get('user_language', 'en')
     selected_timezone = request.COOKIES.get('user_timezone', 'Europe/Moscow')
     selected_darkmode = request.COOKIES.get('dark_mode', 'false')
     return render(request, "posting/settings.html", {
-        # "posts": initial_posts,
-        # "has_more": has_more,
+        "user_data": user_data,
         "title": translate("Настройки", lang),
         "h2_text": translate("Настройки", lang),
         'selected_language': selected_language,
         'selected_timezone': selected_timezone,
         'selected_darkmode': selected_darkmode,
     })
+
+
+@require_POST
+def update_personal_info(request):
+    """Заглушка для обработки данных формы PersonalInfo"""
+    try:
+        first_name = request.POST.get("firstName")
+        last_name = request.POST.get("lastName")
+        email = request.POST.get("email")
+        phone = request.POST.get("phone")
+
+        # Просто логируем, можно будет потом сохранить
+        print("Получены данные формы:")
+        print(f"Имя: {first_name}")
+        print(f"Фамилия: {last_name}")
+        print(f"Email: {email}")
+        print(f"Телефон: {phone}")
+
+        return JsonResponse({"status": "success", "message": "Данные успешно сохранены"})
+
+    except Exception as e:
+        return JsonResponse({"status": "error", "message": f"Ошибка: {str(e)}"}, status=500)
+
 
 @require_POST
 def update_password(request):

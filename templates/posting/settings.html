@@ -32,7 +32,7 @@
 <div class="tab-pane fade show active" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
 <h4 class="mb-4">{{ personal_info }}</h4>
 
-<form id="profileForm2">
+<form id="PersonalInfo">
     <div class="row mb-4">
         <div class="col-md-2 text-center">
             <div class="avatar-upload mb-3">
@@ -49,22 +49,22 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="firstName" class="form-label">{{ name }}</label>
-                    <input type="text" class="form-control" id="firstName" value="Иван">
+                    <input type="text" class="form-control" id="firstName" name="firstName" value="{{ user_data.first_name }}">
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="lastName" class="form-label">{{ surname }}</label>
-                    <input type="text" class="form-control" id="lastName" value="Иванов">
+                    <input type="text" class="form-control" id="lastName" name="lastName" value="{{ user_data.last_name }}">
                 </div>
             </div>
 
             <div class="mb-3">
                 <label for="email" class="form-label">{{ email }}</label>
-                <input type="email" class="form-control" id="email" value="ivan.ivanov@example.com">
+                <input type="email" class="form-control" id="email" name="email" value="{{ user_data.email }}">
             </div>
 
             <div class="mb-3">
                 <label for="phone" class="form-label">{{ phone }}</label>
-                <input type="tel" class="form-control" id="phone" value="+7 (999) 123-45-67">
+                <input type="tel" class="form-control" id="phone" name="phone" value="{{ user_data.phone }}">
             </div>
         </div>
         <div class="mt-4 text-end">
@@ -72,7 +72,8 @@
             <button type="submit" class="btn btn-primary">{{ save_changes }}</button>
         </div>
     </div>
-</form><hr class="my-4">
+</form>
+<hr class="my-4">
 
 {% load i18n %}
 <form id="passwordForm" action="{% url 'update_password' %}" method="post">
@@ -567,6 +568,7 @@
 
 <!-- JavaScript для работы с настройками -->
 <script src = "{% static 'js/settings/update_password.js' %}"></script>
+<script src = "{% static 'js/settings/save_personal_info.js' %}"></script>
 <script src = "{% static 'js/settings/save_time_lang_dark.js' %}"></script>
 
 <script>
