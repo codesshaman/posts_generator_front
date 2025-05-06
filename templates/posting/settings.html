@@ -391,6 +391,12 @@
             <label class="form-check-label" for="emailNewsSwitch">{{ news_and_updates }}</label>
             <small class="text-muted d-block mt-1">{{ service_updates }}</small>
         </div>
+            <button type="button" class="btn btn-primary" id="saveNotificationsBtn"
+            data-url="{% url 'save_notifications' %}">
+        {{ save_settings }}
+    </button>
+
+    <script src="{% static 'js/notifications.js' %}"></script>
     </div>
 </div>
 
@@ -576,6 +582,7 @@
 <script src = "{% static 'js/settings/update_password.js' %}"></script>
 <script src = "{% static 'js/settings/save_personal_info.js' %}"></script>
 <script src = "{% static 'js/settings/save_time_lang_dark.js' %}"></script>
+<script src = "{% static 'js/settings/notifications_settings.js' %}"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {

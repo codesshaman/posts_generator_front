@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 from datetime import datetime
 import random
 import string
+import json
 import re
 import os
 
@@ -166,3 +167,19 @@ def update_password(request):
             "status": "error",
             "message": f"Произошла ошибка: {str(e)}"
         }, status=500)
+
+
+@require_POST
+def save_notifications(request):
+    try:
+        data = json.loads(request.body)
+
+        # Заглушка: просто выводим в консоль
+        print("Полученные настройки уведомлений:")
+        for key, value in data.items():
+            print(f"{key}: {'включено' if value else 'выключено'}")
+
+        return JsonResponse({"status": "ok"})
+    except Exception as e:
+        print("Ошибка при разборе данных:", str(e))
+        return JsonResponse({"status": "error", "message": str(e)}, status=400)
