@@ -117,6 +117,14 @@ DATABASES = {}
 
 AUTH_PASSWORD_VALIDATORS = []
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://devfront.groupposter.ru",
+]
+
+CSRF_COOKIE_SAMESITE = "None"
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SAMESITE = "None"
+SESSION_COOKIE_SECURE = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
