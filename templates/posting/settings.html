@@ -36,11 +36,16 @@
     <div class="row mb-4">
         <div class="col-md-2 text-center">
             <div class="avatar-upload mb-3">
-                <div class="avatar-preview rounded-circle mx-auto" style="width: 100px; height: 100px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                <div class="avatar-preview rounded-circle mx-auto"
+                     id="avatarPreview"
+                     style="width: 100px; height: 100px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; overflow: hidden;">
                     <i class="ph ph-user" style="font-size: 48px; color: #aaa;"></i>
                 </div>
+
+                <input type="file" id="avatarInput" accept="image/*" style="display: none;">
+
                 <div class="mt-2">
-                    <button type="button" class="btn btn-sm btn-outline-primary">{{ change_photo }}</button>
+                    <button type="button" class="btn btn-sm btn-outline-primary" id="changeAvatarBtn">{{ change_photo }}</button>
                 </div>
             </div>
         </div>
@@ -567,6 +572,7 @@
 <script src = "{% static 'js/mobile_menu.js' %}"></script>
 
 <!-- JavaScript для работы с настройками -->
+<script src = "{% static 'js/settings/save_avatar.js' %}"></script>
 <script src = "{% static 'js/settings/update_password.js' %}"></script>
 <script src = "{% static 'js/settings/save_personal_info.js' %}"></script>
 <script src = "{% static 'js/settings/save_time_lang_dark.js' %}"></script>
