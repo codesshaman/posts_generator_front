@@ -391,43 +391,43 @@
             <label class="form-check-label" for="emailNewsSwitch">{{ news_and_updates }}</label>
             <small class="text-muted d-block mt-1">{{ service_updates }}</small>
         </div>
-            <button type="button" class="btn btn-primary" id="saveNotificationsBtn"
-            data-url="{% url 'save_notifications' %}">
-        {{ save_settings }}
-    </button>
-
+        <div class="mt-4 text-end">
+            <button type="button" class="btn btn-primary" id="saveEmailNotificationsBtn" data-url="{% url 'save_notifications' %}">
+                {{ save_settings }}
+            </button>
+        </div>
     <script src="{% static 'js/notifications.js' %}"></script>
     </div>
 </div>
 
-<div class="card mb-4">
-    <div class="card-body">
-        <h5 class="mb-3">{{ browser_notifications }}</h5>
+<!--<div class="card mb-4">-->
+<!--    <div class="card-body">-->
+<!--        <h5 class="mb-3">{{ browser_notifications }}</h5>-->
 
-        <div class="form-check form-switch mb-3">
-            <input class="form-check-input" type="checkbox" id="browserNotificationsSwitch">
-            <label class="form-check-label" for="browserNotificationsSwitch">{{ enable_browser_notifications }}</label>
-            <small class="text-muted d-block mt-1">{{ allow_sending_notifications }}</small>
-        </div>
+<!--        <div class="form-check form-switch mb-3">-->
+<!--            <input class="form-check-input" type="checkbox" id="browserNotificationsSwitch">-->
+<!--            <label class="form-check-label" for="browserNotificationsSwitch">{{ enable_browser_notifications }}</label>-->
+<!--            <small class="text-muted d-block mt-1">{{ allow_sending_notifications }}</small>-->
+<!--        </div>-->
 
-        <div class="browser-notifications-settings mt-3" style="display: none;">
-            <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" id="browserNewPostCheck" checked>
-                <label class="form-check-label" for="browserNewPostCheck">{{ new_posts }}</label>
-            </div>
+<!--        <div class="browser-notifications-settings mt-3" style="display: none;">-->
+<!--            <div class="form-check mb-2">-->
+<!--                <input class="form-check-input" type="checkbox" id="browserNewPostCheck" checked>-->
+<!--                <label class="form-check-label" for="browserNewPostCheck">{{ new_posts }}</label>-->
+<!--            </div>-->
 
-            <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" id="browserPostPublishedCheck" checked>
-                <label class="form-check-label" for="browserPostPublishedCheck">{{ publishing_posts }}</label>
-            </div>
+<!--            <div class="form-check mb-2">-->
+<!--                <input class="form-check-input" type="checkbox" id="browserPostPublishedCheck" checked>-->
+<!--                <label class="form-check-label" for="browserPostPublishedCheck">{{ publishing_posts }}</label>-->
+<!--            </div>-->
 
-            <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" id="browserTokensCheck" checked>
-                <label class="form-check-label" for="browserTokensCheck">{{ coins_using }}</label>
-            </div>
-        </div>
-    </div>
-</div>
+<!--            <div class="form-check mb-2">-->
+<!--                <input class="form-check-input" type="checkbox" id="browserTokensCheck" checked>-->
+<!--                <label class="form-check-label" for="browserTokensCheck">{{ coins_using }}</label>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 <div class="card mb-4">
     <div class="card-body">
@@ -437,39 +437,36 @@
             <label for="telegramUsername" class="form-label">{{ your_telegram }}</label>
             <div class="input-group">
                 <input type="text" class="form-control" id="telegramUsername" placeholder="@username">
-                <button class="btn btn-outline-primary" type="button">{{ connect }}</button>
+                <button class="btn btn-outline-primary" type="button" id="connectTelegram">{{ connect }}</button>
             </div>
             <small class="text-muted">{{ instant_notifications }}</small>
         </div>
 
-        <div class="telegram-notifications-settings mt-4" style="display: none;">
+        <div class="telegram-notifications-settings mt-4" style="display: none;" id="notificationSettings">
             <div class="form-check mb-2">
                 <input class="form-check-input" type="checkbox" id="telegramNewPostCheck" checked>
                 <label class="form-check-label" for="telegramNewPostCheck">{{ new_posts }}</label>
             </div>
-
             <div class="form-check mb-2">
                 <input class="form-check-input" type="checkbox" id="telegramPostPublishedCheck" checked>
                 <label class="form-check-label" for="telegramPostPublishedCheck">{{ publishing_posts }}</label>
             </div>
-
             <div class="form-check mb-2">
                 <input class="form-check-input" type="checkbox" id="telegramTokensCheck" checked>
                 <label class="form-check-label" for="telegramTokensCheck">{{ coins_using }}</label>
             </div>
-
             <div class="form-check mb-2">
                 <input class="form-check-input" type="checkbox" id="telegramBillingCheck" checked>
                 <label class="form-check-label" for="telegramBillingCheck">{{ payments_and_subscription }}</label>
             </div>
         </div>
+<!--        <div class="mt-4 text-end">-->
+<!--            <button type="button" class="btn btn-primary" id="saveTGNotificationsBtn">{{ save_settings }}</button>-->
+<!--        </div>-->
     </div>
 </div>
 
-<div class="mt-4 text-end">
-<!--    <button type="button" class="btn btn-outline-secondary me-2">{{ cancel }}</button>-->
-    <button type="button" class="btn btn-primary" id="saveNotificationsBtn">{{ save_settings }}</button>
-</div>
+
 </div>
 </div>
 </div>
@@ -583,6 +580,9 @@
 <script src = "{% static 'js/settings/save_personal_info.js' %}"></script>
 <script src = "{% static 'js/settings/save_time_lang_dark.js' %}"></script>
 <script src = "{% static 'js/settings/notifications_settings.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src = "{% static 'js/settings/telegram_notifications.js' %}"></script>
+
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {

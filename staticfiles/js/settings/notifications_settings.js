@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const saveBtn = document.getElementById('saveNotificationsBtn');
+    const saveBtn = document.getElementById('saveEmailNotificationsBtn');
     const url = saveBtn.dataset.url;
 
     saveBtn.addEventListener('click', function () {
