@@ -51,6 +51,4 @@ def reset_page(request):
         "suc_chng": translate("Пароль успешно изменён", lang),
         "your_pwd_chng": translate("Ваш пароль был успешно изменен. Теперь вы можете войти в систему, используя новый пароль", lang),
         "go_to_auth": translate("Перейти к авторизации", lang),
-        "h2_text": translate("Мосты", lang),
-        "h2_text": translate("Мосты", lang),
     }

@@ -561,7 +561,7 @@
     </div>
 </div>
 <div class="modal-footer">
-<!--    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ cancel }}</button>-->
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ cancel }}</button>
     <button type="button" class="btn btn-primary" id="saveGroupBtn">{{ add_group }}</button>
 </div>
 </div>
@@ -581,6 +581,15 @@
 <script src = "{% static 'js/settings/save_time_lang_dark.js' %}"></script>
 <script src = "{% static 'js/settings/notifications_settings.js' %}"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- JavaScript для работы с уведомлениями tg и перевода -->
+<script>
+    window.Translations = {
+        invalid_username: "{{ 'Please enter a valid Telegram username starting with @' | escapejs }}",
+        success_message: "{{ 'Successfully subscribed to Telegram notifications!' | escapejs }}",
+        error_message: "{{ 'Error: ' | escapejs }}",
+        general_error: "{{ 'An error occurred while processing your request.' | escapejs }}"
+    };
+</script>
 <script src = "{% static 'js/settings/telegram_notifications.js' %}"></script>
 
 
