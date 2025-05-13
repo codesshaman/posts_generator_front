@@ -21,13 +21,13 @@ $(document).ready(function() {
 
         // Проверка, что username введён
         if (!telegramUsername || !telegramUsername.startsWith('@')) {
-            alert('Please enter a valid Telegram username starting with @');
+            alert(window.Translations.invalid_username);
             return;
         }
 
         // Отправка данных через AJAX
         $.ajax({
-            url: '/telegram/subscribe/', // URL вашего Django-обработчика
+            url: '/telegram/subscribe/',
             type: 'POST',
             data: JSON.stringify({
                 telegram_username: telegramUsername,
@@ -35,19 +35,19 @@ $(document).ready(function() {
             }),
             contentType: 'application/json',
             headers: {
-                'X-CSRFToken': getCookie('csrftoken') // Для защиты CSRF
+                'X-CSRFToken': getCookie('csrftoken')
             },
             success: function(response) {
                 if (response.status === 'success') {
-                    alert('Successfully subscribed to Telegram notifications!');
+                    alert(window.Translations.success_message);
                     $('#notificationSettings').hide();
                     $('#telegramUsername').val('');
                 } else {
-                    alert('Error: ' + response.message);
+                    alert(window.Translations.error_message + response.message);
                 }
             },
             error: function(xhr) {
-                alert('An error occurred while processing your request.');
+                alert(window.Translations.general_error);
             }
         });
     });
