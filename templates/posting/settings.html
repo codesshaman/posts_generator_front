@@ -584,10 +584,10 @@
 <!-- JavaScript для работы с уведомлениями tg и перевода -->
 <script>
     window.Translations = {
-        invalid_username: "{{ 'Please enter a valid Telegram username starting with @' | escapejs }}",
-        success_message: "{{ 'Successfully subscribed to Telegram notifications!' | escapejs }}",
-        error_message: "{{ 'Error: ' | escapejs }}",
-        general_error: "{{ 'An error occurred while processing your request.' | escapejs }}"
+        invalid_username: "{{ valid_username }}",
+        success_message: "{{ sucs_notices }}",
+        error_message: "{{ error }}",
+        general_error: "{{ error_occurred }}"
     };
 </script>
 <script src = "{% static 'js/settings/telegram_notifications.js' %}"></script>

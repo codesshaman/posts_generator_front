@@ -342,4 +342,8 @@ def settings(request):
         "bot_token": translate("Токен бота", lang),
         "paste_received_token": translate("Создайте бота через @BotFather и вставьте полученный токен", lang),
         "bot_is_admin_your_channel": translate("Не забудьте добавить созданного бота в качестве администратора вашего канала или группы", lang),
+        "valid_username": translate("Пожалуйста, введите действительное имя пользователя Telegram, начинающееся с @", lang),
+        "sucs_notices": translate("Вы успешно подписались на уведомления Telegram!", lang),
+        "error": translate("Error", lang),
+        "error_occurred": translate("При обработке вашего запроса произошла ошибка.", lang),
     }

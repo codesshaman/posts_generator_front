@@ -426,9 +426,7 @@
 ^Пароль успешно изменён^Password changed successfully^
 ^Ваш пароль был успешно изменен. Теперь вы можете войти в систему, используя новый пароль^Your password has been successfully changed. You can now log in using a new password^
 ^Перейти к авторизации^Go to authorization^
-^ContentAI^ContentAI^
-^ContentAI^ContentAI^
-^ContentAI^ContentAI^
-^ContentAI^ContentAI^
-^ContentAI^ContentAI^
-^ContentAI^ContentAI^
+^Пожалуйста, введите действительное имя пользователя Telegram, начинающееся с @^Please enter a valid Telegram username starting with @^
+^Вы успешно подписались на уведомления Telegram!^Successfully subscribed to Telegram notifications!^
+^Ошибка^Error^
+^При обработке вашего запроса произошла ошибка.^An error occurred while processing your request.^
