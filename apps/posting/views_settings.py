@@ -1,3 +1,5 @@
+from lib2to3.pgen2.tokenize import group
+
 from project.cookies import set_cookie_if_not_exists, set_cookies
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_POST
@@ -19,6 +21,47 @@ load_dotenv()
 
 # Устанавливаем debug mode
 debug = os.getenv('DEBUG')
+
+#########################################
+############ Заглушки ###################
+#########################################
+
+def get_category_text(category_id):
+    if category_id == 1:
+        return translate("Активна", language).strip()
+    else:
+        return translate("Требует подтверждения", language).strip()
+
+def get_platform_style(category_id):
+    if category_id == 1:
+        return "status-published".strip()
+    elif category_id == 2:
+        return "status-queued".strip()
+    elif category_id == 3:
+        return "status-draft".strip()
+    else:
+        return "status-draft".strip()
+
+def get_platform_text(category_id):
+    if category_id == 1:
+        return "vk"
+    elif category_id == 2:
+        return "boosty"
+    elif category_id == 3:
+        return "telegram"
+    else:
+        return "email"
+
+# Эмулированные данные статей
+groups_data = [
+    {"id": 1, "title": "Первая статья", "category_id": 1, "category_text":get_category_text(1), "platform_style": get_platform_style(1), "platform_text": get_platform_text(1), "description": "Технологии будущего", "subscribers": "15,432", "group_id": "club123456789 "},
+    {"id": 2, "title": "Вторая статья", "category_id": 2, "category_text":get_category_text(2), "platform_style": get_platform_style(2), "platform_text": get_platform_text(2), "description": "Маркетинг сегодня", "subscribers": "3,210", "group_id": "@marketing_today"},
+    {"id": 3, "title": "Третья статья", "category_id": 3, "category_text":get_category_text(3), "platform_style": get_platform_style(2), "platform_text": get_platform_text(2), "description": "Каннибализм и цветоводство", "subscribers": "8", "group_id": "@cannibal_flowers"},
+]
+
+#############################################
+############# Конец заглушкам ###############
+#############################################
 
 @require_POST
 def update_settings(request):
