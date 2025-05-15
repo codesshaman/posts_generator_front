@@ -251,34 +251,94 @@
 </div>
 </div>
 
-<!--<div class="group-card mb-3">-->
-<!--<div class="card">-->
-<!--    <div class="card-body">-->
-<!--        <div class="d-flex justify-content-between align-items-center">-->
-<!--            <div class="d-flex align-items-center">-->
-<!--                <div class="platform-icon me-3">-->
-<!--                    <i class="ph ph-vk-logo" style="font-size: 32px; color: #4C75A3;"></i>-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                    <h5 class="mb-1">Бизнес идеи</h5>-->
-<!--                    <p class="text-muted mb-0">ID: club987654321 • 8,765 подписчиков</p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="group-actions">-->
-<!--                <span class="badge bg-success me-2">Активна</span>-->
-<!--                <div class="btn-group">-->
-<!--                    <button type="button" class="btn btn-sm btn-outline-primary">-->
-<!--                        <i class="ph ph-pencil"></i>-->
-<!--                    </button>-->
-<!--                    <button type="button" class="btn btn-sm btn-outline-danger">-->
-<!--                        <i class="ph ph-trash"></i>-->
-<!--                    </button>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!--</div>-->
+<!-- Список подключенных групп -->
+<div class="connected-groups">
+{% for group in groups_data %}
+<div class="group-card mb-3">
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <div class="platform-icon me-3">
+                        {% if group.platform_text == 'vk' %}
+                            <i class="ph ph-vk-logo" style="font-size: 32px; color: #4C75A3;"></i>
+                        {% elif group.platform_text == 'telegram' %}
+                            <i class="ph ph-telegram-logo" style="font-size: 32px; color: #0088cc;"></i>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <h5 class="mb-1">{{ group.title }}</h5>
+                        <p class="text-muted mb-0">{{ group.group_id }} • {{ group.subscribers }} подписчиков</p>
+                    </div>
+                </div>
+                <div class="group-actions">
+                    <span class="badge {% if group.category_id == 1 %}bg-success{% else %}bg-warning{% endif %} me-2">{{ group.category_text }}</span>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editGroupModal{{ group.id }}">
+                            <i class="ph ph-pencil"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="deleteGroup({{ group.id }})">
+                            <i class="ph ph-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+</div>
+
+<!-- Модальные окна для редактирования -->
+{% for group in groups_data %}
+<div class="modal fade" id="editGroupModal{{ group.id }}" tabindex="-1" aria-labelledby="editGroupModalLabel{{ group.id }}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editGroupModalLabel{{ group.id }}">Редактировать группу</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{% url 'edit_group' group.id %}" method="POST">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="title{{ group.id }}" class="form-label">Название группы</label>
+                        <input type="text" class="form-control" id="title{{ group.id }}" name="title" value="{{ group.title }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="group_id{{ group.id }}" class="form-label">ID группы</label>
+                        <input type="text" class="form-control" id="group_id{{ group.id }}" name="group_id" value="{{ group.group_id }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="subscribers{{ group.id }}" class="form-label">Количество подписчиков</label>
+                        <input type="text" class="form-control" id="subscribers{{ group.id }}" name="subscribers" value="{{ group.subscribers }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="platform{{ group.id }}" class="form-label">Платформа</label>
+                        <select class="form-control" id="platform{{ group.id }}" name="platform" required>
+                            <option value="vk" {% if group.platform_text == 'vk' %}selected{% endif %}>ВКонтакте</option>
+                            <option value="telegram" {% if group.platform_text == 'telegram' %}selected{% endif %}>Telegram</option>
+                            <option value="boosty" {% if group.platform_text == 'boosty' %}selected{% endif %}>Boosty</option>
+                            <option value="email" {% if group.platform_text == 'email' %}selected{% endif %}>Email</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="category{{ group.id }}" class="form-label">Статус</label>
+                        <select class="form-control" id="category{{ group.id }}" name="category" required>
+                            <option value="1" {% if group.category_id == 1 %}selected{% endif %}>Активна</option>
+                            <option value="2" {% if group.category_id == 2 %}selected{% endif %}>Требует подтверждения</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endfor %}
 
 <!-- Telegram группы -->
 <!--<div class="group-card mb-3">-->
@@ -591,7 +651,21 @@
     };
 </script>
 <script src = "{% static 'js/settings/telegram_notifications.js' %}"></script>
-
+<!-- JavaScript для удаления группы -->
+<script>
+function deleteGroup(groupId) {
+    if (confirm('Вы уверены, что хотите удалить эту группу?')) {
+        fetch(`/delete_group/${groupId}/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}'
+            }
+        }).then(() => {
+            window.location.reload();
+        });
+    }
+}
+</script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {

@@ -1,12 +1,12 @@
-from lib2to3.pgen2.tokenize import group
+# from lib2to3.pgen2.tokenize import group
 
 from project.cookies import set_cookie_if_not_exists, set_cookies
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from project.language import translate, language
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
-from django.shortcuts import render
 from django.urls import reverse
 from dotenv import load_dotenv
 from datetime import datetime
@@ -34,13 +34,9 @@ def get_category_text(category_id):
 
 def get_platform_style(category_id):
     if category_id == 1:
-        return "status-published".strip()
-    elif category_id == 2:
-        return "status-queued".strip()
-    elif category_id == 3:
-        return "status-draft".strip()
+        return "bg-warning".strip()
     else:
-        return "status-draft".strip()
+        return "bg-success".strip()
 
 def get_platform_text(category_id):
     if category_id == 1:
@@ -52,11 +48,11 @@ def get_platform_text(category_id):
     else:
         return "email"
 
-# Эмулированные данные статей
+# Эмулированные данные групп
 groups_data = [
-    {"id": 1, "title": "Первая статья", "category_id": 1, "category_text":get_category_text(1), "platform_style": get_platform_style(1), "platform_text": get_platform_text(1), "description": "Технологии будущего", "subscribers": "15,432", "group_id": "club123456789 "},
-    {"id": 2, "title": "Вторая статья", "category_id": 2, "category_text":get_category_text(2), "platform_style": get_platform_style(2), "platform_text": get_platform_text(2), "description": "Маркетинг сегодня", "subscribers": "3,210", "group_id": "@marketing_today"},
-    {"id": 3, "title": "Третья статья", "category_id": 3, "category_text":get_category_text(3), "platform_style": get_platform_style(2), "platform_text": get_platform_text(2), "description": "Каннибализм и цветоводство", "subscribers": "8", "group_id": "@cannibal_flowers"},
+    {"id": 1, "category_id": 1, "category_text":get_category_text(1), "platform_style": get_platform_style(1), "platform_text": get_platform_text(1), "title": "Технологии будущего", "subscribers": "15,432", "group_id": "club123456789 "},
+    {"id": 2, "category_id": 2, "category_text":get_category_text(2), "platform_style": get_platform_style(2), "platform_text": get_platform_text(2), "title": "Маркетинг сегодня", "subscribers": "3,210", "group_id": "@marketing_today"},
+    {"id": 3, "category_id": 3, "category_text":get_category_text(3), "platform_style": get_platform_style(2), "platform_text": get_platform_text(2), "title": "Каннибализм и цветоводство", "subscribers": "8", "group_id": "@cannibal_flowers"},
 ]
 
 #############################################
@@ -118,8 +114,28 @@ def settings(request):
         'selected_language': selected_language,
         'selected_timezone': selected_timezone,
         'selected_darkmode': selected_darkmode,
+        'groups_data': groups_data
     })
 
+def edit_group(request, group_id):
+    if request.method == 'POST':
+        for group in groups_data:
+            if group['id'] == group_id:
+                group['title'] = request.POST['title']
+                group['group_id'] = request.POST['group_id']
+                group['subscribers'] = request.POST['subscribers']
+                group['platform_text'] = request.POST['platform']
+                group['category_id'] = int(request.POST['category'])
+                group['category_text'] = get_category_text(group['category_id'])
+                group['platform_style'] = get_platform_style(group['category_id'])
+                break
+    return redirect(reverse('index'))
+
+def delete_group(request, group_id):
+    global groups_data
+    if request.method == 'POST':
+        groups_data[:] = [group for group in groups_data if group['id'] != group_id]
+    return redirect(reverse('index'))
 
 @require_POST
 def update_personal_info(request):
