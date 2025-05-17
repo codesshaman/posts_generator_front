@@ -11,13 +11,13 @@
 <div class="card-body">
 <ul class="nav nav-tabs settings-tabs" id="settingsTabs" role="tablist">
 <li class="nav-item" role="presentation">
-<button class="nav-set-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="true">
-    <i class="ph ph-user me-2"></i>{{ profile }}
+<button class="nav-set-link active" id="groups-tab" data-bs-toggle="tab" data-bs-target="#groups-tab-pane" type="button" role="tab" aria-controls="groups-tab-pane" aria-selected="true">
+    <i class="ph ph-users-three me-2"></i>{{ groups }}
 </button>
 </li>
 <li class="nav-item" role="presentation">
-<button class="nav-set-link" id="groups-tab" data-bs-toggle="tab" data-bs-target="#groups-tab-pane" type="button" role="tab" aria-controls="groups-tab-pane" aria-selected="false">
-    <i class="ph ph-users-three me-2"></i>{{ groups }}
+<button class="nav-set-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">
+    <i class="ph ph-user me-2"></i>{{ profile }}
 </button>
 </li>
 <li class="nav-item" role="presentation">
@@ -28,8 +28,135 @@
 </ul>
 
 <div class="tab-content mt-4" id="settingsTabsContent">
+
+
+<!-- Вкладка Группы -->
+<div class="tab-pane fade show active" id="groups-tab-pane" role="tabpanel" aria-labelledby="groups-tab" tabindex="0">
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="mb-0">{{ connected_groups }}</h4>
+    <div>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addGroupModal">
+            <i class="ph ph-plus me-2"></i>{{ add_group }}
+        </button>
+    </div>
+</div>
+
+<!-- Фильтры для групп -->
+<div class="groups-filters mb-4">
+    <div class="row g-2">
+        <div class="col-md-4">
+            <div class="input-group">
+                <span class="input-group-text bg-light border-end-0">
+                    <i class="ph ph-magnifying-glass"></i>
+                </span>
+                <input type="text" class="form-control border-start-0" placeholder="Поиск по названию" id="groupSearch">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <select class="form-select" id="platformFilter">
+                <option value="all" selected>{{ all_platforms }}</option>
+                <option value="vk">{{ vk }}</option>
+                <option value="telegram">{{ tg }}</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <select class="form-select" id="statusFilter">
+                <option value="all" selected>{{ all_statuses }}</option>
+                <option value="active">{{ active }}</option>
+                <option value="inactive">{{ inactive }}</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-outline-secondary w-100" id="resetFilters">
+                {{ reset }}
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Список подключенных групп -->
+<div class="connected-groups">
+    {% for group in groups_data %}
+    <div class="group-card mb-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <div class="platform-icon me-3">
+                            {% if group.platform_text == 'vk' %}
+                                <i class="ph ph-vk-logo" style="font-size: 32px; color: #4C75A3;"></i>
+                            {% elif group.platform_text == 'telegram' %}
+                                <i class="ph ph-telegram-logo" style="font-size: 32px; color: #0088cc;"></i>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <h5 class="mb-1">{{ group.title }}</h5>
+                            <p class="text-muted mb-0">{{ group.group_id }} • {{ group.subscribers }} подписчиков</p>
+                        </div>
+                    </div>
+                    <div class="group-actions">
+                        <span class="badge {% if group.category_id == 1 %}bg-success{% else %}bg-warning{% endif %} me-2">{{ group.category_text }}</span>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-outline-danger" onclick="deleteGroup({{ group.id }})">
+                                <i class="ph ph-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+        <p>Группы не найдены.</p>
+    {% endfor %}
+</div>
+
+<!-- Пагинация -->
+{% if page_obj.has_other_pages %}
+<nav aria-label="Навигация по группам" class="mt-4">
+    <ul class="pagination justify-content-center">
+        <!-- Предыдущая страница -->
+        {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Предыдущая</a>
+            </li>
+        {% endif %}
+
+        <!-- Номера страниц -->
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <li class="page-item active">
+                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                </li>
+            {% elif num > page_obj.number|add:-3 and num < page_obj.number|add:3 %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+
+        <!-- Следующая страница -->
+        {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">Следующая</a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Следующая</a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+</div>
+
+
 <!-- Вкладка Профиль -->
-<div class="tab-pane fade show active" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
 <h4 class="mb-4">{{ personal_info }}</h4>
 
 <form id="PersonalInfo">
@@ -174,246 +301,6 @@
 </form>
 </div>
 
-<!-- Вкладка Группы -->
-<div class="tab-pane fade" id="groups-tab-pane" role="tabpanel" aria-labelledby="groups-tab" tabindex="0">
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h4 class="mb-0">{{ connected_groups }}</h4>
-    <div>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addGroupModal">
-            <i class="ph ph-plus me-2"></i>{{ add_group }}
-        </button>
-    </div>
-</div>
-
-<!-- Фильтры для групп -->
-<div class="groups-filters mb-4">
-    <div class="row g-2">
-        <div class="col-md-4">
-            <div class="input-group">
-                <span class="input-group-text bg-light border-end-0">
-                    <i class="ph ph-magnifying-glass"></i>
-                </span>
-                <input type="text" class="form-control border-start-0" placeholder="Поиск по названию" id="groupSearch">
-            </div>
-        </div>
-        <div class="col-md-3">
-            <select class="form-select" id="platformFilter">
-                <option value="all" selected>{{ all_platforms }}</option>
-                <option value="vk">{{ vk }}</option>
-                <option value="telegram">{{ tg }}</option>
-            </select>
-        </div>
-        <div class="col-md-3">
-            <select class="form-select" id="statusFilter">
-                <option value="all" selected>{{ all_statuses }}</option>
-                <option value="active">{{ active }}</option>
-                <option value="inactive">{{ inactive }}</option>
-            </select>
-        </div>
-        <div class="col-md-2">
-            <button type="button" class="btn btn-outline-secondary w-100" id="resetFilters">
-                {{ reset }}
-            </button>
-        </div>
-    </div>
-</div>
-
-<!-- Список подключенных групп -->
-<div class="connected-groups">
-<!-- ВКонтакте группы -->
-<div class="group-card mb-3">
-
-<div class="card">
-    <div class="card-body">
-        <div class="d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center">
-                <div class="platform-icon me-3">
-                    <i class="ph ph-vk-logo" style="font-size: 32px; color: #4C75A3;"></i>
-                </div>
-                <div>
-                    <h5 class="mb-1">Технологии будущего</h5>
-                    <p class="text-muted mb-0">ID: club123456789 • 15,432 подписчика</p>
-                </div>
-            </div>
-            <div class="group-actions">
-                <span class="badge bg-success me-2">Активна</span>
-                <div class="btn-group">
-<!--                    <button type="button" class="btn btn-sm btn-outline-primary">-->
-<!--                        <i class="ph ph-pencil"></i>-->
-<!--                    </button>-->
-                    <button type="button" class="btn btn-sm btn-outline-danger">
-                        <i class="ph ph-trash"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-
-<!-- Список подключенных групп -->
-<div class="connected-groups">
-{% for group in groups_data %}
-<div class="group-card mb-3">
-    <div class="card">
-        <div class="card-body">
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center">
-                    <div class="platform-icon me-3">
-                        {% if group.platform_text == 'vk' %}
-                            <i class="ph ph-vk-logo" style="font-size: 32px; color: #4C75A3;"></i>
-                        {% elif group.platform_text == 'telegram' %}
-                            <i class="ph ph-telegram-logo" style="font-size: 32px; color: #0088cc;"></i>
-                        {% endif %}
-                    </div>
-                    <div>
-                        <h5 class="mb-1">{{ group.title }}</h5>
-                        <p class="text-muted mb-0">{{ group.group_id }} • {{ group.subscribers }} подписчиков</p>
-                    </div>
-                </div>
-                <div class="group-actions">
-                    <span class="badge {% if group.category_id == 1 %}bg-success{% else %}bg-warning{% endif %} me-2">{{ group.category_text }}</span>
-                    <div class="btn-group">
-<!--                        <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editGroupModal{{ group.id }}">-->
-<!--                            <i class="ph ph-pencil"></i>-->
-<!--                        </button>-->
-                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="deleteGroup({{ group.id }})">
-                            <i class="ph ph-trash"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-{% endfor %}
-</div>
-
-<!-- Модальные окна для редактирования -->
-{% for group in groups_data %}
-<div class="modal fade" id="editGroupModal{{ group.id }}" tabindex="-1" aria-labelledby="editGroupModalLabel{{ group.id }}" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editGroupModalLabel{{ group.id }}">Редактировать группу</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="{% url 'edit_group' group.id %}" method="POST">
-                {% csrf_token %}
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="title{{ group.id }}" class="form-label">Название группы</label>
-                        <input type="text" class="form-control" id="title{{ group.id }}" name="title" value="{{ group.title }}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="group_id{{ group.id }}" class="form-label">ID группы</label>
-                        <input type="text" class="form-control" id="group_id{{ group.id }}" name="group_id" value="{{ group.group_id }}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="subscribers{{ group.id }}" class="form-label">Количество подписчиков</label>
-                        <input type="text" class="form-control" id="subscribers{{ group.id }}" name="subscribers" value="{{ group.subscribers }}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="platform{{ group.id }}" class="form-label">Платформа</label>
-                        <select class="form-control" id="platform{{ group.id }}" name="platform" required>
-                            <option value="vk" {% if group.platform_text == 'vk' %}selected{% endif %}>ВКонтакте</option>
-                            <option value="telegram" {% if group.platform_text == 'telegram' %}selected{% endif %}>Telegram</option>
-                            <option value="boosty" {% if group.platform_text == 'boosty' %}selected{% endif %}>Boosty</option>
-                            <option value="email" {% if group.platform_text == 'email' %}selected{% endif %}>Email</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="category{{ group.id }}" class="form-label">Статус</label>
-                        <select class="form-control" id="category{{ group.id }}" name="category" required>
-                            <option value="1" {% if group.category_id == 1 %}selected{% endif %}>Активна</option>
-                            <option value="2" {% if group.category_id == 2 %}selected{% endif %}>Требует подтверждения</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                    <button type="submit" class="btn btn-primary">Сохранить</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-{% endfor %}
-
-<!-- Telegram группы -->
-<!--<div class="group-card mb-3">-->
-<!--<div class="card">-->
-<!--    <div class="card-body">-->
-<!--        <div class="d-flex justify-content-between align-items-center">-->
-<!--            <div class="d-flex align-items-center">-->
-<!--                <div class="platform-icon me-3">-->
-<!--                    <i class="ph ph-telegram-logo" style="font-size: 32px; color: #0088cc;"></i>-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                    <h5 class="mb-1">IT Новости</h5>-->
-<!--                    <p class="text-muted mb-0">@it_news • 5,678 подписчиков</p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="group-actions">-->
-<!--                <span class="badge bg-success me-2">Активна</span>-->
-<!--                <div class="btn-group">-->
-<!--                    <button type="button" class="btn btn-sm btn-outline-primary">-->
-<!--                        <i class="ph ph-pencil"></i>-->
-<!--                    </button>-->
-<!--                    <button type="button" class="btn btn-sm btn-outline-danger">-->
-<!--                        <i class="ph ph-trash"></i>-->
-<!--                    </button>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!--</div>-->
-
-<div class="group-card mb-3">
-<div class="card">
-    <div class="card-body">
-        <div class="d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center">
-                <div class="platform-icon me-3">
-                    <i class="ph ph-telegram-logo" style="font-size: 32px; color: #0088cc;"></i>
-                </div>
-                <div>
-                    <h5 class="mb-1">Маркетинг сегодня</h5>
-                    <p class="text-muted mb-0">@marketing_today • 3,210 подписчиков</p>
-                </div>
-            </div>
-            <div class="group-actions">
-                <span class="badge bg-warning me-2">Требует подтверждения</span>
-                <div class="btn-group">
-<!--                    <button type="button" class="btn btn-sm btn-outline-primary">-->
-<!--                        <i class="ph ph-pencil"></i>-->
-<!--                    </button>-->
-                    <button type="button" class="btn btn-sm btn-outline-danger">
-                        <i class="ph ph-trash"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-</div>
-
-<!-- Пагинация -->
-<nav aria-label="Навигация по группам" class="mt-4">
-    <ul class="pagination justify-content-center">
-        <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Предыдущая</a>
-        </li>
-        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item">
-            <a class="page-link" href="#">Следующая</a>
-        </li>
-    </ul>
-</nav>
-</div>
 
 <!-- Вкладка Уведомления -->
 <div class="tab-pane fade" id="notifications-tab-pane" role="tabpanel" aria-labelledby="notifications-tab" tabindex="0">

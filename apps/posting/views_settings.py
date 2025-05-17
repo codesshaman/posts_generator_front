@@ -1,11 +1,10 @@
-# from lib2to3.pgen2.tokenize import group
-
 from project.cookies import set_cookie_if_not_exists, set_cookies
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from project.language import translate, language
 from django.shortcuts import render, redirect
+from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.urls import reverse
 from dotenv import load_dotenv
@@ -90,31 +89,46 @@ def update_settings(request):
     except Exception as e:
         return JsonResponse({"status": "error", "message": f"Ошибка: {str(e)}"}, status=500)
 
+
 @ensure_csrf_cookie
 @set_cookie_if_not_exists("user_language", lambda request: request.LANGUAGE_CODE or 'en')
 def settings(request):
     """Отображает страницу настроек"""
     if debug:
         print("Отображаем страницу настроек")
-    """Отображение формы с захардкоженными данными."""
+
+    # Захардкоженные данные пользователя
     user_data = {
         "first_name": "Никита",
         "last_name": "Джигурда",
         "email": "n.jigurda@zdorovenniy.yaz",
         "phone": "+7 (999) 123-45-67",
     }
+
+    # Получение данных о языке, часовом поясе и темной теме
     lang = language(request)
     selected_language = request.COOKIES.get('user_language', 'en')
     selected_timezone = request.COOKIES.get('user_timezone', 'Europe/Moscow')
     selected_darkmode = request.COOKIES.get('dark_mode', 'false')
+
+    # Предполагается, что groups_data — это список или QuerySet
+    # Если это не глобальная переменная, замените на ваш источник данных, например:
+    # groups_data = YourModel.objects.all()
+    paginator = Paginator(groups_data, 10)  # 10 групп на страницу
+
+    # Получаем номер страницы из GET-параметра
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     return render(request, "posting/settings.html", {
         "user_data": user_data,
         "title": translate("Настройки", lang),
         "h2_text": translate("Настройки", lang),
-        'selected_language': selected_language,
-        'selected_timezone': selected_timezone,
-        'selected_darkmode': selected_darkmode,
-        'groups_data': groups_data
+        "selected_language": selected_language,
+        "selected_timezone": selected_timezone,
+        "selected_darkmode": selected_darkmode,
+        "groups_data": page_obj,  # Передаем объект страницы вместо всего списка
+        "page_obj": page_obj,  # Для пагинации в шаблоне
     })
 
 def edit_group(request, group_id):
