@@ -243,7 +243,7 @@
 ^для вашей компании^for your company^
 ^Получить корпоративное предложение^Get a corporate offer^
 ^История платежей^Payment history^
-^Дата^^
+^Дата^Date^
 ^Сумма^Sum^
 ^Статус^Status^
 ^Чек^Check^
@@ -430,3 +430,5 @@
 ^Вы успешно подписались на уведомления Telegram!^Successfully subscribed to Telegram notifications!^
 ^Ошибка^Error^
 ^При обработке вашего запроса произошла ошибка.^An error occurred while processing your request.^
+^Нет данных о платежах^No payment data available^
+^Нет сохранённых карт^There are no saved cards^

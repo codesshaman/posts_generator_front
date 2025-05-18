@@ -96,7 +96,7 @@ TEMPLATES = [
                 'apps.posting.context_processors.settings',
                 'apps.posting.context_processors.all_posts',
                 'apps.posting.context_processors.create_post',
-                'apps.posting.context_processors.subscription',
+                'apps.subscribe.context_processors.subscription',
                 'apps.login.context_processors.login_page',
                 'apps.login.context_processors.reset_page',
                 'project.context_processors.dark_mode',

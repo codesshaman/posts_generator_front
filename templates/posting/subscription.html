@@ -327,11 +327,6 @@
 </div>
 
 
-
-
-
-
-
 <!-- История платежей -->
 <div class="card mb-4">
     <div class="card-body">
@@ -349,62 +344,48 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% for payment in payments %}
                     <tr>
-                        <td>15.03.2023</td>
-                        <td>{{ subscription }} "{{ professional }}", {{ subscr_month }} {{ subscr_year }}</td>
-                        <td>{{ subscription_price }} {{ сurrency }}</td>
-                        <td><span class="badge bg-success">{{ paid }}</span></td>
+                        <td>{{ payment.payment_date }}</td>
+                        <!-- Если нужно преобразовать "12.20.25" в "12.03.2023", используйте кастомный фильтр или измените payment_data -->
+                        <td>{{ payment.title }}</td>
+                        <td>{{ payment.sum }} ₽</td>
+                        <td><span class="badge bg-success">{{ payment.Status }}</span></td>
                         <td><a href="#" class="text-decoration-none"><i class="ph ph-receipt me-1"></i> PDF</a></td>
                     </tr>
-<!--                    <tr>-->
-<!--                        <td>15.02.2023</td>-->
-<!--                        <td>Подписка "Профессиональный", март 2023</td>-->
-<!--                        <td>2,990 ₽</td>-->
-<!--                        <td><span class="badge bg-success">Оплачено</span></td>-->
-<!--                        <td><a href="#" class="text-decoration-none"><i class="ph ph-receipt me-1"></i> PDF</a></td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <td>15.01.2023</td>-->
-<!--                        <td>Подписка "Профессиональный", февраль 2023</td>-->
-<!--                        <td>2,990 ₽</td>-->
-<!--                        <td><span class="badge bg-success">Оплачено</span></td>-->
-<!--                        <td><a href="#" class="text-decoration-none"><i class="ph ph-receipt me-1"></i> PDF</a></td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <td>15.12.2022</td>-->
-<!--                        <td>Подписка "Базовый", январь 2023</td>-->
-<!--                        <td>990 ₽</td>-->
-<!--                        <td><span class="badge bg-success">Оплачено</span></td>-->
-<!--                        <td><a href="#" class="text-decoration-none"><i class="ph ph-receipt me-1"></i> PDF</a></td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <td>10.12.2022</td>-->
-<!--                        <td>Дополнительные коины (1,000)</td>-->
-<!--                        <td>590 ₽</td>-->
-<!--                        <td><span class="badge bg-success">Оплачено</span></td>-->
-<!--                        <td><a href="#" class="text-decoration-none"><i class="ph ph-receipt me-1"></i> PDF</a></td>-->
-<!--                    </tr>-->
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center">{{ no_payment_data }}</td>
+                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
 
+        {% if paginator and total_pages > 1 %}
         <div class="d-flex justify-content-center mt-3">
-            <nav aria-label="{{ paid_his }}">
+            <nav aria-label="История платежей">
                 <ul class="pagination">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">{{ prew }}</a>
+                    <li class="page-item {% if not paginator.has_previous %}disabled{% endif %}">
+                        <a class="page-link" href="{% if paginator.has_previous %}?page={{ paginator.previous_page_number }}{% else %}#{% endif %}" {% if not paginator.has_previous %}tabindex="-1" aria-disabled="true"{% endif %}>Предыдущая</a>
                     </li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">{{ next }}</a>
+                    {% for page_num in paginator.paginator.page_range %}
+                        {% if page_num > current_page|add:-3 and page_num < current_page|add:3 %}
+                        <li class="page-item {% if page_num == current_page %}active{% endif %}">
+                            <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                        </li>
+                        {% endif %}
+                    {% endfor %}
+                    <li class="page-item {% if not paginator.has_next %}disabled{% endif %}">
+                        <a class="page-link" href="{% if paginator.has_next %}?page={{ paginator.next_page_number }}{% else %}#{% endif %}" {% if not paginator.has_next %}tabindex="-1" aria-disabled="true"{% endif %}>Следующая</a>
                     </li>
                 </ul>
             </nav>
         </div>
+        {% endif %}
     </div>
 </div>
+
 
 <!-- Способы оплаты -->
 <div class="card mb-4">
@@ -416,76 +397,52 @@
             </button>
         </div>
 
+
+
         <div class="row">
             <!-- Карта 1 -->
-            <div class="col-md-6 mb-3">
-                <div class="card payment-method-card active">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex align-items-center">
-                                <div class="payment-icon me-3">
-                                    <i class="ph ph-credit-card" style="font-size: 24px;"></i>
+
+            <div class="row">
+                {% for card in cards %}
+                <div class="col-md-6 mb-3">
+                    <div class="card payment-method-card {% if card.is_main == 'True' %}active{% endif %}">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <div class="payment-icon me-3">
+                                        <i class="ph ph-credit-card" style="font-size: 24px;"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-1">{{ card.card_type }} •••• {{ card.card_num|slice:"-4:" }}</h5>
+                                        <p class="text-muted mb-0">{{ validity_period }}: {{ card.valid_period }}</p>
+                                        <p class="text-muted mb-0">{{ card.cardholder_name }}</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h5 class="mb-1">{{ card_type_visa }} •••• {{ last_card_nums }}</h5>
-                                    <p class="text-muted mb-0">{{ validity_period }}: {{ month_date }}</p>
-                                </div>
-                            </div>
-                            <div class="payment-actions">
-                                <span class="badge bg-primary me-2">{{ main }}</span>
-                                <div class="dropdown d-inline-block">
-                                    <button class="btn btn-sm btn-light" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="ph ph-dots-three-vertical"></i>
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item" href="#"><i class="ph ph-pencil me-2"></i>
-                                            {{ edit_button }}
-                                        </a></li>
-                                        <li><a class="dropdown-item text-danger" href="#"><i class="ph ph-trash me-2"></i>
-                                            {{ delete_button }}
-                                        </a></li>
-                                    </ul>
+                                <div class="payment-actions">
+                                    {% if card.is_main == 'True' %}
+                                    <span class="badge bg-primary me-2">{{ main_text }}</span>
+                                    {% endif %}
+                                    <div class="dropdown d-inline-block">
+                                        <button class="btn btn-sm btn-light" type="button" id="dropdownMenuButton{{ card.card_id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ph ph-dots-three-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ card.card_id }}">
+                                            <li><a class="dropdown-item" href="#"><i class="ph ph-pencil me-2"></i>{{ edit_button }}</a></li>
+                                            <li><a class="dropdown-item text-danger" href="#"><i class="ph ph-trash me-2"></i>{{ delete_button }}</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                {% empty %}
+                <div class="col-12">
+                    <p class="text-center text-muted">{{ no_saved_cards }}</p>
+                </div>
+                {% endfor %}
             </div>
 
-            <!-- Карта 2 -->
-            <div class="col-md-6 mb-3">
-                <div class="card payment-method-card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex align-items-center">
-                                <div class="payment-icon me-3">
-                                    <i class="ph ph-credit-card" style="font-size: 24px;"></i>
-                                </div>
-                                <div>
-                                    <h5 class="mb-1">{{ card_type_mc }} •••• {{ last_card_nums }}</h5>
-                                    <p class="text-muted mb-0">{{ validity_period }}: {{ month_date }}</p>
-                                </div>
-                            </div>
-                            <div class="payment-actions">
-                                <button class="btn btn-sm btn-outline-primary me-2">{{ make_main }}</button>
-                                <div class="dropdown d-inline-block">
-                                    <button class="btn btn-sm btn-light" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="ph ph-dots-three-vertical"></i>
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                                        <li><a class="dropdown-item" href="#"><i class="ph ph-pencil me-2"></i>
-                                            {{ edit_button }}
-                                        </a></li>
-                                        <li><a class="dropdown-item text-danger" href="#"><i class="ph ph-trash me-2"></i>
-                                            {{ delete_button }}
-                                        </a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
