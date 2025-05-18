@@ -1,8 +1,8 @@
-from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from project.cookies import set_cookie_if_not_exists
 from project.language import translate, language
 from .payment_history import payment_data
+from django.shortcuts import render
 from .credit_cards import card_data
 from .faq_translate import you_can_change_plan, how_to_cancel_sub, unused_coins_burn, accounting_invoice, support_team
 from dotenv import load_dotenv
@@ -13,6 +13,7 @@ load_dotenv()
 
 # Устанавливаем debug mode
 debug = os.getenv('DEBUG') == 'True'
+
 
 @set_cookie_if_not_exists("user_language", lambda request: request.LANGUAGE_CODE or 'en')
 def subscription(request):
@@ -51,9 +52,6 @@ def subscription(request):
         cards = card_data if card_data else []
         if debug:
             print("Отображаем страницу подписки")
-            print("payment_data length:", len(payment_data))
-            print("card_data:", card_data)
-            print("page:", page)
 
         context = {
             "title": translate("Моя подписка", lang),
