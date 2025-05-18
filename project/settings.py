@@ -64,7 +64,9 @@ INSTALLED_APPS = [
     'apps.vkoauth.apps.VKoauthConfig',
     'apps.posting.apps.PostingConfig',
     'apps.articles.apps.ArticlesConfig',
+    'apps.settings.apps.SettingsConfig',
     'apps.mainpage.apps.MainpageConfig',
+    'apps.subscribe.apps.SubscribeConfig',
     'apps.generation.apps.GenerationConfig'
 ]
 
