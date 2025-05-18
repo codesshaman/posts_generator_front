@@ -1,6 +1,7 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from project.cookies import set_cookie_if_not_exists
 from project.language import translate, language
+from .tariffication_system import tarffs_data
 from .payment_history import payment_data
 from django.shortcuts import render
 from .credit_cards import card_data
@@ -91,6 +92,14 @@ def subscription(request):
             'edit_button': translate("Редактировать", lang),
             'delete_button': translate("Удалить", lang),
             'validity_period': translate("Срок действия", lang),
+            'tariffs': tarffs_data,  # Добавляем данные тарифов в контекст
+            'coins': translate("монет", lang),
+            'month': translate("месяц", lang),
+            'money_saving': translate("Экономия", lang),
+            'monthly_payment': translate("Ежемесячный платеж", lang),
+            'annual_payment': translate("Годовой платеж", lang),
+            'discount': translate("Скидка", lang),
+            'upgrade_to': translate("Перейти на", lang),
         }
 
         return render(request, "posting/subscription.html", context)

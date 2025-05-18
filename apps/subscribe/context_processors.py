@@ -104,4 +104,5 @@ def subscription(request):
         "reason": translate("Причина", lang),
         "will_cancelled": translate("Будет отменена", lang),
         "no_saved_cards": translate("Нет сохранённых карт", lang),
+        "money_saving": translate("Экономия", lang),
     }

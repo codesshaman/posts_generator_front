@@ -1,4 +1,5 @@
 {% extends 'basetmp/base.html' %}
+{% load custom_filters %}
 {% load static %}
 {% block content %}
 {% csrf_token %}
@@ -109,200 +110,51 @@
             <!-- Переключатель периода оплаты -->
             <div class="billing-toggle">
                 <span class="billing-period-text me-2">{{ monthly }}</span>
-                <div class="form-check form-switch d-inline-block">
-                    <input class="form-check-input" type="checkbox" id="billingPeriodSwitch">
-                    <label class="form-check-label" for="billingPeriodSwitch"></label>
+                    <div class="form-check form-switch d-inline-block">
+                        <input class="form-check-input" type="checkbox" id="billingPeriodSwitch">
+                        <label class="form-check-label" for="billingPeriodSwitch"></label>
+                    </div>
+                    <span class="billing-period-text ms-2">{{ annually }} <span class="badge bg-success ms-1">-20%</span></span>
                 </div>
-                <span class="billing-period-text ms-2">{{ annually }} <span class="badge bg-success ms-1">-20%</span></span>
             </div>
-        </div>
 
-        <div class="row">
-            <!-- Тариф Профи -->
+            <div class="row">
+            <!-- Тарифы -->
+            {% for tariff in tariffs %}
             <div class="col-md-3 mb-4">
                 <div class="card h-100 plan-card">
                     <div class="card-body d-flex flex-column">
+                        <div class="plan-badge">
+                            <span class="badge {{ tariff.style }}">{{ tariff.label }}</span>
+                        </div>
                         <div class="plan-header mb-4">
-                            <h4 class="plan-title">{{ profi }}</h4>
+                            <h4 class="plan-title">{{ tariff.tariff_name }}</h4>
                             <div class="tokens-amount mb-2">
                                 <i class="ph ph-lightning me-1 text-warning"></i>
-                                <span class="fw-bold">{{ profi_coins }} {{ coins }}</span>
+                                <span class="fw-bold">{{ tariff.coins_num }} {{ coins }}</span>
                             </div>
                             <div class="plan-price">
-                                <span class="price" id="profi-price">{{ profi_price }} {{ сurrency }}</span>
+                                <span class="price" id="profi-price">{{ tariff.tariff_price }} {{ сurrency }}</span>
                                 <span class="period">/{{ month }}</span>
+                                </br>
+                                <span class="savings-badge">{{ money_saving }} {{ tariff.saving_num }}%</span>
                             </div>
                             <p class="text-muted billing-period-text-monthly">{{ monthly_payment }}</p>
                             <p class="text-muted billing-period-text-yearly" style="display: none;">
                                 {{ annual_payment }} ({{ discount }} {{ discount_percent }}%)
                             </p>
                         </div>
-
                         <div class="mt-auto">
-                            <button class="btn btn-outline-primary w-100 update-btn" data-monthly="990" data-yearly="11880">
-                                {{ upgrade_to }} {{ profi }}</button>
+                            <button class="btn btn-outline-primary w-100 update-btn"
+                                    data-monthly="{{ tariff.tariff_price }}"
+                                    data-yearly="{{ tariff.tariffliv_price | floatformat:0 | multiply:12 }}">
+                                {{ upgrade_to }} {{ tariff.tariff_name }}
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Тариф Про 50 -->
-            <div class="col-md-3 mb-4">
-                <div class="card h-100 plan-card">
-                    <div class="card-body d-flex flex-column">
-                        <div class="plan-badge">
-                            <span class="badge bg-primary">Самый популярный</span>
-                        </div>
-
-                        <div class="plan-header mb-4">
-                            <h4 class="plan-title">Про 50</h4>
-                            <div class="tokens-amount mb-2">
-                                <i class="ph ph-lightning me-1 text-warning"></i>
-                                <span class="fw-bold">25,000 {{ coins }}</span>
-                            </div>
-                            <div class="plan-price">
-                                <div class="d-flex align-items-center mb-1">
-                                    <span class="original-price text-decoration-line-through text-muted me-2">2,475 ₽</span>
-                                    <span class="savings-badge">Экономия 7.5%</span>
-                                </div>
-                                <span class="price" id="pro50-price">2,290 ₽</span>
-                                <span class="period">/месяц</span>
-                            </div>
-                            <p class="text-muted billing-period-text-monthly">Ежемесячная оплата</p>
-                            <p class="text-muted billing-period-text-yearly" style="display: none;">Ежегодная оплата (скидка 20%)</p>
-                        </div>
-
-                        <div class="mt-auto">
-                            <button class="btn btn-outline-primary w-100 update-btn" data-monthly="2290" data-yearly="27480">{{ upgrade_to }} Про 50</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Тариф Про 100 -->
-            <div class="col-md-3 mb-4">
-                <div class="card h-100 plan-card">
-                    <div class="card-body d-flex flex-column">
-                        <div class="plan-header mb-4">
-                            <h4 class="plan-title">Про 100</h4>
-                            <div class="tokens-amount mb-2">
-                                <i class="ph ph-lightning me-1 text-warning"></i>
-                                <span class="fw-bold">50,000 {{ coins }}</span>
-                            </div>
-                            <div class="plan-price">
-                                <div class="d-flex align-items-center mb-1">
-                                    <span class="original-price text-decoration-line-through text-muted me-2">4,950 ₽</span>
-                                    <span class="savings-badge">Экономия 12%</span>
-                                </div>
-                                <span class="price" id="pro100-price">4,350 ₽</span>
-                                <span class="period">/месяц</span>
-                            </div>
-                            <p class="text-muted billing-period-text-monthly">Ежемесячная оплата</p>
-                            <p class="text-muted billing-period-text-yearly" style="display: none;">Ежегодная оплата (скидка 20%)</p>
-                        </div>
-
-                        <div class="mt-auto">
-                            <button class="btn btn-outline-primary w-100 update-btn" data-monthly="4350" data-yearly="52200">{{ upgrade_to }} Про 100</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Тариф Про 200 -->
-            <div class="col-md-3 mb-4">
-                <div class="card h-100 plan-card">
-                    <div class="card-body d-flex flex-column">
-                        <div class="plan-badge">
-                            <span class="badge bg-warning">Максимум возможностей</span>
-                        </div>
-
-                        <div class="plan-header mb-4">
-                            <h4 class="plan-title">Про 200</h4>
-                            <div class="tokens-amount mb-2">
-                                <i class="ph ph-lightning me-1 text-warning"></i>
-                                <span class="fw-bold">100,000 {{ coins }}</span>
-                            </div>
-                            <div class="plan-price">
-                                <div class="d-flex align-items-center mb-1">
-                                    <span class="original-price text-decoration-line-through text-muted me-2">9,900 ₽</span>
-                                    <span class="savings-badge">Экономия 20%</span>
-                                </div>
-                                <span class="price" id="pro200-price">7,990 ₽</span>
-                                <span class="period">/месяц</span>
-                            </div>
-                            <p class="text-muted billing-period-text-monthly">Ежемесячная оплата</p>
-                            <p class="text-muted billing-period-text-yearly" style="display: none;">Ежегодная оплата (скидка 20%)</p>
-                        </div>
-
-                        <div class="mt-auto">
-                            <button class="btn btn-outline-primary w-100 update-btn" data-monthly="7990" data-yearly="95880">{{ upgrade_to }} Про 200</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Тариф Про 100 -->
-            <div class="col-md-3 mb-4">
-                <div class="card h-100 plan-card">
-                    <div class="card-body d-flex flex-column">
-                        <div class="plan-header mb-4">
-                            <h4 class="plan-title">Про 100</h4>
-                            <div class="tokens-amount mb-2">
-                                <i class="ph ph-lightning me-1 text-warning"></i>
-                                <span class="fw-bold">50,000 {{ coins }}</span>
-                            </div>
-                            <div class="plan-price">
-                                <div class="d-flex align-items-center mb-1">
-                                    <span class="original-price text-decoration-line-through text-muted me-2">4,950 ₽</span>
-                                    <span class="savings-badge">Экономия 12%</span>
-                                </div>
-                                <span class="price" id="pro100-price">4,350 ₽</span>
-                                <span class="period">/месяц</span>
-                            </div>
-                            <p class="text-muted billing-period-text-monthly">Ежемесячная оплата</p>
-                            <p class="text-muted billing-period-text-yearly" style="display: none;">Ежегодная оплата (скидка 20%)</p>
-                        </div>
-
-                        <div class="mt-auto">
-                            <button class="btn btn-outline-primary w-100 update-btn" data-monthly="4350" data-yearly="52200">{{ upgrade_to }} Про 100</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Тариф Про 200 -->
-            <div class="col-md-3 mb-4">
-                <div class="card h-100 plan-card">
-                    <div class="card-body d-flex flex-column">
-                        <div class="plan-badge">
-                            <span class="badge bg-warning">Максимум возможностей</span>
-                        </div>
-
-                        <div class="plan-header mb-4">
-                            <h4 class="plan-title">Про 200</h4>
-                            <div class="tokens-amount mb-2">
-                                <i class="ph ph-lightning me-1 text-warning"></i>
-                                <span class="fw-bold">100,000 {{ coins }}</span>
-                            </div>
-                            <div class="plan-price">
-                                <div class="d-flex align-items-center mb-1">
-                                    <span class="original-price text-decoration-line-through text-muted me-2">9,900 ₽</span>
-                                    <span class="savings-badge">Экономия 20%</span>
-                                </div>
-                                <span class="price" id="pro200-price">7,990 ₽</span>
-                                <span class="period">/{{ month }}</span>
-                            </div>
-                            <p class="text-muted billing-period-text-monthly">Ежемесячная оплата</p>
-                            <p class="text-muted billing-period-text-yearly" style="display: none;">Ежегодная оплата (скидка 20%)</p>
-                        </div>
-
-                        <div class="mt-auto">
-                            <button class="btn btn-outline-primary w-100 update-btn" data-monthly="7990" data-yearly="95880">{{ upgrade_to }} Про 200</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            {% endfor %}
         </div>
 
         <!-- Дополнительная информация о тарифах -->

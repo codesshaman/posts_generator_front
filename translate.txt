@@ -432,3 +432,4 @@
 ^При обработке вашего запроса произошла ошибка.^An error occurred while processing your request.^
 ^Нет данных о платежах^No payment data available^
 ^Нет сохранённых карт^There are no saved cards^
+^Экономия^Saving^
