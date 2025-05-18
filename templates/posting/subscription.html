@@ -290,7 +290,7 @@
                                     <span class="savings-badge">Экономия 20%</span>
                                 </div>
                                 <span class="price" id="pro200-price">7,990 ₽</span>
-                                <span class="period">/месяц</span>
+                                <span class="period">/{{ month }}</span>
                             </div>
                             <p class="text-muted billing-period-text-monthly">Ежемесячная оплата</p>
                             <p class="text-muted billing-period-text-yearly" style="display: none;">Ежегодная оплата (скидка 20%)</p>
@@ -653,37 +653,7 @@
 <script src = "{% static 'js/mobile_menu.js' %}"></script>
 
 <!-- JavaScript для обработки удаления -->
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const deleteLinks = document.querySelectorAll('.delete-card');
-    const confirmButton = document.getElementById('confirmDeleteButton');
-
-    deleteLinks.forEach(link => {
-        link.addEventListener('click', function () {
-            const cardId = this.getAttribute('data-card-id');
-            const cardType = this.getAttribute('data-card-type');
-            const cardNum = this.getAttribute('data-card-num');
-            confirmButton.setAttribute('href', `/card/delete/${cardId}/`);
-            confirmButton.setAttribute('data-card-id', cardId);
-            confirmButton.setAttribute('data-card-type', cardType);
-            confirmButton.setAttribute('data-card-num', cardNum);
-        });
-    });
-
-    confirmButton.addEventListener('click', function () {
-        const cardId = this.getAttribute('data-card-id');
-        const cardType = this.getAttribute('data-card-type');
-        const cardNum = this.getAttribute('data-card-num');
-        // Функция-заглушка для логирования удаления
-        logCardDeletion(cardId, cardType, cardNum);
-    });
-
-    function logCardDeletion(cardId, cardType, cardNum) {
-        console.log(`Карта удалена: ID=${cardId}, Тип=${cardType}, Последние цифры=${cardNum}`);
-        console.log('Дополнительная информация: Удаление выполнено в', new Date().toLocaleString());
-    }
-});
-</script>
+<script src = "{% static 'js/subscription/delete_card.js' %}"></script>
 
 
 <script>
