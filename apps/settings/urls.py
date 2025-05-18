@@ -1,5 +1,11 @@
+from .update_personal_info import update_personal_info
+from .telegram_subscribe import telegram_subscribe
+from .save_notifications import save_notifications
+from .groups_data import edit_group, delete_group
+from .update_password import update_password
 from django.urls import path
 from .views import *
+
 
 urlpatterns = [
     path('settings', settings, name='settings'),

@@ -1,18 +1,13 @@
 from project.cookies import set_cookie_if_not_exists, set_cookies
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_POST
-from django.views.decorators.csrf import csrf_exempt
 from project.language import translate, language
-from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
+from .groups_data import groups_data
 from django.http import JsonResponse
+from django.shortcuts import render
 from django.urls import reverse
 from dotenv import load_dotenv
-from datetime import datetime
-import random
-import string
-import json
-import re
 import os
 
 # Загружаем .env файл
@@ -21,51 +16,6 @@ load_dotenv()
 # Устанавливаем debug mode
 debug = os.getenv('DEBUG')
 
-#########################################
-############ Заглушки ###################
-#########################################
-
-def get_category_text(category_id):
-    if category_id == 1:
-        return translate("Активна", language).strip()
-    else:
-        return translate("Требует подтверждения", language).strip()
-
-def get_platform_style(category_id):
-    if category_id == 1:
-        return "bg-warning".strip()
-    else:
-        return "bg-success".strip()
-
-def get_platform_text(category_id):
-    if category_id == 1:
-        return "vk"
-    elif category_id == 2:
-        return "boosty"
-    elif category_id == 3:
-        return "telegram"
-    else:
-        return "email"
-
-# Эмулированные данные групп
-groups_data = [
-    {"id": 1, "category_id": 1, "category_text":get_category_text(1), "platform_style": get_platform_style(1), "platform_text": get_platform_text(1), "title": "Технологии будущего", "subscribers": "15,432", "group_id": "club123456789 "},
-    {"id": 2, "category_id": 2, "category_text":get_category_text(2), "platform_style": get_platform_style(2), "platform_text": get_platform_text(2), "title": "Маркетинг сегодня", "subscribers": "3,210", "group_id": "@marketing_today"},
-    {"id": 3, "category_id": 3, "category_text":get_category_text(3), "platform_style": get_platform_style(2), "platform_text": get_platform_text(2), "title": "Каннибализм и цветоводство", "subscribers": "8", "group_id": "@cannibal_flowers"},
-    {"id": 1, "category_id": 1, "category_text":get_category_text(1), "platform_style": get_platform_style(1), "platform_text": get_platform_text(1), "title": "Технологии будущего", "subscribers": "15,432", "group_id": "club123456789 "},
-    {"id": 2, "category_id": 2, "category_text":get_category_text(2), "platform_style": get_platform_style(2), "platform_text": get_platform_text(2), "title": "Маркетинг сегодня", "subscribers": "3,210", "group_id": "@marketing_today"},
-    {"id": 3, "category_id": 3, "category_text":get_category_text(3), "platform_style": get_platform_style(2), "platform_text": get_platform_text(2), "title": "Каннибализм и цветоводство", "subscribers": "8", "group_id": "@cannibal_flowers"},
-    {"id": 1, "category_id": 1, "category_text":get_category_text(1), "platform_style": get_platform_style(1), "platform_text": get_platform_text(1), "title": "Технологии будущего", "subscribers": "15,432", "group_id": "club123456789 "},
-    {"id": 2, "category_id": 2, "category_text":get_category_text(2), "platform_style": get_platform_style(2), "platform_text": get_platform_text(2), "title": "Маркетинг сегодня", "subscribers": "3,210", "group_id": "@marketing_today"},
-    {"id": 3, "category_id": 3, "category_text":get_category_text(3), "platform_style": get_platform_style(2), "platform_text": get_platform_text(2), "title": "Каннибализм и цветоводство", "subscribers": "8", "group_id": "@cannibal_flowers"},
-    {"id": 1, "category_id": 1, "category_text":get_category_text(1), "platform_style": get_platform_style(1), "platform_text": get_platform_text(1), "title": "Технологии будущего", "subscribers": "15,432", "group_id": "club123456789 "},
-    {"id": 2, "category_id": 2, "category_text":get_category_text(2), "platform_style": get_platform_style(2), "platform_text": get_platform_text(2), "title": "Маркетинг сегодня", "subscribers": "3,210", "group_id": "@marketing_today"},
-    {"id": 3, "category_id": 3, "category_text":get_category_text(3), "platform_style": get_platform_style(2), "platform_text": get_platform_text(2), "title": "Каннибализм и цветоводство", "subscribers": "8", "group_id": "@cannibal_flowers"},
-]
-
-#############################################
-############# Конец заглушкам ###############
-#############################################
 
 @require_POST
 def update_settings(request):
@@ -139,160 +89,3 @@ def settings(request):
         "groups_data": page_obj,  # Передаем объект страницы вместо всего списка
         "page_obj": page_obj,  # Для пагинации в шаблоне
     })
-
-def edit_group(request, group_id):
-    if request.method == 'POST':
-        for group in groups_data:
-            if group['id'] == group_id:
-                group['title'] = request.POST['title']
-                group['group_id'] = request.POST['group_id']
-                group['subscribers'] = request.POST['subscribers']
-                group['platform_text'] = request.POST['platform']
-                group['category_id'] = int(request.POST['category'])
-                group['category_text'] = get_category_text(group['category_id'])
-                group['platform_style'] = get_platform_style(group['category_id'])
-                break
-    return redirect(reverse('index'))
-
-def delete_group(request, group_id):
-    global groups_data
-    if request.method == 'POST':
-        groups_data[:] = [group for group in groups_data if group['id'] != group_id]
-    return redirect(reverse('index'))
-
-@require_POST
-def update_personal_info(request):
-    """Заглушка для обработки данных формы PersonalInfo"""
-    try:
-        first_name = request.POST.get("firstName")
-        last_name = request.POST.get("lastName")
-        email = request.POST.get("email")
-        phone = request.POST.get("phone")
-
-        # Просто логируем, можно будет потом сохранить
-        print("Получены данные формы:")
-        print(f"Имя: {first_name}")
-        print(f"Фамилия: {last_name}")
-        print(f"Email: {email}")
-        print(f"Телефон: {phone}")
-
-        return JsonResponse({"status": "success", "message": "Данные успешно сохранены"})
-
-    except Exception as e:
-        return JsonResponse({"status": "error", "message": f"Ошибка: {str(e)}"}, status=500)
-
-
-@require_POST
-def update_password(request):
-    """Обрабатывает AJAX-запрос для смены пароля."""
-    try:
-        # Получаем данные из формы
-        current_password = request.POST.get('current_password')
-        new_password = request.POST.get('new_password')
-        confirm_password = request.POST.get('confirm_password')
-
-        # Заглушка: случайный текущий пароль (для примера)
-        placeholder_password = 'hardcode'
-        print(f"Заглушка текущего пароля: {placeholder_password}")
-
-        # Проверка текущего пароля
-        if current_password != placeholder_password:
-            print("Ошибка: Неверный текущий пароль")
-            return JsonResponse({
-                "status": "error",
-                "message": "Неверный текущий пароль"
-            }, status=400)
-
-        # Проверка совпадения нового пароля и подтверждения
-        if new_password != confirm_password:
-            print("Ошибка: Новый пароль и подтверждение не совпадают")
-            return JsonResponse({
-                "status": "error",
-                "message": "Новый пароль и подтверждение не совпадают"
-            }, status=400)
-
-        # Проверка требований к новому паролю
-        if len(new_password) < 8:
-            print("Ошибка: Пароль должен содержать минимум 8 символов")
-            return JsonResponse({
-                "status": "error",
-                "message": "Пароль должен содержать минимум 8 символов"
-            }, status=400)
-        if not re.search(r'[A-Z]', new_password):
-            print("Ошибка: Пароль должен содержать хотя бы одну заглавную букву")
-            return JsonResponse({
-                "status": "error",
-                "message": "Пароль должен содержать хотя бы одну заглавную букву"
-            }, status=400)
-        if not re.search(r'\d', new_password):
-            print("Ошибка: Пароль должен содержать хотя бы одну цифру")
-            return JsonResponse({
-                "status": "error",
-                "message": "Пароль должен содержать хотя бы одну цифру"
-            }, status=400)
-        if not re.search(r'[!@#$%^&*(),.?":{}|<>]', new_password):
-            print("Ошибка: Пароль должен содержать хотя бы один специальный символ")
-            return JsonResponse({
-                "status": "error",
-                "message": "Пароль должен содержать хотя бы один специальный символ"
-            }, status=400)
-
-        # Если все проверки пройдены
-        print("Пароль успешно изменён")
-        return JsonResponse({
-            "status": "success",
-            "message": "Пароль успешно изменён"
-        })
-
-    except Exception as e:
-        print(f"Ошибка: {str(e)}")
-        return JsonResponse({
-            "status": "error",
-            "message": f"Произошла ошибка: {str(e)}"
-        }, status=500)
-
-
-@require_POST
-def save_notifications(request):
-    try:
-        data = json.loads(request.body)
-
-        # Заглушка: просто выводим в консоль
-        print("Полученные настройки уведомлений:")
-        for key, value in data.items():
-            print(f"{key}: {'включено' if value else 'выключено'}")
-
-        return JsonResponse({"status": "ok"})
-    except Exception as e:
-        print("Ошибка при разборе данных:", str(e))
-        return JsonResponse({"status": "error", "message": str(e)}, status=400)
-
-
-@csrf_exempt
-@require_POST
-def telegram_subscribe(request):
-    try:
-        # Парсим JSON-данные из тела запроса
-        data = json.loads(request.body)
-        telegram_username = data.get('telegram_username')
-        notifications = data.get('notifications', {})
-
-        # Проверка валидности данных
-        if not telegram_username or not telegram_username.startswith('@'):
-            return JsonResponse({'status': 'error', 'message': 'Invalid Telegram username'}, status=400)
-
-        # Вывод данных в консоль Django
-        print("Полученные данные:")
-        print(f"Telegram Username: {telegram_username}")
-        print("Notification Settings:")
-        print(f"  New Posts: {notifications.get('new_posts', False)}")
-        print(f"  Post Published: {notifications.get('post_published', False)}")
-        print(f"  Tokens: {notifications.get('tokens', False)}")
-        print(f"  Billing: {notifications.get('billing', False)}")
-
-        # Возвращаем успешный ответ
-        return JsonResponse({'status': 'success', 'message': 'Data received and logged'})
-    except json.JSONDecodeError:
-        return JsonResponse({'status': 'error', 'message': 'Invalid JSON data'}, status=400)
-    except Exception as e:
-        return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
