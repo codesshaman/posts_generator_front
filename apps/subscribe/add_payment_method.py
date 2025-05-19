@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+from project.language import translate, language
 from django.views.decorators.http import require_POST
 import logging
 import re
@@ -14,6 +15,7 @@ def add_payment_method(request):
     Проверяет валидность данных карты и выводит их в консоль.
     """
     # Извлечение данных из POST-запроса
+    lang = language(request)
     card_number = request.POST.get('cardNumber')
     expiry_date = request.POST.get('expiryDate')
     cvv = request.POST.get('cvv')
@@ -24,7 +26,7 @@ def add_payment_method(request):
     if not all([card_number, expiry_date, cvv, cardholder_name]):
         return JsonResponse({
             'status': 'error',
-            'message': 'Все поля обязательны для заполнения.'
+            'message': translate("Все поля обязательны для заполнения.", lang)
         }, status=400)
 
     # Проверка номера карты (алгоритм Луна)
@@ -47,7 +49,7 @@ def add_payment_method(request):
     if not is_valid_card_number(card_number):
         return JsonResponse({
             'status': 'error',
-            'message': 'Недействительный номер карты.'
+            'message': translate("Недействительный номер карты", lang)
         }, status=400)
 
     # Проверка срока действия
@@ -64,7 +66,7 @@ def add_payment_method(request):
     if not is_valid_expiry_date(expiry_date):
         return JsonResponse({
             'status': 'error',
-            'message': 'Недействительный или истёкший срок действия.'
+            'message': translate("Недействительный или истёкший срок действия.", lang)
         }, status=400)
 
     # Проверка CVV
@@ -77,7 +79,7 @@ def add_payment_method(request):
     if not is_valid_cvv(cvv, card_number):
         return JsonResponse({
             'status': 'error',
-            'message': 'Недействительный CVV.'
+            'message': translate("Недействительный CVV", lang)
         }, status=400)
 
     # Вывод данных в консоль
@@ -91,5 +93,5 @@ def add_payment_method(request):
     # Возвращаем успешный JSON-ответ
     return JsonResponse({
         'status': 'success',
-        'message': 'Способ оплаты успешно обработан (заглушка).'
+        'message': translate("Карта успешно добавлена", lang)
     })

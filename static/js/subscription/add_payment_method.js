@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Проверка номера карты
         if (cardNumberInput.value.trim()) {
-              if (!isValidCardNumber(cardNumberInput.value)) {
+            if (!isValidCardNumber(cardNumberInput.value)) {
                 cardNumberInput.classList.add('is-invalid');
                 isValid = false;
             }
@@ -107,12 +107,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     modal.hide();
                     alert(data.message);
                 } else {
-                    alert('Ошибка при обработке формы: ' + (data.message || 'Неизвестная ошибка'));
+                    alert(window.translations.error_processing_form + ': ' + (data.message || window.translations.unknown_error));
                 }
             })
             .catch(error => {
-                console.error('Ошибка:', error);
-                alert('Произошла ошибка при отправке формы.');
+                console.error('Error:', error);
+                alert(window.translations.error_sending_form);
             });
         }
     });

@@ -109,4 +109,7 @@ def subscription(request):
         "enter_card_period": translate("Введите срок действия в формате ММ / ГГ", lang),
         "enter_card_cvv": translate("Введите корректный CVV (3 цифры)", lang),
         "enter_cardholder_name": translate("Введите имя держателя карты", lang),
+        "error_processing_form": translate("Ошибка обработки формы", lang),
+        "unknown_error": translate("Неизвестная ошибка", lang),
+        "error_sending_form": translate("Ошибка отправки формы", lang),
     }

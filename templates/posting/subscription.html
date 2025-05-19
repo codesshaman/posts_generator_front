@@ -511,6 +511,15 @@
 <!-- JavaScript для обработки удаления -->
 <script src = "{% static 'js/subscription/delete_card.js' %}"></script>
 
+<!-- Переводы для метода оплаты -->
+<script>
+    window.translations = {
+        error_processing_form: "{{ error_processing_form }}",
+        unknown_error: "{{ unknown_error }}",
+        error_sending_form: "{{ error_sending_form }}"
+    };
+</script>
+
 <!-- JavaScript для обработки метода оплаты -->
 <script src = "{% static 'js/subscription/add_payment_method.js' %}"></script>
 

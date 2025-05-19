@@ -437,5 +437,17 @@
 ^Введите срок действия в формате ММ / ГГ^Enter expiration date in MM / YY format^
 ^Введите имя держателя карты^Enter the cardholder's name^
 ^Введите корректный CVV (3 цифры)^Please enter the correct CVV (3 digits)^
+^Неизвестная ошибка^Unknown error^
+^Ошибка обработки формы^Form processing error^
+^Ошибка отправки формы^Error submitting form^
+^Карта успешно добавлена^The card has been added successfully^
+^Все поля обязательны для заполнения^All fields are required^
+^Недействительный номер карты^Invalid card number^
+^Недействительный или истёкший срок действия^Invalid or expired^
+^Недействительный CVV^Invalid CVV^
+^^^
+^^^
+^^^
+^^^
 ^^^
 ^^^
