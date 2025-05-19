@@ -105,4 +105,8 @@ def subscription(request):
         "will_cancelled": translate("Будет отменена", lang),
         "no_saved_cards": translate("Нет сохранённых карт", lang),
         "money_saving": translate("Экономия", lang),
+        "enter_card_number": translate("Введите действительный номер карты (13–19 цифр)", lang),
+        "enter_card_period": translate("Введите срок действия в формате ММ / ГГ", lang),
+        "enter_card_cvv": translate("Введите корректный CVV (3 цифры)", lang),
+        "enter_cardholder_name": translate("Введите имя держателя карты", lang),
     }

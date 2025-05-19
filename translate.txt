@@ -433,3 +433,9 @@
 ^Нет данных о платежах^No payment data available^
 ^Нет сохранённых карт^There are no saved cards^
 ^Экономия^Saving^
+^Введите действительный номер карты (13–19 цифр)^Please enter a valid card number (13-19 digits)^
+^Введите срок действия в формате ММ / ГГ^Enter expiration date in MM / YY format^
+^Введите имя держателя карты^Enter the cardholder's name^
+^Введите корректный CVV (3 цифры)^Please enter the correct CVV (3 digits)^
+^^^
+^^^
