@@ -37,6 +37,16 @@
     position: relative;
 }
 
+.is-invalid {
+    border-color: #dc3545 !important;
+}
+.invalid-feedback {
+    display: none;
+}
+.is-invalid ~ .invalid-feedback {
+    display: block;
+}
+
 .plan-card:hover {
     /* transform: translateY(-5px); */
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);

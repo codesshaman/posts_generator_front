@@ -419,24 +419,28 @@
                 <form id="addPaymentMethodForm">
                     <div class="mb-3">
                         <label for="cardNumber" class="form-label">{{ card_num }}</label>
-                        <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+                        <input type="text" class="form-control" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" required>
+                        <div class="invalid-feedback">Пожалуйста, заполните это поле.</div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="expiryDate" class="form-label">{{ validity_period }}</label>
-                            <input type="text" class="form-control" id="expiryDate" placeholder="ММ/ГГ" required>
+                            <input type="text" class="form-control" id="expiryDate" name="expiryDate" placeholder="ММ/ГГ" required>
+                            <div class="invalid-feedback">Пожалуйста, заполните это поле.</div>
                         </div>
                         <div class="col-md-6">
                             <label for="cvv" class="form-label">CVV</label>
-                            <input type="text" class="form-control" id="cvv" placeholder="123" required>
+                            <input type="text" class="form-control" id="cvv" name="cvv" placeholder="123" required>
+                            <div class="invalid-feedback">Пожалуйста, заполните это поле.</div>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="cardholderName" class="form-label">{{ cardholder_name }}</label>
-                        <input type="text" class="form-control" id="cardholderName" placeholder="IVAN IVANOV" required>
+                        <input type="text" class="form-control" id="cardholderName" name="cardholderName" placeholder="IVAN IVANOV" required>
+                        <div class="invalid-feedback">Пожалуйста, заполните это поле.</div>
                     </div>
                     <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" id="makeDefaultCard">
+                        <input class="form-check-input" type="checkbox" id="makeDefaultCard" name="makeDefaultCard">
                         <label class="form-check-label" for="makeDefaultCard">
                             {{ make_main_payment_method }}
                         </label>
@@ -506,6 +510,9 @@
 
 <!-- JavaScript для обработки удаления -->
 <script src = "{% static 'js/subscription/delete_card.js' %}"></script>
+
+<!-- JavaScript для обработки метода оплаты -->
+<script src = "{% static 'js/subscription/add_payment_method.js' %}"></script>
 
 
 <script>
@@ -646,19 +653,6 @@ if (cancellationReason && otherReasonContainer) {
         } else {
             otherReasonContainer.style.display = 'none';
         }
-    });
-}
-
-// Обработчик для сохранения способа оплаты
-if (savePaymentMethodBtn) {
-    savePaymentMethodBtn.addEventListener('click', function() {
-        // Здесь будет логика сохранения способа оплаты
-        // Для демонстрации просто закроем модальное окно и покажем уведомление
-        const modal = bootstrap.Modal.getInstance(document.getElementById('addPaymentMethodModal'));
-        modal.hide();
-
-        // Показать уведомление
-        showAlert('Способ оплаты успешно добавлен', 'success');
     });
 }
 

@@ -34,6 +34,16 @@
     margin-top: 5px;
 }
 
+.is-invalid {
+    border-color: #dc3545 !important;
+}
+.invalid-feedback {
+    display: none;
+}
+.is-invalid ~ .invalid-feedback {
+    display: block;
+}
+
 /* Стили для навигации и бокового меню (из styles.css) */
 .navbar {
     background-color: #FFFFFF !important;
