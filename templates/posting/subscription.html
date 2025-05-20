@@ -428,7 +428,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="addPaymentMethodForm" method="POST" action="{% url 'add_payment_method' %}">
+                <form id="addPaymentMethodForm" method="POST" action="{% url 'add_payment_method' %}"
+                    data-add-url="{% url 'add_payment_method' %}"
+                    data-edit-url="{% url 'edit_payment_method' %}">
                     {% csrf_token %}
                     <input type="hidden" id="cardId" name="cardId">
                     <div class="mb-3">
