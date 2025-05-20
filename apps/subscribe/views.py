@@ -95,6 +95,7 @@ def subscription(request):
             'tariffs': tarffs_data,  # Добавляем данные тарифов в контекст
             'coins': translate("монет", lang),
             'month': translate("месяц", lang),
+            'save': translate("Сохранить", lang),
             'money_saving': translate("Экономия", lang),
             'monthly_payment': translate("Ежемесячный платеж", lang),
             'annual_payment': translate("Годовой платеж", lang),

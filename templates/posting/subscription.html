@@ -279,7 +279,19 @@
                                             <i class="ph ph-dots-three-vertical"></i>
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ card.card_id }}">
-                                            <li><a class="dropdown-item" href="#"><i class="ph ph-pencil me-2"></i>{{ edit_button }}</a></li>
+                                            <li>
+                                                <a class="dropdown-item edit-card-btn"
+                                                   href="#"
+                                                   data-card-id="{{ card.card_id }}"
+                                                   data-card-type="{{ card.card_type }}"
+                                                   data-card-num="{{ card.card_num }}"
+                                                   data-valid-period="{{ card.valid_period }}"
+                                                   data-cardholder-name="{{ card.cardholder_name }}"
+                                                   data-bs-toggle="modal"
+                                                   data-bs-target="#addPaymentMethodModal">
+                                                    <i class="ph ph-pencil me-2"></i>{{ edit_button }}
+                                                </a>
+                                            </li>
                                             <form method="POST" action="{% url 'delete_card' card.card_id %}">
                                                 {% csrf_token %}
                                                     <button type="submit" class="dropdown-item text-danger">
@@ -412,11 +424,13 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addPaymentMethodModalLabel">{{ adding_payment_method }}</h5>
+                <h5 class="modal-title" id="addPaymentMethodModalLabel">{{ payment_method }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="addPaymentMethodForm">
+                <form id="addPaymentMethodForm" method="POST" action="{% url 'add_payment_method' %}">
+                    {% csrf_token %}
+                    <input type="hidden" id="cardId" name="cardId">
                     <div class="mb-3">
                         <label for="cardNumber" class="form-label">{{ card_num }}</label>
                         <input type="text" class="form-control" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" required>
@@ -449,7 +463,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ cancel }}</button>
-                <button type="button" class="btn btn-primary" id="savePaymentMethodBtn">{{ add }}</button>
+                <button type="button" class="btn btn-primary" id="savePaymentMethodBtn">{{ save }}</button>
             </div>
         </div>
     </div>
@@ -508,17 +522,23 @@
 <!-- JavaScript для работы с мобильным меню -->
 <script src = "{% static 'js/mobile_menu.js' %}"></script>
 
-<!-- JavaScript для обработки удаления -->
-<script src = "{% static 'js/subscription/delete_card.js' %}"></script>
-
 <!-- Переводы для метода оплаты -->
 <script>
     window.translations = {
         error_processing_form: "{{ error_processing_form }}",
         unknown_error: "{{ unknown_error }}",
-        error_sending_form: "{{ error_sending_form }}"
+        error_sending_form: "{{ error_sending_form }}",
+        adding_payment_method: "{{ payment_method }}",
+        save: "{{ save }}",
+        edit_payment_method: "{{ payment_method }}",
     };
 </script>
+
+<!-- JavaScript для редактирования карты -->
+<script src = "{% static 'js/subscription/edit_card.js' %}"></script>
+
+<!-- JavaScript для обработки удаления -->
+<script src = "{% static 'js/subscription/delete_card.js' %}"></script>
 
 <!-- JavaScript для обработки метода оплаты -->
 <script src = "{% static 'js/subscription/add_payment_method.js' %}"></script>
