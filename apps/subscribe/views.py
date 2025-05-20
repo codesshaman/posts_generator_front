@@ -39,9 +39,6 @@ def subscription(request):
         else:
             # Создаем объект Paginator
             paginator = Paginator(payment_data, 20)  # 20 платежей на страницу
-            if debug:
-                print("payment_data:", payment_data)
-                print("page:", page)
             try:
                 payments = paginator.page(page)
             except PageNotAnInteger:

@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
             saveButton.textContent = editButtonText;
 
             // Устанавливаем action формы для редактирования
-            form.action = "{% url 'edit_payment_method' %}";
+            form.action = form.dataset.editUrl;
         });
     });
 
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('cardId').value = '';
             modalTitle.textContent = addTitle;
             saveButton.textContent = addButtonText;
-            form.action = "{% url 'add_payment_method' %}";
+            form.action = form.dataset.addUrl;
         }
     });
 
@@ -70,9 +70,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert(data.message);
             }
         })
-        .catch(error => {
-            console.error('Ошибка:', error);
-            alert('Произошла ошибка при сохранении карты.');
-        });
+//        .catch(error => {
+//            console.error('Ошибка:', error);
+//            alert('Произошла ошибка при сохранении карты.');
+//        });
     });
 });

@@ -70,9 +70,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert(data.message);
             }
         })
-        .catch(error => {
-            console.error('Ошибка:', error);
-            alert('Произошла ошибка при сохранении карты.');
-        });
+//        .catch(error => {
+//            console.error('Ошибка:', error);
+//            alert('Произошла ошибка при сохранении карты.');
+//        });
     });
 });

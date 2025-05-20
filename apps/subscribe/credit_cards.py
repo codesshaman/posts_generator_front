@@ -14,12 +14,12 @@ in_detail = False
 
 # Эмулированные данные платежей
 card_data = [
-    {"card_id": 1, "card_type": "Visa", "card_num": "2202 2545 3278 4582",
+    {"card_id": 1, "card_type": "Visa", "card_num": "5596 6687 2663 9415",
       "is_main": "True","valid_period": "03/33", "cardholder_name": "NIKITA DJIGURDA"},
-    {"card_id": 2, "card_type": "Visa", "card_num": "2202 2545 3278 5556",
-      "is_main": "False", "valid_period": "03/33", "cardholder_name": "NIKITA DJIGURDA"},
-    {"card_id": 3, "card_type": "Visa", "card_num": "2202 2545 3278 5643",
-     "is_main": "False", "valid_period": "03/33", "cardholder_name": "NIKITA DJIGURDA"},
+    {"card_id": 2, "card_type": "Visa", "card_num": "5596 6637 2552 8206",
+      "is_main": "False", "valid_period": "06/26", "cardholder_name": "NIKITA DJIGURDA"},
+    {"card_id": 3, "card_type": "Visa", "card_num": "2200 3902 9917 8912",
+     "is_main": "False", "valid_period": "01/31", "cardholder_name": "NIKITA DJIGURDA"},
 ]
 
 def delete_card(request, card_id):
