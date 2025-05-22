@@ -445,7 +445,7 @@
 ^Недействительный номер карты^Invalid card number^
 ^Недействительный или истёкший срок действия^Invalid or expired^
 ^Недействительный CVV^Invalid CVV^
-^^^
+^Оплата прошла успешно^The payment was successful^
 ^^^
 ^^^
 ^^^

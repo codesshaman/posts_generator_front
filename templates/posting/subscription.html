@@ -3,6 +3,7 @@
 {% load static %}
 {% block content %}
 {% csrf_token %}
+{% load i18n %}
 
 </div>
 
@@ -82,7 +83,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <button class="btn btn-outline-primary w-100">
+                        <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#addCoinsModal">
                             <i class="ph ph-plus-circle me-2"></i> {{ add_coins }}
                         </button>
                     </div>
@@ -471,6 +472,31 @@
     </div>
 </div>
 
+<!-- Модальное окно добавления коинов -->
+<div class="modal fade" id="addCoinsModal" tabindex="-1" aria-labelledby="addCoinsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addCoinsModalLabel">{% trans "Add Coins" %}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addCoinsForm">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="coinAmount" class="form-label">{{ group_name }}</label>
+                        <input type="number" class="form-control" id="coinAmount" placeholder="{% trans 'Enter number of coins' %}" required min="1">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Close" %}</button>
+                        <button type="submit" class="btn btn-primary">{% trans "Add Coins" %}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Модальное окно отмены подписки -->
 <div class="modal fade" id="cancelSubscriptionModal" tabindex="-1" aria-labelledby="cancelSubscriptionModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -533,6 +559,8 @@
         adding_payment_method: "{{ payment_method }}",
         save: "{{ save }}",
         edit_payment_method: "{{ payment_method }}",
+        error: "{{ error }}",
+        succpay: "{{ succ_pay }}",
     };
 </script>
 
@@ -544,6 +572,48 @@
 
 <!-- JavaScript для обработки метода оплаты -->
 <script src = "{% static 'js/subscription/add_payment_method.js' %}"></script>
+
+<!-- JavaScript для обработки формы -->
+<script>
+document.getElementById('addCoinsForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const coinAmount = document.getElementById('coinAmount').value;
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    // Вывод в консоль (заглушка)
+    console.log('Количество коинов:', coinAmount);
+
+    try {
+        const response = await fetch('{% url "add_coins" %}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken
+            },
+            body: JSON.stringify({
+                coins: parseInt(coinAmount)
+            })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            // Успешная обработка
+            console.log('Успех:', data);
+            // Закрываем модалку
+            const modal = bootstrap.Modal.getInstance(document.getElementById('addCoinsModal'));
+            modal.hide();
+            // Перезагружаем страницу
+            window.location.reload();
+        } else {
+            console.error('Ошибка:', data);
+        }
+    } catch (error) {
+        console.error('Ошибка при отправке:', error);
+    }
+});
+</script>
 
 
 <script>

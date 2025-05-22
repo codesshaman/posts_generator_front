@@ -242,5 +242,6 @@ def settings(request):
         "valid_username": translate("Пожалуйста, введите действительное имя пользователя Telegram, начинающееся с @", lang),
         "sucs_notices": translate("Вы успешно подписались на уведомления Telegram!", lang),
         "error": translate("Error", lang),
+        "succ_pay": translate("Оплата прошла успешно", lang),
         "error_occurred": translate("При обработке вашего запроса произошла ошибка.", lang),
     }
