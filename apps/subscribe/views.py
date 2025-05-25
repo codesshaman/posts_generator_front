@@ -28,9 +28,9 @@ def subscription(request):
 
         # Получаем номер страницы из GET-параметра для пагинации платежей
         page = request.GET.get('page', 1)
-        payment_data = []  # Заглушка для данных платежей, замените на реальные данные
-        cards = []  # Заглушка для данных карт, замените на реальные данные
-        tariffs_data = []  # Заглушка для данных тарифов, замените на реальные данные
+        payment_data = []  # Заглушка для данных платежей
+        cards = []  # Заглушка для данных карт
+        tariffs_data = []  # Заглушка для данных тарифов
 
         if not payment_data:
             payments = []
@@ -48,8 +48,23 @@ def subscription(request):
 
         # Определяем статус подписки и дату окончания
         global subscription_status
-        active_status = translate("Активна", lang) if subscription_status else f"{translate('Будет отменена', lang)} {timezone.now().strftime('%d.%m.%Y')}"
-        subscr_end_date = timezone.now().strftime('%d.%m.%Y')  # Текущая дата как заглушка
+        active_status = translate("Активна", lang) if subscription_status else (
+            f"{translate('Будет отменена', lang)} {timezone.now().strftime('%d.%m.%Y')}"
+        )
+        subscr_end_date = timezone.now().strftime('%d.%m.%Y')
+
+        # Словарь переводов для JavaScript
+        translations = {
+            'too_expensive': translate("Слишком дорого", lang),
+            'not_use_service': translate("Не использую сервис", lang),
+            'missing_features': translate("Не хватает функций", lang),
+            'found_alternative': translate("Нашёл альтернативу", lang),
+            'other': translate("Другое", lang),
+            'will_cancelled': translate("Подписка будет отменена", lang),
+            'reason': translate("Причина", lang),
+            'successfully_renewed': translate("Подписка успешно возобновлена", lang),
+            'error_message': translate("Произошла ошибка", lang),
+        }
 
         context = {
             "title": translate("Моя подписка", lang),
@@ -98,7 +113,7 @@ def subscription(request):
             "annual_payment": translate("Годовой платеж", lang),
             "discount": translate("Скидка", lang),
             "upgrade_to": translate("Перейти на", lang),
-            "subscription_status": subscription_status,  # Передаем статус подписки
+            "subscription_status": subscription_status,
             "cancel_subscription": translate("Отменить подписку", lang),
             "cancel_subscription_confirm": translate("Подтверждение отмены подписки", lang),
             "cancel_subscription_options": translate("Что произойдет после отмены", lang),
@@ -111,8 +126,8 @@ def subscription(request):
             "select_reason": translate("Выберите причину", lang),
             "too_expensive": translate("Слишком дорого", lang),
             "not_use_service": translate("Не использую сервис", lang),
-            "missing_features": translate("Отсутствуют нужные функции", lang),
-            "found_alternative": translate("Нашел альтернативу", lang),
+            "missing_features": translate("Не хватает функций", lang),
+            "found_alternative": translate("Нашёл альтернативу", lang),
             "other": translate("Другое", lang),
             "write_reason": translate("Укажите причину", lang),
             "cancel": translate("Отмена", lang),
@@ -121,6 +136,7 @@ def subscription(request):
             "will_cancelled": translate("Подписка будет отменена", lang),
             "reason": translate("Причина", lang),
             "cancel_subs": translate("Отменить подписку", lang) if subscription_status else translate("Возобновить подписку", lang),
+            "translations": translations,
         }
 
         return render(request, "posting/subscription.html", context)

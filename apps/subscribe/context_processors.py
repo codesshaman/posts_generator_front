@@ -111,5 +111,8 @@ def subscription(request):
         "enter_cardholder_name": translate("Введите имя держателя карты", lang),
         "error_processing_form": translate("Ошибка обработки формы", lang),
         "unknown_error": translate("Неизвестная ошибка", lang),
+        "error_subscr": translate("Произошла ошибка при возобновлении подписки", lang),
         "error_sending_form": translate("Ошибка отправки формы", lang),
+        "error_cancel": translate("Произошла ошибка при отмене подписки", lang),
+        "reason_required": translate("Пожалуйста, выберите причину отмены", lang),
     }

@@ -1,5 +1,6 @@
 {% extends 'basetmp/base.html' %}
 {% load custom_filters %}
+{% load i18n static %}
 {% load static %}
 {% block content %}
 {% csrf_token %}
@@ -523,11 +524,11 @@
                     <label for="cancellationReason" class="form-label">{{ reason_for_cancel }}</label>
                     <select class="form-select" id="cancellationReason">
                         <option value="" selected>{{ select_reason }}...</option>
-                        <option value="too_expensive">{{ too_expensive }}</option>
-                        <option value="not_using">{{ not_use_service }}</option>
-                        <option value="missing_features">{{ missing_features }}</option>
-                        <option value="found_alternative">{{ found_alternative }}</option>
-                        <option value="other">{{ other }}</option>
+                        <option value="1">{{ too_expensive }}</option>
+                        <option value="2">{{ not_use_service }}</option>
+                        <option value="3">{{ missing_features }}</option>
+                        <option value="4">{{ found_alternative }}</option>
+                        <option value="5">{{ other }}</option>
                     </select>
                 </div>
                 <div class="form-group mt-3" id="otherReasonContainer" style="display: none;">
@@ -559,7 +560,14 @@
         save: "{{ save }}",
         edit_payment_method: "{{ payment_method }}",
         error: "{{ error }}",
+        error_subscr: "{{ error_subscr }}",
+        error_cancel: "{{ error_cancel }}",
         succpay: "{{ succ_pay }}",
+        too_expensive: "{{ too_expensive }}",
+        not_use_service: "{{ not_use_service }}",
+        missing_features: "{{ missing_features }}",
+        found_alternative: "{{ found_alternative }}",
+        reason_required: "{{ reason_required }}",
     };
 </script>
 

@@ -53,8 +53,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 })
                 .catch(error => {
-                    console.error('Ошибка:', error);
-                    showAlert('Произошла ошибка при возобновлении подписки', 'danger');
+                    console.error(window.translations.error ||'Ошибка:', error);
+                    showAlert(window.translations.error_message || 'Произошла ошибка при возобновлении подписки', 'danger');
                 });
             }
         });
@@ -63,18 +63,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // Обработчик для подтверждения отмены подписки
     if (confirmCancelSubscriptionBtn) {
         confirmCancelSubscriptionBtn.addEventListener('click', function() {
-            const reason = cancellationReason.value;
+            const reasonNumber = cancellationReason.value;
+            if (!reasonNumber) {
+                showAlert(window.translations.reason_required || 'Пожалуйста, выберите причину отмены', 'danger');
+                return;
+            }
             let reasonText = '';
-            if (reason === 'too_expensive') {
-                reasonText = '{{ too_expensive }}';
-            } else if (reason === 'not_using') {
-                reasonText = '{{ not_use_service }}';
-            } else if (reason === 'missing_features') {
-                reasonText = '{{ missing_features }}';
-            } else if (reason === 'found_alternative') {
-                reasonText = '{{ found_alternative }}';
-            } else if (reason === 'other') {
-                reasonText = document.getElementById('otherReason').value || 'Другое';
+
+            if (reasonNumber === '1') {
+                reasonText = window.translations.too_expensive;
+            } else if (reasonNumber === '2') {
+                reasonText = window.translations.not_use_service;
+            } else if (reasonNumber === '3') {
+                reasonText = window.translations.missing_features;
+            } else if (reasonNumber === '4') {
+                reasonText = window.translations.found_alternative;
+            } else if (reasonNumber === '5') {
+                reasonText = document.getElementById('otherReason').value || window.translations.other;
             }
 
             // Закрываем модальное окно
@@ -90,7 +95,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 body: JSON.stringify({
                     action: 'cancel',
-                    reason: reasonText,
+                    reason_number: reasonNumber,
+                    other_reason: reasonNumber === '5' ? reasonText : '',
                     cancellation_date: getCurrentDate()
                 })
             })
@@ -109,8 +115,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             })
             .catch(error => {
-                console.error('Ошибка:', error);
-                showAlert('Произошла ошибка при отмене подписки', 'danger');
+                console.error(window.translations.error ||'Ошибка:', error);
+                showAlert(window.translations.error_message || 'Произошла ошибка при отмене подписки', 'danger');
             });
         });
     }
@@ -118,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Показ поля для другой причины отмены
     if (cancellationReason && otherReasonContainer) {
         cancellationReason.addEventListener('change', function() {
-            otherReasonContainer.style.display = this.value === 'other' ? 'block' : 'none';
+            otherReasonContainer.style.display = this.value === '5' ? 'block' : 'none';
         });
     }
 });
