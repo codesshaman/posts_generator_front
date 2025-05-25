@@ -13,7 +13,9 @@
     <div class="card-body">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h3 class="card-title mb-0">{{ current_sub }}</h3>
-            <span class="badge bg-success py-2 px-3">{{ active_status }}</span>
+            <span class="badge {{ subscription_status|yesno:'bg-success,bg-warning' }} py-2 px-3" id="subscriptionStatusBadge">
+                {{ active_status }}
+            </span>
         </div>
 
         <div class="row">
@@ -92,8 +94,8 @@
         </div>
 
         <div class="mt-4 d-flex justify-content-end">
-            <button class="btn btn-outline-danger me-2">
-                <i class="ph ph-x me-2"></i> {{ cancel_subs }}
+            <button class="btn {{ subscription_status|yesno:'btn-outline-danger,btn-outline-success' }} me-2" id="cancelSubscriptionBtn">
+                <i class="ph ph-{{ subscription_status|yesno:'x,arrows-clockwise' }} me-2"></i> {{ cancel_subs }}
             </button>
             <button class="btn btn-outline-primary">
                 <i class="ph ph-pencil-simple me-2"></i> {{ change_plan }}
@@ -510,7 +512,6 @@
                     <i class="ph ph-warning-circle text-warning" style="font-size: 64px;"></i>
                     <h4 class="mt-3">{{ cancel_subscription_confirm }}</h4>
                 </div>
-
                 <p>{{ cancel_subscription_options }}:</p>
                 <ul>
                     <li>{{ will_be_active_until }} {{ subscr_end_date }}</li>
@@ -518,7 +519,6 @@
                     <li>{{ use_all_functions }} {{ before_expiration }}</li>
                     <li>{{ renew_subscription }}</li>
                 </ul>
-
                 <div class="form-group mt-4">
                     <label for="cancellationReason" class="form-label">{{ reason_for_cancel }}</label>
                     <select class="form-select" id="cancellationReason">
@@ -530,7 +530,6 @@
                         <option value="other">{{ other }}</option>
                     </select>
                 </div>
-
                 <div class="form-group mt-3" id="otherReasonContainer" style="display: none;">
                     <label for="otherReason" class="form-label">{{ write_reason }}</label>
                     <textarea class="form-control" id="otherReason" rows="3"></textarea>
@@ -538,7 +537,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ cancel }}</button>
-                <button type="button" class="btn btn-danger" id="confirmCancelSubscriptionBtn">{{ сonfirm_unsubscription }}</button>
+                <button type="button" class="btn btn-danger" id="confirmCancelSubscriptionBtn">{{ confirm_unsubscription }}</button>
             </div>
         </div>
     </div>
@@ -572,6 +571,8 @@
 
 <!-- JavaScript для обработки метода оплаты -->
 <script src = "{% static 'js/subscription/add_payment_method.js' %}"></script>
+
+<script src = "{% static 'js/subscription/manage_subscription.js' %}"></script>
 
 <!-- JavaScript для обработки формы -->
 <script>
@@ -658,104 +659,7 @@ if (addPaymentMethodBtn) {
 }
 
 // Обработчик для кнопки отмены подписки
-if (cancelSubscriptionBtn) {
-    // Сохраняем оригинальный HTML кнопки
-    const originalButtonHTML = cancelSubscriptionBtn.innerHTML;
-    const originalButtonClass = 'btn-outline-danger';
-    const renewButtonClass = 'btn-outline-success';
 
-    // Флаг для отслеживания состояния подписки
-    let isSubscriptionCancelled = false;
-
-    // Функция для обработки клика на кнопку отмены/возобновления
-    function handleSubscriptionButtonClick() {
-        if (!isSubscriptionCancelled) {
-            // Если подписка активна - показываем модальное окно отмены
-            const modal = new bootstrap.Modal(document.getElementById('cancelSubscriptionModal'));
-            modal.show();
-        } else {
-            // Если подписка уже отменена - возобновляем её
-
-            // Находим бейдж статуса подписки
-            const statusBadge = document.querySelector('.card-body .badge.bg-warning');
-            if (statusBadge) {
-                statusBadge.classList.remove('bg-warning');
-                statusBadge.classList.add('bg-success');
-                statusBadge.textContent = {{ active }};
-            }
-
-            // Возвращаем исходный вид кнопки
-            cancelSubscriptionBtn.classList.remove(renewButtonClass);
-            cancelSubscriptionBtn.classList.add(originalButtonClass);
-            cancelSubscriptionBtn.innerHTML = originalButtonHTML;
-
-            // Обновляем флаг состояния
-            isSubscriptionCancelled = false;
-
-            // Показываем уведомление о возобновлении подписки
-            showAlert('{{ successfully_renewed }}', 'success');
-        }
-    }
-
-    // Добавляем обработчик события клика
-    cancelSubscriptionBtn.addEventListener('click', handleSubscriptionButtonClick);
-
-    // Обработчик для подтверждения отмены подписки
-    if (confirmCancelSubscriptionBtn) {
-        confirmCancelSubscriptionBtn.addEventListener('click', function() {
-            // Получаем выбранную причину отмены
-            const reason = cancellationReason ? cancellationReason.value : '';
-            let reasonText = '';
-
-            if (reason === 'too_expensive') {
-                reasonText = '{{ too_expensive }}';
-            } else if (reason === 'not_using') {
-                reasonText = '{{ not_use_service }}';
-            } else if (reason === 'missing_features') {
-                reasonText = '{{ missing_features }}';
-            } else if (reason === 'found_alternative') {
-                reasonText = '{{ found_alternative }}';
-            } else if (reason === 'other') {
-                reasonText = document.getElementById('otherReason').value || 'Другое';
-            }
-
-            // Закрываем модальное окно
-            const modal = bootstrap.Modal.getInstance(document.getElementById('cancelSubscriptionModal'));
-            modal.hide();
-
-            // Находим бейдж статуса подписки
-            const statusBadge = document.querySelector('.card-body .badge.bg-success');
-            if (statusBadge) {
-                // Меняем цвет и текст бейджа
-                statusBadge.classList.remove('bg-success');
-                statusBadge.classList.add('bg-warning');
-                statusBadge.textContent = '{{ will_cancelled }} 15.04.2023';
-            }
-
-            // Меняем внешний вид кнопки
-            cancelSubscriptionBtn.classList.remove(originalButtonClass);
-            cancelSubscriptionBtn.classList.add(renewButtonClass);
-            cancelSubscriptionBtn.innerHTML = '<i class="ph ph-arrows-clockwise me-2"></i> Возобновить подписку';
-
-            // Обновляем флаг состояния
-            isSubscriptionCancelled = true;
-
-            // Показать уведомление
-            showAlert('{{ will_be_cancelled }}. {{ reason }}: ' + reasonText, 'info');
-        });
-    }
-}
-
-// Показ поля для другой причины отмены
-if (cancellationReason && otherReasonContainer) {
-    cancellationReason.addEventListener('change', function() {
-        if (this.value === 'other') {
-            otherReasonContainer.style.display = 'block';
-        } else {
-            otherReasonContainer.style.display = 'none';
-        }
-    });
-}
 
 // Обработчик для переключателя периода оплаты
 if (billingSwitch) {
