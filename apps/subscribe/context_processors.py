@@ -115,4 +115,6 @@ def subscription(request):
         "error_sending_form": translate("Ошибка отправки формы", lang),
         "error_cancel": translate("Произошла ошибка при отмене подписки", lang),
         "reason_required": translate("Пожалуйста, выберите причину отмены", lang),
+        "add_coins_sign": translate("Добавить коины", lang),
+        "enter_coins_num": translate("Введите количество коинов для покупки", lang),
     }

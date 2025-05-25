@@ -450,4 +450,5 @@
 ^Произошла ошибка при отмене подписки^An error occurred when canceling the subscription^
 ^Подписка будет отменена^The subscription will be cancelled.^
 ^Пожалуйста, выберите причину отмены^Please select the reason for cancellation^
-^^^
+^Введите количество коинов для покупки^Enter the number of coins to purchase^
+^Добавить коины^Add coins^

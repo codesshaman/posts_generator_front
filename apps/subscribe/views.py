@@ -92,10 +92,6 @@ def subscription(request):
             "card_type_visa": "Visa",
             "month_date": "05/25",
             "card_type_mc": "MasterCard",
-            "you_can_change": you_can_change,
-            "how_to_cancel": how_to_cancel,
-            "unused_coins": unused_coins,
-            "accounting": accounting,
             "support_team": support,
             "subscr_end_date": subscr_end_date,
             "payments": payments.object_list if paginator else [],
@@ -140,6 +136,10 @@ def subscription(request):
             "reason": translate("Причина", lang),
             "cancel_subs": translate("Отменить подписку", lang) if subscription_status else translate("Возобновить подписку", lang),
             "translations": translations,
+            "you_can_change": you_can_change_plan(lang),
+            "how_to_cancel": how_to_cancel_sub(lang),
+            "unused_coins": unused_coins_burn(lang),
+            "accounting": accounting_invoice(lang),
         }
 
         return render(request, "posting/subscription.html", context)
