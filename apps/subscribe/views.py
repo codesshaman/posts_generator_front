@@ -1,6 +1,9 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from project.cookies import set_cookie_if_not_exists
 from project.language import translate, language
+from .tariffication_system import tarffs_data
+from .payment_history import payment_data
+from .credit_cards import card_data
 from django.shortcuts import render
 from django.utils import timezone
 from .faq_translate import you_can_change_plan, how_to_cancel_sub, unused_coins_burn, accounting_invoice, support_team
@@ -28,9 +31,9 @@ def subscription(request):
 
         # Получаем номер страницы из GET-параметра для пагинации платежей
         page = request.GET.get('page', 1)
-        payment_data = []  # Заглушка для данных платежей
-        cards = []  # Заглушка для данных карт
-        tariffs_data = []  # Заглушка для данных тарифов
+        # payment_data = []  # Заглушка для данных платежей
+        # cards = []  # Заглушка для данных карт
+        # tariffs_data = []  # Заглушка для данных тарифов
 
         if not payment_data:
             payments = []
@@ -99,8 +102,8 @@ def subscription(request):
             "current_page": payments.number if paginator else 1,
             "total_pages": paginator.num_pages if paginator else 1,
             "paginator": payments if paginator else None,
-            "cards": cards,
-            "tariffs": tariffs_data,
+            "cards": card_data,
+            "tariffs": tarffs_data,
             "main_text": translate("Основная", lang),
             "edit_button": translate("Редактировать", lang),
             "delete_button": translate("Удалить", lang),
