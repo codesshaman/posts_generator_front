@@ -10,28 +10,40 @@ document.getElementById('passwordForm').addEventListener('submit', async functio
     if (alertDiv) alertDiv.remove();
 
     try {
-        const response = await fetch(form.action, {
+        // Отправляем данные на фронтенд для логирования
+        const frontendLogResponse = await fetch('/settings/change-password/', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': csrftoken
+            }
+        });
+        const frontendLogData = await frontendLogResponse.json();
+        console.log('Ответ от фронтенда:', frontendLogData);
+
+        // Отправляем основной запрос на бэкенд
+        const backendResponse = await fetch(form.action, {
             method: form.method,
             body: formData,
             headers: {
                 'X-CSRFToken': csrftoken
             }
         });
-        const data = await response.json();
+        const backendData = await backendResponse.json();
 
         // Создаём уведомление
         const alertDiv = document.createElement('div');
-        alertDiv.className = `alert alert-${data.status === 'success' ? 'success' : 'danger'} mt-3`;
-        alertDiv.textContent = data.message;
+        alertDiv.className = `alert alert-${backendData.status === 'success' ? 'success' : 'danger'} mt-3`;
+        alertDiv.textContent = backendData.message;
         form.parentNode.insertBefore(alertDiv, form);
 
-        if (data.status === 'success') {
+        if (backendData.status === 'success') {
             // Очищаем поля формы
             form.reset();
             // Обновляем страницу через 2 секунды
             setTimeout(() => {
                 window.location.reload();
-            }, 2000);
+            }, 3000);
         }
     } catch (error) {
         console.error('Ошибка AJAX:', error);
@@ -41,7 +53,6 @@ document.getElementById('passwordForm').addEventListener('submit', async functio
         form.parentNode.insertBefore(alertDiv, form);
     }
 });
-
 
 // Переключение видимости пароля
 function togglePasswordVisibility(inputId, toggleId) {

@@ -1,7 +1,25 @@
 from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_protect
 from django.http import JsonResponse
 import re
 
+
+@require_POST
+@csrf_protect
+def change_password(request):
+    current_password = request.POST.get('current_password')
+    new_password = request.POST.get('new_password')
+    confirm_password = request.POST.get('confirm_password')
+
+    # Функция-заглушка для вывода пароля в консоль
+    print(f"Current Password: {current_password}")
+    print(f"New Password: {new_password}")
+    print(f"Confirm Password: {confirm_password}")
+
+    return JsonResponse({
+        'status': 'success',
+        'message': 'Password logged successfully'
+    })
 
 @require_POST
 def update_password(request):

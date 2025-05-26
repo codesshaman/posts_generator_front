@@ -1,8 +1,8 @@
+from .update_password import update_password, change_password
 from .update_personal_info import update_personal_info
 from .telegram_subscribe import telegram_subscribe
 from .save_notifications import save_notifications
 from .groups_data import edit_group, delete_group
-from .update_password import update_password
 from django.urls import path
 from .views import *
 
@@ -16,4 +16,5 @@ urlpatterns = [
     path("settings/personal-info/update/", update_personal_info, name="update_personal_info"),
     path('edit_group/<int:group_id>/', edit_group, name='edit_group'),
     path('delete_group/<int:group_id>/', delete_group, name='delete_group'),
+    path('settings/change-password/', change_password, name='log_password'),
 ]
