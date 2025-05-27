@@ -43,7 +43,7 @@
                         </div>
                         <div class="d-flex justify-content-between mb-2">
                             <span>{{ price }}:</span>
-                            <span class="fw-bold">{{ price_sum }} {{ сurrency }}/{{ month }}</span>
+                            <span class="fw-bold">{{ price_sum }} {{ сurrency }}</span>
                         </div>
                         <div class="d-flex justify-content-between mb-2">
                             <span>{{ payment }}:</span>
@@ -114,15 +114,15 @@
             <!-- Переключатель периода оплаты -->
             <div class="billing-toggle">
                 <span class="billing-period-text me-2">{{ monthly }}</span>
-                    <div class="form-check form-switch d-inline-block">
-                        <input class="form-check-input" type="checkbox" id="billingPeriodSwitch">
-                        <label class="form-check-label" for="billingPeriodSwitch"></label>
-                    </div>
-                    <span class="billing-period-text ms-2">{{ annually }} <span class="badge bg-success ms-1">-20%</span></span>
+                <div class="form-check form-switch d-inline-block">
+                    <input class="form-check-input" type="checkbox" id="billingPeriodSwitch">
+                    <label class="form-check-label" for="billingPeriodSwitch"></label>
                 </div>
+                <span class="billing-period-text ms-2">{{ annually }} <span class="badge bg-success ms-1">-20%</span></span>
             </div>
+        </div>
 
-            <div class="row">
+        <div class="row">
             <!-- Тарифы -->
             {% for tariff in tariffs %}
             <div class="col-md-3 mb-4">
@@ -138,9 +138,13 @@
                                 <span class="fw-bold">{{ tariff.coins_num }} {{ coins }}</span>
                             </div>
                             <div class="plan-price">
-                                <span class="price" id="profi-price">{{ tariff.monthly_price }} {{ сurrency }}</span>
-                                <span class="period">/{{ month }}</span>
-                                </br>
+                                <span class="price"
+                                      data-monthly="{{ tariff.monthly_price }}"
+                                      data-annually="{{ tariff.annually_price }}">
+                                    {{ tariff.monthly_price }}
+                                </span>
+                                <span class="currency">{{ currency }}</span>
+                                <span class="period">/{{ month }}</span><br/>
                                 <span class="savings-badge">{{ money_saving }} {{ tariff.saving_num }}%</span>
                             </div>
                             <p class="text-muted billing-period-text-monthly">{{ monthly_payment }}</p>
@@ -150,8 +154,9 @@
                         </div>
                         <div class="mt-auto">
                             <button class="btn btn-outline-primary w-100 update-btn"
-                                    data-monthly="{{ monthly_payment }}"
-                                    data-yearly="{{ monthly_payment }}">
+                                    data-monthly="{{ tariff.monthly_price }}"
+                                    data-yearly="{{ tariff.annually_price }}"
+                                    data-tariff-name="{{ tariff.tariff_name }}">
                                 {{ upgrade_to }} {{ tariff.tariff_name }}
                             </button>
                         </div>
@@ -570,6 +575,8 @@
         missing_features: "{{ missing_features }}",
         found_alternative: "{{ found_alternative }}",
         reason_required: "{{ reason_required }}",
+        month: "{{ month }}",
+        year: "{{ year }}",
     };
 </script>
 
@@ -582,7 +589,11 @@
 <!-- JavaScript для обработки метода оплаты -->
 <script src = "{% static 'js/subscription/add_payment_method.js' %}"></script>
 
+<!-- JavaScript для отмены подписки -->
 <script src = "{% static 'js/subscription/manage_subscription.js' %}"></script>
+
+<!-- JavaScript для вывода годовой цены тарифа -->
+<script src = "{% static 'js/subscription/annualy_prices.js' %}"></script>
 
 <!-- JavaScript для обработки формы -->
 <script>

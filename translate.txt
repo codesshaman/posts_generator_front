@@ -216,6 +216,7 @@
 ^Стоимость^Price^
 ^Способ оплаты^Payment method^
 ^месяц^month^
+^год^year^
 ^Использование коинов^Using coins^
 ^Доступно коинов^Available coins^
 ^Расход коинов^Coin consumption^

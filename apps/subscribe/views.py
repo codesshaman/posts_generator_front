@@ -102,6 +102,7 @@ def subscription(request):
             "validity_period": translate("Срок действия", lang),
             "coins": translate("монет", lang),
             "month": translate("месяц", lang),
+            "year": translate("год", lang),
             "save": translate("Сохранить", lang),
             "money_saving": translate("Экономия", lang),
             "monthly_payment": translate("Ежемесячный платеж", lang),
