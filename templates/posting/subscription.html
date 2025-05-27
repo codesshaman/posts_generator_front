@@ -98,9 +98,9 @@
             <button class="btn {{ subscription_status|yesno:'btn-outline-danger,btn-outline-success' }} me-2" id="cancelSubscriptionBtn">
                 <i class="ph ph-{{ subscription_status|yesno:'x,arrows-clockwise' }} me-2"></i> {{ cancel_subs }}
             </button>
-            <button class="btn btn-outline-primary">
-                <i class="ph ph-pencil-simple me-2"></i> {{ change_plan }}
-            </button>
+<!--            <button class="btn btn-outline-primary">-->
+<!--                <i class="ph ph-pencil-simple me-2"></i> {{ change_plan }}-->
+<!--            </button>-->
         </div>
     </div>
 </div>
@@ -138,7 +138,7 @@
                                 <span class="fw-bold">{{ tariff.coins_num }} {{ coins }}</span>
                             </div>
                             <div class="plan-price">
-                                <span class="price" id="profi-price">{{ tariff.tariff_price }} {{ сurrency }}</span>
+                                <span class="price" id="profi-price">{{ tariff.monthly_price }} {{ сurrency }}</span>
                                 <span class="period">/{{ month }}</span>
                                 </br>
                                 <span class="savings-badge">{{ money_saving }} {{ tariff.saving_num }}%</span>
@@ -150,8 +150,8 @@
                         </div>
                         <div class="mt-auto">
                             <button class="btn btn-outline-primary w-100 update-btn"
-                                    data-monthly="{{ tariff.tariff_price }}"
-                                    data-yearly="{{ tariff.tariffliv_price | floatformat:0 | multiply:12 }}">
+                                    data-monthly="{{ monthly_payment }}"
+                                    data-yearly="{{ monthly_payment }}">
                                 {{ upgrade_to }} {{ tariff.tariff_name }}
                             </button>
                         </div>
@@ -705,64 +705,64 @@ document.querySelectorAll('.update-btn').forEach(button => {
 });
 });
 
-// Функция для обновления цен в зависимости от выбранного периода
-function updatePricesBasedOnPeriod(isYearly) {
-    // Получаем элементы цен
-    const profiPrice = document.getElementById('profi-price');
-    const pro50Price = document.getElementById('pro50-price');
-    const pro100Price = document.getElementById('pro100-price');
-    const pro200Price = document.getElementById('pro200-price');
+<!--// Функция для обновления цен в зависимости от выбранного периода-->
+<!--function updatePricesBasedOnPeriod(isYearly) {-->
+<!--    // Получаем элементы цен-->
+<!--    const profiPrice = document.getElementById('profi-price');-->
+<!--    const pro50Price = document.getElementById('pro50-price');-->
+<!--    const pro100Price = document.getElementById('pro100-price');-->
+<!--    const pro200Price = document.getElementById('pro200-price');-->
 
-    if (!profiPrice || !pro50Price || !pro100Price || !pro200Price) {
-        return; // Если элементы не найдены, выходим из функции
-    }
+<!--    if (!profiPrice || !pro50Price || !pro100Price || !pro200Price) {-->
+<!--        return; // Если элементы не найдены, выходим из функции-->
+<!--    }-->
 
-    // Массив элементов цен для анимации
-    const priceElements = [profiPrice, pro50Price, pro100Price, pro200Price];
+<!--    // Массив элементов цен для анимации-->
+<!--    const priceElements = [profiPrice, pro50Price, pro100Price, pro200Price];-->
 
-    // Добавляем класс анимации
-    priceElements.forEach(el => {
-        el.classList.add('price-changed');
+<!--    // Добавляем класс анимации-->
+<!--    priceElements.forEach(el => {-->
+<!--        el.classList.add('price-changed');-->
 
-        // Удаляем класс анимации после завершения
-        setTimeout(() => {
-            el.classList.remove('price-changed');
-        }, 500);
-    });
+<!--        // Удаляем класс анимации после завершения-->
+<!--        setTimeout(() => {-->
+<!--            el.classList.remove('price-changed');-->
+<!--        }, 500);-->
+<!--    });-->
 
-    if (isYearly) {
-        // Применяем скидку 20% для годовой оплаты
-        profiPrice.textContent = '792 ₽';
-        pro50Price.textContent = '1,832 ₽';
-        pro100Price.textContent = '3,480 ₽';
-        pro200Price.textContent = '6,392 ₽';
+<!--    if (isYearly) {-->
+<!--        // Применяем скидку 20% для годовой оплаты-->
+<!--        profiPrice.textContent = '792 ₽';-->
+<!--        pro50Price.textContent = '1,832 ₽';-->
+<!--        pro100Price.textContent = '3,480 ₽';-->
+<!--        pro200Price.textContent = '6,392 ₽';-->
 
-        // Обновляем перечеркнутые цены для годовой подписки
-        const originalPrices = document.querySelectorAll('.original-price');
-        if (originalPrices.length >= 3) {
-            originalPrices[0].textContent = '1,980 ₽';
-            originalPrices[1].textContent = '3,960 ₽';
-            originalPrices[2].textContent = '7,920 ₽';
-        }
-    } else {
-        // Возвращаем обычные цены для месячной оплаты
-        profiPrice.textContent = '990 ₽';
-        pro50Price.textContent = '2,290 ₽';
-        pro100Price.textContent = '4,350 ₽';
-        pro200Price.textContent = '7,990 ₽';
+<!--        // Обновляем перечеркнутые цены для годовой подписки-->
+<!--        const originalPrices = document.querySelectorAll('.original-price');-->
+<!--        if (originalPrices.length >= 3) {-->
+<!--            originalPrices[0].textContent = '1,980 ₽';-->
+<!--            originalPrices[1].textContent = '3,960 ₽';-->
+<!--            originalPrices[2].textContent = '7,920 ₽';-->
+<!--        }-->
+<!--    } else {-->
+<!--        // Возвращаем обычные цены для месячной оплаты-->
+<!--        profiPrice.textContent = '990 ₽';-->
+<!--        pro50Price.textContent = '2,290 ₽';-->
+<!--        pro100Price.textContent = '4,350 ₽';-->
+<!--        pro200Price.textContent = '7,990 ₽';-->
 
-        // Возвращаем перечеркнутые цены для месячной подписки
-        const originalPrices = document.querySelectorAll('.original-price');
-        if (originalPrices.length >= 3) {
-            originalPrices[0].textContent = '2,475 ₽';
-            originalPrices[1].textContent = '4,950 ₽';
-            originalPrices[2].textContent = '9,900 ₽';
-        }
-    }
+<!--        // Возвращаем перечеркнутые цены для месячной подписки-->
+<!--        const originalPrices = document.querySelectorAll('.original-price');-->
+<!--        if (originalPrices.length >= 3) {-->
+<!--            originalPrices[0].textContent = '2,475 ₽';-->
+<!--            originalPrices[1].textContent = '4,950 ₽';-->
+<!--            originalPrices[2].textContent = '9,900 ₽';-->
+<!--        }-->
+<!--    }-->
 
-    // Обновляем текст на кнопках
-    updateButtonText(isYearly);
-}
+<!--    // Обновляем текст на кнопках-->
+<!--    updateButtonText(isYearly);-->
+<!--}-->
 
 // Функция для обновления текста на кнопках
 function updateButtonText(isYearly) {

@@ -23,10 +23,6 @@ def subscription(request):
     """Отображает страницу подписки"""
     try:
         lang = language(request)
-        you_can_change = translate("Вы можете изменить план", lang)
-        how_to_cancel = translate("Как отменить подписку", lang)
-        unused_coins = translate("Неиспользованные монеты сгорят", lang)
-        accounting = translate("Счет для бухгалтерии", lang)
         support = translate("Обратитесь в поддержку", lang)
 
         # Получаем номер страницы из GET-параметра для пагинации платежей
