@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const yearText = window.translations.year;
     const monthlyText = window.translations.monthly;
     const annuallyText = window.translations.annually;
-    const currencyText = window.translations.currency || '₽'; // Значение по умолчанию, если currency не определена
+    const currencyText = window.translations.currency || '₽';
 
     // Функция для расчета следующей даты списания
     function getNextBillingDate(period) {
@@ -15,8 +15,10 @@ document.addEventListener("DOMContentLoaded", function () {
         let nextDate;
         if (period === monthText) {
             nextDate = new Date(today.setMonth(today.getMonth() + 1));
+            periodNum = 0;
         } else {
             nextDate = new Date(today.setFullYear(today.getFullYear() + 1));
+            periodNum = 1;
         }
         return nextDate.toLocaleDateString('ru-RU', {
             day: '2-digit',
@@ -42,6 +44,22 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 3000); // Удаляем уведомление через 3 секунды
     }
 
+    // Функция для получения CSRF-токена из cookies
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
     // Обработчик клика по кнопкам обновления тарифа
     updateButtons.forEach(button => {
         button.addEventListener("click", function () {
@@ -57,13 +75,17 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("modalPeriod").textContent = periodText;
             document.getElementById("modalNextBillingDate").textContent = getNextBillingDate(period);
 
-            // Сохраняем planName в data-атрибуте модального окна
-            document.getElementById("planConfirmationModal").dataset.planName = planName;
+            // Сохраняем данные в data-атрибутах модального окна
+            const modal = document.getElementById("planConfirmationModal");
+            modal.dataset.planName = planName;
+            modal.dataset.price = price;
+            modal.dataset.period = period;
+            modal.dataset.nextBillingDate = getNextBillingDate(period);
 
             // Инициализируем и показываем модальное окно
             try {
-                const modal = new bootstrap.Modal(document.getElementById("planConfirmationModal"));
-                modal.show();
+                const modalInstance = new bootstrap.Modal(modal);
+                modalInstance.show();
             } catch (error) {
                 console.error("Ошибка при инициализации модального окна:", error);
             }
@@ -74,21 +96,48 @@ document.addEventListener("DOMContentLoaded", function () {
     const confirmButton = document.getElementById("confirmPlanUpdateBtn");
     if (confirmButton) {
         confirmButton.addEventListener("click", function () {
-            // Получаем planName из data-атрибута модального окна
-            const planName = document.getElementById("planConfirmationModal").dataset.planName || "Неизвестный тариф";
-            try {
-                const modal = bootstrap.Modal.getInstance(document.getElementById("planConfirmationModal"));
-                if (modal) {
-                    modal.hide();
-                } else {
-                    console.warn("Модальное окно не инициализировано");
-                }
-            } catch (error) {
-                console.error("Ошибка при закрытии модального окна:", error);
-            }
+            const modal = document.getElementById("planConfirmationModal");
+            const planName = modal.dataset.planName || "Неизвестный тариф";
+            const price = modal.dataset.price;
+            const period = modal.dataset.period;
+            const nextBillingDate = modal.dataset.nextBillingDate;
 
-            // Показываем уведомление об успешном обновлении
-            showAlert(`Тариф успешно обновлен до "${planName}"`, 'success');
+            // Отправляем данные на сервер
+            fetch('/update-tariff/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+
+                body: JSON.stringify({
+                    tariff_name: planName,
+                    price: price,
+                    period: periodNum,
+                    next_billing_date: nextBillingDate
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Ответ от сервера:", data);
+                // Закрываем модальное окно
+                try {
+                    const modalInstance = bootstrap.Modal.getInstance(modal);
+                    if (modalInstance) {
+                        modalInstance.hide();
+                    } else {
+                        console.warn("Модальное окно не инициализировано");
+                    }
+                } catch (error) {
+                    console.error("Ошибка при закрытии модального окна:", error);
+                }
+                // Показываем уведомление об успешном обновлении
+                showAlert(`Тариф успешно обновлен до "${planName}"`, 'success');
+            })
+            .catch(error => {
+                console.error("Ошибка при отправке данных на сервер:", error);
+                showAlert("Ошибка при обновлении тарифа", 'danger');
+            });
         });
     } else {
         console.error("Кнопка confirmPlanUpdateBtn не найдена");
