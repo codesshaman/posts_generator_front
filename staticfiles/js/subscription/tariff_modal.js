@@ -9,10 +9,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const annuallyText = window.translations.annually;
     const currencyText = window.translations.currency || '₽';
 
+    // Функция для форматирования даты в ДД.ММ.ГГГГ
+    function formatDate(date) {
+        return `${date.getDate().toString().padStart(2, '0')}.${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getFullYear()}`;
+    }
+
     // Функция для расчета следующей даты списания
     function getNextBillingDate(period) {
         const today = new Date();
         let nextDate;
+        let periodNum;
         if (period === monthText) {
             nextDate = new Date(today.setMonth(today.getMonth() + 1));
             periodNum = 0;
@@ -20,11 +26,14 @@ document.addEventListener("DOMContentLoaded", function () {
             nextDate = new Date(today.setFullYear(today.getFullYear() + 1));
             periodNum = 1;
         }
-        return nextDate.toLocaleDateString('ru-RU', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric'
-        });
+        return {
+            date: nextDate.toLocaleDateString('ru-RU', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            }),
+            periodNum: periodNum
+        };
     }
 
     // Функция для показа уведомления
@@ -41,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (alert) {
                 alert.remove();
             }
-        }, 3000); // Удаляем уведомление через 3 секунды
+        }, 3000);
     }
 
     // Функция для получения CSRF-токена из cookies
@@ -65,22 +74,24 @@ document.addEventListener("DOMContentLoaded", function () {
         button.addEventListener("click", function () {
             const planName = this.dataset.tariffName;
             const useAnnual = switchInput.checked;
-            const price = useAnnual ? this.dataset.yearly : this.dataset.monthly;
+            const price = parseFloat(useAnnual ? this.dataset.yearly : this.dataset.monthly);
             const period = useAnnual ? yearText : monthText;
             const periodText = useAnnual ? annuallyText : monthlyText;
+            const nextBilling = getNextBillingDate(period);
 
             // Обновляем содержимое модального окна
             document.getElementById("modalPlanName").textContent = `Вы выбрали тариф "${planName}"`;
             document.getElementById("modalPrice").textContent = `${price} ${currencyText}/${period}`;
             document.getElementById("modalPeriod").textContent = periodText;
-            document.getElementById("modalNextBillingDate").textContent = getNextBillingDate(period);
+            document.getElementById("modalNextBillingDate").textContent = nextBilling.date;
 
             // Сохраняем данные в data-атрибутах модального окна
             const modal = document.getElementById("planConfirmationModal");
             modal.dataset.planName = planName;
             modal.dataset.price = price;
             modal.dataset.period = period;
-            modal.dataset.nextBillingDate = getNextBillingDate(period);
+            modal.dataset.periodNum = nextBilling.periodNum;
+            modal.dataset.nextBillingDate = nextBilling.date;
 
             // Инициализируем и показываем модальное окно
             try {
@@ -100,6 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const planName = modal.dataset.planName || "Неизвестный тариф";
             const price = modal.dataset.price;
             const period = modal.dataset.period;
+            const periodNum = modal.dataset.periodNum;
             const nextBillingDate = modal.dataset.nextBillingDate;
 
             // Отправляем данные на сервер
@@ -109,7 +121,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     'Content-Type': 'application/json',
                     'X-CSRFToken': getCookie('csrftoken')
                 },
-
                 body: JSON.stringify({
                     tariff_name: planName,
                     price: price,
