@@ -93,7 +93,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'apps.basetmp.context_processors.menu_context',
                 'apps.posting.context_processors.scheduler',
-                'apps.posting.context_processors.settings',
+                'apps.settings.context_processors.settings',
                 'apps.posting.context_processors.all_posts',
                 'apps.posting.context_processors.create_post',
                 'apps.subscribe.context_processors.subscription',
