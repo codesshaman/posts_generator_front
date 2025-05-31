@@ -20,12 +20,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (data.status === 'success') {
                     alert(data.message);  // Можно заменить на кастомный alert
                 } else {
-                    alert('Ошибка: ' + data.message);
+                    alert(window.Translations.error_message ' + data.message);
                 }
             })
             .catch(error => {
-                console.error('Ошибка:', error);
-                alert('Произошла ошибка при отправке данных');
+                console.error(window.Translations.error_message, error);
+                alert(window.Translations.error_data_sending);
             });
         });
     }

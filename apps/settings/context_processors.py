@@ -83,5 +83,6 @@ def settings(request):
         "error": translate("Error", lang),
         "succ_pay": translate("Оплата прошла успешно", lang),
         "error_occurred": translate("При обработке вашего запроса произошла ошибка.", lang),
-        "are_you_sure": translate("Вы уверены, что хотите удалить эту группу", lang),
+        "are_you_sure": translate("Вы уверены, что хотите удалить эту группу?", lang),
+        "error_data_sending": translate("Произошла ошибка при отправке данных", lang),
     }
