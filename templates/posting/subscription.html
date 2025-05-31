@@ -86,19 +86,23 @@
                     </div>
 
                     <div class="mt-4">
-                        <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#addCoinsModal">
-                            <i class="ph ph-plus-circle me-2"></i> {{ add_coins }}
-                        </button>
+                        {% if attached_card %}
+                            <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#addCoinsModal">
+                                <i class="ph ph-plus-circle me-2"></i> {{ add_coins }}
+                            </button>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="mt-4 d-flex justify-content-end">
-            <button class="btn {{ subscription_status|yesno:'btn-outline-danger,btn-outline-success' }} me-2" id="cancelSubscriptionBtn">
-                <i class="ph ph-{{ subscription_status|yesno:'x,arrows-clockwise' }} me-2"></i> {{ cancel_subs }}
-            </button>
-<!--            <button class="btn btn-outline-primary">-->
+            {% if attached_card %}
+                <button class="btn {{ subscription_status|yesno:'btn-outline-danger,btn-outline-success' }} me-2" id="cancelSubscriptionBtn">
+                    <i class="ph ph-{{ subscription_status|yesno:'x,arrows-clockwise' }} me-2"></i> {{ cancel_subs }}
+                </button>
+            {% endif %}
+            <!--            <button class="btn btn-outline-primary">-->
 <!--                <i class="ph ph-pencil-simple me-2"></i> {{ change_plan }}-->
 <!--            </button>-->
         </div>
@@ -639,46 +643,7 @@
 <script src = "{% static 'js/subscription/tariff_modal.js' %}"></script>
 
 <!-- JavaScript для обработки формы -->
-<script>
-document.getElementById('addCoinsForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-
-    const coinAmount = document.getElementById('coinAmount').value;
-    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-
-    // Вывод в консоль (заглушка)
-    console.log('Количество коинов:', coinAmount);
-
-    try {
-        const response = await fetch('{% url "add_coins" %}', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': csrfToken
-            },
-            body: JSON.stringify({
-                coins: parseInt(coinAmount)
-            })
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            // Успешная обработка
-            console.log('Успех:', data);
-            // Закрываем модалку
-            const modal = bootstrap.Modal.getInstance(document.getElementById('addCoinsModal'));
-            modal.hide();
-            // Перезагружаем страницу
-            window.location.reload();
-        } else {
-            console.error('Ошибка:', data);
-        }
-    } catch (error) {
-        console.error('Ошибка при отправке:', error);
-    }
-});
-</script>
+<script  src = "{% static 'js/subscription/modal_coins.js' %}"></script>
 
 
 <script>

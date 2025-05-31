@@ -16,7 +16,13 @@ load_dotenv()
 # Устанавливаем debug mode
 debug = os.getenv('DEBUG') == 'True'
 
+# Заглушка на состояние активной подписки
+# Подписка есть - True, нет - False
 subscription_status = True
+
+# Заглушка на привязку кредитной карты
+# Карта привязана - True, нет - False
+attached_card = True
 
 @set_cookie_if_not_exists("user_language", lambda request: request.LANGUAGE_CODE or 'en')
 def subscription(request):
@@ -137,6 +143,7 @@ def subscription(request):
             "how_to_cancel": how_to_cancel_sub(lang),
             "unused_coins": unused_coins_burn(lang),
             "accounting": accounting_invoice(lang),
+            "attached_card": attached_card
         }
 
         return render(request, "posting/subscription.html", context)

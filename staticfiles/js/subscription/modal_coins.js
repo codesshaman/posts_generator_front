@@ -4,11 +4,11 @@ document.getElementById('addCoinsForm').addEventListener('submit', async functio
     const coinAmount = document.getElementById('coinAmount').value;
     const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
-    // Вывод в консоль (заглушка) с использованием перевода
-    console.log(`${window.translations?.coin_amount || 'Number of coins'}:`, coinAmount);
+    // Вывод в консоль (заглушка)
+//    console.log('Количество коинов:', coinAmount);
 
     try {
-        const response = await fetch(window.urls.add_coins, {
+        const response = await fetch('/add-coins/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -22,17 +22,15 @@ document.getElementById('addCoinsForm').addEventListener('submit', async functio
         const data = await response.json();
 
         if (response.ok) {
-            // Успешная обработка
-            console.log(`${window.translations?.succpay || 'Success'}:`, data);
             // Закрываем модалку
             const modal = bootstrap.Modal.getInstance(document.getElementById('addCoinsModal'));
             modal.hide();
             // Перезагружаем страницу
             window.location.reload();
         } else {
-            console.error(`${window.translations?.error || 'Error'}:`, data);
+            console.error(window.Translations.error, data);
         }
     } catch (error) {
-        console.error(`${window.translations?.error_sending_form || 'Error sending request'}:`, error);
+        console.error(window.Translations.error_sending_form, error);
     }
 });
