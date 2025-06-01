@@ -455,3 +455,9 @@
 ^Пожалуйста, выберите причину отмены^Please select the reason for cancellation^
 ^Введите количество коинов для покупки^Enter the number of coins to purchase^
 ^Добавить коины^Add coins^
+^Пожалуйста, укажите ID или адрес группы ВКонтакте^Please provide the ID or address of the VK group^
+^Пожалуйста, подтвердите, что вы администратор группы ВКонтакте^Please confirm that you are the administrator of the VK group^
+^Пожалуйста, укажите название канала Telegram^Please provide the name of the Telegram channel^
+^Пожалуйста, укажите токен бота Telegram^Please provide the Telegram bot token^
+^Пожалуйста, подтвердите, что вы администратор канала Telegram^Please confirm that you are the administrator of the Telegram channel^
+^Произошла ошибка при добавлении группы^There was an error adding the group^

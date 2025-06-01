@@ -355,100 +355,109 @@
 </div>
 
 <!-- Модальное окно добавления группы -->
+<!-- Модальное окно добавления группы -->
 <div class="modal fade" id="addGroupModal" tabindex="-1" aria-labelledby="addGroupModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered">
-<div class="modal-content">
-<div class="modal-header">
-    <h5 class="modal-title" id="addGroupModalLabel">{{ adding_public }}</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-</div>
-<div class="modal-body">
-    <div class="platform-selection mb-4">
-        <label class="form-label">{{ select_platform }}</label>
-        <div class="d-flex">
-            <div class="form-check form-check-inline me-4">
-                <input class="form-check-input" type="radio" name="platformRadio" id="vkRadio" value="vk" checked>
-                <label class="form-check-label" for="vkRadio">
-                    <i class="ph ph-vk-logo me-1" style="color: #4C75A3;"></i> {{ vk }}
-                </label>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addGroupModalLabel">{{ adding_public }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="platformRadio" id="telegramRadio" value="telegram">
-                <label class="form-check-label" for="telegramRadio">
-                    <i class="ph ph-telegram-logo me-1" style="color: #0088cc;"></i> {{ tg }}
-                </label>
+            <div class="modal-body">
+                <div class="platform-selection mb-4">
+                    <label class="form-label">{{ select_platform }}</label>
+                    <div class="d-flex">
+                        <div class="form-check form-check-inline me-4">
+                            <input class="form-check-input" type="radio" name="platformRadio" id="vkRadio" value="vk" checked>
+                            <label class="form-check-label" for="vkRadio">
+                                <i class="ph ph-vk-logo me-1" style="color: #4C75A3;"></i> {{ vk }}
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="platformRadio" id="telegramRadio" value="telegram">
+                            <label class="form-check-label" for="telegramRadio">
+                                <i class="ph ph-telegram-logo me-1" style="color: #0088cc;"></i> {{ tg }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Форма для ВКонтакте -->
+                <div id="vkForm">
+                    <div class="mb-3">
+                        <label for="vkGroupId" class="form-label">{{ group_id_address }}</label>
+                        <input type="text" class="form-control" id="vkGroupId" placeholder="club123456789 {{ or }} vk.com/groupname">
+                        <div class="invalid-feedback" id="vkGroupIdError"></div>
+                        <small class="text-muted">{{ full_page_address }}</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="vkGroupName" class="form-label">{{ group_name_optional }}</label>
+                        <input type="text" class="form-control" id="vkGroupName" placeholder="Название для удобства">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">{{ authorization }}</label>
+                        <div class="d-grid">
+                            <button type="button" class="btn btn-primary" id="vkAuthBtn">
+                                <i class="ph ph-vk-logo me-2"></i>{{ vk_login }}
+                            </button>
+                        </div>
+                        <small class="text-muted mt-2">{{ required_to_publish }}</small>
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="vkAdminCheck">
+                        <label class="form-check-label" for="vkAdminCheck">
+                            {{ i_am_the_admin }}
+                        </label>
+                        <div class="invalid-feedback" id="vkAdminCheckError"></div>
+                    </div>
+                </div>
+
+                <!-- Форма для Telegram -->
+                <div id="telegramForm" style="display: none;">
+                    <div class="mb-3">
+                        <label for="telegramChannelName" class="form-label">{{ public_name }}</label>
+                        <input type="text" class="form-control" id="telegramChannelName" placeholder="@channel_name">
+                        <div class="invalid-feedback" id="telegramChannelNameError"></div>
+                        <small class="text-muted">{{ with_the_symbol }}</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="telegramBotToken" class="form-label">{{ bot_token }}</label>
+                        <input type="text" class="form-control" id="telegramBotToken" placeholder="123456789:ABCDefGhIJKlmNoPQRsTUVwxyZ">
+                        <div class="invalid-feedback" id="telegramBotTokenError"></div>
+                        <small class="text-muted">{{ paste_received_token }}</small>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <i class="ph ph-info me-2"></i>
+                        <small>{{ bot_is_admin_your_channel }}</small>
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="telegramAdminCheck">
+                        <label class="form-check-label" for="telegramAdminCheck">
+                            {{ i_am_the_admin }}
+                        </label>
+                        <div class="invalid-feedback" id="telegramAdminCheckError"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ cancel }}</button>
+                <button type="button" class="btn btn-primary" id="saveGroupBtn">{{ add_group }}</button>
             </div>
         </div>
     </div>
-
-    <!-- Форма для ВКонтакте -->
-    <div id="vkForm">
-        <div class="mb-3">
-            <label for="vkGroupId" class="form-label">{{ group_id_address }}</label>
-            <input type="text" class="form-control" id="vkGroupId" placeholder="club123456789 {{ or }} vk.com/groupname">
-            <small class="text-muted">{{ full_page_address }}</small>
-        </div>
-
-        <div class="mb-3">
-            <label for="vkGroupName" class="form-label">{{ group_name_optional }}</label>
-            <input type="text" class="form-control" id="vkGroupName" placeholder="Название для удобства">
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">{{ authorization }}</label>
-            <div class="d-grid">
-                <button type="button" class="btn btn-primary" id="vkAuthBtn">
-                    <i class="ph ph-vk-logo me-2"></i>{{ vk_login }}
-                </button>
-            </div>
-            <small class="text-muted mt-2">{{ required_to_publish }}</small>
-        </div>
-
-        <div class="form-check mb-3">
-            <input class="form-check-input" type="checkbox" id="vkAdminCheck">
-            <label class="form-check-label" for="vkAdminCheck">
-                {{ i_am_the_admin }}
-            </label>
-        </div>
-    </div>
-
-    <!-- Форма для Telegram -->
-    <div id="telegramForm" style="display: none;">
-        <div class="mb-3">
-            <label for="telegramChannelName" class="form-label">{{ public_name }}</label>
-            <input type="text" class="form-control" id="telegramChannelName" placeholder="@channel_name">
-            <small class="text-muted">{{ with_the_symbol }}</small>
-        </div>
-
-        <div class="mb-3">
-            <label for="telegramBotToken" class="form-label">{{ bot_token }}</label>
-            <input type="text" class="form-control" id="telegramBotToken" placeholder="123456789:ABCDefGhIJKlmNoPQRsTUVwxyZ">
-            <small class="text-muted">{{ paste_received_token }}</small>
-        </div>
-
-        <div class="alert alert-info">
-            <i class="ph ph-info me-2"></i>
-            <small>{{ bot_is_admin_your_channel }}</small>
-        </div>
-
-        <div class="form-check mb-3">
-            <input class="form-check-input" type="checkbox" id="telegramAdminCheck">
-            <label class="form-check-label" for="telegramAdminCheck">
-                {{ i_am_the_admin }}
-            </label>
-        </div>
-    </div>
-</div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ cancel }}</button>
-    <button type="button" class="btn btn-primary" id="saveGroupBtn">{{ add_group }}</button>
-</div>
-</div>
-</div>
 </div>
 
 <!-- Контейнер для уведомлений -->
 <div id="alertsContainer"></div>
+
+<!-- JavaScript для показа уведомлений -->
+<script src = "{% static 'js/show_alert.js' %}"></script>
 
 <!-- JavaScript для работы с мобильным меню -->
 <script src = "{% static 'js/mobile_menu.js' %}"></script>
@@ -469,9 +478,19 @@
         general_error: "{{ error_occurred }}",
         are_you_sure: "{{ are_you_sure }}",
         error_data_sending: "{{ error_data_sending }}",
+        group_adding_error: "{{ group_adding_error }}",
+        admin_enshures: "{{ admin_enshures }}",
+        telegram_bot_token_input: "{{ telegram_bot_token_input }}",
+        telegram_channel_name_input: "{{ telegram_channel_name_input }}",
+        vk_admin_confirmation: "{{ vk_admin_confirmation }}",
+        input_id_or_address_vk_group: "{{ input_id_or_address_vk_group }}",
     };
 </script>
 <!--<script src = "{% static 'js/settings/telegram_notifications.js' %}"></script>-->
+
+<!-- JavaScript для добавления группы -->
+<script src = "{% static 'js/settings/add_group.js' %}"></script>
+
 <!-- JavaScript для удаления группы -->
 <script src = "{% static 'js/settings/delete_group.js' %}"></script>
 
@@ -565,45 +584,6 @@ if (vkRadio && telegramRadio) {
             vkForm.style.display = 'none';
             telegramForm.style.display = 'block';
         }
-    });
-}
-
-// Обработчик для кнопки сохранения группы
-const saveGroupBtn = document.getElementById('saveGroupBtn');
-if (saveGroupBtn) {
-    saveGroupBtn.addEventListener('click', function() {
-        // Определяем, какая платформа выбрана
-        const isVk = document.getElementById('vkRadio').checked;
-
-        // Собираем данные в зависимости от выбранной платформы
-        let groupData = {};
-
-        if (isVk) {
-            groupData = {
-                platform: 'vk',
-                groupId: document.getElementById('vkGroupId').value,
-                groupName: document.getElementById('vkGroupName').value,
-                isAdmin: document.getElementById('vkAdminCheck').checked
-            };
-        } else {
-            groupData = {
-                platform: 'telegram',
-                channelName: document.getElementById('telegramChannelName').value,
-                botToken: document.getElementById('telegramBotToken').value,
-                isAdmin: document.getElementById('telegramAdminCheck').checked
-            };
-        }
-
-        // Здесь будет логика сохранения группы
-        // Для демонстрации просто закроем модальное окно и покажем уведомление
-        const modal = bootstrap.Modal.getInstance(document.getElementById('addGroupModal'));
-        modal.hide();
-
-        // Показать уведомление
-        showAlert(`Группа успешно добавлена`, 'success');
-
-        // В реальном приложении здесь был бы AJAX-запрос к серверу
-        console.log('Сохраняем группу:', groupData);
     });
 }
 

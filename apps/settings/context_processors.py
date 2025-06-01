@@ -85,4 +85,10 @@ def settings(request):
         "error_occurred": translate("При обработке вашего запроса произошла ошибка.", lang),
         "are_you_sure": translate("Вы уверены, что хотите удалить эту группу?", lang),
         "error_data_sending": translate("Произошла ошибка при отправке данных", lang),
+        "input_id_or_address_vk_group": translate("Пожалуйста, укажите ID или адрес группы ВКонтакте", lang),
+        "vk_admin_confirmation": translate("Пожалуйста, подтвердите, что вы администратор группы ВКонтакте", lang),
+        "telegram_channel_name_input": translate("Пожалуйста, укажите название канала Telegram", lang),
+        "telegram_bot_token_input": translate("Пожалуйста, укажите токен бота Telegram", lang),
+        "admin_enshures": translate("Пожалуйста, подтвердите, что вы администратор канала Telegram", lang),
+        "group_adding_error": translate("Произошла ошибка при добавлении группы", lang),
     }
