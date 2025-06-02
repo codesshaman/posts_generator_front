@@ -45,41 +45,32 @@
             <p class="text-muted mb-4">{{ muted_text }}</p>
 
             <div id="groupsList" class="row">
-                <!-- Группа 1 -->
+                <!-- Вывод групп -->
+                {% for group in groups_data %}
                 <div class="col-md-4 mb-4">
-                    <div class="card group-card h-100" data-group-id="1">
-                        <img src="https://via.placeholder.com/300x150?text=Facebook+Group" class="card-img-top" alt="Facebook Group">
+                    <div class="card group-card h-100" data-group-id="{{ group.id }}">
+                        <img src="https://via.placeholder.com/300x150?text={{ group.platform_text|urlencode }}+Group" class="card-img-top" alt="{{ group.platform_text }} Group">
                         <div class="card-body">
-                            <h5 class="card-title">{{ marketing }}</h5>
-                            <p class="card-text text-muted">{{ facebook }} • {{ subscribers }}: {{ some_subs_num }}</p>
+                            <h5 class="card-title">{{ group.title }}</h5>
+                            <p class="card-text text-muted">{{ group.platform_text }} • Subscribers: {{ group.subscribers }}</p>
                         </div>
                     </div>
                 </div>
-
-                <!-- Группа 2 -->
-                <div class="col-md-4 mb-4">
-                    <div class="card group-card h-100" data-group-id="2">
-                        <img src="https://via.placeholder.com/300x150?text=Instagram+Page" class="card-img-top" alt="Instagram Page">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ interior_design }}</h5>
-                            <p class="card-text text-muted">{{ instagram }} • {{ subscribers }}: {{ some_subs_num }}</p>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
 
                 <!-- Группа 3 -->
-                <div class="col-md-4 mb-4">
-                    <div class="card group-card h-100" data-group-id="3">
-                        <img src="https://via.placeholder.com/300x150?text=LinkedIn+Page" class="card-img-top" alt="LinkedIn Page">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ it_and_technologys }}</h5>
-                            <p class="card-text text-muted">{{ boosty }} • {{ subscribers }}: {{ some_subs_num }}</p>
-                        </div>
-                    </div>
-                </div>
+<!--                <div class="col-md-4 mb-4">-->
+<!--                    <div class="card group-card h-100" data-group-id="3">-->
+<!--                        <img src="https://via.placeholder.com/300x150?text=LinkedIn+Page" class="card-img-top" alt="LinkedIn Page">-->
+<!--                        <div class="card-body">-->
+<!--                            <h5 class="card-title">{{ it_and_technologys }}</h5>-->
+<!--                            <p class="card-text text-muted">{{ boosty }} • {{ subscribers }}: {{ some_subs_num }}</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
                 <!-- Добавить новую группу -->
-                <div class="col-md-4 mb-4">
+                <div class="col-md-4 mb-4" onclick="window.location.href='{% url 'settings' %}'" style="cursor: pointer;">
                     <div class="card group-card add-group h-100" id="addGroupCard">
                         <div class="card-body d-flex flex-column align-items-center justify-content-center">
                             <div class="add-icon mb-3">
@@ -375,41 +366,41 @@
 <div id="alertsContainer"></div>
 
 <!-- Модальное окно добавления новой группы -->
-<div class="modal fade" id="addGroupModal" tabindex="-1" aria-labelledby="addGroupModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addGroupModalLabel">{{ new_gtoup_addition }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="addGroupForm">
-                    <div class="mb-3">
-                        <label for="newGroupName" class="form-label">{{ group_name }}</label>
-                        <input type="text" class="form-control" id="newGroupName" placeholder="Введите название группы" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="newGroupUrl" class="form-label">{{ group_url }}</label>
-                        <input type="url" class="form-control" id="newGroupUrl" placeholder="https://facebook.com/groups/example" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="newGroupPlatform" class="form-label">{{ platform }}</label>
-                        <select class="form-select" id="newGroupPlatform">
-                            <option value="facebook">Facebook</option>
-                            <option value="instagram">Instagram</option>
-                            <option value="linkedin">LinkedIn</option>
-                            <option value="twitter">Twitter</option>
-                        </select>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ cancel }}</button>
-                <button type="button" class="btn btn-primary" id="saveNewGroupBtn">{{ add_group }}</button>
-            </div>
-        </div>
-    </div>
-</div>
+<!--<div class="modal fade" id="addGroupModal" tabindex="-1" aria-labelledby="addGroupModalLabel" aria-hidden="true">-->
+<!--    <div class="modal-dialog modal-dialog-centered">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="addGroupModalLabel">{{ new_gtoup_addition }}</h5>-->
+<!--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--                <form id="addGroupForm">-->
+<!--                    <div class="mb-3">-->
+<!--                        <label for="newGroupName" class="form-label">{{ group_name }}</label>-->
+<!--                        <input type="text" class="form-control" id="newGroupName" placeholder="Введите название группы" required>-->
+<!--                    </div>-->
+<!--                    <div class="mb-3">-->
+<!--                        <label for="newGroupUrl" class="form-label">{{ group_url }}</label>-->
+<!--                        <input type="url" class="form-control" id="newGroupUrl" placeholder="https://facebook.com/groups/example" required>-->
+<!--                    </div>-->
+<!--                    <div class="mb-3">-->
+<!--                        <label for="newGroupPlatform" class="form-label">{{ platform }}</label>-->
+<!--                        <select class="form-select" id="newGroupPlatform">-->
+<!--                            <option value="facebook">Facebook</option>-->
+<!--                            <option value="instagram">Instagram</option>-->
+<!--                            <option value="linkedin">LinkedIn</option>-->
+<!--                            <option value="twitter">Twitter</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--            <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ cancel }}</button>-->
+<!--                <button type="button" class="btn btn-primary" id="saveNewGroupBtn">{{ add_group }}</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 <!-- Модальное окно редактирования поста -->
 <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">

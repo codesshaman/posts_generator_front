@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Инициализация модальных окон
-    const addGroupModal = new bootstrap.Modal(document.getElementById('addGroupModal'));
+//    const addGroupModal = new bootstrap.Modal(document.getElementById('addGroupModal'));
     const editPostModal = new bootstrap.Modal(document.getElementById('editPostModal'));
     const scheduleModal = new bootstrap.Modal(document.getElementById('scheduleModal'));
 
@@ -121,10 +121,10 @@ function setupGroupSelection() {
     });
 
     // Добавление новой группы
-    addGroupCard.addEventListener('click', function() {
-        const addGroupModal = new bootstrap.Modal(document.getElementById('addGroupModal'));
-        addGroupModal.show();
-    });
+//    addGroupCard.addEventListener('click', function() {
+//        const addGroupModal = new bootstrap.Modal(document.getElementById('addGroupModal'));
+//        addGroupModal.show();
+//    });
 
     // Сохранение новой группы
     document.getElementById('saveNewGroupBtn').addEventListener('click', function() {
@@ -146,8 +146,8 @@ function setupGroupSelection() {
         groupsList.insertBefore(newGroupCard, addGroupCard.parentNode);
         
         // Закрыть модальное окно
-        const addGroupModal = bootstrap.Modal.getInstance(document.getElementById('addGroupModal'));
-        addGroupModal.hide();
+//        const addGroupModal = bootstrap.Modal.getInstance(document.getElementById('addGroupModal'));
+//        addGroupModal.hide();
         
         // Сбросить форму
         document.getElementById('addGroupForm').reset();

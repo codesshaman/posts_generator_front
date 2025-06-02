@@ -71,6 +71,7 @@
     border: 2px solid transparent;
     border-radius: 12px;
     overflow: hidden;
+    min-height: 210px;
 }
 
 .group-card:hover {

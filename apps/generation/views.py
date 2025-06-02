@@ -1,5 +1,6 @@
 from project.cookies import set_cookie_if_not_exists
 from project.language import translate, language
+from .groups_data import groups_data
 from django.shortcuts import render
 from dotenv import load_dotenv
 from .step_1 import *
@@ -63,5 +64,5 @@ def autogeneration(request):
         "percent_4": 14,
         "percent_5": 11,
         "percent_6": 9,
-
+        "groups_data": groups_data
     })
