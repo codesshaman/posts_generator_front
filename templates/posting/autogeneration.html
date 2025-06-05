@@ -89,6 +89,8 @@
         <button class="btn btn-light" onclick="window.location.href='index.html'">
             <i class="ph ph-arrow-left me-2"></i> {{ back_to_posts }}
         </button>
+        <input type="hidden" id="selectedGroupId" name="selectedGroupId">
+        <input type="hidden" id="selectedPlatformText" name="selectedPlatformText">
         <button id="step1NextBtn" class="btn btn-primary btn-next-step" style="display: none;" data-next-step="2">
             {{ next }} <i class="ph ph-arrow-right ms-2"></i>
         </button>

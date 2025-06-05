@@ -211,11 +211,54 @@ function updateSelectedGroupInfo(groupId) {
         const groupName = selectedCard.querySelector('.card-title').textContent;
         const groupStats = selectedCard.querySelector('.card-text').textContent;
         const groupImage = selectedCard.querySelector('img').src;
-        
+        const platformText = groupStats.split('•')[0].trim(); // Получаем platform_text из текста
+
         document.getElementById('selectedGroupName').textContent = groupName;
         document.getElementById('selectedGroupStats').textContent = groupStats;
         document.getElementById('selectedGroupImage').src = groupImage;
+
+        // Заполняем скрытые поля
+        document.getElementById('selectedGroupId').value = groupId;
+        document.getElementById('selectedPlatformText').value = platformText;
     }
+}
+
+document.getElementById('step1NextBtn').addEventListener('click', function() {
+    const groupId = document.getElementById('selectedGroupId').value;
+    const platformText = document.getElementById('selectedPlatformText').value;
+
+    fetch('/process-group-selection/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCSRFToken(),
+        },
+        body: JSON.stringify({
+            group_id: groupId,
+            platform_text: platformText
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Ответ от сервера:', data);
+        // Далее переход или обновление интерфейса
+    })
+    .catch(error => {
+        console.error('Ошибка при отправке:', error);
+    });
+});
+
+// Получение CSRF-токена
+function getCSRFToken() {
+    const name = 'csrftoken';
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.startsWith(name + '=')) {
+            return decodeURIComponent(cookie.substring(name.length + 1));
+        }
+    }
+    return '';
 }
 
 // Функциональность процесса анализа

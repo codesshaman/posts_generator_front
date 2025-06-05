@@ -42,5 +42,5 @@ groups_data = [
     {"id": 9, "category_id": 3, "category_text":get_category_text(3), "platform_style": get_platform_style(3), "platform_text": get_platform_text(3), "title": "Каннибализм и цветоводство в эпоху постапокалиптического постмодернизма", "subscribers": "8", "group_id": "@cannibal_flowers"},
     {"id": 10, "category_id": 1, "category_text":get_category_text(1), "platform_style": get_platform_style(1), "platform_text": get_platform_text(1), "title": "Технологии будущего", "subscribers": "15,432", "group_id": "club123456789 "},
     {"id": 11, "category_id": 2, "category_text":get_category_text(2), "platform_style": get_platform_style(3), "platform_text": get_platform_text(2), "title": "Маркетинг сегодня", "subscribers": "3,210", "group_id": "@marketing_today"},
-    # {"id": 12, "category_id": 3, "category_text":get_category_text(3), "platform_style": get_platform_style(3), "platform_text": get_platform_text(3), "title": "Мемы про котиков", "subscribers": "8", "group_id": "@cannibal_flowers"},
+    {"id": 12, "category_id": 3, "category_text":get_category_text(3), "platform_style": get_platform_style(3), "platform_text": get_platform_text(3), "title": "Мемы про котиков", "subscribers": "8", "group_id": "@cannibal_flowers"},
 ]
