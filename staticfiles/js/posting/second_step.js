@@ -90,7 +90,53 @@ function setupAnalysisProcess() {
 
                 // Показать кнопку "Далее"
                 step2NextBtn.style.display = 'block';
+
+                // Отрендерить темы
+                renderTopics(generatedTopics);
             }
         }, intervalTime);
     }
+
+    // Функция для рендеринга тем в postAnalysis
+    function renderTopics(topics) {
+        const topicsList = document.createElement('ul');
+        topics.forEach(topic => {
+            const li = document.createElement('li');
+            li.textContent = `${topic.title} (${topic.percent}%)`;
+            topicsList.appendChild(li);
+        });
+        postAnalysis.innerHTML = '<h3>Результаты анализа</h3>'; // Очищаем содержимое
+        postAnalysis.appendChild(topicsList);
+    }
+
+    // Функция для сброса состояния анализа
+    function resetAnalysis() {
+        // Очистить массив тем
+        generatedTopics = [];
+
+        // Сбросить видимость блоков
+        preAnalysis.style.display = 'block';
+        duringAnalysis.style.display = 'none';
+        postAnalysis.style.display = 'none';
+
+        // Сбросить прогресс-бар
+        const analysisProgress = document.getElementById('analysisProgress');
+        const analysisStatus = document.getElementById('analysisStatus');
+        analysisProgress.style.width = '0%';
+        analysisProgress.setAttribute('aria-valuenow', 0);
+        analysisStatus.textContent = '';
+
+        // Скрыть кнопку "Далее"
+        step2NextBtn.style.display = 'none';
+
+        // Очистить содержимое postAnalysis
+        postAnalysis.innerHTML = '';
+    }
+
+    // Обработчик кнопки "Назад"
+    const prevStepBtn = document.querySelector('.btn-prev-step[data-prev-step="1"]');
+    prevStepBtn.addEventListener('click', function() {
+        resetAnalysis();
+        // Здесь может быть дополнительная логика для перехода на шаг 1
+    });
 }
