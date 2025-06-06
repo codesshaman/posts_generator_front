@@ -1,3 +1,8 @@
+from .groups_data import groups_topics
+from django.http import JsonResponse
+import json
+
+
 def get_analyses_text(lang):
     if lang == "ru":
         return "Мы проанализируем выбранную группу, \
@@ -36,3 +41,18 @@ def themes_analysis_complete(lang):
                 and identified the main topics"
 
 
+def get_group_topics(request):
+    if request.method == 'POST':
+        # Можно добавить проверку group_id из request.body, если нужно
+        data = json.loads(request.body)
+        group_id = data.get('group_id')
+
+        # Возвращаем темы и время анализа (в секундах)
+        response_data = {
+            'status': 'success',
+            'topics': groups_topics,
+            'analysis_duration': 5  # Время эмуляции анализа в секундах
+        }
+        return JsonResponse(response_data)
+
+    return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)

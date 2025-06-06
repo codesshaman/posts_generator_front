@@ -44,3 +44,13 @@ groups_data = [
     {"id": 11, "category_id": 2, "category_text":get_category_text(2), "platform_style": get_platform_style(3), "platform_text": get_platform_text(2), "title": "Маркетинг сегодня", "subscribers": "3,210", "group_id": "@marketing_today"},
     {"id": 12, "category_id": 3, "category_text":get_category_text(3), "platform_style": get_platform_style(3), "platform_text": get_platform_text(3), "title": "Мемы про котиков", "subscribers": "8", "group_id": "@cannibal_flowers"},
 ]
+
+# Эмулированные темы групп
+groups_topics = [
+    {"id": 1, "title": "SEO", "percent": "28 "},
+    {"id": 2, "title": "SMM", "percent": "21"},
+    {"id": 3, "title": "Sales", "percent": "17"},
+    {"id": 4, "title": "Content", "percent": "14 "},
+    {"id": 5, "title": "Marketing", "percent": "11"},
+    {"id": 6, "title": "Advertising", "percent": "9"},
+]

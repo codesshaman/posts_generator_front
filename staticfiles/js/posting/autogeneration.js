@@ -95,272 +95,273 @@ function setupStepNavigation() {
 }
 
 // Функциональность выбора группы
-function setupGroupSelection() {
-    const groupCards = document.querySelectorAll('.group-card:not(.add-group)');
-    const addGroupCard = document.getElementById('addGroupCard');
-    const step1NextBtn = document.getElementById('step1NextBtn');
-
-    // Выбор группы
-    groupCards.forEach(card => {
-        card.addEventListener('click', function() {
-            // Удалить класс selected со всех карточек
-            groupCards.forEach(c => c.classList.remove('selected'));
-            
-            // Добавить класс selected к выбранной карточке
-            this.classList.add('selected');
-            
-            // Сохранить ID выбранной группы
-            selectedGroupId = this.dataset.groupId;
-            
-            // Показать кнопку "Далее"
-            step1NextBtn.style.display = 'block';
-
-            // Обновить информацию о выбранной группе на шаге 2
-            updateSelectedGroupInfo(selectedGroupId);
-        });
-    });
-
-    // Добавление новой группы
-//    addGroupCard.addEventListener('click', function() {
-//        const addGroupModal = new bootstrap.Modal(document.getElementById('addGroupModal'));
-//        addGroupModal.show();
+//function setupGroupSelection() {
+//    const groupCards = document.querySelectorAll('.group-card:not(.add-group)');
+//    const addGroupCard = document.getElementById('addGroupCard');
+//    const step1NextBtn = document.getElementById('step1NextBtn');
+//
+//    // Выбор группы
+//    groupCards.forEach(card => {
+//        card.addEventListener('click', function() {
+//            // Удалить класс selected со всех карточек
+//            groupCards.forEach(c => c.classList.remove('selected'));
+//
+//            // Добавить класс selected к выбранной карточке
+//            this.classList.add('selected');
+//
+//            // Сохранить ID выбранной группы
+//            selectedGroupId = this.dataset.groupId;
+//
+//            // Показать кнопку "Далее"
+//            step1NextBtn.style.display = 'block';
+//
+//            // Обновить информацию о выбранной группе на шаге 2
+//            updateSelectedGroupInfo(selectedGroupId);
+//        });
 //    });
+//
+//    // Добавление новой группы
+////    addGroupCard.addEventListener('click', function() {
+////        const addGroupModal = new bootstrap.Modal(document.getElementById('addGroupModal'));
+////        addGroupModal.show();
+////    });
+//
+//    // Сохранение новой группы
+//    document.getElementById('saveNewGroupBtn').addEventListener('click', function() {
+//        const groupName = document.getElementById('newGroupName').value;
+//        const groupUrl = document.getElementById('newGroupUrl').value;
+//        const groupPlatform = document.getElementById('newGroupPlatform').value;
+//
+//        if (!groupName || !groupUrl) {
+//            showAlert('Пожалуйста, заполните все обязательные поля', 'danger');
+//            return;
+//        }
+//
+//        // Создать новую карточку группы
+//        const newGroupId = Date.now(); // Использовать временную метку как ID
+//        const newGroupCard = createGroupCard(newGroupId, groupName, groupPlatform);
+//
+//        // Добавить новую карточку группы в список
+//        const groupsList = document.getElementById('groupsList');
+//        groupsList.insertBefore(newGroupCard, addGroupCard.parentNode);
+//
+//        // Закрыть модальное окно
+////        const addGroupModal = bootstrap.Modal.getInstance(document.getElementById('addGroupModal'));
+////        addGroupModal.hide();
+//
+//        // Сбросить форму
+//        document.getElementById('addGroupForm').reset();
+//
+//        // Показать сообщение об успехе
+//        showAlert('Группа успешно добавлена', 'success');
+//    });
+//}
 
-    // Сохранение новой группы
-    document.getElementById('saveNewGroupBtn').addEventListener('click', function() {
-        const groupName = document.getElementById('newGroupName').value;
-        const groupUrl = document.getElementById('newGroupUrl').value;
-        const groupPlatform = document.getElementById('newGroupPlatform').value;
-        
-        if (!groupName || !groupUrl) {
-            showAlert('Пожалуйста, заполните все обязательные поля', 'danger');
-            return;
-        }
-        
-        // Создать новую карточку группы
-        const newGroupId = Date.now(); // Использовать временную метку как ID
-        const newGroupCard = createGroupCard(newGroupId, groupName, groupPlatform);
-        
-        // Добавить новую карточку группы в список
-        const groupsList = document.getElementById('groupsList');
-        groupsList.insertBefore(newGroupCard, addGroupCard.parentNode);
-        
-        // Закрыть модальное окно
-//        const addGroupModal = bootstrap.Modal.getInstance(document.getElementById('addGroupModal'));
-//        addGroupModal.hide();
-        
-        // Сбросить форму
-        document.getElementById('addGroupForm').reset();
-        
-        // Показать сообщение об успехе
-        showAlert('Группа успешно добавлена', 'success');
-    });
-}
+//// Создание элемента карточки группы
+//function createGroupCard(id, name, platform) {
+//    const colDiv = document.createElement('div');
+//    colDiv.className = 'col-md-4 mb-4';
+//
+//    const platformMap = {
+//        'facebook': 'Facebook',
+//        'instagram': 'Instagram',
+//        'linkedin': 'LinkedIn',
+//        'twitter': 'Twitter'
+//    };
+//
+//    const platformName = platformMap[platform] || platform;
+//
+//    colDiv.innerHTML = `
+//        <div class="card group-card h-100" data-group-id="${id}">
+//            <img src="https://via.placeholder.com/300x150?text=${platformName}+Group" class="card-img-top" alt="${platformName} Group">
+//            <div class="card-body">
+//                <h5 class="card-title">${name}</h5>
+//                <p class="card-text text-muted">${platformName} • Подписчиков: 0</p>
+//            </div>
+//        </div>
+//    `;
+//
+//    // Добавить обработчик клика на новую карточку
+//    const card = colDiv.querySelector('.group-card');
+//    card.addEventListener('click', function() {
+//        // Удалить класс selected со всех карточек
+//        document.querySelectorAll('.group-card:not(.add-group)').forEach(c => c.classList.remove('selected'));
+//
+//        // Добавить класс selected к выбранной карточке
+//        this.classList.add('selected');
+//
+//        // Сохранить ID выбранной группы
+//        selectedGroupId = this.dataset.groupId;
+//
+//        // Показать кнопку "Далее"
+//        document.getElementById('step1NextBtn').style.display = 'block';
+//
+//        // Обновить информацию о выбранной группе на шаге 2
+//        updateSelectedGroupInfo(selectedGroupId);
+//    });
+//
+//    return colDiv;
+//}
 
-// Создание элемента карточки группы
-function createGroupCard(id, name, platform) {
-    const colDiv = document.createElement('div');
-    colDiv.className = 'col-md-4 mb-4';
-    
-    const platformMap = {
-        'facebook': 'Facebook',
-        'instagram': 'Instagram',
-        'linkedin': 'LinkedIn',
-        'twitter': 'Twitter'
-    };
-    
-    const platformName = platformMap[platform] || platform;
-    
-    colDiv.innerHTML = `
-        <div class="card group-card h-100" data-group-id="${id}">
-            <img src="https://via.placeholder.com/300x150?text=${platformName}+Group" class="card-img-top" alt="${platformName} Group">
-            <div class="card-body">
-                <h5 class="card-title">${name}</h5>
-                <p class="card-text text-muted">${platformName} • Подписчиков: 0</p>
-            </div>
-        </div>
-    `;
-    
-    // Добавить обработчик клика на новую карточку
-    const card = colDiv.querySelector('.group-card');
-    card.addEventListener('click', function() {
-        // Удалить класс selected со всех карточек
-        document.querySelectorAll('.group-card:not(.add-group)').forEach(c => c.classList.remove('selected'));
-        
-        // Добавить класс selected к выбранной карточке
-        this.classList.add('selected');
-        
-        // Сохранить ID выбранной группы
-        selectedGroupId = this.dataset.groupId;
-        
-        // Показать кнопку "Далее"
-        document.getElementById('step1NextBtn').style.display = 'block';
-
-        // Обновить информацию о выбранной группе на шаге 2
-        updateSelectedGroupInfo(selectedGroupId);
-    });
-    
-    return colDiv;
-}
-
-// Обновление информации о выбранной группе на шаге 2
-function updateSelectedGroupInfo(groupId) {
-    const selectedCard = document.querySelector(`.group-card[data-group-id="${groupId}"]`);
-    
-    if (selectedCard) {
-        const groupName = selectedCard.querySelector('.card-title').textContent;
-        const groupStats = selectedCard.querySelector('.card-text').textContent;
-        const groupImage = selectedCard.querySelector('img').src;
-        const platformText = groupStats.split('•')[0].trim(); // Получаем platform_text из текста
-
-        document.getElementById('selectedGroupName').textContent = groupName;
-        document.getElementById('selectedGroupStats').textContent = groupStats;
-        document.getElementById('selectedGroupImage').src = groupImage;
-
-        // Заполняем скрытые поля
-        document.getElementById('selectedGroupId').value = groupId;
-        document.getElementById('selectedPlatformText').value = platformText;
-    }
-}
-
-document.getElementById('step1NextBtn').addEventListener('click', function() {
-    const groupId = document.getElementById('selectedGroupId').value;
-    const platformText = document.getElementById('selectedPlatformText').value;
-
-    fetch('/process-group-selection/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': getCSRFToken(),
-        },
-        body: JSON.stringify({
-            group_id: groupId,
-            platform_text: platformText
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Ответ от сервера:', data);
-        // Далее переход или обновление интерфейса
-    })
-    .catch(error => {
-        console.error('Ошибка при отправке:', error);
-    });
-});
-
+//// Обновление информации о выбранной группе на шаге 2
+//function updateSelectedGroupInfo(groupId) {
+//    const selectedCard = document.querySelector(`.group-card[data-group-id="${groupId}"]`);
+//
+//    if (selectedCard) {
+//        const groupName = selectedCard.querySelector('.card-title').textContent;
+//        const groupStats = selectedCard.querySelector('.card-text').textContent;
+//        const groupImage = selectedCard.querySelector('img').src;
+//        const platformText = groupStats.split('•')[0].trim(); // Получаем platform_text из текста
+//
+//        document.getElementById('selectedGroupName').textContent = groupName;
+//        document.getElementById('selectedGroupStats').textContent = groupStats;
+//        document.getElementById('selectedGroupImage').src = groupImage;
+//
+//        // Заполняем скрытые поля
+//        document.getElementById('selectedGroupId').value = groupId;
+//        document.getElementById('selectedPlatformText').value = platformText;
+//    }
+//}
+//
+//// Отправка данных группы на сервер
+//document.getElementById('step1NextBtn').addEventListener('click', function() {
+//    const groupId = document.getElementById('selectedGroupId').value;
+//    const platformText = document.getElementById('selectedPlatformText').value;
+//
+//    fetch('/process-group-selection/', {
+//        method: 'POST',
+//        headers: {
+//            'Content-Type': 'application/json',
+//            'X-CSRFToken': getCSRFToken(),
+//        },
+//        body: JSON.stringify({
+//            group_id: groupId,
+//            platform_text: platformText
+//        })
+//    })
+//    .then(response => response.json())
+//    .then(data => {
+//        console.log('Ответ от сервера:', data);
+//        // Далее переход или обновление интерфейса
+//    })
+//    .catch(error => {
+//        console.error('Ошибка при отправке:', error);
+//    });
+//});
+//
 // Получение CSRF-токена
-function getCSRFToken() {
-    const name = 'csrftoken';
-    const cookies = document.cookie.split(';');
-    for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim();
-        if (cookie.startsWith(name + '=')) {
-            return decodeURIComponent(cookie.substring(name.length + 1));
-        }
-    }
-    return '';
-}
-
-// Функциональность процесса анализа
-function setupAnalysisProcess() {
-    const startAnalysisBtn = document.getElementById('startAnalysisBtn');
-    const preAnalysis = document.getElementById('preAnalysis');
-    const duringAnalysis = document.getElementById('duringAnalysis');
-    const postAnalysis = document.getElementById('postAnalysis');
-    const step2NextBtn = document.getElementById('step2NextBtn');
-    
-    startAnalysisBtn.addEventListener('click', function() {
-        // Скрыть блок перед анализом
-        preAnalysis.style.display = 'none';
-        
-        // Показать блок во время анализа
-        duringAnalysis.style.display = 'block';
-        
-        // Имитировать процесс анализа
-        simulateAnalysisProcess();
-    });
-    
-    function simulateAnalysisProcess() {
-        const analysisProgress = document.getElementById('analysisProgress');
-        const analysisStatus = document.getElementById('analysisStatus');
-        let progress = 0;
-        
-        const interval = setInterval(() => {
-            progress += 5;
-            analysisProgress.style.width = `${progress}%`;
-            analysisProgress.setAttribute('aria-valuenow', progress);
-            
-            // Обновить текст статуса
-            if (progress < 30) {
-                analysisStatus.textContent = 'Анализ постов группы...';
-            } else if (progress < 60) {
-                analysisStatus.textContent = 'Определение основных тем...';
-            } else if (progress < 90) {
-                analysisStatus.textContent = 'Анализ активности аудитории...';
-            } else {
-                analysisStatus.textContent = 'Завершение анализа...';
-            }
-            
-            if (progress >= 100) {
-                clearInterval(interval);
-                
-                // Скрыть блок во время анализа
-                duringAnalysis.style.display = 'none';
-                
-                // Показать блок после анализа
-                postAnalysis.style.display = 'block';
-                
-                // Показать кнопку "Далее"
-                step2NextBtn.style.display = 'block';
-                
-                // Сгенерировать темы для шага 3
-                generateTopics();
-            }
-        }, 200);
-    }
-}
-
-// Генерация тем на основе анализа
-function generateTopics() {
-    // Примерные темы на основе выбранной группы
-    const selectedCard = document.querySelector(`.group-card[data-group-id="${selectedGroupId}"]`);
-    const groupName = selectedCard ? selectedCard.querySelector('.card-title').textContent : '';
-    
-    // Генерация тем на основе названия группы
-    if (groupName.includes('Маркетинг')) {
-        generatedTopics = [
-            { id: 1, title: 'Тренды в digital-маркетинге 2023', description: 'Обзор основных трендов в digital-маркетинге в 2023 году' },
-            { id: 2, title: 'Эффективные стратегии SMM', description: 'Как разработать эффективную стратегию продвижения в социальных сетях' },
-            { id: 3, title: 'Контент-маркетинг для бизнеса', description: 'Как использовать контент-маркетинг для привлечения клиентов' },
-            { id: 4, title: 'Email-маркетинг: лучшие практики', description: 'Советы по созданию эффективных email-рассылок' },
-            { id: 5, title: 'SEO-оптимизация в 2023 году', description: 'Актуальные методы SEO-оптимизации сайтов' }
-        ];
-    } else if (groupName.includes('Дизайн')) {
-        generatedTopics = [
-            { id: 1, title: 'Тренды в дизайне интерьера 2023', description: 'Обзор основных трендов в дизайне интерьера в 2023 году' },
-            { id: 2, title: 'Минимализм в интерьере', description: 'Как создать стильный минималистичный интерьер' },
-            { id: 3, title: 'Цветовые решения для маленьких помещений', description: 'Как визуально увеличить пространство с помощью цвета' },
-            { id: 4, title: 'Экологичные материалы в интерьере', description: 'Обзор экологичных материалов для современного интерьера' },
-            { id: 5, title: 'Освещение в интерьере', description: 'Как правильно организовать освещение в разных комнатах' }
-        ];
-    } else if (groupName.includes('IT')) {
-        generatedTopics = [
-            { id: 1, title: 'Тренды в разработке ПО 2023', description: 'Обзор основных трендов в разработке программного обеспечения в 2023 году' },
-            { id: 2, title: 'Искусственный интеллект в бизнесе', description: 'Как компании используют ИИ для оптимизации процессов' },
-            { id: 3, title: 'Кибербезопасность для бизнеса', description: 'Основные угрозы и методы защиты информации' },
-            { id: 4, title: 'Облачные технологии', description: 'Преимущества использования облачных технологий для бизнеса' },
-            { id: 5, title: 'Мобильная разработка', description: 'Тренды в разработке мобильных приложений' }
-        ];
-    } else {
-        generatedTopics = [
-            { id: 1, title: 'Тема 1', description: 'Описание темы 1' },
-            { id: 2, title: 'Тема 2', description: 'Описание темы 2' },
-            { id: 3, title: 'Тема 3', description: 'Описание темы 3' },
-            { id: 4, title: 'Тема 4', description: 'Описание темы 4' },
-            { id: 5, title: 'Тема 5', description: 'Описание темы 5' }
-        ];
-    }
-}
+//function getCSRFToken() {
+//    const name = 'csrftoken';
+//    const cookies = document.cookie.split(';');
+//    for (let i = 0; i < cookies.length; i++) {
+//        const cookie = cookies[i].trim();
+//        if (cookie.startsWith(name + '=')) {
+//            return decodeURIComponent(cookie.substring(name.length + 1));
+//        }
+//    }
+//    return '';
+//}
+//
+//// Функциональность процесса анализа
+//function setupAnalysisProcess() {
+//    const startAnalysisBtn = document.getElementById('startAnalysisBtn');
+//    const preAnalysis = document.getElementById('preAnalysis');
+//    const duringAnalysis = document.getElementById('duringAnalysis');
+//    const postAnalysis = document.getElementById('postAnalysis');
+//    const step2NextBtn = document.getElementById('step2NextBtn');
+//
+//    startAnalysisBtn.addEventListener('click', function() {
+//        // Скрыть блок перед анализом
+//        preAnalysis.style.display = 'none';
+//
+//        // Показать блок во время анализа
+//        duringAnalysis.style.display = 'block';
+//
+//        // Имитировать процесс анализа
+//        simulateAnalysisProcess();
+//    });
+//
+//    function simulateAnalysisProcess() {
+//        const analysisProgress = document.getElementById('analysisProgress');
+//        const analysisStatus = document.getElementById('analysisStatus');
+//        let progress = 0;
+//
+//        const interval = setInterval(() => {
+//            progress += 5;
+//            analysisProgress.style.width = `${progress}%`;
+//            analysisProgress.setAttribute('aria-valuenow', progress);
+//
+//            // Обновить текст статуса
+//            if (progress < 30) {
+//                analysisStatus.textContent = 'Анализ постов группы...';
+//            } else if (progress < 60) {
+//                analysisStatus.textContent = 'Определение основных тем...';
+//            } else if (progress < 90) {
+//                analysisStatus.textContent = 'Анализ активности аудитории...';
+//            } else {
+//                analysisStatus.textContent = 'Завершение анализа...';
+//            }
+//
+//            if (progress >= 100) {
+//                clearInterval(interval);
+//
+//                // Скрыть блок во время анализа
+//                duringAnalysis.style.display = 'none';
+//
+//                // Показать блок после анализа
+//                postAnalysis.style.display = 'block';
+//
+//                // Показать кнопку "Далее"
+//                step2NextBtn.style.display = 'block';
+//
+//                // Сгенерировать темы для шага 3
+//                generateTopics();
+//            }
+//        }, 200);
+//    }
+//}
+//
+//// Генерация тем на основе анализа
+//function generateTopics() {
+//    // Примерные темы на основе выбранной группы
+//    const selectedCard = document.querySelector(`.group-card[data-group-id="${selectedGroupId}"]`);
+//    const groupName = selectedCard ? selectedCard.querySelector('.card-title').textContent : '';
+//
+//    // Генерация тем на основе названия группы
+//    if (groupName.includes('Маркетинг')) {
+//        generatedTopics = [
+//            { id: 1, title: 'Тренды в digital-маркетинге 2023', description: 'Обзор основных трендов в digital-маркетинге в 2023 году' },
+//            { id: 2, title: 'Эффективные стратегии SMM', description: 'Как разработать эффективную стратегию продвижения в социальных сетях' },
+//            { id: 3, title: 'Контент-маркетинг для бизнеса', description: 'Как использовать контент-маркетинг для привлечения клиентов' },
+//            { id: 4, title: 'Email-маркетинг: лучшие практики', description: 'Советы по созданию эффективных email-рассылок' },
+//            { id: 5, title: 'SEO-оптимизация в 2023 году', description: 'Актуальные методы SEO-оптимизации сайтов' }
+//        ];
+//    } else if (groupName.includes('Дизайн')) {
+//        generatedTopics = [
+//            { id: 1, title: 'Тренды в дизайне интерьера 2023', description: 'Обзор основных трендов в дизайне интерьера в 2023 году' },
+//            { id: 2, title: 'Минимализм в интерьере', description: 'Как создать стильный минималистичный интерьер' },
+//            { id: 3, title: 'Цветовые решения для маленьких помещений', description: 'Как визуально увеличить пространство с помощью цвета' },
+//            { id: 4, title: 'Экологичные материалы в интерьере', description: 'Обзор экологичных материалов для современного интерьера' },
+//            { id: 5, title: 'Освещение в интерьере', description: 'Как правильно организовать освещение в разных комнатах' }
+//        ];
+//    } else if (groupName.includes('IT')) {
+//        generatedTopics = [
+//            { id: 1, title: 'Тренды в разработке ПО 2023', description: 'Обзор основных трендов в разработке программного обеспечения в 2023 году' },
+//            { id: 2, title: 'Искусственный интеллект в бизнесе', description: 'Как компании используют ИИ для оптимизации процессов' },
+//            { id: 3, title: 'Кибербезопасность для бизнеса', description: 'Основные угрозы и методы защиты информации' },
+//            { id: 4, title: 'Облачные технологии', description: 'Преимущества использования облачных технологий для бизнеса' },
+//            { id: 5, title: 'Мобильная разработка', description: 'Тренды в разработке мобильных приложений' }
+//        ];
+//    } else {
+//        generatedTopics = [
+//            { id: 1, title: 'Тема 1', description: 'Описание темы 1' },
+//            { id: 2, title: 'Тема 2', description: 'Описание темы 2' },
+//            { id: 3, title: 'Тема 3', description: 'Описание темы 3' },
+//            { id: 4, title: 'Тема 4', description: 'Описание темы 4' },
+//            { id: 5, title: 'Тема 5', description: 'Описание темы 5' }
+//        ];
+//    }
+//}
 
 // Функциональность управления темами
 function setupTopicsManagement() {

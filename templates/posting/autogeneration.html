@@ -70,17 +70,17 @@
 <!--                </div>-->
 
                 <!-- Добавить новую группу -->
-                <div class="col-md-4 mb-4" onclick="window.location.href='{% url 'settings' %}'" style="cursor: pointer;">
-                    <div class="card group-card add-group h-100" id="addGroupCard">
-                        <div class="card-body d-flex flex-column align-items-center justify-content-center">
-                            <div class="add-icon mb-3">
-                                <i class="ph ph-plus-circle"></i>
-                            </div>
-                            <h5 class="card-title">{{ add_new_group }}</h5>
-                            <p class="card-text text-muted text-center">{{ add_for_analysis }}</p>
-                        </div>
-                    </div>
-                </div>
+<!--                <div class="col-md-4 mb-4" onclick="window.location.href='{% url 'settings' %}'" style="cursor: pointer;">-->
+<!--                    <div class="card group-card add-group h-100" id="addGroupCard">-->
+<!--                        <div class="card-body d-flex flex-column align-items-center justify-content-center">-->
+<!--                            <div class="add-icon mb-3">-->
+<!--                                <i class="ph ph-plus-circle"></i>-->
+<!--                            </div>-->
+<!--                            <h5 class="card-title">{{ add_new_group }}</h5>-->
+<!--                            <p class="card-text text-muted text-center">{{ add_for_analysis }}</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
         </div>
     </div>
@@ -165,74 +165,81 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-6 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ main_group_topics }}</h5>
-                                <div id="topThemes" class="mt-3">
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <span>{{ subject_1 }}</span>
-                                        <span>{{ percent_1 }}%</span>
-                                    </div>
-                                    <div class="progress mb-3" style="height: 8px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
 
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <span>{{ subject_2 }}</span>
-                                        <span>{{ percent_2 }}%</span>
-                                    </div>
-                                    <div class="progress mb-3" style="height: 8px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 48%" aria-valuenow="48" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
+                <h3>Результаты анализа</h3>
+                <ul>
+                    {% for topic in generated_topics %}
+                    <li>{{ topic.title }} ({{ topic.percent }}%)</li>
+                    {% endfor %}
+                </ul>
+<!--                <div class="row">-->
+<!--                    <div class="col-md-6 mb-4">-->
+<!--                        <div class="card h-100">-->
+<!--                            <div class="card-body">-->
+<!--                                <h5 class="card-title">{{ main_group_topics }}</h5>-->
+<!--                                <div id="topThemes" class="mt-3">-->
+<!--                                    <div class="d-flex justify-content-between mb-2">-->
+<!--                                        <span>{{ subject_1 }}</span>-->
+<!--                                        <span>{{ percent_1 }}%</span>-->
+<!--                                    </div>-->
+<!--                                    <div class="progress mb-3" style="height: 8px;">-->
+<!--                                        <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>-->
+<!--                                    </div>-->
 
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <span>{{ subject_3 }}</span>
-                                        <span>{{ percent_3 }}%</span>
-                                    </div>
-                                    <div class="progress mb-3" style="height: 8px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 37%" aria-valuenow="37" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<!--                                    <div class="d-flex justify-content-between mb-2">-->
+<!--                                        <span>{{ subject_2 }}</span>-->
+<!--                                        <span>{{ percent_2 }}%</span>-->
+<!--                                    </div>-->
+<!--                                    <div class="progress mb-3" style="height: 8px;">-->
+<!--                                        <div class="progress-bar" role="progressbar" style="width: 48%" aria-valuenow="48" aria-valuemin="0" aria-valuemax="100"></div>-->
+<!--                                    </div>-->
 
-                    <div class="col-md-6 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ main_group_topics }}</h5>
-                                <div id="audienceActivity" class="mt-3">
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <span>{{ subject_4 }}</span>
-                                        <span>{{ percent_4 }}%</span>
-                                    </div>
-                                    <div class="progress mb-3" style="height: 8px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <span>{{ subject_5 }}</span>
-                                        <span>{{ percent_5 }}%</span>
-                                    </div>
-                                    <div class="progress mb-3" style="height: 8px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 48%" aria-valuenow="48" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <span>{{ subject_6 }}</span>
-                                        <span>{{ percent_6 }}%</span>
-                                    </div>
-                                    <div class="progress mb-3" style="height: 8px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 37%" aria-valuenow="37" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
+<!--                                    <div class="d-flex justify-content-between mb-2">-->
+<!--                                        <span>{{ subject_3 }}</span>-->
+<!--                                        <span>{{ percent_3 }}%</span>-->
+<!--                                    </div>-->
+<!--                                    <div class="progress mb-3" style="height: 8px;">-->
+<!--                                        <div class="progress-bar" role="progressbar" style="width: 37%" aria-valuenow="37" aria-valuemin="0" aria-valuemax="100"></div>-->
+<!--                                    </div>-->
 <!--                                </div>-->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                    <div class="col-md-6 mb-4">-->
+<!--                        <div class="card h-100">-->
+<!--                            <div class="card-body">-->
+<!--                                <h5 class="card-title">{{ main_group_topics }}</h5>-->
+<!--                                <div id="audienceActivity" class="mt-3">-->
+<!--                                    <div class="d-flex justify-content-between mb-2">-->
+<!--                                        <span>{{ subject_4 }}</span>-->
+<!--                                        <span>{{ percent_4 }}%</span>-->
+<!--                                    </div>-->
+<!--                                    <div class="progress mb-3" style="height: 8px;">-->
+<!--                                        <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>-->
+<!--                                    </div>-->
+
+<!--                                    <div class="d-flex justify-content-between mb-2">-->
+<!--                                        <span>{{ subject_5 }}</span>-->
+<!--                                        <span>{{ percent_5 }}%</span>-->
+<!--                                    </div>-->
+<!--                                    <div class="progress mb-3" style="height: 8px;">-->
+<!--                                        <div class="progress-bar" role="progressbar" style="width: 48%" aria-valuenow="48" aria-valuemin="0" aria-valuemax="100"></div>-->
+<!--                                    </div>-->
+
+<!--                                    <div class="d-flex justify-content-between mb-2">-->
+<!--                                        <span>{{ subject_6 }}</span>-->
+<!--                                        <span>{{ percent_6 }}%</span>-->
+<!--                                    </div>-->
+<!--                                    <div class="progress mb-3" style="height: 8px;">-->
+<!--                                        <div class="progress-bar" role="progressbar" style="width: 37%" aria-valuenow="37" aria-valuemin="0" aria-valuemax="100"></div>-->
+<!--                                    </div>-->
+<!--&lt;!&ndash;                                </div>&ndash;&gt;-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
         </div>
     </div>
@@ -536,6 +543,12 @@
 
 <!-- Подключение скрипта автогенерации -->
 <script src = "{% static 'js/posting/autogeneration.js' %}"></script>
+
+<!-- Подключение скрипта первого шага -->
+<script src = "{% static 'js/posting/first_step.js' %}"></script>
+
+<!-- Подключение скрипта второго шага -->
+<script src = "{% static 'js/posting/second_step.js' %}"></script>
 
 <!-- Phosphor Icons JavaScript -->
 <script src="https://unpkg.com/@phosphor-icons/web"></script>
