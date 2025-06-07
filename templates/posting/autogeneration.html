@@ -166,7 +166,7 @@
                 </div>
 
 
-                <h3>Результаты анализа</h3>
+                <h3>{{ analysis_results }}</h3>
                 <ul>
                     {% for topic in generated_topics %}
                     <li>{{ topic.title }} ({{ topic.percent }}%)</li>
@@ -536,6 +536,18 @@
             });
         }
     });
+</script>
+
+<script>
+    window.translations = {
+        analysis: {
+            analyzingPosts: "{{ group_posts_analysis }}...",
+            definingTopics: "{{ main_topics }}...",
+            analyzingAudience: "{{ aaa }}...",
+            finishing: "{{ complete_analysis }}..."
+        }
+
+    };
 </script>
 
 <!-- Подключение Sortable.js для перетаскивания элементов -->

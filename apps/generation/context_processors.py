@@ -52,7 +52,11 @@ def autogeneration(request):
         "generate_post": translate("Сгенерировать посты", lang),
         "regenerate": translate("Сгенерировать заново", lang),
         "ready": translate("Готово", lang),
+        "analysis_results": translate("Результаты анализа", lang),
         "plan_everything": translate("Запланировать всё", lang),
         "save_everything": translate("Сохранить всё", lang),
         "wait": translate("Пожалуйста, подождите", lang),
+        "main_topics": translate("Определение основных тем", lang),
+        "aaa": translate("Анализ активности аудитории", lang),
+        "complete_analysis": translate("Завершение анализа", lang),
     }

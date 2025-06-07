@@ -61,22 +61,22 @@ function setupAnalysisProcess() {
         const analysisProgress = document.getElementById('analysisProgress');
         const analysisStatus = document.getElementById('analysisStatus');
         let progress = 0;
-        const intervalTime = (duration * 1000) / 20; // Разбиваем время на 20 шагов
+        const intervalTime = (duration * 5000) / 20; // Разбиваем время на 20 шагов
 
         const interval = setInterval(() => {
             progress += 5;
             analysisProgress.style.width = `${progress}%`;
             analysisProgress.setAttribute('aria-valuenow', progress);
 
-            // Обновить текст статуса
+            // Обновить текст статуса с использованием переводов
             if (progress < 30) {
-                analysisStatus.textContent = 'Анализ постов группы...';
+                analysisStatus.textContent = window.translations.analysis.analyzingPosts;
             } else if (progress < 60) {
-                analysisStatus.textContent = 'Определение основных тем...';
+                analysisStatus.textContent = window.translations.analysis.definingTopics;
             } else if (progress < 90) {
-                analysisStatus.textContent = 'Анализ активности аудитории...';
+                analysisStatus.textContent = window.translations.analysis.analyzingAudience;
             } else {
-                analysisStatus.textContent = 'Завершение анализа...';
+                analysisStatus.textContent = window.translations.analysis.finishing;
             }
 
             if (progress >= 100) {

@@ -84,6 +84,9 @@
 ^Разделяйте хештеги пробелами^Separate hashtags with spaces^
 ^Сгенерировать новое изображение^Generate a new image^
 ^Анализ постов группы^Analysis of group posts^
+^Определение основных тем^Defining the main topics^
+^Анализ активности аудитории^Audience activity analysis^
+^Завершение анализа^Completion of the analysis^
 ^Загрузка^Loading^
 ^Основные темы группы^Main topics of the group^
 ^Маркетинг^Marketing^
@@ -100,6 +103,7 @@
 ^Сгенерировать заново^Regenerate^
 ^Готово^Ready^
 ^Запланировать всё^Plan everything^
+^Результаты анализа^Analysis results^
 ^Сохранить всё^Save everything^
 ^Пожалуйста, подождите^Please, wait ^
 ^Посты^Posts^
