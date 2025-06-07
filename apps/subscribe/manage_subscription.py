@@ -4,7 +4,6 @@ from django.http import JsonResponse
 from django.utils import timezone
 import json
 
-
 # Маппинг номеров причин для сервера
 REASON_MAPPING = {
     '1': 'too_expensive',
@@ -17,6 +16,7 @@ REASON_MAPPING = {
 @require_POST
 def manage_subscription(request):
     """Обработка отмены или возобновления подписки"""
+    lang = language(request)
     global subscription_status
     try:
         data = json.loads(request.body)
@@ -28,7 +28,7 @@ def manage_subscription(request):
             if not reason_number or reason_number not in REASON_MAPPING:
                 return JsonResponse({
                     'status': 'error',
-                    'message': translate('Пожалуйста, выберите причину отмены', request.LANGUAGE_CODE)
+                    'message': translate('Пожалуйста, выберите причину отмены', lang)
                 }, status=400)
             subscription_status = False
             reason_text = REASON_MAPPING.get(reason_number, 'other')
@@ -41,9 +41,9 @@ def manage_subscription(request):
             print(log_message)
             return JsonResponse({
                 'status': 'success',
-                'message': translate('Подписка будет отменена', request.LANGUAGE_CODE) + f". {translate('Причина', request.LANGUAGE_CODE)}: {reason_text if reason_number != '5' else other_reason}",
-                'new_status': f"{translate('Будет отменена', request.LANGUAGE_CODE)} {cancellation_date}",
-                'button_text': translate('Возобновить подписку', request.LANGUAGE_CODE),
+                'message': translate('Подписка будет отменена', lang) + f". {translate('Причина', lang)}: {reason_text if reason_number != '5' else other_reason}",
+                'new_status': f"{translate('Будет отменена', lang)} {cancellation_date}",
+                'button_text': translate('Возобновить подписку', lang),
                 'button_class': 'btn-outline-success',
                 'badge_class': 'bg-warning'
             })
@@ -52,9 +52,9 @@ def manage_subscription(request):
             print(f"Подписка возобновлена. Время: {timezone.now().strftime('%d.%m.%Y %H:%M:%S')}")
             return JsonResponse({
                 'status': 'success',
-                'message': translate('Ваша подписка успешно возобновлена', request.LANGUAGE_CODE),
-                'new_status': translate('Активна', request.LANGUAGE_CODE),
-                'button_text': translate('Отменить подписку', request.LANGUAGE_CODE),
+                'message': translate('Ваша подписка успешно возобновлена', lang),
+                'new_status': translate('Активна', lang),
+                'button_text': translate('Отменить подписку', lang),
                 'button_class': 'btn-outline-danger',
                 'badge_class': 'bg-success'
             })

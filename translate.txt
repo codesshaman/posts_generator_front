@@ -297,8 +297,13 @@
 ^Вы сможете использовать все функции^You will be able to use all the functions^
 ^до окончания срока действия^before the expiration date^
 ^Вы можете возобновить подписку в любое время^You can renew your subscription at any time^
-^Причина отмены (необязательно)^Reason for cancellation (optional)^
+^Причина отмены^Reason for cancellation^
+^Автоматическое продление будет отключено^Automatic renewal will be disabled.^
+^до истечения срока^before the expiration of the term^
+^Вы можете возобновить подписку в любой момент^You can renew your subscription at any time.^
 ^Выберите причину^Select a reason^
+^Что произойдет после отмены^What happens after cancellation^
+^Подтверждение отмены подписки^Confirmation of subscription cancellation^
 ^Слишком дорого^Too expensive^
 ^Не использую сервис^I don't use the service^
 ^Не хватает функций^Lacks features^
