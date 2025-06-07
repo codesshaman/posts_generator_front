@@ -60,15 +60,29 @@ function setupAnalysisProcess() {
     function simulateAnalysisProcess(duration) {
         const analysisProgress = document.getElementById('analysisProgress');
         const analysisStatus = document.getElementById('analysisStatus');
+
+        // Получение платформы из <p id="selectedGroupStats">
+        const statsText = document.getElementById('selectedGroupStats').textContent.trim();
+        const firstWord = statsText.split(/\s+/)[0].toLowerCase();
+
+        // Установка коэффициента в зависимости от платформы
+        let coefficient = 5000;
+        if (firstWord === 'boosty') {
+            coefficient = 6000;
+        } else if (firstWord === 'telegram') {
+            coefficient = 1000;
+        } else if (firstWord === 'vk') {
+            coefficient = 3000;
+        }
+
         let progress = 0;
-        const intervalTime = (duration * 5000) / 20; // Разбиваем время на 20 шагов
+        const intervalTime = (duration * coefficient) / 20; // Используем определённый коэффициент
 
         const interval = setInterval(() => {
             progress += 5;
             analysisProgress.style.width = `${progress}%`;
             analysisProgress.setAttribute('aria-valuenow', progress);
 
-            // Обновить текст статуса с использованием переводов
             if (progress < 30) {
                 analysisStatus.textContent = window.translations.analysis.analyzingPosts;
             } else if (progress < 60) {
@@ -81,21 +95,14 @@ function setupAnalysisProcess() {
 
             if (progress >= 100) {
                 clearInterval(interval);
-
-                // Скрыть блок во время анализа
                 duringAnalysis.style.display = 'none';
-
-                // Показать блок после анализа
                 postAnalysis.style.display = 'block';
-
-                // Показать кнопку "Далее"
                 step2NextBtn.style.display = 'block';
-
-                // Отрендерить темы
                 renderTopics(generatedTopics);
             }
         }, intervalTime);
     }
+
 
     // Функция для рендеринга тем в postAnalysis
     function renderTopics(topics) {

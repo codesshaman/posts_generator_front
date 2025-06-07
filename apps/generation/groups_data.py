@@ -55,3 +55,8 @@ groups_topics = [
     {"id": 6, "title": "Advertising", "percent": "6"},
     {"id": 6, "title": "Parapsychology", "percent": "5"},
 ]
+
+# Эмулированные данные отдельной группы
+group_data = [
+    {"group_id": 1, "platform_text": "telegram"},
+]
