@@ -52,7 +52,7 @@ def manage_subscription(request):
             print(f"Подписка возобновлена. Время: {timezone.now().strftime('%d.%m.%Y %H:%M:%S')}")
             return JsonResponse({
                 'status': 'success',
-                'message': translate('Подписка успешно возобновлена', request.LANGUAGE_CODE),
+                'message': translate('Ваша подписка успешно возобновлена', request.LANGUAGE_CODE),
                 'new_status': translate('Активна', request.LANGUAGE_CODE),
                 'button_text': translate('Отменить подписку', request.LANGUAGE_CODE),
                 'button_class': 'btn-outline-danger',
