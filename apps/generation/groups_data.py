@@ -51,6 +51,7 @@ groups_topics = [
     {"id": 2, "title": "SMM", "percent": "21"},
     {"id": 3, "title": "Sales", "percent": "17"},
     {"id": 4, "title": "Content", "percent": "14 "},
-    {"id": 5, "title": "Marketing", "percent": "11"},
-    {"id": 6, "title": "Advertising", "percent": "9"},
+    {"id": 5, "title": "Marketing", "percent": "9"},
+    {"id": 6, "title": "Advertising", "percent": "6"},
+    {"id": 6, "title": "Parapsychology", "percent": "5"},
 ]
