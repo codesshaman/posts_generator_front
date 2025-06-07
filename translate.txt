@@ -357,6 +357,7 @@
 ^Неактивные^Inactive^
 ^Сбросить^Reset^
 ^Поиск по названию^Search by name^
+^Название для отображения в системе^Name to display in the system^
 ^Настройки уведомлений^Notification settings^
 ^Email уведомления^Email notifications^
 ^Новые посты^New posts^

@@ -43,6 +43,7 @@ def settings(request):
         "active": translate("Активные", lang),
         "inactive": translate("Неактивные", lang),
         "reset": translate("Сбросить", lang),
+        "sys_name": translate("Название для отображения в системе", lang),
         "search_by_name": translate("Поиск по названию", lang),
         "notification_settings": translate("Настройки уведомлений", lang),
         "email_notifications": translate("Email уведомления", lang),
