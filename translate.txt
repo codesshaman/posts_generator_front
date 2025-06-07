@@ -219,8 +219,10 @@
 ^Следующее списание^Next write-off^
 ^Стоимость^Price^
 ^Способ оплаты^Payment method^
+^Период оплаты^Payment period^
 ^месяц^month^
 ^год^year^
+^Дата следующего списания^Next write-off date^
 ^Использование коинов^Using coins^
 ^Доступно коинов^Available coins^
 ^Расход коинов^Coin consumption^
@@ -239,7 +241,11 @@
 ^Обновить до^Upgrade to^
 ^годовой план^annual plan^
 ^Примечание^Note^
+^Вы выбрали тариф^You have selected a plan^
+^Подтверждение обновления тарифа^Confirmation of plan update^
 ^Все тарифы включают неограниченное^All plans include an unlimited^
+^Нажимая 'Подтвердить', вы соглашаетесь с условиями использования сервиса и подтверждаете^By clicking "Confirm", you agree to the terms of use of the service and confirm^
+^что с вашей карты будет списана указанная сумма^that the specified amount will be debited from your card^
 ^количество запросов^number of requests^
 ^в пределах доступных коинов^within the limits of available coins^
 ^При оплате за год предоставляется^An additional discount is provided^
@@ -310,6 +316,7 @@
 ^Нашёл альтернативу^Found an alternative^
 ^Другое^Other^
 ^Укажите причину^Please write the reason^
+^Подтвердить^Confirm^
 ^Подтвердить отмену подписки^Confirm unsubscription^
 ^Ваша подписка успешно возобновлена^Your subscription has been successfully renewed^
 ^Ваша подписка будет отменена по окончании текущего периода^Your subscription will be cancelled at the end of the current period^

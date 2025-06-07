@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const nextBilling = getNextBillingDate(period);
 
             // Обновляем содержимое модального окна
-            document.getElementById("modalPlanName").textContent = `Вы выбрали тариф "${planName}"`;
+            document.getElementById("modalPlanName").textContent = `${window.translations.your_choose_plan} "${planName}"`;
             document.getElementById("modalPrice").textContent = `${price} ${currencyText}/${period}`;
             document.getElementById("modalPeriod").textContent = periodText;
             document.getElementById("modalNextBillingDate").textContent = nextBilling.date;

@@ -564,35 +564,35 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="planConfirmationModalLabel">Подтверждение обновления тарифа</h5>
+                <h5 class="modal-title" id="planConfirmationModalLabel">{{ tariff_update_confirmation }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="text-center mb-4">
                     <i class="ph ph-check-circle text-success" style="font-size: 64px;"></i>
-                    <h4 class="mt-3" id="modalPlanName">Вы выбрали тариф</h4>
+                    <h4 class="mt-3" id="modalPlanName">{{ your_choose_plan }}</h4>
                 </div>
                 <div class="current-plan-info">
                     <div class="d-flex justify-content-between mb-2">
-                        <span>Стоимость:</span>
+                        <span>{{ price }}:</span>
                         <span class="fw-bold" id="modalPrice"></span>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
-                        <span>Период оплаты:</span>
+                        <span>{{ payment_period }}:</span>
                         <span class="fw-bold" id="modalPeriod"></span>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
-                        <span>Дата следующего списания:</span>
+                        <span>{{ next_write_off }}:</span>
                         <span class="fw-bold" id="modalNextBillingDate"></span>
                     </div>
                 </div>
                 <div class="alert alert-info mt-3">
-                    <small>Нажимая "Подтвердить", вы соглашаетесь с условиями использования сервиса и подтверждаете, что с вашей карты будет списана указанная сумма.</small>
+                    <small>{{ click_to_confirm }}, {{ will_be_debited_from_your_card }}.</small>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                <button type="button" class="btn btn-primary" id="confirmPlanUpdateBtn">Подтвердить</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ cancel }}</button>
+                <button type="button" class="btn btn-primary" id="confirmPlanUpdateBtn">{{ confirm }}</button>
             </div>
         </div>
     </div>
@@ -625,6 +625,7 @@
         month: "{{ month }}",
         year: "{{ year }}",
         currency: "{{ currency }}",
+        your_choose_plan: "{{ your_choose_plan }}"
     };
 </script>
 
