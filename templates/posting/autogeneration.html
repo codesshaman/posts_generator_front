@@ -169,7 +169,10 @@
                 <h3>{{ analysis_results }}</h3>
                 <ul>
                     {% for topic in generated_topics %}
-                    <li>{{ topic.title }} ({{ topic.percent }}%)</li>
+                    <li data-topic-id="{{ topic.id }}" class="topic-item">
+                        <strong>{{ topic.title }}</strong> ({{ topic.percent }}%)
+                        <textarea class="topic-description" style="display:none;">{{ topic.description }}</textarea>
+                    </li>
                     {% endfor %}
                 </ul>
 <!--                <div class="row">-->
