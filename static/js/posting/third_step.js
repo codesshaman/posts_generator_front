@@ -13,8 +13,8 @@ function setupTopicsManagement() {
         const newTopicId = Date.now();
         generatedTopics.push({
             id: newTopicId,
-            title: 'Новая тема',
-            description: 'Описание новой темы'
+            title: window.translations.topics.newTopic,
+            description: window.translations.topics.newTopicDescription
         });
 
         renderTopics();

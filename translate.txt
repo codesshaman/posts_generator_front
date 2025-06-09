@@ -58,6 +58,8 @@
 ^Выбор группы^Group selection^
 ^Анализ^Analysis^
 ^Темы^Topics^
+^Новая тема^New Topic^
+^Описание новой темы^Description of the new topic^
 ^Контент-план^Content plan^
 ^Выберите группу для анализа^Select a group for analysis^
 ^Маркетинг и реклама^Marketing and advertising^

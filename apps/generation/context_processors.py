@@ -52,6 +52,8 @@ def autogeneration(request):
         "generate_post": translate("Сгенерировать посты", lang),
         "regenerate": translate("Сгенерировать заново", lang),
         "ready": translate("Готово", lang),
+        "new_topic": translate("Новая тема", lang),
+        "new_topic_description": translate("Описание новой темы", lang),
         "analysis_results": translate("Результаты анализа", lang),
         "plan_everything": translate("Запланировать всё", lang),
         "save_everything": translate("Сохранить всё", lang),
