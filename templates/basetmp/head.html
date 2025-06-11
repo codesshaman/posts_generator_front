@@ -50,6 +50,14 @@
         <link rel="stylesheet" href="{% static 'css/autogeneration_dark.css' %}">
     {% endif %}
 {% endif %}
+{% if request.resolver_match.view_name == 'contentplan' %}
+    {% if not set_dark_mode %}
+        <link rel="stylesheet" href="{% static 'css/autogeneration.css' %}">
+    {% endif %}
+    {% if set_dark_mode %}
+        <link rel="stylesheet" href="{% static 'css/autogeneration_dark.css' %}">
+    {% endif %}
+{% endif %}
 {% if request.resolver_match.view_name == 'subscription' %}
     {% if not set_dark_mode %}
         <link rel="stylesheet" href="{% static 'css/subscription.css' %}">
