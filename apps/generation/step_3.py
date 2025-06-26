@@ -18,7 +18,7 @@ def mock_generated_posts(request):
         {
             "id": 8,
             "title": "10 трендов в SMM в 2025 году",
-            "content": "Социальные сети продолжают развиваться, и вот ключевые тенденции, которые стоит учитывать...",
+            "description": "Социальные сети продолжают развиваться, и вот ключевые тенденции, которые стоит учитывать...",
             "hashtags": "#smm #тренды #маркетинг",
             "image": "https://via.placeholder.com/600x400?text=Post_1",
             "platform": "instagram",
@@ -27,7 +27,16 @@ def mock_generated_posts(request):
         {
             "id": 9,
             "title": "Как продвигать бренд через Reels",
-            "content": "Reels стал мощным инструментом маркетинга. Вот как его использовать правильно...",
+            "description": "Reels стал мощным инструментом маркетинга. Вот как его использовать правильно...",
+            "hashtags": "#reels #instagram #продвижение",
+            "image": "https://via.placeholder.com/600x400?text=Post_2",
+            "platform": "facebook",
+            "publishDate": datetime.now().strftime('%d.%m.%Y')
+        },
+        {
+            "id": 10,
+            "title": "Ну кто так ест?",
+            "description": "Неправильно ты, Дядя Фёдор, бутерброд ешь. Надо колбасой на язык класть...",
             "hashtags": "#reels #instagram #продвижение",
             "image": "https://via.placeholder.com/600x400?text=Post_2",
             "platform": "facebook",
