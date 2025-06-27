@@ -1,4 +1,3 @@
-
 // Функциональность управления контент-планом
 function setupContentPlanManagement() {
     const contentPlanList = document.getElementById('contentPlanList');

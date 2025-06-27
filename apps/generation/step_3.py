@@ -1,5 +1,6 @@
 from django.http import JsonResponse
-from datetime import datetime
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 
 def get_postanalysis_text(lang):
@@ -13,35 +14,18 @@ def get_postanalysis_text(lang):
                 the main topics that may be of interest to you. \
                 You can edit the suggested topics or add your own."
 
-def posts_generation(request):
-    posts = [
-        {
-            "id": 8,
-            "title": "10 трендов в SMM в 2025 году",
-            "description": "Социальные сети продолжают развиваться, и вот ключевые тенденции, которые стоит учитывать...",
-            "hashtags": "#smm #тренды #маркетинг",
-            "image": "https://via.placeholder.com/600x400?text=Post_1",
-            "platform": "instagram",
-            "publishDate": datetime.now().strftime('%d.%m.%Y')
-        },
-        {
-            "id": 9,
-            "title": "Как продвигать бренд через Reels",
-            "description": "Reels стал мощным инструментом маркетинга. Вот как его использовать правильно...",
-            "hashtags": "#reels #instagram #продвижение",
-            "image": "https://via.placeholder.com/600x400?text=Post_2",
-            "platform": "facebook",
-            "publishDate": datetime.now().strftime('%d.%m.%Y')
-        },
-        {
-            "id": 10,
-            "title": "Ну кто так ест?",
-            "description": "Неправильно ты, Дядя Фёдор, бутерброд ешь. Надо колбасой на язык класть...",
-            "hashtags": "#reels #instagram #продвижение",
-            "image": "https://via.placeholder.com/600x400?text=Post_2",
-            "platform": "facebook",
-            "publishDate": datetime.now().strftime('%d.%m.%Y')
-        }
-    ]
+@csrf_exempt
+def receive_content_plan(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            topics = data.get('topics', [])
 
-    return JsonResponse(posts, safe=False)
+            print('📥 Полученные темы:')
+            for topic in topics:
+                print(f"— Заголовок: {topic.get('title')}, Описание: {topic.get('description')}")
+
+            return JsonResponse({'status': 'ok', 'message': 'Контент-план получен'}, status=200)
+        except json.JSONDecodeError:
+            return JsonResponse({'status': 'error', 'message': 'Неверный формат JSON'}, status=400)
+    return JsonResponse({'status': 'error', 'message': 'Метод не поддерживается'}, status=405)
