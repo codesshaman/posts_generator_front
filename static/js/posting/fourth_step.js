@@ -31,33 +31,23 @@ function setupContentPlanManagement() {
 
             // Генерация контент-плана на основе выбранных тем
             function generateContentPlan() {
-                contentPlan = [];
+                showLoading('Генерация контент-плана...');
 
-                // Получение текущей даты
-                const currentDate = new Date();
-
-                // Генерация постов для каждой темы
-                generatedTopics.forEach((topic, index) => {
-                    // Создание даты публикации (каждые 2 дня)
-                    const publishDate = new Date(currentDate);
-                    publishDate.setDate(publishDate.getDate() + index * 2);
-
-                    // Форматирование даты
-                    const formattedDate = publishDate.toLocaleDateString('ru-RU', {
-                        day: '2-digit',
-                        month: '2-digit',
-                        year: 'numeric'
+                fetch('/generate-content-plan/')
+                    .then(response => {
+                        if (!response.ok) throw new Error('Ошибка при загрузке контент-плана');
+                        return response.json();
+                    })
+                    .then(data => {
+                        window.contentPlan = data;  // глобально определяем contentPlan
+                        renderContentPlan();        // вызываем твою функцию для отрисовки
+                        hideLoading();
+                        showAlert('Контент-план успешно загружен!', 'success');
+                    })
+                    .catch(error => {
+                        hideLoading();
+                        showAlert('Не удалось загрузить контент-план: ' + error.message, 'danger');
                     });
-
-                    // Создание элемента контент-плана
-                    contentPlan.push({
-                        id: Date.now() + index,
-                        title: topic.title,
-                        description: topic.description,
-                        publishDate: formattedDate,
-                        platform: index % 2 === 0 ? 'instagram' : 'facebook'
-                    });
-                });
             }
 
             // Отрисовка контент-плана
