@@ -227,16 +227,27 @@ function setupContentPlanManagement() {
             const saveAllBtn = document.getElementById('saveAllBtn');
 
             // Генерация постов при переходе к шагу 5
+            function pollPostGenerationStatus() {
+                const interval = setInterval(() => {
+                    fetch('/check-posts-status/')
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.status === true) {
+                                clearInterval(interval);
+                                generatePosts();
+                                renderPosts();
+                                hideLoading();
+                            }
+                        });
+                }, 500);
+            }
+
             generatePostsBtn.addEventListener('click', function() {
                 showLoading('Генерация постов...');
-
-                // Имитация генерации постов
-                setTimeout(() => {
-                    generatePosts();
-                    renderPosts();
-                    hideLoading();
-                }, 3000);
+                fetch('/check-posts-status/', { method: 'POST' })
+                    .then(() => pollPostGenerationStatus());
             });
+
 
             // Запланировать все посты
             scheduleAllBtn.addEventListener('click', function() {

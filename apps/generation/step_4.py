@@ -1,5 +1,9 @@
+from django.views.decorators.http import require_http_methods
+from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+from django.utils import timezone
 from datetime import datetime
+import random
 
 
 def get_topics_text(lang):
@@ -62,3 +66,33 @@ def posts_generation(request):
     ]
 
     return JsonResponse(posts, safe=False)
+
+@csrf_exempt
+@require_http_methods(["GET", "POST"])
+def check_posts_status(request):
+    if not request.session.session_key:
+        request.session.create()
+
+    if request.method == 'POST':
+        # Перезапуск генерации постов
+        request.session['posts_started_at'] = timezone.now().timestamp()
+        request.session['posts_delay'] = random.randint(5, 15)
+        request.session.modified = True
+        return JsonResponse({'status': False})
+
+    # Проверка статуса
+    if 'posts_started_at' not in request.session:
+        return JsonResponse({'status': False})
+
+    start_time = request.session['posts_started_at']
+    delay = request.session['posts_delay']
+    now = timezone.now().timestamp()
+    elapsed = now - start_time
+
+    if elapsed >= delay:
+        request.session.pop('posts_started_at', None)
+        request.session.pop('posts_delay', None)
+        request.session.modified = True
+        return JsonResponse({'status': True})
+
+    return JsonResponse({'status': False})
