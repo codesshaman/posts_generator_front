@@ -1,5 +1,8 @@
-from django.http import JsonResponse
+from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+from django.utils import timezone
+import random
 import json
 
 
@@ -29,3 +32,35 @@ def receive_content_plan(request):
         except json.JSONDecodeError:
             return JsonResponse({'status': 'error', 'message': 'Неверный формат JSON'}, status=400)
     return JsonResponse({'status': 'error', 'message': 'Метод не поддерживается'}, status=405)
+
+
+
+@csrf_exempt
+@require_http_methods(["GET", "POST"])
+def check_generate_status(request):
+    if not request.session.session_key:
+        request.session.create()
+
+    if request.method == 'POST':
+        # Перезапуск анализа (при нажатии кнопки "Сгенерировать" или "Перегенерировать")
+        request.session['generate_started_at'] = timezone.now().timestamp()
+        request.session['generate_delay'] = random.randint(5, 15)
+        request.session.modified = True
+        return JsonResponse({'status': False})
+
+    # Проверка статуса
+    if 'generate_started_at' not in request.session:
+        return JsonResponse({'status': False})
+
+    start_time = request.session['generate_started_at']
+    delay = request.session['generate_delay']
+    now = timezone.now().timestamp()
+    elapsed = now - start_time
+
+    if elapsed >= delay:
+        request.session.pop('generate_started_at', None)
+        request.session.pop('generate_delay', None)
+        request.session.modified = True
+        return JsonResponse({'status': True})
+
+    return JsonResponse({'status': False})

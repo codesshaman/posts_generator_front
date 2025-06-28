@@ -4,29 +4,34 @@ function setupContentPlanManagement() {
     const generateContentPlanBtn = document.getElementById('generateContentPlanBtn');
     const regenerateContentPlanBtn = document.getElementById('regenerateContentPlanBtn');
 
+    function pollGenerationStatus() {
+        const interval = setInterval(() => {
+            fetch('/check-generate-status/')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === true) {
+                        clearInterval(interval);
+                        generateContentPlan();
+                        renderContentPlan();
+                        hideLoading();
+                    }
+                });
+        }, 500);
+    }
+
     // Генерация контент-плана при переходе к шагу 4
-    generateContentPlanBtn.addEventListener('click', function() {
+    generateContentPlanBtn.addEventListener('click', () => {
         showLoading('Генерация контент-плана...');
+        fetch('/check-generate-status/', { method: 'POST' })
+            .then(() => pollGenerationStatus());
+    });
 
-                // Имитация генерации контент-плана
-                setTimeout(() => {
-                    generateContentPlan();
-                    renderContentPlan();
-                    hideLoading();
-                }, 2000);
-            });
-
-            // Повторная генерация контент-плана
-            regenerateContentPlanBtn.addEventListener('click', function() {
-                showLoading('Генерация нового контент-плана...');
-
-                // Имитация повторной генерации контент-плана
-                setTimeout(() => {
-                    generateContentPlan();
-                    renderContentPlan();
-                    hideLoading();
-                }, 2000);
-            });
+    // Повторная генерация контент-плана
+    regenerateContentPlanBtn.addEventListener('click', () => {
+        showLoading('Генерация нового контент-плана...');
+        fetch('/check-generate-status/', { method: 'POST' })
+            .then(() => pollGenerationStatus());
+    });
 
             // Генерация контент-плана на основе выбранных тем
             function generateContentPlan() {
