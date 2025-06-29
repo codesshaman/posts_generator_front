@@ -8,6 +8,194 @@
 
 </div>
 
+
+
+<!-- Контейнер для уведомлений -->
+    <div id="alertsContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 10000;"></div>
+
+    <!-- Индикатор загрузки -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="text-white">
+            <div class="spinner-border" role="status"></div>
+            <p id="loadingMessage">Пожалуйста, подождите...</p>
+        </div>
+    </div>
+
+    <!-- Основной контейнер -->
+    <div class="container mt-5">
+        <!-- Кнопки управления -->
+        <div class="mb-4">
+            <button id="generateContentPlanBtn" class="btn btn-primary">Сгенерировать контент-план</button>
+            <button id="regenerateContentPlanBtn" class="btn btn-secondary">Перегенерировать контент-план</button>
+            <button id="generatePostsBtn" class="btn btn-success">Сгенерировать посты</button>
+            <button id="scheduleAllBtn" class="btn btn-info">Запланировать все</button>
+            <button id="saveAllBtn" class="btn btn-primary">Сохранить все</button>
+        </div>
+
+        <!-- Список контент-плана -->
+        <div id="contentPlanList"></div>
+
+        <!-- Шаблон элемента контент-плана (скрыт) -->
+        <template id="contentPlanItemTemplate">
+            <div class="content-plan-item mb-3" data-item-id="">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="drag-handle me-3">
+                                <i class="ph ph-dots-six-vertical"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div class="d-flex align-items-center">
+                                        <span class="badge bg-secondary me-2"></span>
+                                        <input type="text" class="form-control plan-item-title">
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="platform-badge me-2"></div>
+                                        <select class="form-select form-select-sm platform-select" style="width: auto;">
+                                            <option value="instagram">Instagram</option>
+                                            <option value="facebook">Facebook</option>
+                                            <option value="linkedin">LinkedIn</option>
+                                            <option value="twitter">Twitter</option>
+                                        </select>
+                                        <div class="date-picker-container ms-2">
+                                            <input type="text" class="form-control form-control-sm publish-date" readonly>
+                                            <i class="ph ph-calendar"></i>
+                                        </div>
+                                        <button class="btn btn-sm btn-outline-danger ms-2 delete-plan-item-btn">
+                                            <i class="ph ph-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <textarea class="form-control plan-item-description" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <!-- Список сгенерированных постов -->
+        <div id="generatedPostsList" class="row"></div>
+
+        <!-- Шаблон карточки поста (скрыт) -->
+        <template id="postCardTemplate">
+            <div class="col-md-6 mb-4" data-post-id="">
+                <div class="card h-100">
+                    <img src="" class="card-img-top post-image" alt="">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="card-title mb-0"></h5>
+                            <div class="platform-badge"></div>
+                        </div>
+                        <p class="card-text post-content"></p>
+                        <p class="card-text text-muted hashtags hidden"></p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <div class="publish-date">
+                                <i class="ph ph-calendar me-1"></i>
+                            </div>
+                            <div>
+                                <button class="btn btn-sm btn-outline-primary edit-post-btn me-1">
+                                    <i class="ph ph-pencil"></i> Редактировать
+                                </button>
+                                <button class="btn btn-sm btn-outline-success schedule-post-btn">
+                                    <i class="ph ph-calendar-plus"></i> Запланировать
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+
+    <!-- Модальное окно редактирования поста -->
+    <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editPostModalLabel">Редактировать пост</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="postTitle" class="form-label">Заголовок</label>
+                        <input type="text" class="form-control" id="postTitle">
+                    </div>
+                    <div class="mb-3">
+                        <label for="postContent" class="form-label">Содержание</label>
+                        <textarea class="form-control" id="postContent" rows="5"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="postHashtags" class="form-label">Хэштеги</label>
+                        <input type="text" class="form-control" id="postHashtags">
+                    </div>
+                    <div class="mb-3">
+                        <label for="postPlatform" class="form-label">Платформа</label>
+                        <select class="form-select" id="postPlatform">
+                            <option value="instagram">Instagram</option>
+                            <option value="facebook">Facebook</option>
+                            <option value="linkedin">LinkedIn</option>
+                            <option value="twitter">Twitter</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="postScheduleDate" class="form-label">Дата публикации</label>
+                        <input type="date" class="form-control" id="postScheduleDate">
+                    </div>
+                    <div class="mb-3">
+                        <label for="postScheduleTime" class="form-label">Время публикации</label>
+                        <input type="time" class="form-control" id="postScheduleTime">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Изображение</label>
+                        <img id="postImage" src="" class="img-fluid mb-2" alt="Post Image">
+                        <input type="file" class="form-control" id="postImageUpload" accept="image/*">
+                        <button id="generateImageBtn" class="btn btn-secondary mt-2">Сгенерировать изображение</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    <button type="button" class="btn btn-primary" id="savePostChanges">Сохранить изменения</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно планирования -->
+    <div class="modal fade" id="scheduleModal" tabindex="-1" aria-labelledby="scheduleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="scheduleModalLabel">Запланировать пост</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="scheduleDate" class="form-label">Дата публикации</label>
+                        <input type="date" class="form-control" id="scheduleDate">
+                    </div>
+                    <div class="mb-3">
+                        <label for="scheduleTime" class="form-label">Время публикации</label>
+                        <input type="time" class="form-control" id="scheduleTime">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    <button type="button" class="btn btn-primary" id="saveScheduleChanges">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
 <!-- Индикатор прогресса -->
 <div class="mb-5">
     <div class="progress-steps mb-2">
@@ -34,253 +222,6 @@
     </div>
     <div class="progress">
         <div class="progress-bar" id="stepProgressBar" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-    </div>
-</div>
-
-<!-- Шаг 1: Выбор группы -->
-<div id="step1" class="step-content">
-    <div class="card mb-4">
-        <div class="card-body">
-            <h3 class="card-title mb-4">{{ card_title }}</h3>
-            <p class="text-muted mb-4">{{ muted_text }}</p>
-
-            <div id="groupsList" class="row">
-                <!-- Вывод групп -->
-                {% for group in groups_data %}
-                <div class="col-md-4 mb-4">
-                    <div class="card group-card h-100" data-group-id="{{ group.id }}">
-                        <img src="https://via.placeholder.com/300x150?text={{ group.platform_text|urlencode }}+Group" class="card-img-top" alt="{{ group.platform_text }} Group">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ group.title }}</h5>
-                            <p class="card-text text-muted">{{ group.platform_text }} • Subscribers: {{ group.subscribers }}</p>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-
-                <!-- Группа 3 -->
-<!--                <div class="col-md-4 mb-4">-->
-<!--                    <div class="card group-card h-100" data-group-id="3">-->
-<!--                        <img src="https://via.placeholder.com/300x150?text=LinkedIn+Page" class="card-img-top" alt="LinkedIn Page">-->
-<!--                        <div class="card-body">-->
-<!--                            <h5 class="card-title">{{ it_and_technologys }}</h5>-->
-<!--                            <p class="card-text text-muted">{{ boosty }} • {{ subscribers }}: {{ some_subs_num }}</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-                <!-- Добавить новую группу -->
-<!--                <div class="col-md-4 mb-4" onclick="window.location.href='{% url 'settings' %}'" style="cursor: pointer;">-->
-<!--                    <div class="card group-card add-group h-100" id="addGroupCard">-->
-<!--                        <div class="card-body d-flex flex-column align-items-center justify-content-center">-->
-<!--                            <div class="add-icon mb-3">-->
-<!--                                <i class="ph ph-plus-circle"></i>-->
-<!--                            </div>-->
-<!--                            <h5 class="card-title">{{ add_new_group }}</h5>-->
-<!--                            <p class="card-text text-muted text-center">{{ add_for_analysis }}</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-            </div>
-        </div>
-    </div>
-
-    <div class="d-flex justify-content-between mt-4">
-        <button class="btn btn-light" onclick="window.location.href='index.html'">
-            <i class="ph ph-arrow-left me-2"></i> {{ back_to_posts }}
-        </button>
-        <input type="hidden" id="selectedGroupId" name="selectedGroupId">
-        <input type="hidden" id="selectedPlatformText" name="selectedPlatformText">
-        <button id="step1NextBtn" class="btn btn-primary btn-next-step" style="display: none;" data-next-step="2">
-            {{ next }} <i class="ph ph-arrow-right ms-2"></i>
-        </button>
-    </div>
-</div>
-
-<!-- Шаг 2: Анализ группы -->
-<div id="step2" class="step-content" style="display: none;">
-    <div class="card mb-4">
-        <div class="card-body">
-            <h3 class="card-title mb-4">{{ group_analysis }}</h3>
-            <!-- Информация о выбранной группе -->
-            <div class="selected-group-info mb-4">
-                <div class="d-flex align-items-center">
-                    <img id="selectedGroupImage" src="" alt="{{ selected_group }}" class="me-3" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
-                    <div>
-                        <h4 id="selectedGroupName" class="mb-1"></h4>
-                        <p id="selectedGroupStats" class="text-muted mb-0"></p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Блок перед анализом -->
-            <div id="preAnalysis">
-                <p class="mb-4">{{ getanalysestext }}</p>
-
-                <div class="alert alert-info d-flex align-items-center" role="alert">
-                    <i class="ph ph-info me-3" style="font-size: 24px;"></i>
-                    <div>
-                        {{ analyses_text }}
-                    </div>
-                </div>
-                <div class="token-cost-info alert alert-info mb-4">
-                    <div class="d-flex align-items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-2 text-indigo-600">
-                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                        </svg>
-                        <div>
-                            <h6 class="mb-1">{{ analyses_ }}</h6>
-                            <p class="mb-0">{{ group_cost }} <strong id="analysisCost">{{ tokens_cost }}</strong>
-                                {{ coins }}</p>
-                        </div>
-                    </div>
-                </div>
-
-                <button id="startAnalysisBtn" class="btn btn-primary mt-3">
-                    <i class="ph ph-chart-line-up me-2"></i>{{ run_analysis }}
-                </button>
-            </div>
-
-            <!-- Блок во время анализа -->
-            <div id="duringAnalysis" style="display: none;">
-                <p class="mb-4" id="analysisStatus">{{ group_posts_analysis }}...</p>
-
-                <div class="progress mb-4" style="height: 10px;">
-                    <div id="analysisProgress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-
-                <div class="d-flex justify-content-center">
-                    <div class="spinner-border text-primary" role="status">
-                        <span class="visually-hidden">{{ loading }}...</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Блок после анализа -->
-            <div id="postAnalysis" style="display: none;">
-                <div class="alert alert-success d-flex align-items-center mb-4" role="alert">
-                    <i class="ph ph-check-circle me-3" style="font-size: 24px;"></i>
-                    <div>
-                        <strong>{{ analysis_complete }}!</strong> {{ themes_analysis }}.
-                    </div>
-                </div>
-
-
-                <h3>{{ analysis_results }}</h3>
-                <ul>
-                    {% for topic in generated_topics %}
-                    <li data-topic-id="{{ topic.id }}" class="topic-item">
-                        <strong>{{ topic.title }}</strong> ({{ topic.percent }}%)
-                        <textarea class="topic-description" style="display:none;">{{ topic.description }}</textarea>
-                    </li>
-                    {% endfor %}
-                </ul>
-<!--                <div class="row">-->
-<!--                    <div class="col-md-6 mb-4">-->
-<!--                        <div class="card h-100">-->
-<!--                            <div class="card-body">-->
-<!--                                <h5 class="card-title">{{ main_group_topics }}</h5>-->
-<!--                                <div id="topThemes" class="mt-3">-->
-<!--                                    <div class="d-flex justify-content-between mb-2">-->
-<!--                                        <span>{{ subject_1 }}</span>-->
-<!--                                        <span>{{ percent_1 }}%</span>-->
-<!--                                    </div>-->
-<!--                                    <div class="progress mb-3" style="height: 8px;">-->
-<!--                                        <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>-->
-<!--                                    </div>-->
-
-<!--                                    <div class="d-flex justify-content-between mb-2">-->
-<!--                                        <span>{{ subject_2 }}</span>-->
-<!--                                        <span>{{ percent_2 }}%</span>-->
-<!--                                    </div>-->
-<!--                                    <div class="progress mb-3" style="height: 8px;">-->
-<!--                                        <div class="progress-bar" role="progressbar" style="width: 48%" aria-valuenow="48" aria-valuemin="0" aria-valuemax="100"></div>-->
-<!--                                    </div>-->
-
-<!--                                    <div class="d-flex justify-content-between mb-2">-->
-<!--                                        <span>{{ subject_3 }}</span>-->
-<!--                                        <span>{{ percent_3 }}%</span>-->
-<!--                                    </div>-->
-<!--                                    <div class="progress mb-3" style="height: 8px;">-->
-<!--                                        <div class="progress-bar" role="progressbar" style="width: 37%" aria-valuenow="37" aria-valuemin="0" aria-valuemax="100"></div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
-<!--                    <div class="col-md-6 mb-4">-->
-<!--                        <div class="card h-100">-->
-<!--                            <div class="card-body">-->
-<!--                                <h5 class="card-title">{{ main_group_topics }}</h5>-->
-<!--                                <div id="audienceActivity" class="mt-3">-->
-<!--                                    <div class="d-flex justify-content-between mb-2">-->
-<!--                                        <span>{{ subject_4 }}</span>-->
-<!--                                        <span>{{ percent_4 }}%</span>-->
-<!--                                    </div>-->
-<!--                                    <div class="progress mb-3" style="height: 8px;">-->
-<!--                                        <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>-->
-<!--                                    </div>-->
-
-<!--                                    <div class="d-flex justify-content-between mb-2">-->
-<!--                                        <span>{{ subject_5 }}</span>-->
-<!--                                        <span>{{ percent_5 }}%</span>-->
-<!--                                    </div>-->
-<!--                                    <div class="progress mb-3" style="height: 8px;">-->
-<!--                                        <div class="progress-bar" role="progressbar" style="width: 48%" aria-valuenow="48" aria-valuemin="0" aria-valuemax="100"></div>-->
-<!--                                    </div>-->
-
-<!--                                    <div class="d-flex justify-content-between mb-2">-->
-<!--                                        <span>{{ subject_6 }}</span>-->
-<!--                                        <span>{{ percent_6 }}%</span>-->
-<!--                                    </div>-->
-<!--                                    <div class="progress mb-3" style="height: 8px;">-->
-<!--                                        <div class="progress-bar" role="progressbar" style="width: 37%" aria-valuenow="37" aria-valuemin="0" aria-valuemax="100"></div>-->
-<!--                                    </div>-->
-<!--&lt;!&ndash;                                </div>&ndash;&gt;-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-            </div>
-        </div>
-    </div>
-
-    <div class="d-flex justify-content-between mt-4">
-        <button class="btn btn-light btn-prev-step" data-prev-step="1">
-            <i class="ph ph-arrow-left me-2"></i> {{ back }}
-        </button>
-        <button class="btn btn-primary btn-next-step" id="step2NextBtn" data-next-step="3" style="display: none;">
-            {{ next }} <i class="ph ph-arrow-right ms-2"></i>
-        </button>
-    </div>
-</div>
-
-<!-- Шаг 3: Темы постов -->
-<div id="step3" class="step-content" style="display: none;">
-    <div class="card mb-4">
-        <div class="card-body">
-            <h3 class="card-title mb-4">{{ post_topics }}</h3>
-            <p class="text-muted mb-4">{{ postanalysis }}</p>
-
-            <div id="topicsList" class="mb-4">
-                <!-- Темы будут добавлены динамически через JavaScript -->
-            </div>
-
-            <button id="addTopicBtn" class="btn btn-outline-primary">
-                <i class="ph ph-plus me-2"></i> {{ add_topic }}
-            </button>
-        </div>
-    </div>
-
-    <div class="d-flex justify-content-between mt-4">
-        <button class="btn btn-light btn-prev-step" data-prev-step="2">
-            <i class="ph ph-arrow-left me-2"></i>{{ back }}
-        </button>
-        <button id="generateContentPlanBtn" class="btn btn-primary btn-next-step" data-next-step="4">
-            {{ generate_content_plan }} <i class="ph ph-arrow-right ms-2"></i>
-        </button>
     </div>
 </div>
 
@@ -578,11 +519,11 @@
 <!--<script src = "{% static 'js/posting/fourth_step.js' %}"></script>-->
 
 <!-- Подключение всей хуйни -->
-<!--<script src = "{% static 'js/posting/content_plan.js' %}"></script>-->
-<!--<script src = "{% static 'js/posting/posts_generator.js' %}"></script>-->
-<!--<script src = "{% static 'js/posting/modals.js' %}"></script>-->
-<!--<script src = "{% static 'js/posting/content_plan.js' %}"></script>-->
-<!--<script src = "{% static 'js/posting/content_plan.js' %}"></script>-->
+<script src = "{% static 'js/posting/content_plan.js' %}"></script>
+<script src = "{% static 'js/posting/posts_generator.js' %}"></script>
+<script src = "{% static 'js/posting/modals.js' %}"></script>
+<script src = "{% static 'js/posting/content_plan.js' %}"></script>
+<script src = "{% static 'js/posting/content_plan.js' %}"></script>
 
 
 

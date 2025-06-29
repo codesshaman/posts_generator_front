@@ -7,9 +7,6 @@
         background-color: #fff;
         border-left: 0;
     }
-    .form-control {
-        border-right: 0;
-    }
 
 /* Стили для вкладок */
 .settings-tabs .nav-set-link {

@@ -1,4 +1,6 @@
 from django.http import JsonResponse
+from django.utils import timezone
+import random
 import json
 
 
@@ -27,3 +29,25 @@ def process_group_selection(request):
         return JsonResponse({'status': 'ok'})
 
     return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
+
+
+def check_analysis_status(request):
+    # Если это первый вызов, установить время старта и задержку
+    if 'analysis_started_at' not in request.session:
+        request.session['analysis_started_at'] = timezone.now().timestamp()
+        request.session['analysis_delay'] = random.randint(5, 20)
+        request.session.modified = True
+
+    start_time = request.session['analysis_started_at']
+    delay = request.session['analysis_delay']
+    now = timezone.now().timestamp()
+
+    elapsed = now - start_time
+
+    if elapsed >= delay:
+        # Очистить состояние анализа
+        request.session.pop('analysis_started_at', None)
+        request.session.pop('analysis_delay', None)
+        return JsonResponse({'status': True})
+
+    return JsonResponse({'status': False})

@@ -80,3 +80,44 @@ function setupTopicsManagement() {
         });
     }
 }
+
+document.getElementById('generateContentPlanBtn').addEventListener('click', function(event) {
+    event.preventDefault();
+
+    const payload = generatedTopics.map(topic => ({
+        title: topic.title,
+        description: topic.description
+    }));
+
+    fetch('/receive-content-plan/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCSRFToken(),  // если используете CSRF
+        },
+        body: JSON.stringify({ topics: payload })
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('Ошибка при отправке данных');
+        return response.json();
+    })
+    .then(data => {
+        showAlert('Контент-план успешно отправлен!', 'success');
+        console.log('Ответ от сервера:', data);
+    })
+    .catch(error => {
+        showAlert('Ошибка при отправке данных: ' + error.message, 'danger');
+    });
+});
+
+function getCSRFToken() {
+    const name = 'csrftoken';
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+        cookie = cookie.trim();
+        if (cookie.startsWith(name + '=')) {
+            return decodeURIComponent(cookie.substring(name.length + 1));
+        }
+    }
+    return '';
+}

@@ -12,4 +12,5 @@ urlpatterns = [
     path('', include('apps.posting.urls')),     # Страница "Мои посты"
     path('', include('apps.subscribe.urls')),   # Страница подписки
     path('', include('apps.generation.urls')),  # Страница автогенерации
+    path('', include('apps.contentplan.urls')),  # Страница контент-плана
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

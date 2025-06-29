@@ -58,50 +58,74 @@ function setupAnalysisProcess() {
     });
 
     function simulateAnalysisProcess(duration) {
-        const analysisProgress = document.getElementById('analysisProgress');
-        const analysisStatus = document.getElementById('analysisStatus');
+    const analysisProgress = document.getElementById('analysisProgress');
+    const analysisStatus = document.getElementById('analysisStatus');
+    let progress = 0;
 
-        // Получение платформы из <p id="selectedGroupStats">
-        const statsText = document.getElementById('selectedGroupStats').textContent.trim();
-        const firstWord = statsText.split(/\s+/)[0].toLowerCase();
+    duringAnalysis.style.display = 'block';
 
-        // Установка коэффициента в зависимости от платформы
-        let coefficient = 5000;
-        if (firstWord === 'boosty') {
-            coefficient = 6000;
-        } else if (firstWord === 'telegram') {
-            coefficient = 1000;
-        } else if (firstWord === 'vk') {
-            coefficient = 3000;
+    const interval = setInterval(() => {
+        progress += 5;
+        analysisProgress.style.width = `${progress}%`;
+        analysisProgress.setAttribute('aria-valuenow', progress);
+
+        if (progress < 30) {
+            analysisStatus.textContent = window.translations.analysis.analyzingPosts;
+        } else if (progress < 60) {
+            analysisStatus.textContent = window.translations.analysis.definingTopics;
+        } else if (progress < 90) {
+            analysisStatus.textContent = window.translations.analysis.analyzingAudience;
+        } else {
+            analysisStatus.textContent = window.translations.analysis.finishing;
         }
 
-        let progress = 0;
-        const intervalTime = (duration * coefficient) / 20; // Используем определённый коэффициент
+        if (progress >= 100) progress = 95; // "заморозим" на 95%, пока сервер не подтвердит завершение
+    }, 500);
 
-        const interval = setInterval(() => {
-            progress += 5;
-            analysisProgress.style.width = `${progress}%`;
-            analysisProgress.setAttribute('aria-valuenow', progress);
+    // Начать опрос сервера на завершение
+    pollAnalysisStatus()
+        .then(() => {
+            clearInterval(interval);
+            analysisProgress.style.width = `100%`;
+            analysisProgress.setAttribute('aria-valuenow', 100);
+            analysisStatus.textContent = window.translations.analysis.complete;
 
-            if (progress < 30) {
-                analysisStatus.textContent = window.translations.analysis.analyzingPosts;
-            } else if (progress < 60) {
-                analysisStatus.textContent = window.translations.analysis.definingTopics;
-            } else if (progress < 90) {
-                analysisStatus.textContent = window.translations.analysis.analyzingAudience;
-            } else {
-                analysisStatus.textContent = window.translations.analysis.finishing;
+            duringAnalysis.style.display = 'none';
+            postAnalysis.style.display = 'block';
+            step2NextBtn.style.display = 'block';
+            renderTopics(generatedTopics);
+        })
+        .catch(err => {
+            clearInterval(interval);
+            console.error('Ошибка анализа:', err);
+        });
+}
+
+// Опрос Django-сервера каждые 0.5 секунды
+async function pollAnalysisStatus() {
+    const MAX_RETRIES = 120; // таймаут 1 минута
+    let retries = 0;
+
+    while (retries < MAX_RETRIES) {
+        const response = await fetch('/check-analysis-status/', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCSRFToken()
             }
+        });
 
-            if (progress >= 100) {
-                clearInterval(interval);
-                duringAnalysis.style.display = 'none';
-                postAnalysis.style.display = 'block';
-                step2NextBtn.style.display = 'block';
-                renderTopics(generatedTopics);
-            }
-        }, intervalTime);
+        const data = await response.json();
+        if (data.status === true) {
+            return true;
+        }
+
+        retries++;
+        await new Promise(resolve => setTimeout(resolve, 500)); // 0.5 сек
     }
+
+    throw new Error('Превышено время ожидания завершения анализа');
+}
 
 
     // Функция для рендеринга тем в postAnalysis
