@@ -160,6 +160,10 @@
     padding-right: 0;
 }
 
+.content-plan-item .plan-item-title {
+    width: 30vw !important;
+}
+
 .content-plan-item .form-control:focus {
     box-shadow: none;
     border-color: var(--primary-color);

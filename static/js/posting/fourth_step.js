@@ -117,6 +117,12 @@ function setupContentPlanManagement() {
                                         <textarea class="form-control plan-item-description" rows="2">${item.description}</textarea>
                                     </div>
                                 </div>
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="autoGenerateImages" checked>
+                                    <label class="form-check-label" for="autoGenerateImages">
+                                        Сгенерировать изображение
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     `;
