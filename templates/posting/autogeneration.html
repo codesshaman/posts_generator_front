@@ -515,31 +515,6 @@
 <!-- JavaScript для работы с мобильным меню -->
 <script src = "{% static 'js/mobile_menu.js' %}"></script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const toggleButton = document.querySelector('.toggle-sidebar');
-        const sidebar = document.querySelector('.sidebar');
-        const overlay = document.querySelector('.overlay');
-
-        if (toggleButton) {
-            toggleButton.addEventListener('click', function() {
-                sidebar.classList.toggle('show');
-                if (sidebar.classList.contains('show')) {
-                    overlay.style.display = 'block';
-                } else {
-                    overlay.style.display = 'none';
-                }
-            });
-        }
-
-        if (overlay) {
-            overlay.addEventListener('click', function() {
-                sidebar.classList.remove('show');
-                overlay.style.display = 'none';
-            });
-        }
-    });
-</script>
 
 <script>
     window.translations = {
@@ -574,8 +549,8 @@
 <!-- Подключение скрипта четвёртого шага -->
 <script src = "{% static 'js/posting/fourth_step.js' %}"></script>
 
-<!-- Подключение скрипта четвёртого шага -->
-<!--<script src = "{% static 'js/posting/fourth_step.js' %}"></script>-->
+<!-- Подключение скрипта пятого шага -->
+<script src = "{% static 'js/posting/fifth_step.js' %}"></script>
 
 <!-- Подключение всей хуйни -->
 <!--<script src = "{% static 'js/posting/content_plan.js' %}"></script>-->
