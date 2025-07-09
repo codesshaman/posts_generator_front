@@ -112,7 +112,17 @@
                     </div>
                 </div>
             </div>
-
+            <!-- Блок предыдущего анализа -->
+            <div class="alert alert-info d-flex align-items-center" role="alert">
+                    <i class="ph ph-info me-3" style="font-size: 24px;"></i>
+                    <div>
+                        {{ prew_analyse }}
+                    </div>
+                </div>
+            <!-- Блок предыдущего анализа -->
+            <button id="prewAnalysisBtn" class="btn btn-primary mt-3">
+                <i class="ph ph-chart-line-up me-2"></i>{{ get_prew_analysis_tags }}
+            </button>
             <!-- Блок перед анализом -->
             <div id="preAnalysis">
                 <p class="mb-4">{{ getanalysestext }}</p>
@@ -135,7 +145,6 @@
                         </div>
                     </div>
                 </div>
-
                 <button id="startAnalysisBtn" class="btn btn-primary mt-3">
                     <i class="ph ph-chart-line-up me-2"></i>{{ run_analysis }}
                 </button>

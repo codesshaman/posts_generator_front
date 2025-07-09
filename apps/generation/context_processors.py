@@ -11,7 +11,7 @@ def autogeneration(request):
         "posts": translate("Посты", lang),
         "card_title": translate("Выберите группу для анализа", lang),
         "group_analysis": translate("Анализ группы", lang),
-        "selected_group": translate("Выбранная группа", lang),
+        "selected_group": translate("Группа", lang),
         "subscribers": translate("Подписчиков", lang),
         "add_new_group": translate("Добавить новую группу", lang),
         "add_for_analysis": translate("Подключите новую группу или страницу для анализа", lang),
@@ -61,4 +61,6 @@ def autogeneration(request):
         "main_topics": translate("Определение основных тем", lang),
         "aaa": translate("Анализ активности аудитории", lang),
         "complete_analysis": translate("Завершение анализа", lang),
+        "prew_analyse": translate("Вы можете выбрать теги на основе предыдущего анализа от", lang),
+        "get_prew_analysis_tags": translate("Взять теги предыдущего анализа", lang),
     }
