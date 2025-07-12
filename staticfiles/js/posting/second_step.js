@@ -127,7 +127,6 @@ async function pollAnalysisStatus() {
     throw new Error('Превышено время ожидания завершения анализа');
 }
 
-
     // Функция для рендеринга тем в postAnalysis
     function renderTopics(topics) {
         const topicsList = document.createElement('ul');
@@ -136,7 +135,7 @@ async function pollAnalysisStatus() {
             li.textContent = `${topic.title} (${topic.percent}%)`;
             topicsList.appendChild(li);
         });
-        postAnalysis.innerHTML = '<h3>Результаты анализа</h3>'; // Очищаем содержимое
+        postAnalysis.innerHTML = `<h3>${window.translations.analysis.analysis_results}</h3>`; // Используем перевод
         postAnalysis.appendChild(topicsList);
     }
 
@@ -184,31 +183,4 @@ async function pollAnalysisStatus() {
                 console.error(error);
             });
     });
-
-
-//    function resetAnalysis() {
-//        generatedTopics = [];
-//
-//        preAnalysis.style.display = 'block';
-//        duringAnalysis.style.display = 'none';
-//        postAnalysis.style.display = 'none';
-//
-//        const analysisProgress = document.getElementById('analysisProgress');
-//        const analysisStatus = document.getElementById('analysisStatus');
-//        analysisProgress.style.width = '0%';
-//        analysisProgress.setAttribute('aria-valuenow', 0);
-//        analysisStatus.textContent = '';
-//
-//        step2NextBtn.style.display = 'none';
-//        postAnalysis.innerHTML = '';
-//    }
-//    prevStepBtn.addEventListener('click', function() {
-//        const confirmed = confirm(
-//            window.translations.analysis.reset
-//        );
-//        if (confirmed) {
-//            resetAnalysis();
-//            // Здесь может быть дополнительная логика для перехода на шаг 1
-//        }
-//    });
 }

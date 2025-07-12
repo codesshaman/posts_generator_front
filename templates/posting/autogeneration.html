@@ -57,30 +57,6 @@
                     </div>
                 </div>
                 {% endfor %}
-
-                <!-- Группа 3 -->
-<!--                <div class="col-md-4 mb-4">-->
-<!--                    <div class="card group-card h-100" data-group-id="3">-->
-<!--                        <img src="https://via.placeholder.com/300x150?text=LinkedIn+Page" class="card-img-top" alt="LinkedIn Page">-->
-<!--                        <div class="card-body">-->
-<!--                            <h5 class="card-title">{{ it_and_technologys }}</h5>-->
-<!--                            <p class="card-text text-muted">{{ boosty }} • {{ subscribers }}: {{ some_subs_num }}</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-                <!-- Добавить новую группу -->
-<!--                <div class="col-md-4 mb-4" onclick="window.location.href='{% url 'settings' %}'" style="cursor: pointer;">-->
-<!--                    <div class="card group-card add-group h-100" id="addGroupCard">-->
-<!--                        <div class="card-body d-flex flex-column align-items-center justify-content-center">-->
-<!--                            <div class="add-icon mb-3">-->
-<!--                                <i class="ph ph-plus-circle"></i>-->
-<!--                            </div>-->
-<!--                            <h5 class="card-title">{{ add_new_group }}</h5>-->
-<!--                            <p class="card-text text-muted text-center">{{ add_for_analysis }}</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
             </div>
         </div>
     </div>
@@ -121,7 +97,7 @@
                     </div>
                 </div>
             <!-- Блок предыдущего анализа -->
-            <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#addCoinsModal">
+            <button id="step2NextBtn2" class="btn btn-outline-primary w-100">
                 <i class="ph ph-plus-circle me-2"></i> {{ get_prew_analysis_tags }}
             </button>
             </br>
@@ -193,74 +169,6 @@
                     </li>
                     {% endfor %}
                 </ul>
-<!--                <div class="row">-->
-<!--                    <div class="col-md-6 mb-4">-->
-<!--                        <div class="card h-100">-->
-<!--                            <div class="card-body">-->
-<!--                                <h5 class="card-title">{{ main_group_topics }}</h5>-->
-<!--                                <div id="topThemes" class="mt-3">-->
-<!--                                    <div class="d-flex justify-content-between mb-2">-->
-<!--                                        <span>{{ subject_1 }}</span>-->
-<!--                                        <span>{{ percent_1 }}%</span>-->
-<!--                                    </div>-->
-<!--                                    <div class="progress mb-3" style="height: 8px;">-->
-<!--                                        <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>-->
-<!--                                    </div>-->
-
-<!--                                    <div class="d-flex justify-content-between mb-2">-->
-<!--                                        <span>{{ subject_2 }}</span>-->
-<!--                                        <span>{{ percent_2 }}%</span>-->
-<!--                                    </div>-->
-<!--                                    <div class="progress mb-3" style="height: 8px;">-->
-<!--                                        <div class="progress-bar" role="progressbar" style="width: 48%" aria-valuenow="48" aria-valuemin="0" aria-valuemax="100"></div>-->
-<!--                                    </div>-->
-
-<!--                                    <div class="d-flex justify-content-between mb-2">-->
-<!--                                        <span>{{ subject_3 }}</span>-->
-<!--                                        <span>{{ percent_3 }}%</span>-->
-<!--                                    </div>-->
-<!--                                    <div class="progress mb-3" style="height: 8px;">-->
-<!--                                        <div class="progress-bar" role="progressbar" style="width: 37%" aria-valuenow="37" aria-valuemin="0" aria-valuemax="100"></div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
-<!--                    <div class="col-md-6 mb-4">-->
-<!--                        <div class="card h-100">-->
-<!--                            <div class="card-body">-->
-<!--                                <h5 class="card-title">{{ main_group_topics }}</h5>-->
-<!--                                <div id="audienceActivity" class="mt-3">-->
-<!--                                    <div class="d-flex justify-content-between mb-2">-->
-<!--                                        <span>{{ subject_4 }}</span>-->
-<!--                                        <span>{{ percent_4 }}%</span>-->
-<!--                                    </div>-->
-<!--                                    <div class="progress mb-3" style="height: 8px;">-->
-<!--                                        <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>-->
-<!--                                    </div>-->
-
-<!--                                    <div class="d-flex justify-content-between mb-2">-->
-<!--                                        <span>{{ subject_5 }}</span>-->
-<!--                                        <span>{{ percent_5 }}%</span>-->
-<!--                                    </div>-->
-<!--                                    <div class="progress mb-3" style="height: 8px;">-->
-<!--                                        <div class="progress-bar" role="progressbar" style="width: 48%" aria-valuenow="48" aria-valuemin="0" aria-valuemax="100"></div>-->
-<!--                                    </div>-->
-
-<!--                                    <div class="d-flex justify-content-between mb-2">-->
-<!--                                        <span>{{ subject_6 }}</span>-->
-<!--                                        <span>{{ percent_6 }}%</span>-->
-<!--                                    </div>-->
-<!--                                    <div class="progress mb-3" style="height: 8px;">-->
-<!--                                        <div class="progress-bar" role="progressbar" style="width: 37%" aria-valuenow="37" aria-valuemin="0" aria-valuemax="100"></div>-->
-<!--                                    </div>-->
-<!--&lt;!&ndash;                                </div>&ndash;&gt;-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
             </div>
         </div>
     </div>
@@ -319,13 +227,6 @@
             <div id="contentPlanList" class="mb-4">
                 <!-- Элементы контент-плана будут добавлены динамически через JavaScript -->
             </div>
-
-<!--            <div class="form-check mb-3">-->
-<!--                <input class="form-check-input" type="checkbox" id="autoGenerateImages" checked>-->
-<!--                <label class="form-check-label" for="autoGenerateImages">-->
-<!--                    {{ generate_images }}-->
-<!--                </label>-->
-<!--            </div>-->
         </div>
     </div>
 
@@ -394,43 +295,6 @@
 
 <!-- Контейнер для уведомлений -->
 <div id="alertsContainer"></div>
-
-<!-- Модальное окно добавления новой группы -->
-<!--<div class="modal fade" id="addGroupModal" tabindex="-1" aria-labelledby="addGroupModalLabel" aria-hidden="true">-->
-<!--    <div class="modal-dialog modal-dialog-centered">-->
-<!--        <div class="modal-content">-->
-<!--            <div class="modal-header">-->
-<!--                <h5 class="modal-title" id="addGroupModalLabel">{{ new_gtoup_addition }}</h5>-->
-<!--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--            </div>-->
-<!--            <div class="modal-body">-->
-<!--                <form id="addGroupForm">-->
-<!--                    <div class="mb-3">-->
-<!--                        <label for="newGroupName" class="form-label">{{ group_name }}</label>-->
-<!--                        <input type="text" class="form-control" id="newGroupName" placeholder="Введите название группы" required>-->
-<!--                    </div>-->
-<!--                    <div class="mb-3">-->
-<!--                        <label for="newGroupUrl" class="form-label">{{ group_url }}</label>-->
-<!--                        <input type="url" class="form-control" id="newGroupUrl" placeholder="https://facebook.com/groups/example" required>-->
-<!--                    </div>-->
-<!--                    <div class="mb-3">-->
-<!--                        <label for="newGroupPlatform" class="form-label">{{ platform }}</label>-->
-<!--                        <select class="form-select" id="newGroupPlatform">-->
-<!--                            <option value="facebook">Facebook</option>-->
-<!--                            <option value="instagram">Instagram</option>-->
-<!--                            <option value="linkedin">LinkedIn</option>-->
-<!--                            <option value="twitter">Twitter</option>-->
-<!--                        </select>-->
-<!--                    </div>-->
-<!--                </form>-->
-<!--            </div>-->
-<!--            <div class="modal-footer">-->
-<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ cancel }}</button>-->
-<!--                <button type="button" class="btn btn-primary" id="saveNewGroupBtn">{{ add_group }}</button>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
 
 <!-- Модальное окно редактирования поста -->
 <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
@@ -541,7 +405,8 @@
             definingTopics: "{{ main_topics }}...",
             analyzingAudience: "{{ aaa }}...",
             finishing: "{{ complete_analysis }}...",
-            reset: "{{ analysis_backward_reset }}"
+            reset: "{{ analysis_backward_reset }}",
+            analysis_results: "{{ analysis_results }}"
         },
         topics: {
             newTopic: "{{ new_topic }}",
@@ -570,15 +435,6 @@
 
 <!-- Подключение скрипта пятого шага -->
 <script src = "{% static 'js/posting/fifth_step.js' %}"></script>
-
-<!-- Подключение всей хуйни -->
-<!--<script src = "{% static 'js/posting/content_plan.js' %}"></script>-->
-<!--<script src = "{% static 'js/posting/posts_generator.js' %}"></script>-->
-<!--<script src = "{% static 'js/posting/modals.js' %}"></script>-->
-<!--<script src = "{% static 'js/posting/content_plan.js' %}"></script>-->
-<!--<script src = "{% static 'js/posting/content_plan.js' %}"></script>-->
-
-
 
 <!-- Phosphor Icons JavaScript -->
 <script src="https://unpkg.com/@phosphor-icons/web"></script>
