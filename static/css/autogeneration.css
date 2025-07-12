@@ -169,6 +169,20 @@
     border-color: var(--primary-color);
 }
 
+.center_text {
+    display: flex;
+    font-size: 48px;
+    justify-content: center;
+    align-items: center;
+}
+
+.center_text_2 {
+    display: flex;
+    font-size: 24px;
+    justify-content: center;
+    align-items: center;
+}
+
 .drag-handle {
     cursor: grab;
     color: #6c757d;

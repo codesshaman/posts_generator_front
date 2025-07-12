@@ -1,5 +1,6 @@
 from .groups_data import groups_topics
 from django.http import JsonResponse
+import random
 import json
 
 
@@ -56,3 +57,9 @@ def get_group_topics(request):
         return JsonResponse(response_data)
 
     return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
+
+def check_reset_view(request):
+    # Рандомно возвращаем True или False
+    # result = random.choice([True, False])
+    # return JsonResponse({'allow_reset': result})
+    return JsonResponse({'allow_reset': True})

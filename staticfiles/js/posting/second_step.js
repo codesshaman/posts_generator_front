@@ -167,7 +167,48 @@ async function pollAnalysisStatus() {
     // Обработчик кнопки "Назад"
     const prevStepBtn = document.querySelector('.btn-prev-step[data-prev-step="1"]');
     prevStepBtn.addEventListener('click', function() {
-        resetAnalysis();
-        // Здесь может быть дополнительная логика для перехода на шаг 1
+        // Сначала запрос на API
+        fetch('/check-reset/')
+            .then(response => response.json())
+            .then(data => {
+                if (data.allow_reset) {
+                    // Только если API разрешил сброс — показываем confirm
+                    const confirmed = alert(window.translations.analysis.reset);
+                    if (confirmed) {
+                        resetAnalysis();
+                        showStep1();
+                    }
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
     });
+
+
+//    function resetAnalysis() {
+//        generatedTopics = [];
+//
+//        preAnalysis.style.display = 'block';
+//        duringAnalysis.style.display = 'none';
+//        postAnalysis.style.display = 'none';
+//
+//        const analysisProgress = document.getElementById('analysisProgress');
+//        const analysisStatus = document.getElementById('analysisStatus');
+//        analysisProgress.style.width = '0%';
+//        analysisProgress.setAttribute('aria-valuenow', 0);
+//        analysisStatus.textContent = '';
+//
+//        step2NextBtn.style.display = 'none';
+//        postAnalysis.innerHTML = '';
+//    }
+//    prevStepBtn.addEventListener('click', function() {
+//        const confirmed = confirm(
+//            window.translations.analysis.reset
+//        );
+//        if (confirmed) {
+//            resetAnalysis();
+//            // Здесь может быть дополнительная логика для перехода на шаг 1
+//        }
+//    });
 }

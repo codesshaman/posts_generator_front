@@ -61,6 +61,7 @@ def autogeneration(request):
         "main_topics": translate("Определение основных тем", lang),
         "aaa": translate("Анализ активности аудитории", lang),
         "complete_analysis": translate("Завершение анализа", lang),
-        "prew_analyse": translate("Вы можете выбрать теги на основе предыдущего анализа от", lang),
-        "get_prew_analysis_tags": translate("Взять теги предыдущего анализа", lang),
+        "prew_analyse": translate("Вы можете выбрать темы на основе предыдущего анализа от", lang),
+        "get_prew_analysis_tags": translate("Взять темы предыдущего анализа", lang),
+        "analysis_backward_reset": translate("Данные анализа группы сохранены. Вы можете вернутся к ним по кнопке Взять темы предыдущего анализа", lang),
     }
