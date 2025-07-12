@@ -59,7 +59,22 @@ def get_group_topics(request):
     return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
 
 def check_reset_view(request):
+    """Эта функция возвращает True если предыдущий
+    анализ был произведён не позднее N месяцев назад
+    и False если анализа не было или он был давно.
+    Значение передаётся в js скрипт second_step.js
+    для всплывающего окна с предупреждением о
+    сохранённом предыдущем анализе"""
     # Рандомно возвращаем True или False
     # result = random.choice([True, False])
     # return JsonResponse({'allow_reset': result})
     return JsonResponse({'allow_reset': True})
+
+def check_prew_view():
+    """"Эта функция передаёт True или False
+    в тех же случаях, что и предыдущая
+    (check_reset_view), но результат
+    используется для показа/скрытия
+    блока предыдущего анализа на
+    странице второго шага."""
+    return True

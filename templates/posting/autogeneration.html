@@ -113,6 +113,7 @@
                 </div>
             </div>
             <!-- Блок предыдущего анализа -->
+            {% if show_analysis %}
             <div class="alert alert-info d-flex align-items-center" role="alert">
                     <i class="ph ph-info me-3" style="font-size: 24px;"></i>
                     <div>
@@ -126,10 +127,11 @@
             </br>
             </br>
             </br>
-            <p class="center_text">ИЛИ</p>
-            <p class="center_text_2">Провести анализ заново</p>
+            <p class="center_text">{{ or }}</p>
+            <p class="center_text_2">{{ re_run }}</p>
             </br>
             </br>
+            {% endif %}
             <!-- Блок перед анализом -->
             <div id="preAnalysis">
                 <p class="mb-4">{{ getanalysestext }}</p>

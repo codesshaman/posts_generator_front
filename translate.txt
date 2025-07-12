@@ -109,6 +109,8 @@
 ^Сохранить всё^Save everything^
 ^Пожалуйста, подождите^Please, wait ^
 ^Посты^Posts^
+^ИЛИ^OR^
+^Провести анализ заново^Re-run the analysis^
 ^Вы можете выбрать темы на основе предыдущего анализа от^You can select tags based on previous analysis from^
 #########################################
 ### apps/posting/views_create_post.py ###

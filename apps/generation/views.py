@@ -27,6 +27,7 @@ def autogeneration(request):
     postanalysis = get_postanalysis_text(lang)
     topics_text = get_topics_text(lang)
     advice_text = get_advice(lang)
+    prew_analysis = check_prew_view()
     prew_analysis_date = "18.06.25"
     generate_images = get_generate(lang)
     generated_text = get_generated_text(lang)
@@ -42,6 +43,7 @@ def autogeneration(request):
         "facebook": "Facebook",
         "instagram": "Instagram",
         "boosty": "Boosty",
+        'show_analysis': prew_analysis,
         "prew_analysis_date": prew_analysis_date,
         "getanalysestext": getanalysestext,
         "analyses_text": analysestext,
