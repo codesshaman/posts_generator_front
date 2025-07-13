@@ -18,6 +18,7 @@ function setupAnalysisProcess() {
     const duringAnalysis = document.getElementById('duringAnalysis');
     const postAnalysis = document.getElementById('postAnalysis');
     const step2NextBtn = document.getElementById('step2NextBtn');
+    const step2NextBtn2 = document.getElementById('step2NextBtn2');
 
     startAnalysisBtn.addEventListener('click', function() {
         // Скрыть блок перед анализом
@@ -57,75 +58,114 @@ function setupAnalysisProcess() {
         });
     });
 
-    function simulateAnalysisProcess(duration) {
-    const analysisProgress = document.getElementById('analysisProgress');
-    const analysisStatus = document.getElementById('analysisStatus');
-    let progress = 0;
+    // Новая функция для мгновенного получения и отображения тем
+    step2NextBtn2.addEventListener('click', function() {
+        // Скрыть блок перед анализом
+        preAnalysis.style.display = 'none';
+        duringAnalysis.style.display = 'none';
+        postAnalysis.style.display = 'block';
+        step2NextBtn.style.display = 'block';
 
-    duringAnalysis.style.display = 'block';
-
-    const interval = setInterval(() => {
-        progress += 5;
-        analysisProgress.style.width = `${progress}%`;
-        analysisProgress.setAttribute('aria-valuenow', progress);
-
-        if (progress < 30) {
-            analysisStatus.textContent = window.translations.analysis.analyzingPosts;
-        } else if (progress < 60) {
-            analysisStatus.textContent = window.translations.analysis.definingTopics;
-        } else if (progress < 90) {
-            analysisStatus.textContent = window.translations.analysis.analyzingAudience;
-        } else {
-            analysisStatus.textContent = window.translations.analysis.finishing;
-        }
-
-        if (progress >= 100) progress = 95; // "заморозим" на 95%, пока сервер не подтвердит завершение
-    }, 500);
-
-    // Начать опрос сервера на завершение
-    pollAnalysisStatus()
-        .then(() => {
-            clearInterval(interval);
-            analysisProgress.style.width = `100%`;
-            analysisProgress.setAttribute('aria-valuenow', 100);
-            analysisStatus.textContent = window.translations.analysis.complete;
-
-            duringAnalysis.style.display = 'none';
-            postAnalysis.style.display = 'block';
-            step2NextBtn.style.display = 'block';
-            renderTopics(generatedTopics);
-        })
-        .catch(err => {
-            clearInterval(interval);
-            console.error('Ошибка анализа:', err);
-        });
-}
-
-// Опрос Django-сервера каждые 0.5 секунды
-async function pollAnalysisStatus() {
-    const MAX_RETRIES = 120; // таймаут 1 минута
-    let retries = 0;
-
-    while (retries < MAX_RETRIES) {
-        const response = await fetch('/check-analysis-status/', {
-            method: 'GET',
+        // Запрос тем с сервера
+        fetch('/get-group-topics/', {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': getCSRFToken()
+                'X-CSRFToken': getCSRFToken(),
+            },
+            body: JSON.stringify({
+                group_id: selectedGroupId // Передаем ID выбранной группы
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                // Сохраняем темы из ответа сервера
+                generatedTopics = data.topics;
+                // Мгновенно отображаем темы
+                renderTopics(generatedTopics);
+            } else {
+                console.error('Ошибка при получении тем:', data.message);
+                postAnalysis.style.display = 'none';
+                preAnalysis.style.display = 'block';
             }
+        })
+        .catch(error => {
+            console.error('Ошибка при запросе:', error);
+            postAnalysis.style.display = 'none';
+            preAnalysis.style.display = 'block';
         });
+    });
 
-        const data = await response.json();
-        if (data.status === true) {
-            return true;
-        }
+    function simulateAnalysisProcess(duration) {
+        const analysisProgress = document.getElementById('analysisProgress');
+        const analysisStatus = document.getElementById('analysisStatus');
+        let progress = 0;
 
-        retries++;
-        await new Promise(resolve => setTimeout(resolve, 500)); // 0.5 сек
+        duringAnalysis.style.display = 'block';
+
+        const interval = setInterval(() => {
+            progress += 5;
+            analysisProgress.style.width = `${progress}%`;
+            analysisProgress.setAttribute('aria-valuenow', progress);
+
+            if (progress < 30) {
+                analysisStatus.textContent = window.translations.analysis.analyzingPosts;
+            } else if (progress < 60) {
+                analysisStatus.textContent = window.translations.analysis.definingTopics;
+            } else if (progress < 90) {
+                analysisStatus.textContent = window.translations.analysis.analyzingAudience;
+            } else {
+                analysisStatus.textContent = window.translations.analysis.finishing;
+            }
+
+            if (progress >= 100) progress = 95; // "заморозим" на 95%, пока сервер не подтвердит завершение
+        }, 500);
+
+        // Начать опрос сервера на завершение
+        pollAnalysisStatus()
+            .then(() => {
+                clearInterval(interval);
+                analysisProgress.style.width = `100%`;
+                analysisProgress.setAttribute('aria-valuenow', 100);
+                analysisStatus.textContent = window.translations.analysis.complete;
+
+                duringAnalysis.style.display = 'none';
+                postAnalysis.style.display = 'block';
+                step2NextBtn.style.display = 'block';
+                renderTopics(generatedTopics);
+            })
+            .catch(err => {
+                clearInterval(interval);
+                console.error('Ошибка анализа:', err);
+            });
     }
 
-    throw new Error('Превышено время ожидания завершения анализа');
-}
+    // Опрос Django-сервера каждые 0.5 секунды
+    async function pollAnalysisStatus() {
+        const MAX_RETRIES = 120; // таймаут 1 минута
+        let retries = 0;
+
+        while (retries < MAX_RETRIES) {
+            const response = await fetch('/check-analysis-status/', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCSRFToken()
+                }
+            });
+
+            const data = await response.json();
+            if (data.status === true) {
+                return true;
+            }
+
+            retries++;
+            await new Promise(resolve => setTimeout(resolve, 500)); // 0.5 сек
+        }
+
+        throw new Error('Превышено время ожидания завершения анализа');
+    }
 
     // Функция для рендеринга тем в postAnalysis
     function renderTopics(topics) {
