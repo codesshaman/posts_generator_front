@@ -1,3 +1,4 @@
+from django.views.decorators.csrf import csrf_exempt
 from .groups_data import groups_topics
 from django.http import JsonResponse
 import random
@@ -57,6 +58,19 @@ def get_group_topics(request):
         return JsonResponse(response_data)
 
     return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
+
+@csrf_exempt
+def notify_button_click(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            button_name = data.get('button')
+            group_id = data.get('group_id')
+            print(f"Button '{button_name}' clicked for group ID: {group_id}")
+            return JsonResponse({'status': 'success', 'message': 'Button click recorded'})
+        except json.JSONDecodeError:
+            return JsonResponse({'status': 'error', 'message': 'Invalid JSON'}, status=400)
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=405)
 
 def check_reset_view(request):
     """Эта функция возвращает True если предыдущий

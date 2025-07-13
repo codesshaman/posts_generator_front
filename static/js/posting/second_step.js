@@ -58,8 +58,30 @@ function setupAnalysisProcess() {
         });
     });
 
-    // Новая функция для мгновенного получения и отображения тем
+    // Функция для мгновенного получения и отображения тем
     step2NextBtn2.addEventListener('click', function() {
+        // Уведомление сервера о нажатии кнопки
+        fetch('/notify-button-click/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCSRFToken(),
+            },
+            body: JSON.stringify({
+                button: 'step2NextBtn2',
+                group_id: selectedGroupId
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status !== 'success') {
+                console.error('Ошибка при уведомлении сервера:', data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Ошибка при отправке уведомления:', error);
+        });
+
         // Скрыть блок перед анализом
         preAnalysis.style.display = 'none';
         duringAnalysis.style.display = 'none';
@@ -91,7 +113,7 @@ function setupAnalysisProcess() {
             }
         })
         .catch(error => {
-            console.error('Ошибка при запросе:', error);
+            console.error('-error:', error);
             postAnalysis.style.display = 'none';
             preAnalysis.style.display = 'block';
         });
