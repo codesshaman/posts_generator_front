@@ -88,28 +88,28 @@
                     </div>
                 </div>
             </div>
-            <!-- Блок предыдущего анализа -->
-            {% if show_analysis %}
-            <div class="alert alert-info d-flex align-items-center" role="alert">
-                    <i class="ph ph-info me-3" style="font-size: 24px;"></i>
-                    <div>
-                        {{ prew_analyse }} {{ prew_analysis_date }}
-                    </div>
-                </div>
-            <!-- Блок предыдущего анализа -->
-            <button id="step2NextBtn2" class="btn btn-outline-primary w-100">
-                <i class="ph ph-plus-circle me-2"></i> {{ get_prew_analysis_tags }}
-            </button>
-            </br>
-            </br>
-            </br>
-            <p class="center_text">{{ or }}</p>
-            <p class="center_text_2">{{ re_run }}</p>
-            </br>
-            </br>
-            {% endif %}
             <!-- Блок перед анализом -->
             <div id="preAnalysis">
+                <!-- Блок предыдущего анализа -->
+                {% if show_analysis %}
+                <div class="alert alert-info d-flex align-items-center" role="alert">
+                        <i class="ph ph-info me-3" style="font-size: 24px;"></i>
+                        <div>
+                            {{ prew_analyse }} {{ prew_analysis_date }}
+                        </div>
+                    </div>
+                <!-- Блок предыдущего анализа -->
+                <button id="step2NextBtn2" class="btn btn-outline-primary w-100">
+                    <i class="ph ph-plus-circle me-2"></i> {{ get_prew_analysis_tags }}
+                </button>
+                </br>
+                </br>
+                </br>
+                <p class="center_text">{{ or }}</p>
+                <p class="center_text_2">{{ re_run }}</p>
+                </br>
+                </br>
+                {% endif %}
                 <p class="mb-4">{{ getanalysestext }}</p>
 
                 <div class="alert alert-info d-flex align-items-center" role="alert">
