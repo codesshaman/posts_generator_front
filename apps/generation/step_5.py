@@ -91,3 +91,30 @@ def get_content_plan(request):
     ]
 
     return JsonResponse({'posts': content_plan})
+
+# views.py
+from django.http import JsonResponse
+
+def save_post(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        platform = request.POST.get('platform')
+        content = request.POST.get('content')
+        hashtags = request.POST.get('hashtags')
+        schedule_date = request.POST.get('schedule_date')
+        schedule_time = request.POST.get('schedule_time')
+        image = request.FILES.get('image')
+
+        print("===== Полученные данные =====")
+        print("Название:", title)
+        print("Платформа:", platform)
+        print("Контент:", content)
+        print("Хэштеги:", hashtags)
+        print("Дата публикации:", schedule_date)
+        print("Время публикации:", schedule_time)
+        print("Изображение:", image.name if image else "Нет изображения")
+        print("=============================")
+
+        return JsonResponse({'status': 'success'})
+
+    return JsonResponse({'status': 'error', 'message': 'Invalid method'}, status=400)

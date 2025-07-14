@@ -2,7 +2,7 @@ from .step_1 import process_group_selection, check_analysis_status
 from .step_2 import get_group_topics, check_reset_view, notify_button_click
 from .step_3 import receive_content_plan, check_generate_status
 from .step_4 import posts_generation, check_posts_status
-from .step_5 import generate_posts_view, get_content_plan
+from .step_5 import generate_posts_view, get_content_plan, save_post
 from .views import autogeneration
 from django.urls import path
 
@@ -21,4 +21,5 @@ urlpatterns = [
     path('generate-posts/', generate_posts_view, name='generate_posts'),
     path('content-plan/', get_content_plan, name='get_content_plan'),
     path('check-reset/', check_reset_view, name='check_reset'),
+    path('save-post/', save_post, name='save_post'),
 ]
