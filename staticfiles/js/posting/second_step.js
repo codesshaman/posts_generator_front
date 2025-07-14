@@ -1,4 +1,5 @@
 // Получение CSRF-токена
+let generatedTopics = [];
 function getCSRFToken() {
     const name = 'csrftoken';
     const cookies = document.cookie.split(';');
@@ -221,8 +222,10 @@ function setupAnalysisProcess() {
         // Скрыть кнопку "Далее"
         step2NextBtn.style.display = 'none';
 
-        // Очистить содержимое postAnalysis
-        postAnalysis.innerHTML = '';
+        // Полностью очистить содержимое блока с результатами
+        while (postAnalysis.firstChild) {
+            postAnalysis.removeChild(postAnalysis.firstChild);
+        }
     }
 
     // Обработчик кнопки "Назад"
@@ -235,10 +238,8 @@ function setupAnalysisProcess() {
                 if (data.allow_reset) {
                     // Только если API разрешил сброс — показываем confirm
                     const confirmed = alert(window.translations.analysis.reset);
-                    if (confirmed) {
-                        resetAnalysis();
-                        showStep1();
-                    }
+                    resetAnalysis();
+                    showStep1();
                 }
             })
             .catch(error => {
