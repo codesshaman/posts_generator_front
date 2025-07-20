@@ -64,3 +64,13 @@ def check_generate_status(request):
         return JsonResponse({'status': True})
 
     return JsonResponse({'status': False})
+
+def view_content_plan(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        print("Полученные темы от фронтенда:")
+        for topic in data.get("topics", []):
+            print(f"Название: {topic['title']}, Описание: {topic['description']}")
+
+        return JsonResponse({"status": "ok", "message": "Данные получены"})
+    return JsonResponse({"error": "Неверный метод запроса"}, status=400)

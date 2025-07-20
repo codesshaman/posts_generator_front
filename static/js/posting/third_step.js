@@ -84,16 +84,29 @@ function setupTopicsManagement() {
 document.getElementById('generateContentPlanBtn').addEventListener('click', function(event) {
     event.preventDefault();
 
+    // Обновляем массив generatedTopics по текущим значениям в DOM
+    const topicItems = document.querySelectorAll('.topic-item');
+    topicItems.forEach(item => {
+        const topicId = parseInt(item.dataset.topicId);
+        const topic = generatedTopics.find(t => t.id === topicId);
+        if (topic) {
+            topic.title = item.querySelector('.topic-title').value;
+            topic.description = item.querySelector('.topic-description').value;
+        }
+    });
+
+    // Формируем payload
     const payload = generatedTopics.map(topic => ({
         title: topic.title,
         description: topic.description
     }));
 
-    fetch('/receive-content-plan/', {
+    // Отправляем на Django
+    fetch('/view-content-plan/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRFToken': getCSRFToken(),  // если используете CSRF
+            'X-CSRFToken': getCSRFToken(),
         },
         body: JSON.stringify({ topics: payload })
     })
