@@ -1,9 +1,11 @@
 from django.views.decorators.http import require_http_methods
+from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.utils import timezone
 from datetime import datetime
 import random
+import json
 
 
 def get_topics_text(lang):
@@ -96,3 +98,35 @@ def check_posts_status(request):
         return JsonResponse({'status': True})
 
     return JsonResponse({'status': False})
+
+@require_POST
+@csrf_exempt  # УБЕРИ это, если будешь слать корректный X-CSRFToken
+def receive_content_plan(request):
+    """
+    Заглушка: принимает массив объектов (контент-план),
+    печатает в консоль и возвращает краткий ответ.
+    """
+    try:
+        raw = request.body.decode('utf-8')
+        data = json.loads(raw)
+
+        if not isinstance(data, list):
+            return JsonResponse({'status': 'error', 'error': 'Ожидался список объектов'}, status=400)
+
+        print("=== [CONTENT PLAN RECEIVED] ===")
+        for idx, item in enumerate(data, start=1):
+            print(
+                f"#{idx}: id={item.get('id')} "
+                f"title={item.get('title')!r} "
+                f"platform={item.get('platform')} "
+                f"description={item.get('description', '').strip()}"
+            )
+        print("=== [END CONTENT PLAN] ===")
+
+        # Можешь пока вернуть те же данные или только статус
+        return JsonResponse({'status': 'ok', 'count': len(data)})
+
+    except json.JSONDecodeError:
+        return JsonResponse({'status': 'error', 'error': 'Некорректный JSON'}, status=400)
+    except Exception as e:
+        return JsonResponse({'status': 'error', 'error': str(e)}, status=500)

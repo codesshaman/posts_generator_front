@@ -99,16 +99,6 @@ function setupContentPlanManagement() {
                                                 <div class="platform-badge me-2" title="${platformName}">
                                                     ${platformIcon}
                                                 </div>
-                                                <select class="form-select form-select-sm platform-select" style="width: auto;">
-                                                    <option value="instagram" ${item.platform === 'instagram' ? 'selected' : ''}>Instagram</option>
-                                                    <option value="facebook" ${item.platform === 'facebook' ? 'selected' : ''}>Facebook</option>
-                                                    <option value="linkedin" ${item.platform === 'linkedin' ? 'selected' : ''}>LinkedIn</option>
-                                                    <option value="twitter" ${item.platform === 'twitter' ? 'selected' : ''}>Twitter</option>
-                                                </select>
-                                                <div class="date-picker-container ms-2">
-                                                    <input type="text" class="form-control form-control-sm publish-date" value="${item.publishDate}" readonly>
-                                                    <i class="ph ph-calendar"></i>
-                                                </div>
                                                 <button class="btn btn-sm btn-outline-danger ms-2 delete-plan-item-btn">
                                                     <i class="ph ph-trash"></i>
                                                 </button>
@@ -146,52 +136,6 @@ function setupContentPlanManagement() {
                         const item = contentPlan.find(i => i.id === itemId);
                         if (item) {
                             item.description = this.value;
-                        }
-                    });
-
-                    // Обновление платформы
-                    planItem.querySelector('.platform-select').addEventListener('change', function() {
-                        const itemId = parseInt(planItem.dataset.itemId);
-                        const item = contentPlan.find(i => i.id === itemId);
-                        if (item) {
-                            item.platform = this.value;
-
-                            // Обновление иконки платформы
-                            const platformBadge = planItem.querySelector('.platform-badge');
-                            if (this.value === 'instagram') {
-                                platformBadge.innerHTML = '<i class="ph ph-instagram-logo"></i>';
-                                platformBadge.title = 'Instagram';
-                            } else if (this.value === 'facebook') {
-                                platformBadge.innerHTML = '<i class="ph ph-facebook-logo"></i>';
-                                platformBadge.title = 'Facebook';
-                            } else if (this.value === 'linkedin') {
-                                platformBadge.innerHTML = '<i class="ph ph-linkedin-logo"></i>';
-                                platformBadge.title = 'LinkedIn';
-                            } else if (this.value === 'twitter') {
-                                platformBadge.innerHTML = '<i class="ph ph-twitter-logo"></i>';
-                                platformBadge.title = 'Twitter';
-                            }
-                        }
-                    });
-
-                    // Выбор даты публикации
-                    planItem.querySelector('.date-picker-container').addEventListener('click', function() {
-                        // Здесь можно добавить код для открытия календаря
-                        // Для простоты просто увеличим дату на 1 день
-                        const itemId = parseInt(planItem.dataset.itemId);
-                        const item = contentPlan.find(i => i.id === itemId);
-                        if (item) {
-                            const dateParts = item.publishDate.split('.');
-                            const currentDate = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
-                            currentDate.setDate(currentDate.getDate() + 1);
-
-                            item.publishDate = currentDate.toLocaleDateString('ru-RU', {
-                                day: '2-digit',
-                                month: '2-digit',
-                                year: 'numeric'
-                            });
-
-                            planItem.querySelector('.publish-date').value = item.publishDate;
                         }
                     });
 
@@ -249,12 +193,74 @@ function setupContentPlanManagement() {
                 }, 500);
             }
 
-            generatePostsBtn.addEventListener('click', function() {
-                showLoading('Генерация постов...');
-                fetch('/check-posts-status/', { method: 'POST' })
-                    .then(() => pollPostGenerationStatus());
-            });
+            function getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return decodeURIComponent(parts.pop().split(';').shift());
+                return null;
+            }
 
+            // Подстраховка: синхронизируем contentPlan с DOM перед отправкой,
+            // чтобы учесть незавершённый ввод (если пользователь печатает и не отпустил keyup).
+            function syncContentPlanFromDOM() {
+                const items = document.querySelectorAll('.content-plan-item');
+                items.forEach(el => {
+                    const id = parseInt(el.dataset.itemId);
+                    const obj = contentPlan.find(i => i.id === id);
+                    if (obj) {
+                        const titleInput = el.querySelector('.plan-item-title');
+                        const descTextarea = el.querySelector('.plan-item-description');
+                        if (titleInput) obj.title = titleInput.value;
+                        if (descTextarea) obj.description = descTextarea.value;
+                        // Если дата всё ещё есть в DOM (вдруг не удалил):
+                        const dateInput = el.querySelector('.publish-date');
+                        if (dateInput && dateInput.value) obj.publishDate = dateInput.value;
+                    }
+                });
+            }
+
+            function sendContentPlanToServer() {
+                syncContentPlanFromDOM();
+
+                return fetch('/receive-content-plan/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // Раскомментируй, если уберёшь csrf_exempt во view:
+                         'X-CSRFToken': getCookie('csrftoken')
+                    },
+                    body: JSON.stringify(contentPlan)
+                })
+                .then(res => {
+                    if (!res.ok) {
+                        throw new Error('Ошибка сети: ' + res.status);
+                    }
+                    return res.json();
+                })
+                .then(data => {
+                    if (data.status !== 'ok') {
+                        throw new Error(data.error || 'Сервер вернул ошибку');
+                    }
+                    console.log('Контент-план успешно отправлен. Количество элементов:', data.count);
+                    return data;
+                });
+            }
+
+            generatePostsBtn.addEventListener('click', function() {
+                showLoading('Отправка контент-плана...');
+                sendContentPlanToServer()
+                    .then(() => {
+                        showLoading('Генерация постов...'); // сменим сообщение
+                        return fetch('/check-posts-status/', { method: 'POST' });
+                    })
+                    .then(() => {
+                        pollPostGenerationStatus(); // как и было
+                    })
+                    .catch(err => {
+                        hideLoading();
+                        showAlert('Не удалось отправить контент-план: ' + err.message, 'danger');
+                    });
+            });
 
             // Запланировать все посты
             scheduleAllBtn.addEventListener('click', function() {
@@ -639,23 +645,3 @@ function setupContentPlanManagement() {
             const loadingOverlay = document.getElementById('loadingOverlay');
             loadingOverlay.style.display = 'none';
         }
-//
-//document.getElementById('generateContentPlanBtn').addEventListener('click', function () {
-//    showLoading('Генерация контент-плана...');
-//
-//    fetch('/generate-content-plan/')
-//        .then(response => {
-//            if (!response.ok) throw new Error('Ошибка при загрузке контент-плана');
-//            return response.json();
-//        })
-//        .then(data => {
-//            generatedPosts = data;  // Обновляем глобальный массив
-//            renderPosts();          // Рендерим карточки
-//            hideLoading();
-//            showAlert('Контент-план успешно загружен!', 'success');
-//        })
-//        .catch(error => {
-//            hideLoading();
-//            showAlert('Не удалось загрузить контент-план: ' + error.message, 'danger');
-//        });
-//});
