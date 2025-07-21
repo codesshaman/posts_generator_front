@@ -169,6 +169,8 @@ function setupContentPlanManagement() {
                 }
             }
         }
+        let contentPlan = [];
+        let generatedPosts = [];
 
         // Функциональность генерации постов
         function setupPostsGeneration() {
@@ -176,6 +178,39 @@ function setupContentPlanManagement() {
             const generatedPostsList = document.getElementById('generatedPostsList');
             const scheduleAllBtn = document.getElementById('scheduleAllBtn');
             const saveAllBtn = document.getElementById('saveAllBtn');
+
+            // Загрузка контент-плана с сервера перед отрисовкой
+            function loadContentPlanFromServer() {
+                return fetch('/get-content-plan/', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then(res => {
+                    if (!res.ok) {
+                        throw new Error('Ошибка загрузки контент-плана: ' + res.status);
+                    }
+                    return res.json();
+                })
+                .then(data => {
+                    if (data.status !== 'ok') {
+                        throw new Error(data.error || 'Сервер вернул ошибку');
+                    }
+                    contentPlan = data.contentPlan; // Обновляем contentPlan данными с сервера
+                    console.log('Контент-план успешно загружен. Количество элементов:', contentPlan.length);
+                    return data;
+                });
+            }
+
+            // Вызов загрузки и отрисовки контент-плана
+            loadContentPlanFromServer()
+                .then(() => {
+                    renderContentPlan(); // Отрисовываем контент-план после загрузки
+                })
+                .catch(err => {
+                    showAlert('Не удалось загрузить контент-план: ' + err.message, 'danger');
+                });
 
             // Генерация постов при переходе к шагу 5
             function pollPostGenerationStatus() {
@@ -200,8 +235,7 @@ function setupContentPlanManagement() {
                 return null;
             }
 
-            // Подстраховка: синхронизируем contentPlan с DOM перед отправкой,
-            // чтобы учесть незавершённый ввод (если пользователь печатает и не отпустил keyup).
+            // Подстраховка: синхронизируем contentPlan с DOM перед отправкой
             function syncContentPlanFromDOM() {
                 const items = document.querySelectorAll('.content-plan-item');
                 items.forEach(el => {
@@ -212,7 +246,6 @@ function setupContentPlanManagement() {
                         const descTextarea = el.querySelector('.plan-item-description');
                         if (titleInput) obj.title = titleInput.value;
                         if (descTextarea) obj.description = descTextarea.value;
-                        // Если дата всё ещё есть в DOM (вдруг не удалил):
                         const dateInput = el.querySelector('.publish-date');
                         if (dateInput && dateInput.value) obj.publishDate = dateInput.value;
                     }
@@ -226,8 +259,7 @@ function setupContentPlanManagement() {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        // Раскомментируй, если уберёшь csrf_exempt во view:
-                         'X-CSRFToken': getCookie('csrftoken')
+                        'X-CSRFToken': getCookie('csrftoken')
                     },
                     body: JSON.stringify(contentPlan)
                 })
@@ -250,11 +282,11 @@ function setupContentPlanManagement() {
                 showLoading('Отправка контент-плана...');
                 sendContentPlanToServer()
                     .then(() => {
-                        showLoading('Генерация постов...'); // сменим сообщение
+                        showLoading('Генерация постов...');
                         return fetch('/check-posts-status/', { method: 'POST' });
                     })
                     .then(() => {
-                        pollPostGenerationStatus(); // как и было
+                        pollPostGenerationStatus();
                     })
                     .catch(err => {
                         hideLoading();
@@ -262,40 +294,28 @@ function setupContentPlanManagement() {
                     });
             });
 
-            // Запланировать все посты
             scheduleAllBtn.addEventListener('click', function() {
                 showLoading('Планирование постов...');
-
-                // Имитация планирования постов
                 setTimeout(() => {
                     showAlert('Все посты успешно запланированы', 'success');
                     hideLoading();
                 }, 1500);
             });
 
-            // Сохранить все посты
             saveAllBtn.addEventListener('click', function() {
                 showLoading('Сохранение постов...');
-
-                // Имитация сохранения постов
                 setTimeout(() => {
                     showAlert('Все посты успешно сохранены', 'success');
                     hideLoading();
-
-                    // Перенаправление на страницу с постами
                     setTimeout(() => {
                         window.location.href = 'index.html';
                     }, 1500);
                 }, 1500);
             });
 
-            // Генерация постов на основе контент-плана
             function generatePosts() {
                 generatedPosts = [];
-
-                // Генерация постов для каждого элемента контент-плана
                 contentPlan.forEach((item, index) => {
-                    // Генерация текста поста в зависимости от платформы
                     let postContent = '';
                     let hashtags = '';
 
@@ -313,7 +333,6 @@ function setupContentPlanManagement() {
                         hashtags = generateHashtags(item.title, 2);
                     }
 
-                    // Создание объекта поста
                     generatedPosts.push({
                         id: Date.now() + index,
                         title: item.title,
@@ -326,16 +345,13 @@ function setupContentPlanManagement() {
                 });
             }
 
-            // Отрисовка сгенерированных постов
             function renderPosts() {
                 generatedPostsList.innerHTML = '';
-
                 generatedPosts.forEach(post => {
                     const postCard = document.createElement('div');
                     postCard.className = 'col-md-6 mb-4';
                     postCard.dataset.postId = post.id;
 
-                    // Определение иконки платформы
                     let platformIcon = '';
                     let platformName = '';
 
@@ -384,43 +400,31 @@ function setupContentPlanManagement() {
 
                     generatedPostsList.appendChild(postCard);
 
-                    // Редактирование поста
                     postCard.querySelector('.edit-post-btn').addEventListener('click', function() {
                         const postId = parseInt(postCard.dataset.postId);
                         const post = generatedPosts.find(p => p.id === postId);
 
                         if (post) {
-                            // Заполнение формы редактирования поста
                             document.getElementById('postTitle').value = post.title;
                             document.getElementById('postContent').value = post.content;
                             document.getElementById('postHashtags').value = post.hashtags;
                             document.getElementById('postPlatform').value = post.platform;
 
-                            // Разбор даты публикации
                             const dateParts = post.publishDate.split('.');
                             const publishDate = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
-
                             document.getElementById('postScheduleDate').value = publishDate.toISOString().split('T')[0];
                             document.getElementById('postScheduleTime').value = '12:00';
-
-                            // Установка изображения
                             document.getElementById('postImage').src = post.image;
 
-                            // Открытие модального окна редактирования
                             const editPostModal = new bootstrap.Modal(document.getElementById('editPostModal'));
                             editPostModal.show();
 
-                            // Обработчик сохранения изменений
                             document.getElementById('savePostChanges').onclick = function() {
-                                // Обновление данных поста
                                 post.title = document.getElementById('postTitle').value;
                                 post.content = document.getElementById('postContent').value;
                                 post.hashtags = document.getElementById('postHashtags').value;
 
-                                // Обновление даты публикации
                                 const newDate = document.getElementById('postScheduleDate').value;
-                                const newTime = document.getElementById('postScheduleTime').value;
-
                                 if (newDate) {
                                     const dateObj = new Date(newDate);
                                     post.publishDate = dateObj.toLocaleDateString('ru-RU', {
@@ -430,10 +434,8 @@ function setupContentPlanManagement() {
                                     });
                                 }
 
-                                // Обновление карточки поста
                                 postCard.querySelector('.card-title').textContent = post.title;
                                 postCard.querySelector('.post-content').textContent = post.content.substring(0, 150) + (post.content.length > 150 ? '...' : '');
-
                                 if (post.hashtags) {
                                     let hashtagsElement = postCard.querySelector('.hashtags');
                                     if (hashtagsElement) {
@@ -451,42 +453,28 @@ function setupContentPlanManagement() {
                                         hashtagsElement.remove();
                                     }
                                 }
-
                                 postCard.querySelector('.publish-date').innerHTML = `<i class="ph ph-calendar me-1"></i> ${post.publishDate}`;
-
-                                // Закрытие модального окна
                                 const editPostModal = bootstrap.Modal.getInstance(document.getElementById('editPostModal'));
                                 editPostModal.hide();
-
-                                // Показать сообщение об успехе
                                 showAlert('Пост успешно обновлен', 'success');
                             };
                         }
                     });
 
-                    // Планирование поста
                     postCard.querySelector('.schedule-post-btn').addEventListener('click', function() {
                         const postId = parseInt(postCard.dataset.postId);
                         const post = generatedPosts.find(p => p.id === postId);
 
                         if (post) {
-                            // Разбор даты публикации
                             const dateParts = post.publishDate.split('.');
                             const publishDate = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
-
                             document.getElementById('scheduleDate').value = publishDate.toISOString().split('T')[0];
                             document.getElementById('scheduleTime').value = '12:00';
-
-                            // Открытие модального окна планирования
                             const scheduleModal = new bootstrap.Modal(document.getElementById('scheduleModal'));
                             scheduleModal.show();
 
-                            // Обработчик сохранения изменений
                             document.getElementById('saveScheduleChanges').onclick = function() {
-                                // Обновление даты публикации
                                 const newDate = document.getElementById('scheduleDate').value;
-                                const newTime = document.getElementById('scheduleTime').value;
-
                                 if (newDate) {
                                     const dateObj = new Date(newDate);
                                     post.publishDate = dateObj.toLocaleDateString('ru-RU', {
@@ -494,16 +482,10 @@ function setupContentPlanManagement() {
                                         month: '2-digit',
                                         year: 'numeric'
                                     });
-
-                                    // Обновление отображения даты публикации
                                     postCard.querySelector('.publish-date').innerHTML = `<i class="ph ph-calendar me-1"></i> ${post.publishDate}`;
                                 }
-
-                                // Закрытие модального окна
                                 const scheduleModal = bootstrap.Modal.getInstance(document.getElementById('scheduleModal'));
                                 scheduleModal.hide();
-
-                                // Показать сообщение об успехе
                                 showAlert('Пост успешно запланирован на ' + post.publishDate, 'success');
                             };
                         }
@@ -511,55 +493,41 @@ function setupContentPlanManagement() {
                 });
             }
 
-            // Генерация текста поста для Instagram
             function generateInstagramPost(title, description) {
                 return `📱 ${title}\n\n${description}\n\nЧто вы думаете об этом? Поделитесь своим мнением в комментариях! 👇`;
             }
 
-            // Генерация текста поста для Facebook
             function generateFacebookPost(title, description) {
                 return `${title}\n\n${description}\n\nА какой у вас опыт в этой сфере? Делитесь в комментариях!`;
             }
 
-            // Генерация текста поста для LinkedIn
             function generateLinkedInPost(title, description) {
                 return `${title}\n\n${description}\n\nКакие еще тренды вы заметили в этой области? Буду рад обсудить в комментариях.`;
             }
 
-            // Генерация текста поста для Twitter
             function generateTwitterPost(title, description) {
-                // Ограничение длины для Twitter
                 const maxLength = 280;
                 let post = `${title}\n\n${description}`;
-
                 if (post.length > maxLength) {
                     post = post.substring(0, maxLength - 3) + '...';
                 }
-
                 return post;
             }
 
-            // Генерация хештегов
             function generateHashtags(title, count = 5) {
-                // Список возможных хештегов
                 const possibleHashtags = [
                     '#маркетинг', '#smm', '#контентмаркетинг', '#бизнес', '#реклама',
                     '#продвижение', '#digital', '#socialmedia', '#стратегия', '#брендинг',
                     '#seo', '#аналитика', '#тренды', '#медиа', '#таргет'
                 ];
-
-                // Выбор случайных хештегов
                 const hashtags = [];
                 for (let i = 0; i < count; i++) {
                     const randomIndex = Math.floor(Math.random() * possibleHashtags.length);
                     const hashtag = possibleHashtags[randomIndex];
-
                     if (!hashtags.includes(hashtag)) {
                         hashtags.push(hashtag);
                     }
                 }
-
-                // Добавление хештега на основе заголовка
                 const titleWords = title.split(' ');
                 if (titleWords.length > 0) {
                     const titleHashtag = '#' + titleWords[0].toLowerCase().replace(/[^а-яa-z0-9]/gi, '');
@@ -567,7 +535,6 @@ function setupContentPlanManagement() {
                         hashtags.push(titleHashtag);
                     }
                 }
-
                 return hashtags.join(' ');
             }
         }

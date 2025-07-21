@@ -1,6 +1,4 @@
-from django.views.decorators.http import require_GET
 from django.views.decorators.csrf import csrf_exempt
-from datetime import datetime, timedelta
 from django.http import JsonResponse
 import json
 
@@ -52,48 +50,42 @@ def generate_posts_view(request):
     return JsonResponse({'status': 'error', 'message': 'Только POST'}, status=405)
 
 
-@require_GET
+@csrf_exempt
 def get_content_plan(request):
-    # Заглушка с тестовыми данными
+    # Заглушка с данными контент-плана
     content_plan = [
         {
-            'id': 1,
-            'title': 'Новинки осеннего сезона',
-            'description': 'Представляем новую коллекцию осенней одежды',
-            'platform': 'instagram',
-            'publish_date': (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S'),
-            'image': 'https://via.placeholder.com/600x400?text=Новинки+осеннего+сезона'
+            "id": 1,
+            "title": "Введение в маркетинг",
+            "description": "Рассказываем основы маркетинга для начинающих.",
+            "platform": "instagram",
+            "publishDate": "25.07.2025"
         },
         {
-            'id': 2,
-            'title': 'Советы по продуктивности',
-            'description': '5 способов повысить эффективность работы',
-            'platform': 'linkedin',
-            'publish_date': (datetime.now() + timedelta(days=2)).strftime('%Y-%m-%d %H:%M:%S'),
-            'image': 'https://via.placeholder.com/600x400?text=Советы+по+продуктивности'
+            "id": 2,
+            "title": "Тренды SMM 2025",
+            "description": "Какие тренды в социальных сетях будут актуальны в 2025 году.",
+            "platform": "linkedin",
+            "publishDate": "26.07.2025"
         },
         {
-            'id': 3,
-            'title': 'Быстрый анонс',
-            'description': 'Скоро большой релиз!',
-            'platform': 'twitter',
-            'publish_date': (datetime.now() + timedelta(days=3)).strftime('%Y-%m-%d %H:%M:%S'),
-            'image': 'https://via.placeholder.com/600x400?text=Быстрый+анонс'
+            "id": 3,
+            "title": "Эффективная реклама",
+            "description": "Как создать рекламу, которая привлечёт клиентов.",
+            "platform": "facebook",
+            "publishDate": "27.07.2025"
         },
         {
-            'id': 4,
-            'title': 'История успеха',
-            'description': 'Как мы достигли новых высот',
-            'platform': 'facebook',
-            'publish_date': (datetime.now() + timedelta(days=4)).strftime('%Y-%m-%d %H:%M:%S'),
-            'image': 'https://via.placeholder.com/600x400?text=История+успеха'
+            "id": 4,
+            "title": "Короткий твит о SEO",
+            "description": "SEO остаётся ключевым для продвижения!",
+            "platform": "twitter",
+            "publishDate": "28.07.2025"
         }
     ]
 
-    return JsonResponse({'posts': content_plan})
+    return JsonResponse({"status": "ok", "contentPlan": content_plan})
 
-# views.py
-from django.http import JsonResponse
 
 def save_post(request):
     if request.method == 'POST':
