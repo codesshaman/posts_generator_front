@@ -49,7 +49,6 @@ def generate_posts_view(request):
 
     return JsonResponse({'status': 'error', 'message': 'Только POST'}, status=405)
 
-
 @csrf_exempt
 def get_content_plan(request):
     # Заглушка с данными контент-плана
@@ -90,9 +89,10 @@ def get_content_plan(request):
 
     return JsonResponse({"status": "ok", "contentPlan": content_plan})
 
-
+@csrf_exempt
 def save_post(request):
     if request.method == 'POST':
+        post_id = request.POST.get('id')
         title = request.POST.get('title')
         platform = request.POST.get('platform')
         content = request.POST.get('content')
@@ -102,6 +102,7 @@ def save_post(request):
         image = request.FILES.get('image')
 
         print("===== Полученные данные =====")
+        print("ID поста:", post_id)
         print("Название:", title)
         print("Платформа:", platform)
         print("Контент:", content)

@@ -235,6 +235,19 @@ function setupContentPlanManagement() {
                 return null;
             }
 
+            // CSRF-токен из cookie
+            function getCSRFToken() {
+                const name = 'csrftoken';
+                const cookies = document.cookie.split(';');
+                for (let cookie of cookies) {
+                    cookie = cookie.trim();
+                    if (cookie.startsWith(name + '=')) {
+                        return decodeURIComponent(cookie.slice(name.length + 1));
+                    }
+                }
+                return '';
+            }
+
             // Подстраховка: синхронизируем contentPlan с DOM перед отправкой
             function syncContentPlanFromDOM() {
                 const items = document.querySelectorAll('.content-plan-item');
@@ -248,7 +261,6 @@ function setupContentPlanManagement() {
                         if (descTextarea) obj.description = descTextarea.value;
                         const dateInput = el.querySelector('.publish-date');
                         if (dateInput && dateInput.value) obj.publishDate = dateInput.value;
-                        // Синхронизация хэштегов
                         const hashtagsInput = el.querySelector('.plan-item-hashtags');
                         if (hashtagsInput) obj.hashtags = hashtagsInput.value;
                     }
@@ -318,24 +330,24 @@ function setupContentPlanManagement() {
 
             function generatePosts() {
                 generatedPosts = [];
-                contentPlan.forEach((item, index) => {
+                contentPlan.forEach((item) => {
                     let postContent = '';
 
                     if (item.platform === 'instagram') {
                         postContent = generateInstagramPost(item.title, item.description);
                     } else if (item.platform === 'facebook') {
                         postContent = generateFacebookPost(item.title, item.description);
-                    } else if (item.platform === 'linkedin') {
+                    } else if (item => item.platform === 'linkedin') {
                         postContent = generateLinkedInPost(item.title, item.description);
                     } else if (item.platform === 'twitter') {
                         postContent = generateTwitterPost(item.title, item.description);
                     }
 
                     generatedPosts.push({
-                        id: Date.now() + index,
+                        id: item.id, // Используем id из contentPlan
                         title: item.title,
                         content: postContent,
-                        hashtags: item.hashtags || '', // Используем хэштеги из contentPlan
+                        hashtags: item.hashtags || '',
                         platform: item.platform,
                         publishDate: item.publishDate,
                         image: `https://via.placeholder.com/600x400?text=${encodeURIComponent(item.title)}`
@@ -371,6 +383,7 @@ function setupContentPlanManagement() {
                         <div class="card h-100">
                             <img src="${post.image}" class="card-img-top" alt="${post.title}">
                             <div class="card-body">
+                                <input type="hidden" class="post-id" value="${post.id}">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <h5 class="card-title mb-0">${post.title}</h5>
                                     <div class="platform-badge" title="${platformName}">
@@ -417,45 +430,80 @@ function setupContentPlanManagement() {
                             const editPostModal = new bootstrap.Modal(document.getElementById('editPostModal'));
                             editPostModal.show();
 
-                            document.getElementById('savePostChanges').onclick = function() {
-                                post.title = document.getElementById('postTitle').value;
-                                post.content = document.getElementById('postContent').value;
-                                post.hashtags = document.getElementById('postHashtags').value;
+                            document.getElementById('savePostChanges').addEventListener('click', function () {
+                                const formData = new FormData();
+                                formData.append('id', post.id); // Добавляем id поста
+                                formData.append('title', document.getElementById('postTitle').value);
+                                formData.append('platform', document.getElementById('postPlatform').value);
+                                formData.append('content', document.getElementById('postContent').value);
+                                formData.append('hashtags', document.getElementById('postHashtags').value);
+                                formData.append('schedule_date', document.getElementById('postScheduleDate').value);
+                                formData.append('schedule_time', document.getElementById('postScheduleTime').value);
 
-                                const newDate = document.getElementById('postScheduleDate').value;
-                                if (newDate) {
-                                    const dateObj = new Date(newDate);
-                                    post.publishDate = dateObj.toLocaleDateString('ru-RU', {
-                                        day: '2-digit',
-                                        month: '2-digit',
-                                        year: 'numeric'
-                                    });
+                                const imageFile = document.getElementById('postImageUpload').files[0];
+                                if (imageFile) {
+                                    formData.append('image', imageFile);
                                 }
 
-                                postCard.querySelector('.card-title').textContent = post.title;
-                                postCard.querySelector('.post-content').textContent = post.content.substring(0, 150) + (post.content.length > 150 ? '...' : '');
-                                if (post.hashtags) {
-                                    let hashtagsElement = postCard.querySelector('.hashtags');
-                                    if (hashtagsElement) {
-                                        hashtagsElement.textContent = post.hashtags;
+                                fetch('/save-post/', {
+                                    method: 'POST',
+                                    headers: {
+                                        'X-CSRFToken': getCSRFToken(),
+                                    },
+                                    body: formData,
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    console.log('Ответ от сервера:', data);
+
+                                    // Обновление данных поста
+                                    post.title = document.getElementById('postTitle').value;
+                                    post.content = document.getElementById('postContent').value;
+                                    post.hashtags = document.getElementById('postHashtags').value;
+
+                                    const newDate = document.getElementById('postScheduleDate').value;
+                                    if (newDate) {
+                                        const dateObj = new Date(newDate);
+                                        post.publishDate = dateObj.toLocaleDateString('ru-RU', {
+                                            day: '2-digit',
+                                            month: '2-digit',
+                                            year: 'numeric'
+                                        });
+                                    }
+
+                                    // Обновление карточки поста
+                                    postCard.querySelector('.card-title').textContent = post.title;
+                                    postCard.querySelector('.post-content').textContent = post.content.substring(0, 150) + (post.content.length > 150 ? '...' : '');
+                                    if (post.hashtags) {
+                                        let hashtagsElement = postCard.querySelector('.hashtags');
+                                        if (hashtagsElement) {
+                                            hashtagsElement.textContent = post.hashtags;
+                                        } else {
+                                            const contentElement = postCard.querySelector('.post-content');
+                                            const hashtagsP = document.createElement('p');
+                                            hashtagsP.className = 'card-text text-muted hashtags';
+                                            hashtagsP.textContent = post.hashtags;
+                                            contentElement.after(hashtagsP);
+                                        }
                                     } else {
-                                        const contentElement = postCard.querySelector('.post-content');
-                                        const hashtagsP = document.createElement('p');
-                                        hashtagsP.className = 'card-text text-muted hashtags';
-                                        hashtagsP.textContent = post.hashtags;
-                                        contentElement.after(hashtagsP);
+                                        const hashtagsElement = postCard.querySelector('.hashtags');
+                                        if (hashtagsElement) {
+                                            hashtagsElement.remove();
+                                        }
                                     }
-                                } else {
-                                    const hashtagsElement = postCard.querySelector('.hashtags');
-                                    if (hashtagsElement) {
-                                        hashtagsElement.remove();
-                                    }
-                                }
-                                postCard.querySelector('.publish-date').innerHTML = `<i class="ph ph-calendar me-1"></i> ${post.publishDate}`;
-                                const editPostModal = bootstrap.Modal.getInstance(document.getElementById('editPostModal'));
-                                editPostModal.hide();
-                                showAlert('Пост успешно обновлен', 'success');
-                            };
+                                    postCard.querySelector('.publish-date').innerHTML = `<i class="ph ph-calendar me-1"></i> ${post.publishDate}`;
+
+                                    // Закрытие модального окна
+                                    const editPostModal = bootstrap.Modal.getInstance(document.getElementById('editPostModal'));
+                                    editPostModal.hide();
+
+                                    showAlert('Пост успешно обновлен', 'success');
+                                })
+                                .catch(error => {
+                                    console.error('Ошибка при отправке формы:', error);
+                                    showAlert('Произошла ошибка при отправке данных.', 'danger');
+                                });
+                            }, { once: true }); // Слушатель события добавляется однократно
                         }
                     });
 
