@@ -59,28 +59,32 @@ def get_content_plan(request):
             "title": "Введение в маркетинг",
             "description": "Рассказываем основы маркетинга для начинающих.",
             "platform": "instagram",
-            "publishDate": "25.07.2025"
+            "publishDate": "25.07.2025",
+            "hashtags": "#маркетинг #основымаркетинга #бизнес #продвижение #smm"
         },
         {
             "id": 2,
             "title": "Тренды SMM 2025",
             "description": "Какие тренды в социальных сетях будут актуальны в 2025 году.",
             "platform": "linkedin",
-            "publishDate": "26.07.2025"
+            "publishDate": "26.07.2025",
+            "hashtags": "#smm #тренды2025 #соцсети #digital #маркетинг"
         },
         {
             "id": 3,
             "title": "Эффективная реклама",
             "description": "Как создать рекламу, которая привлечёт клиентов.",
             "platform": "facebook",
-            "publishDate": "27.07.2025"
+            "publishDate": "27.07.2025",
+            "hashtags": "#seo #продвижение #маркетинг"
         },
         {
             "id": 4,
             "title": "Короткий твит о SEO",
             "description": "SEO остаётся ключевым для продвижения!",
             "platform": "twitter",
-            "publishDate": "28.07.2025"
+            "publishDate": "28.07.2025",
+            "hashtags": "#seo #продвижение #маркетинг"
         }
     ]
 

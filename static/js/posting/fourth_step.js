@@ -248,6 +248,9 @@ function setupContentPlanManagement() {
                         if (descTextarea) obj.description = descTextarea.value;
                         const dateInput = el.querySelector('.publish-date');
                         if (dateInput && dateInput.value) obj.publishDate = dateInput.value;
+                        // Синхронизация хэштегов
+                        const hashtagsInput = el.querySelector('.plan-item-hashtags');
+                        if (hashtagsInput) obj.hashtags = hashtagsInput.value;
                     }
                 });
             }
@@ -317,27 +320,22 @@ function setupContentPlanManagement() {
                 generatedPosts = [];
                 contentPlan.forEach((item, index) => {
                     let postContent = '';
-                    let hashtags = '';
 
                     if (item.platform === 'instagram') {
                         postContent = generateInstagramPost(item.title, item.description);
-                        hashtags = generateHashtags(item.title);
                     } else if (item.platform === 'facebook') {
                         postContent = generateFacebookPost(item.title, item.description);
-                        hashtags = '';
                     } else if (item.platform === 'linkedin') {
                         postContent = generateLinkedInPost(item.title, item.description);
-                        hashtags = generateHashtags(item.title, 3);
                     } else if (item.platform === 'twitter') {
                         postContent = generateTwitterPost(item.title, item.description);
-                        hashtags = generateHashtags(item.title, 2);
                     }
 
                     generatedPosts.push({
                         id: Date.now() + index,
                         title: item.title,
                         content: postContent,
-                        hashtags: hashtags,
+                        hashtags: item.hashtags || '', // Используем хэштеги из contentPlan
                         platform: item.platform,
                         publishDate: item.publishDate,
                         image: `https://via.placeholder.com/600x400?text=${encodeURIComponent(item.title)}`
@@ -512,30 +510,6 @@ function setupContentPlanManagement() {
                     post = post.substring(0, maxLength - 3) + '...';
                 }
                 return post;
-            }
-
-            function generateHashtags(title, count = 5) {
-                const possibleHashtags = [
-                    '#маркетинг', '#smm', '#контентмаркетинг', '#бизнес', '#реклама',
-                    '#продвижение', '#digital', '#socialmedia', '#стратегия', '#брендинг',
-                    '#seo', '#аналитика', '#тренды', '#медиа', '#таргет'
-                ];
-                const hashtags = [];
-                for (let i = 0; i < count; i++) {
-                    const randomIndex = Math.floor(Math.random() * possibleHashtags.length);
-                    const hashtag = possibleHashtags[randomIndex];
-                    if (!hashtags.includes(hashtag)) {
-                        hashtags.push(hashtag);
-                    }
-                }
-                const titleWords = title.split(' ');
-                if (titleWords.length > 0) {
-                    const titleHashtag = '#' + titleWords[0].toLowerCase().replace(/[^а-яa-z0-9]/gi, '');
-                    if (!hashtags.includes(titleHashtag)) {
-                        hashtags.push(titleHashtag);
-                    }
-                }
-                return hashtags.join(' ');
             }
         }
 
