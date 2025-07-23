@@ -110,6 +110,7 @@
 ^Пожалуйста, подождите^Please, wait ^
 ^Посты^Posts^
 ^ИЛИ^OR^
+^Ошибка при отправке данных^Error sending data^
 ^Генерация контент-плана^Content plan generation^
 ^Ошибка сети^Network error^
 ^Сохранение постов...^Saving posts...^
@@ -121,6 +122,7 @@
 ^Отправка контент-плана...^Submitting content plan...^
 ^Ошибка загрузки контент-плана:^Error loading content plan:^
 ^Ошибка при загрузке контент-плана^Error loading content plan^
+^Контент-план успешно отправлен^Content plan successfully sent^
 ^Не удалось отправить контент-план:^Failed to submit content plan:^
 ^Все посты успешно сохранены^All posts have been saved successfully.^
 ^Пост успешно запланирован на^The post has been successfully scheduled for^
