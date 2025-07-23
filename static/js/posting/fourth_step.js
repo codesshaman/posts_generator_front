@@ -21,37 +21,33 @@ function setupContentPlanManagement() {
 
     // Генерация контент-плана при переходе к шагу 4
     generateContentPlanBtn.addEventListener('click', () => {
-        showLoading('Генерация контент-плана...');
+        showLoading(window.translations.alerts.contPlanGen + '...');
         fetch('/check-generate-status/', { method: 'POST' })
             .then(() => pollGenerationStatus());
     });
 
     // Повторная генерация контент-плана
     regenerateContentPlanBtn.addEventListener('click', () => {
-        showLoading('Генерация нового контент-плана...');
+        showLoading(window.translations.alerts.contPlanGen + '...');
         fetch('/check-generate-status/', { method: 'POST' })
             .then(() => pollGenerationStatus());
     });
 
             // Генерация контент-плана на основе выбранных тем
             function generateContentPlan() {
-                showLoading('Генерация контент-плана...');
+                showLoading(window.translations.alerts.contPlanGen + '...');
 
                 fetch('/generate-content-plan/')
                     .then(response => {
-                        if (!response.ok) throw new Error('Ошибка при загрузке контент-плана');
+                        if (!response.ok) throw new Error(window.translations.alerts.cpLoadErr);
                         return response.json();
                     })
                     .then(data => {
                         window.contentPlan = data;  // глобально определяем contentPlan
                         renderContentPlan();        // вызываем твою функцию для отрисовки
                         hideLoading();
-                        showAlert('Контент-план успешно загружен!', 'success');
+                        showAlert(window.translations.alerts.cplanLoad + '!', 'success');
                     })
-                    .catch(error => {
-                        hideLoading();
-                        showAlert('Не удалось загрузить контент-план: ' + error.message, 'danger');
-                    });
             }
 
 
@@ -189,16 +185,16 @@ function setupContentPlanManagement() {
                 })
                 .then(res => {
                     if (!res.ok) {
-                        throw new Error('Ошибка загрузки контент-плана: ' + res.status);
+                        throw new Error(window.translations.alerts.cpError + res.status);
                     }
                     return res.json();
                 })
                 .then(data => {
                     if (data.status !== 'ok') {
-                        throw new Error(data.error || 'Сервер вернул ошибку');
+                        throw new Error(data.error || window.translations.alerts.serverError);
                     }
                     contentPlan = data.contentPlan; // Обновляем contentPlan данными с сервера
-                    console.log('Контент-план успешно загружен. Количество элементов:', contentPlan.length);
+                    console.log(window.translations.alerts.cplanLoad, contentPlan.length);
                     return data;
                 });
             }
@@ -208,9 +204,6 @@ function setupContentPlanManagement() {
                 .then(() => {
                     renderContentPlan(); // Отрисовываем контент-план после загрузки
                 })
-                .catch(err => {
-                    showAlert('Не удалось загрузить контент-план: ' + err.message, 'danger');
-                });
 
             // Генерация постов при переходе к шагу 5
             function pollPostGenerationStatus() {
@@ -280,24 +273,24 @@ function setupContentPlanManagement() {
                 })
                 .then(res => {
                     if (!res.ok) {
-                        throw new Error('Ошибка сети: ' + res.status);
+                        throw new Error(window.translations.alerts.networkError + res.status);
                     }
                     return res.json();
                 })
                 .then(data => {
                     if (data.status !== 'ok') {
-                        throw new Error(data.error || 'Сервер вернул ошибку');
+                        throw new Error(data.error || window.translations.alerts.serverError);
                     }
-                    console.log('Контент-план успешно отправлен. Количество элементов:', data.count);
+                    console.log(window.translations.alerts.sendConPlan, data.count);
                     return data;
                 });
             }
 
             generatePostsBtn.addEventListener('click', function() {
-                showLoading('Отправка контент-плана...');
+                showLoading(window.translations.alerts.submConPlan);
                 sendContentPlanToServer()
                     .then(() => {
-                        showLoading('Генерация постов...');
+                        showLoading(window.translations.alerts.postsGen);
                         return fetch('/check-posts-status/', { method: 'POST' });
                     })
                     .then(() => {
@@ -305,25 +298,25 @@ function setupContentPlanManagement() {
                     })
                     .catch(err => {
                         hideLoading();
-                        showAlert('Не удалось отправить контент-план: ' + err.message, 'danger');
+                        showAlert(window.translations.alerts.failConPlan + err.message, 'danger');
                     });
             });
 
             scheduleAllBtn.addEventListener('click', function() {
-                showLoading('Планирование постов...');
+                showLoading(window.translations.alerts.postsPlaning);
                 setTimeout(() => {
-                    showAlert('Все посты успешно запланированы', 'success');
+                    showAlert(window.translations.alerts.postsShadul, 'success');
                     hideLoading();
                 }, 1500);
             });
 
             saveAllBtn.addEventListener('click', function() {
-                showLoading('Сохранение постов...');
+                showLoading(window.translations.alerts.postsSaving);
                 setTimeout(() => {
-                    showAlert('Все посты успешно сохранены', 'success');
+                    showAlert(window.translations.alerts.postsSucSave, 'success');
                     hideLoading();
                     setTimeout(() => {
-                        window.location.href = 'index.html';
+                        window.location.href = 'scheduler';
                     }, 1500);
                 }, 1500);
             });
@@ -454,7 +447,7 @@ function setupContentPlanManagement() {
                                 })
                                 .then(response => response.json())
                                 .then(data => {
-                                    console.log('Ответ от сервера:', data);
+                                    console.log(window.translations.alerts.serverResp, data);
 
                                     // Обновление данных поста
                                     post.title = document.getElementById('postTitle').value;
@@ -497,11 +490,11 @@ function setupContentPlanManagement() {
                                     const editPostModal = bootstrap.Modal.getInstance(document.getElementById('editPostModal'));
                                     editPostModal.hide();
 
-                                    showAlert('Пост успешно обновлен', 'success');
+                                    showAlert(window.translations.alerts.postSucUpd, 'success');
                                 })
                                 .catch(error => {
-                                    console.error('Ошибка при отправке формы:', error);
-                                    showAlert('Произошла ошибка при отправке данных.', 'danger');
+                                    console.error(window.translations.alerts.sendFormErr, error);
+                                    showAlert(window.translations.alerts.dataSavingErr, 'danger');
                                 });
                             }, { once: true }); // Слушатель события добавляется однократно
                         }
@@ -532,7 +525,7 @@ function setupContentPlanManagement() {
                                 }
                                 const scheduleModal = bootstrap.Modal.getInstance(document.getElementById('scheduleModal'));
                                 scheduleModal.hide();
-                                showAlert('Пост успешно запланирован на ' + post.publishDate, 'success');
+                                showAlert(window.translations.alerts.plannedFor + ' ' + post.publishDate, 'success');
                             };
                         }
                     });
@@ -540,15 +533,15 @@ function setupContentPlanManagement() {
             }
 
             function generateInstagramPost(title, description) {
-                return `📱 ${title}\n\n${description}\n\nЧто вы думаете об этом? Поделитесь своим мнением в комментариях! 👇`;
+                return `${title}\n\n${description}\n\n`;
             }
 
             function generateFacebookPost(title, description) {
-                return `${title}\n\n${description}\n\nА какой у вас опыт в этой сфере? Делитесь в комментариях!`;
+                return `${title}\n\n${description}\n\n`;
             }
 
             function generateLinkedInPost(title, description) {
-                return `${title}\n\n${description}\n\nКакие еще тренды вы заметили в этой области? Буду рад обсудить в комментариях.`;
+                return `${title}\n\n${description}\n\n`;
             }
 
             function generateTwitterPost(title, description) {
@@ -565,7 +558,7 @@ function setupContentPlanManagement() {
         function setupModals() {
             // Генерация изображения
             document.getElementById('generateImageBtn').addEventListener('click', function() {
-                showLoading('Генерация изображения...');
+                showLoading(window.translations.alerts.imageGen);
 
                 // Имитация генерации изображения
                 setTimeout(() => {
@@ -622,7 +615,7 @@ function setupContentPlanManagement() {
         }
 
         // Функции для работы с индикатором загрузки
-        function showLoading(message = 'Пожалуйста, подождите...') {
+        function showLoading(message = window.translations.alerts.pleaseWait + '...') {
             const loadingOverlay = document.getElementById('loadingOverlay');
             const loadingMessage = document.getElementById('loadingMessage');
 
