@@ -127,8 +127,8 @@
 ^Все посты успешно сохранены^All posts have been saved successfully.^
 ^Пост успешно запланирован на^The post has been successfully scheduled for^
 ^Все посты успешно запланированы^All posts have been successfully scheduled^
-^Контент-план успешно загружен. Количество элементов:^Content plan successfully loaded. Number of items:^
-^Контент-план успешно отправлен. Количество элементов:^Content plan successfully sent. Number of elements:^
+^Контент-план успешно загружен^Content plan successfully loaded^
+^Контент-план успешно отправлен^Content plan successfully sent^
 ^Вы можете выбрать темы на основе предыдущего анализа от^You can select tags based on previous analysis from^
 #########################################
 ### apps/posting/views_create_post.py ###

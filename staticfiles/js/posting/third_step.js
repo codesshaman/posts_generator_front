@@ -111,15 +111,15 @@ document.getElementById('generateContentPlanBtn').addEventListener('click', func
         body: JSON.stringify({ topics: payload })
     })
     .then(response => {
-        if (!response.ok) throw new Error('Ошибка при отправке данных');
+        if (!response.ok) throw new Error(window.translations.alerts.dataSendErr);
         return response.json();
     })
     .then(data => {
-        showAlert('Контент-план успешно отправлен!', 'success');
-        console.log('Ответ от сервера:', data);
+        showAlert(window.translations.alerts.cpSendSuc + '!', 'success');
+        console.log(window.translations.alerts.serverResp, data);
     })
     .catch(error => {
-        showAlert('Ошибка при отправке данных: ' + error.message, 'danger');
+        showAlert(window.translations.alerts.dataSendErr + ': ' + error.message, 'danger');
     });
 });
 
