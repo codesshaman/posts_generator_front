@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Перенаправляем на главную страницу через 1.5 секунды
                 setTimeout(function() {
-                    window.location.href = 'index.html';
+                    window.location.href = '/posts';
                 }, 1500);
             } else {
                 // Показываем уведомление об ошибке
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Перенаправляем на главную страницу через 1.5 секунды
             setTimeout(function() {
-                window.location.href = 'index.html';
+                window.location.href = '/posts';
             }, 1500);
         });
     }
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
      // Перенаправляем на главную страницу
      setTimeout(() => {
-         window.location.href = 'index.html';
+         window.location.href = '/posts';
      }, 1500);
  }, 2000);
 });
@@ -211,7 +211,7 @@ function checkAuth() {
 const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 if (currentUser && currentUser.isLoggedIn) {
 // Если пользователь уже авторизован, перенаправляем на главную страницу
-window.location.href = 'index.html';
+window.location.href = '/posts';
 }
 }
 
