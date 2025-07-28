@@ -95,8 +95,6 @@
                     </div>
                 </div>
             </div>
-
-
             <!-- Настройки публикации -->
             <div class="mb-4">
                 <label class="form-label">{{ pub_settings }}</label>
@@ -135,7 +133,7 @@
                 </div>
                 <div class="form-text">{{ add_hashtags }}</div>
             </div>
-            <!-- Выбор группы в виде радиокнопок с иконкой платформы -->
+            <!-- Выбор группы в виде чекбоксов с иконкой платформы -->
             <label for="postTags" class="form-label">Choose groups</label>
             <div class="mb-4">
                 <label class="form-label">{{ group_selection_label }}</label>
@@ -151,7 +149,7 @@
                             {% if forloop.first %}checked{% endif %}
                         >
                         <label class="form-check-label" for="group{{ group.id }}">
-                            <i class="ph ph-{{ group.platform_style }}-logo platform-icon {{ group.platform_style }}"></i>
+                            <span class="platform-text">{{ group.platform_text }}</span>
                             <span>{{ group.title }}</span>
                         </label>
                     </div>
