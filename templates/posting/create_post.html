@@ -144,7 +144,7 @@
                     <div class="form-check form-check-inline platform-option">
                         <input
                             class="form-check-input"
-                            type="radio"
+                            type="checkbox"
                             name="group_id"
                             id="group{{ group.id }}"
                             value="{{ group.id }}"
@@ -553,15 +553,21 @@
         function updatePreview() {
             const title = document.getElementById('postTitle').value || '{{ post_title }}';
             const content = document.getElementById('postContent').value || '{{ post_content_here }}...';
-            const platform = document.querySelector('input[name="platform"]:checked').value;
+            const selectedGroups = Array.from(document.querySelectorAll('input[name="group_ids[]"]:checked'))
 
             previewTitle.textContent = title;
             previewContent.innerHTML = formatContent(content);
 
             // Устанавливаем платформу
-            previewPlatformBadge.textContent = getPlatformName(platform);
-            previewPlatformBadge.className = 'preview-platform-badge';
-            previewPlatformBadge.classList.add('platform-' + platform);
+            if (selectedGroups.length > 0) {
+                const firstGroup = selectedGroups[0]; // For preview, use the first selected group
+                previewPlatformBadge.textContent = getPlatformName(firstGroup);
+                previewPlatformBadge.className = 'preview-platform-badge';
+                previewPlatformBadge.classList.add('platform-' + firstGroup);
+            } else {
+                previewPlatformBadge.textContent = 'No platform selected';
+                previewPlatformBadge.className = 'preview-platform-badge';
+            }
 
             // Устанавливаем изображение
             if (previewImg.src) {
