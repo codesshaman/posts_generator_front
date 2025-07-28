@@ -146,7 +146,6 @@
                             name="group_id"
                             id="group{{ group.id }}"
                             value="{{ group.id }}"
-                            {% if forloop.first %}checked{% endif %}
                         >
                         <label class="form-check-label" for="group{{ group.id }}">
                             <span class="platform-text">{{ group.platform_text }}</span>
