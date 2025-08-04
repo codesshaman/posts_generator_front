@@ -1,9 +1,8 @@
 from project.cookies import set_cookie_if_not_exists
 from project.language import translate, language
-from collections import OrderedDict
+from django.http import JsonResponse
 from django.shortcuts import render
 from dotenv import load_dotenv
-from datetime import datetime
 import os
 
 
@@ -85,3 +84,7 @@ def create_post(request):
         'platform': 'Выберите платформу',
         'unique_platforms': unique_platforms,
     })
+
+def generate_unique_id(request):
+    unique_id = "2353534_23423423"
+    return JsonResponse({'id': unique_id})

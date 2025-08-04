@@ -934,8 +934,17 @@
         }
 
         // Функция генерации уникального ID
-        function generateUniqueId() {
-            return Date.now().toString(36) + Math.random().toString(36).substr(2);
+        async function generateUniqueId() {
+            try {
+                const response = await fetch('/get_next_id/');
+                if (!response.ok) throw new Error('Ошибка при получении ID');
+                const data = await response.json();
+                console.log('Полученный ID с Django:', data.id); // Заглушка, можно закомментировать
+                return data.id;
+            } catch (error) {
+                console.error('Ошибка при запросе ID:', error);
+                return null;
+            }
         }
 
         // Функция сохранения поста в localStorage
