@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'apps.mainpage.apps.MainpageConfig',
     'apps.subscribe.apps.SubscribeConfig',
     'apps.generation.apps.GenerationConfig',
+    'apps.createpost.apps.CreatepostConfig',
     'apps.contentplan.apps.ContentPlanConfig',
 ]
 
@@ -96,7 +97,7 @@ TEMPLATES = [
                 'apps.posting.context_processors.scheduler',
                 'apps.settings.context_processors.settings',
                 'apps.posting.context_processors.all_posts',
-                'apps.posting.context_processors.create_post',
+                'apps.createpost.context_processors.create_post',
                 'apps.subscribe.context_processors.subscription',
                 'apps.contentplan.context_processors.contentplan',
                 'apps.login.context_processors.login_page',

@@ -21,11 +21,11 @@ WARN_COLOR=\033[33;01m	# Warning yellow
 
 all:
 	@printf "$(OK_COLOR)==== Starting the configuration ${name} ====$(NO_COLOR)\n"
-	$(GUNICORN) --bind $(ALLOWED_HOST):$(ALLOWED_PORT) project.wsgi:application
+	@$(GUNICORN) --bind $(ALLOWED_HOST):$(ALLOWED_PORT) project.wsgi:application
 
 ssl:
 	@printf "$(OK_COLOR)==== Starting the configuration ${name} ====$(NO_COLOR)\n"
-	$(GUNICORN) --certfile=certs/cert.pem --keyfile=certs/key.pem --bind $(ALLOWED_HOST):$(ALLOWED_PORT) project.wsgi:application
+	@$(GUNICORN) --certfile=certs/cert.pem --keyfile=certs/key.pem --bind $(ALLOWED_HOST):$(ALLOWED_PORT) project.wsgi:application
 
 app:
 	@printf "$(OK_COLOR)==== Creating a new application ====$(NO_COLOR)\n"
@@ -102,11 +102,11 @@ certs:
 
 make:
 	@printf "$(OK_COLOR)==== Make makemigrations ${name} ====$(NO_COLOR)\n"
-	$(PYTHON) manage.py makemigrations
+	@$(PYTHON) manage.py makemigrations
 
 migrate:
 	@printf "$(OK_COLOR)==== Launch configuration ${name} ====$(NO_COLOR)\n"
-	$(PYTHON) manage.py migrate
+	@$(PYTHON) manage.py migrate
 
 push:
 	@bash scripts/push.sh
@@ -123,15 +123,15 @@ req:
 
 root:
 	@printf "$(OK_COLOR)==== Create superuser for ${name} ====$(NO_COLOR)\n"
-	$(PYTHON) manage.py createsuperuser
+	@$(PYTHON) manage.py createsuperuser
 
 run:
 	@printf "$(OK_COLOR)==== Run ${name} ====$(NO_COLOR)\n"
-	$(PYTHON) manage.py runserver
+	@$(PYTHON) manage.py runserver
 
 static:
 	@printf "$(OK_COLOR)==== Collect static ${name} ====$(NO_COLOR)\n"
-	$(PYTHON) manage.py collectstatic
+	@$(PYTHON) manage.py collectstatic
 
 venv:
 	@printf "$(OK_COLOR)==== Launch virtual environment for ${name} ====$(NO_COLOR)\n"
