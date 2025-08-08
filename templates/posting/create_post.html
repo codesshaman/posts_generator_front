@@ -18,6 +18,42 @@
                 <input type="text" class="form-control" id="postTitle" placeholder="{{ enter_post_title }}" required>
                 <div class="form-text">{{ should_be }}</div>
             </div>
+
+            <!-- Выбор платформы -->
+            <div class="mb-4">
+                <label class="form-label">{{ platform }}</label>
+                <div class="platform-selector">
+                    <div class="form-check form-check-inline platform-option">
+                        <input class="form-check-input" type="radio" name="platform" id="platformLinkedin" value="linkedin" checked>
+                        <label class="form-check-label" for="platformLinkedin">
+                            <i class="ph ph-linkedin-logo platform-icon linkedin"></i>
+                            <span>LinkedIn</span>
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline platform-option">
+                        <input class="form-check-input" type="radio" name="platform" id="platformFacebook" value="facebook">
+                        <label class="form-check-label" for="platformFacebook">
+                            <i class="ph ph-facebook-logo platform-icon facebook"></i>
+                            <span>Facebook</span>
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline platform-option">
+                        <input class="form-check-input" type="radio" name="platform" id="platformInstagram" value="instagram">
+                        <label class="form-check-label" for="platformInstagram">
+                            <i class="ph ph-instagram-logo platform-icon instagram"></i>
+                            <span>Instagram</span>
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline platform-option">
+                        <input class="form-check-input" type="radio" name="platform" id="platformTwitter" value="twitter">
+                        <label class="form-check-label" for="platformTwitter">
+                            <i class="ph ph-twitter-logo platform-icon twitter"></i>
+                            <span>Twitter</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
             <!-- Содержание поста -->
             <div class="mb-4">
                 <label for="postContent" class="form-label">{{ post_content }}</label>
@@ -95,6 +131,8 @@
                     </div>
                 </div>
             </div>
+
+
             <!-- Настройки публикации -->
             <div class="mb-4">
                 <label class="form-label">{{ pub_settings }}</label>
@@ -120,6 +158,10 @@
                             <input class="form-check-input" type="checkbox" id="saveAsDraft" checked>
                             <label class="form-check-label ms-sm-2" for="saveAsDraft">{{ save_as_draft }}</label>
                         </div>
+                        <div class="form-check form-switch mb-3">
+                            <input class="form-check-input" type="checkbox" id="enableComments" checked>
+                            <label class="form-check-label ms-sm-2" for="enableComments">{{ allow_comments }}</label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -133,6 +175,7 @@
                 </div>
                 <div class="form-text">{{ add_hashtags }}</div>
             </div>
+
             <!-- Выбор группы в виде чекбоксов с иконкой платформы -->
             <label for="postTags" class="form-label">Choose groups</label>
             <div class="mb-4">
@@ -155,6 +198,7 @@
                     {% endfor %}
                 </div>
             </div>
+
             <!-- Кнопки действий -->
             <div class="d-flex justify-content-between mt-5">
                 <div>
