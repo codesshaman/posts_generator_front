@@ -4,6 +4,15 @@ import random
 import json
 
 
+TOTAL_COINS = 5000  # Максимум коинов за сессию
+
+@csrf_exempt
+def get_initial_tokens(request):
+    """Возвращает стартовое количество токенов при загрузке страницы"""
+    total_tokens = request.session.get('total_tokens', 0)
+    remaining = TOTAL_COINS - total_tokens
+    return JsonResponse({'total_coins': TOTAL_COINS, 'remaining': remaining})
+
 @csrf_exempt  # Используйте только для теста
 def check_completion(request):
     if request.method == 'GET':  # Или POST, если нужно
@@ -15,10 +24,17 @@ def check_completion(request):
             delta = random.randint(100, 599)
 
             # Аккумулируем в сессии (общее количество использованных токенов)
-            total_tokens = request.session.get('total_tokens', 0) + delta
-            request.session['total_tokens'] = total_tokens
+            used = request.session.get('total_tokens', 0) + delta
+            if used > TOTAL_COINS:
+                used = TOTAL_COINS  # Не превышаем максимум
+            request.session['total_tokens'] = used
 
-            return JsonResponse({'completed': completed, 'tokens': total_tokens})
+            remaining = TOTAL_COINS - used
+            return JsonResponse({
+                'completed': completed,
+                'tokens': used,
+                'remaining': remaining
+            })
         else:
             return JsonResponse({'completed': completed})
 

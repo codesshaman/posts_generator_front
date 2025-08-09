@@ -11,4 +11,5 @@ urlpatterns = [
     path('generate_one_post/', generate_content_api, name='generate_content_api'),
     path('generate_prompt/', generate_prompt, name='generate_prompt'),
     path('check_completion/', check_completion, name='check_completion'),
+    path('get_initial_tokens/', get_initial_tokens, name='get_initial_tokens'),
 ]
