@@ -360,8 +360,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             // Сохраняем оригинальную логику: генерируем контент локально
                             const generatedContent = await generateDummyContent(prompt);
 
-                            // Обновляем счетчик токенов
-                            const tokens = Math.floor(Math.random() * 500) + 100;
+                            // Обновляем счетчик токенов (теперь tokens приходят с сервера)
+                            const tokens = checkData.tokens;
                             tokensUsed.textContent = tokens;
                             document.querySelector('.token-usage .progress-bar').style.width = (tokens / 5000 * 100) + '%';
 
