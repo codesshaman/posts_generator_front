@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 import json
 
-def generate_dummy_content(prompt, tone, length, platform):
+def generate_dummy_content(prompt, tone, length):
     # Генерируем заголовок в зависимости от запроса
     if 'маркетинг' in prompt.lower():
         title = '5 инновационных стратегий маркетинга, которые нельзя игнорировать в 2023 году'
@@ -43,16 +43,7 @@ def generate_dummy_content(prompt, tone, length, platform):
             'В заключение хотелось бы подчеркнуть, что адаптивность и готовность к постоянному обучению — это фундаментальные качества, необходимые для процветания в эпоху цифровой трансформации. Инвестиции в развитие человеческого капитала остаются одним из самых надежных способов обеспечить долгосрочный успех.'
         ])
 
-    # Адаптируем контент для разных платформ
-    if platform == 'twitter':
-        content = paragraphs[0]
-    elif platform == 'instagram':
-        content = '\n\n'.join(paragraphs)
-        content = content.replace('важно', '⚠️ важно')
-        content = content.replace('успех', 'успех 🚀')
-        content = content.replace('инновации', 'инновации ✨')
-    else:
-        content = '\n\n'.join(paragraphs)
+    content = paragraphs[0]
 
     # Формируем хэштеги
     if 'маркетинг' in prompt.lower():
@@ -75,10 +66,9 @@ def generate_content_api(request):
         prompt = data.get('prompt', '')
         tone = data.get('tone', 'professional')
         length = data.get('length', 'medium')
-        platform = data.get('platform', 'linkedin')
 
         # Вызываем функцию генерации контента
-        generated_content = generate_dummy_content(prompt, tone, length, platform)
+        generated_content = generate_dummy_content(prompt, tone, length)
 
         # Формируем ответ
         response = {
