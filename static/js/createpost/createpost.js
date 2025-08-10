@@ -609,12 +609,30 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
     }
 
-    // Функция сохранения поста
-    function savePost(status) {
+    // Функция сохранения поста (модифицирована для отправки в Django)
+    async function savePost(status) {
         // Собираем данные формы
         const title = document.getElementById('postTitle').value.trim();
         const content = document.getElementById('postContent').value.trim();
-        const image = previewImg.src;
+        const image = previewImg.src;  // Ссылка на изображение (base64 или URL)
+
+        // Собираем хэштеги из массива tags
+        const hashtags = tags;
+
+        // Собираем выбранные группы
+        const selectedGroups = [];
+        const groupCheckboxes = document.querySelectorAll('input[name="group_ids[]"]:checked');
+        groupCheckboxes.forEach(function(checkbox) {
+            const groupId = checkbox.value;
+            const label = checkbox.nextElementSibling;  // label после input
+            const platformText = label.querySelector('.platform-text').textContent;
+            const groupTitle = label.querySelector('span:last-child').textContent;  // Последний span - title
+            selectedGroups.push({
+                id: groupId,
+                platform: platformText,
+                title: groupTitle
+            });
+        });
 
         // Получаем дату публикации, если пост запланирован
         let publishDate = null;
@@ -631,35 +649,95 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Создаем объект поста
-        const post = {
-            id: generateUniqueId(),
+        const postData = {
             title: title,
             content: content,
             image: image,
-            tags: tags,
+            hashtags: hashtags,
+            groups: selectedGroups,
             status: status,
-            publishDate: publishDate,
-            createdAt: new Date(),
+            publishDate: publishDate ? publishDate.toISOString() : null,  // Преобразуем в ISO строку
+            createdAt: new Date().toISOString(),
             allowComments: document.getElementById('enableComments').checked
         };
 
-        // В реальном приложении здесь был бы AJAX-запрос к серверу
-        // Для демонстрации просто сохраняем в localStorage
-        savePostToLocalStorage(post);
+        // Отправляем данные в Django через AJAX (POST-запрос)
+        try {
+            const response = await fetch('/save_post/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCSRFToken()
+                },
+                body: JSON.stringify(postData)
+            });
 
-        // Показываем уведомление об успешном сохранении
-        showNotification(status);
+            if (!response.ok) {
+                throw new Error('Ошибка при сохранении поста');
+            }
 
-        // Перенаправляем на страницу со списком постов через 2 секунды
-        setTimeout(function() {
-            window.location.href = 'index.html';
-        }, 2000);
+            const data = await response.json();
+            // Можно обработать ответ от сервера, если нужно
+            showNotification(status);  // Показываем уведомление
+
+            // Перенаправляем на страницу со списком постов через 2 секунды
+            setTimeout(function() {
+                window.location.href = 'index.html';
+            }, 2000);
+        } catch (error) {
+            alert('Произошла ошибка при отправке данных: ' + error.message);
+        }
     }
+
+//    function savePost(status) {
+//        // Собираем данные формы
+//        const title = document.getElementById('postTitle').value.trim();
+//        const content = document.getElementById('postContent').value.trim();
+//        const image = previewImg.src;
+//
+//        // Получаем дату публикации, если пост запланирован
+//        let publishDate = null;
+//        if (status === 'scheduled') {
+//            const date = document.getElementById('publishDate').value;
+//            const time = document.getElementById('publishTime').value;
+//            publishDate = new Date(`${date}T${time}`);
+//
+//            // Проверяем, что дата в будущем
+//            if (publishDate <= new Date()) {
+//                alert('Дата публикации должна быть в будущем');
+//                return;
+//            }
+//        }
+//
+//        // Создаем объект поста
+//        const post = {
+//            title: title,
+//            content: content,
+//            image: image,
+//            tags: tags,
+//            status: status,
+//            publishDate: publishDate,
+//            createdAt: new Date(),
+//            allowComments: document.getElementById('enableComments').checked
+//        };
+//
+//        // В реальном приложении здесь был бы AJAX-запрос к серверу
+//        // Для демонстрации просто сохраняем в localStorage
+//        savePostToLocalStorage(post);
+//
+//        // Показываем уведомление об успешном сохранении
+//        showNotification(status);
+//
+//        // Перенаправляем на страницу со списком постов через 2 секунды
+//        setTimeout(function() {
+//            window.location.href = 'index.html';
+//        }, 2000);
+//    }
 
     // Функция генерации уникального ID
-    function generateUniqueId() {
-        return Date.now().toString(36) + Math.random().toString(36).substr(2);
-    }
+//    function generateUniqueId() {
+//        return Date.now().toString(36) + Math.random().toString(36).substr(2);
+//    }
 
     // Функция сохранения поста в localStorage
     function savePostToLocalStorage(post) {
