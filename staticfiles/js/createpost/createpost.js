@@ -266,15 +266,9 @@ document.addEventListener('DOMContentLoaded', function() {
     function updatePreview() {
         const title = document.getElementById('postTitle').value || 'Заголовок поста';
         const content = document.getElementById('postContent').value || 'Содержание поста будет отображаться здесь...';
-//        const platform = document.querySelector('input[name="platform"]:checked').value;
 
         previewTitle.textContent = title;
         previewContent.innerHTML = formatContent(content);
-
-        // Устанавливаем платформу
-//        previewPlatformBadge.textContent = getPlatformName(platform);
-//        previewPlatformBadge.className = 'preview-platform-badge';
-//        previewPlatformBadge.classList.add('platform-' + platform);
 
         // Устанавливаем изображение
         if (previewImg.src) {
@@ -300,17 +294,6 @@ document.addEventListener('DOMContentLoaded', function() {
         content = content.replace(/\n/g, '<br>');
         return content;
     }
-
-    // Функция получения названия платформы
-//    function getPlatformName(platform) {
-//        switch(platform) {
-//            case 'linkedin': return 'LinkedIn';
-//            case 'facebook': return 'Facebook';
-//            case 'instagram': return 'Instagram';
-//            case 'twitter': return 'Twitter';
-//            default: return 'Неизвестно';
-//        }
-//    }
 
     // Обработчик для кнопки генерации в модальном окне
     generateBtn.addEventListener('click', async function() {
@@ -410,7 +393,6 @@ document.addEventListener('DOMContentLoaded', function() {
     async function generateDummyContent(prompt) {
         const tone = document.getElementById('aiTone').value;
         const length = document.getElementById('aiLength').value;
-//        const platform = document.querySelector('input[name="platform"]:checked').value;
 
         try {
             const response = await fetch('/generate_one_post/', {
@@ -632,7 +614,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Собираем данные формы
         const title = document.getElementById('postTitle').value.trim();
         const content = document.getElementById('postContent').value.trim();
-//        const platform = document.querySelector('input[name="platform"]:checked').value;
         const image = previewImg.src;
 
         // Получаем дату публикации, если пост запланирован
