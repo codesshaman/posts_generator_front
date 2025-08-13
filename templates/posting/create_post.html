@@ -483,32 +483,43 @@
                 return;
             }
 
-            // Получаем выбранный стиль и соотношение сторон
             const style = document.querySelector('input[name="imageStyle"]:checked').value;
             const ratio = document.querySelector('input[name="imageRatio"]:checked').value;
 
-            // Показываем индикатор загрузки
             imageGenerationResult.style.display = 'block';
             imageGenerationLoading.style.display = 'block';
             generatedImageContainer.style.display = 'none';
             useGeneratedImageBtn.style.display = 'none';
 
-            // Имитация запроса к API
-            setTimeout(function() {
-                // Здесь должен быть запрос к API для генерации изображения
-                // Для демонстрации используем заглушку с случайным изображением
-                generateDummyImage(prompt, style, ratio);
+            // Функция для опроса Django
+            function checkStatus() {
+                fetch('/image_gen/')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.ready) {
+                            // Готово: генерируем изображение
+                            generateDummyImage(prompt, style, ratio);
 
-                // Обновляем счетчик токенов
-                const tokens = Math.floor(Math.random() * 800) + 200;
-                imageTokensUsed.textContent = tokens;
-                document.querySelector('#imageGenerationResult .progress-bar').style.width = (tokens / 5000 * 100) + '%';
+                            const tokens = Math.floor(Math.random() * 800) + 200;
+                            imageTokensUsed.textContent = tokens;
+                            document.querySelector('#imageGenerationResult .progress-bar').style.width = (tokens / 5000 * 100) + '%';
 
-                // Скрываем индикатор загрузки и показываем результат
-                imageGenerationLoading.style.display = 'none';
-                generatedImageContainer.style.display = 'block';
-                useGeneratedImageBtn.style.display = 'inline-block';
-            }, 3000);
+                            imageGenerationLoading.style.display = 'none';
+                            generatedImageContainer.style.display = 'block';
+                            useGeneratedImageBtn.style.display = 'inline-block';
+                        } else {
+                            // Не готово — повторяем запрос через 0.5 сек
+                            setTimeout(checkStatus, 500);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Ошибка при опросе статуса:', error);
+                        setTimeout(checkStatus, 2000);
+                    });
+            }
+
+            // Запуск цикла опроса
+            checkStatus();
         });
 
         // Функция для генерации примера изображения (заглушка)
