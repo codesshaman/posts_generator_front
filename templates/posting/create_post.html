@@ -491,75 +491,88 @@
             generatedImageContainer.style.display = 'none';
             useGeneratedImageBtn.style.display = 'none';
 
+
             // Функция для опроса Django
             function checkStatus() {
-                fetch('/image_gen/')
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.ready) {
-                            // Готово: генерируем изображение
-                            generateDummyImage(prompt, style, ratio);
 
-                            const tokens = Math.floor(Math.random() * 800) + 200;
-                            imageTokensUsed.textContent = tokens;
-                            document.querySelector('#imageGenerationResult .progress-bar').style.width = (tokens / 5000 * 100) + '%';
+            // Скрываем картинку, чтобы не мигала старая
+            generatedImageContainer.style.display = 'none';
 
-                            imageGenerationLoading.style.display = 'none';
+            fetch('/image_gen/')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.ready) {
+                        // Убираем индикатор загрузки
+                        imageGenerationLoading.style.display = 'none';
+
+                        // Добавляем рандомный параметр к URL, чтобы обойти кэш
+                        const noCacheUrl = data.image_url + '?t=' + Date.now();
+
+                        // Устанавливаем изображение и ждём его загрузки
+                        generatedImage.onload = function() {
                             generatedImageContainer.style.display = 'block';
-                            useGeneratedImageBtn.style.display = 'inline-block';
-                        } else {
-                            // Не готово — повторяем запрос через 0.5 сек
-                            setTimeout(checkStatus, 500);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Ошибка при опросе статуса:', error);
-                        setTimeout(checkStatus, 2000);
-                    });
-            }
+                        };
+                        generatedImage.src = noCacheUrl;
+
+                        // Рандомные токены
+                        const tokens = Math.floor(Math.random() * 800) + 200;
+                        imageTokensUsed.textContent = tokens;
+                        document.querySelector('#imageGenerationResult .progress-bar').style.width = (tokens / 5000 * 100) + '%';
+
+                        useGeneratedImageBtn.style.display = 'inline-block';
+                    } else {
+                        setTimeout(checkStatus, 500);
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка при опросе статуса:', error);
+                    setTimeout(checkStatus, 2000);
+                });
+        }
+
 
             // Запуск цикла опроса
             checkStatus();
         });
 
         // Функция для генерации примера изображения (заглушка)
-        function generateDummyImage(prompt, style, ratio) {
-            // Определяем размеры изображения в зависимости от соотношения сторон
-            let width, height;
-            switch(ratio) {
-                case '1:1':
-                    width = 512;
-                    height = 512;
-                    break;
-                case '4:3':
-                    width = 640;
-                    height = 480;
-                    break;
-                case '16:9':
-                    width = 640;
-                    height = 360;
-                    break;
-                default:
-                    width = 512;
-                    height = 512;
-            }
+<!--        function generateDummyImage(prompt, style, ratio) {-->
+<!--            // Определяем размеры изображения в зависимости от соотношения сторон-->
+<!--            let width, height;-->
+<!--            switch(ratio) {-->
+<!--                case '1:1':-->
+<!--                    width = 512;-->
+<!--                    height = 512;-->
+<!--                    break;-->
+<!--                case '4:3':-->
+<!--                    width = 640;-->
+<!--                    height = 480;-->
+<!--                    break;-->
+<!--                case '16:9':-->
+<!--                    width = 640;-->
+<!--                    height = 360;-->
+<!--                    break;-->
+<!--                default:-->
+<!--                    width = 512;-->
+<!--                    height = 512;-->
+<!--            }-->
 
-            // Генерируем случайное изображение с Unsplash Source
-            // Используем параметры из запроса для получения релевантного изображения
-            let keywords = prompt.split(' ').slice(0, 3).join(',');
+<!--            // Генерируем случайное изображение с Unsplash Source-->
+<!--            // Используем параметры из запроса для получения релевантного изображения-->
+<!--            let keywords = prompt.split(' ').slice(0, 3).join(',');-->
 
-            // Добавляем стиль в ключевые слова
-            if (style === 'realistic') keywords += ',photo';
-            if (style === 'cartoon') keywords += ',illustration';
-            if (style === 'abstract') keywords += ',abstract';
-            if (style === '3d') keywords += ',3d';
+<!--            // Добавляем стиль в ключевые слова-->
+<!--            if (style === 'realistic') keywords += ',photo';-->
+<!--            if (style === 'cartoon') keywords += ',illustration';-->
+<!--            if (style === 'abstract') keywords += ',abstract';-->
+<!--            if (style === '3d') keywords += ',3d';-->
 
-            // Генерируем URL для изображения
-            const imageUrl = `https://source.unsplash.com/random/${width}x${height}/?${encodeURIComponent(keywords)}`;
+<!--            // Генерируем URL для изображения-->
+<!--            const imageUrl = `https://source.unsplash.com/random/${width}x${height}/?${encodeURIComponent(keywords)}`;-->
 
-            // Устанавливаем изображение
-            generatedImage.src = imageUrl;
-        }
+<!--            // Устанавливаем изображение-->
+<!--            generatedImage.src = imageUrl;-->
+<!--        }-->
 
         // Обработчик для кнопки "Использовать изображение"
         useGeneratedImageBtn.addEventListener('click', function() {

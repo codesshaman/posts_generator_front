@@ -15,5 +15,5 @@ urlpatterns = [
     path('check_completion/', check_completion, name='check_completion'),
     path('get_initial_tokens/', get_initial_tokens, name='get_initial_tokens'),
     path('save_post/', save_post, name='save_post'),
-    path("image_gen/", image_generation_status, name="image_status")
+    path("image_gen/", image_gen_view, name="image_status")
 ]
