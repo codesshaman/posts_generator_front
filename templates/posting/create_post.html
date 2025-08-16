@@ -473,7 +473,37 @@
             imageGeneratorModal.show();
         });
 
-        // Остальной код без изменений...
+        // Отдельная функция для инициации генерации изображения (POST-запрос)
+        function initImageGeneration(prompt, style, ratio) {
+            fetch('/send_image_promt/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Если нужно, добавьте CSRF-токен для Django: 'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify({
+                    prompt: prompt,
+                    style: style,
+                    ratio: ratio
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Ошибка при инициации генерации изображения');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // После успешной инициации начинаем опрос статуса
+                checkStatus();
+                // Для заглушки: выводим промпт в консоль браузера (как placeholder, пока Django не обработан)
+                console.log('Передаваемый промпт в Django:', prompt);
+            })
+            .catch(error => {
+                console.error('Ошибка при отправке данных в Django:', error);
+                imageGenerationLoading.style.display = 'none';
+            });
+        }
 
         // Обработчик для кнопки "Сгенерировать" в модальном окне
         generateImageBtnSubmit.addEventListener('click', function() {
@@ -491,6 +521,8 @@
             generatedImageContainer.style.display = 'none';
             useGeneratedImageBtn.style.display = 'none';
 
+            // Вызываем отдельную функцию для инициации
+            initImageGeneration(prompt, style, ratio);
 
             // Функция для опроса Django
             function checkStatus() {
@@ -534,45 +566,6 @@
             // Запуск цикла опроса
             checkStatus();
         });
-
-        // Функция для генерации примера изображения (заглушка)
-<!--        function generateDummyImage(prompt, style, ratio) {-->
-<!--            // Определяем размеры изображения в зависимости от соотношения сторон-->
-<!--            let width, height;-->
-<!--            switch(ratio) {-->
-<!--                case '1:1':-->
-<!--                    width = 512;-->
-<!--                    height = 512;-->
-<!--                    break;-->
-<!--                case '4:3':-->
-<!--                    width = 640;-->
-<!--                    height = 480;-->
-<!--                    break;-->
-<!--                case '16:9':-->
-<!--                    width = 640;-->
-<!--                    height = 360;-->
-<!--                    break;-->
-<!--                default:-->
-<!--                    width = 512;-->
-<!--                    height = 512;-->
-<!--            }-->
-
-<!--            // Генерируем случайное изображение с Unsplash Source-->
-<!--            // Используем параметры из запроса для получения релевантного изображения-->
-<!--            let keywords = prompt.split(' ').slice(0, 3).join(',');-->
-
-<!--            // Добавляем стиль в ключевые слова-->
-<!--            if (style === 'realistic') keywords += ',photo';-->
-<!--            if (style === 'cartoon') keywords += ',illustration';-->
-<!--            if (style === 'abstract') keywords += ',abstract';-->
-<!--            if (style === '3d') keywords += ',3d';-->
-
-<!--            // Генерируем URL для изображения-->
-<!--            const imageUrl = `https://source.unsplash.com/random/${width}x${height}/?${encodeURIComponent(keywords)}`;-->
-
-<!--            // Устанавливаем изображение-->
-<!--            generatedImage.src = imageUrl;-->
-<!--        }-->
 
         // Обработчик для кнопки "Использовать изображение"
         useGeneratedImageBtn.addEventListener('click', function() {
