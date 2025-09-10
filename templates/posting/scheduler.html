@@ -110,59 +110,63 @@
 <h5 class="mb-3 mt-5">{{ planed }} {{ for_next_week }}</h5>
 
 <!-- Пост 4 -->
+{% for post in posts2 %}
 <div class="card mb-4 post-card">
-<div class="row g-0">
-    <div class="col-md-3 position-relative">
-        <img src="https://www.unisender.com/ru/blog/wp-content/uploads/2022/03/seo-strategy.jpg" class="img-fluid rounded-start post-image" alt="{{ without_image }}">
-        <span class="post-status status-queued">{{ queue }}</span>
-    </div>
-    <div class="col-md-9">
-        <div class="card-body d-flex flex-column h-100">
-            <div class="post-meta mb-2">
-                <span class="platform-badge platform-twitter">Twitter</span>
-                <span class="post-time"><i class="ph ph-clock me-1"></i> {{ publish_text }}: {{ publish_date }}, {{ publish_time }}</span>
-            </div>
-            <h5 class="card-title mb-2">SEO-оптимизация для начинающих: с чего начать</h5>
-            <p class="card-text post-description">Базовое руководство по оптимизации сайта для поисковых систем. Узнайте, как правильно подбирать ключевые слова и оптимизировать контент...</p>
-            <div class="post-actions mt-auto">
-                <button class="btn-edit">{{ edit_button }}</button>
-                <button class="btn-delete">{{ delete_button }}</button>
-                <button class="btn-reschedule"><i class="ph ph-calendar-plus me-1"></i> {{ change_date }}</button>
-                <button class="btn-publish-now"><i class="ph ph-paper-plane-right me-1"></i> {{ publish_now }}</button>
+    <div class="row g-0">
+        <div class="col-md-3 position-relative">
+            <img src="{{ post.image_url }}" class="img-fluid rounded-start post-image" alt="{{ post.image_alt }}">
+            <span class="post-status status-queued">{{ post.status }}</span>
+        </div>
+        <div class="col-md-9">
+            <div class="card-body d-flex flex-column h-100">
+                <div class="post-meta mb-2">
+                    <span class="platform-badge platform-{{ post.platform|lower }}">{{ post.platform }}</span>
+                    <span class="post-time"><i class="ph ph-clock me-1"></i> {{ publish_text }}: {{ post.publish_date }} {{ post.publish_time }}</span>
+                </div>
+                <h5 class="card-title mb-2">{{ post.title }}</h5>
+                <p class="card-text post-description">{{ post.description }}</p>
+                <div class="post-actions mt-auto">
+                    <button class="btn-edit">{{ edit_button }}</button>
+                    <button class="btn-delete">{{ delete_button }}</button>
+                    <button class="btn-reschedule"><i class="ph ph-calendar-plus me-1"></i> {{ change_date }}</button>
+                    <button class="btn-publish-now"><i class="ph ph-paper-plane-right me-1"></i> {{ publish_now }}</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
-</div>
+{% endfor %}
 
 <!-- Раздел с более поздними публикациями -->
 <h5 class="mb-3 mt-5">{{ planed }} {{ for_next_month }}</h5>
 
 <!-- Пост 4 -->
+{% for post in posts3 %}
 <div class="card mb-4 post-card">
-<div class="row g-0">
-    <div class="col-md-3 position-relative">
-        <img src="https://www.unisender.com/ru/blog/wp-content/uploads/2022/03/seo-strategy.jpg" class="img-fluid rounded-start post-image" alt="{{ without_image }}">
-        <span class="post-status status-queued">{{ queue }}</span>
-    </div>
-    <div class="col-md-9">
-        <div class="card-body d-flex flex-column h-100">
-            <div class="post-meta mb-2">
-                <span class="platform-badge platform-twitter">Twitter</span>
-                <span class="post-time"><i class="ph ph-clock me-1"></i> {{ publish_text }}: {{ publish_date }}, {{ publish_time }}</span>
-            </div>
-            <h5 class="card-title mb-2">SEO-оптимизация для начинающих: с чего начать</h5>
-            <p class="card-text post-description">Базовое руководство по оптимизации сайта для поисковых систем. Узнайте, как правильно подбирать ключевые слова и оптимизировать контент...</p>
-            <div class="post-actions mt-auto">
-                <button class="btn-edit">{{ edit_button }}</button>
-                <button class="btn-delete">{{ delete_button }}</button>
-                <button class="btn-reschedule"><i class="ph ph-calendar-plus me-1"></i> {{ change_date }}</button>
-                <button class="btn-publish-now"><i class="ph ph-paper-plane-right me-1"></i> {{ publish_now }}</button>
+    <div class="row g-0">
+        <div class="col-md-3 position-relative">
+            <img src="{{ post.image_url }}" class="img-fluid rounded-start post-image" alt="{{ post.image_alt }}">
+            <span class="post-status status-queued">{{ post.status }}</span>
+        </div>
+        <div class="col-md-9">
+            <div class="card-body d-flex flex-column h-100">
+                <div class="post-meta mb-2">
+                    <span class="platform-badge platform-{{ post.platform|lower }}">{{ post.platform }}</span>
+                    <span class="post-time"><i class="ph ph-clock me-1"></i> {{ publish_text }}: {{ post.publish_date }} {{ post.publish_time }}</span>
+                </div>
+                <h5 class="card-title mb-2">{{ post.title }}</h5>
+                <p class="card-text post-description">{{ post.description }}</p>
+                <div class="post-actions mt-auto">
+                    <button class="btn-edit">{{ edit_button }}</button>
+                    <button class="btn-delete">{{ delete_button }}</button>
+                    <button class="btn-reschedule"><i class="ph ph-calendar-plus me-1"></i> {{ change_date }}</button>
+                    <button class="btn-publish-now"><i class="ph ph-paper-plane-right me-1"></i> {{ publish_now }}</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
-</div>
+{% endfor %}
 
 </div>
 </div>
