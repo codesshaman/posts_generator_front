@@ -1,6 +1,13 @@
 from project.language import translate, language
 
 
+def user_profile_stub():
+    username = 'Никита Джигурда'
+    return username
+
+def is_authenticated():
+    return True
+
 def menu_context(request):
     lang = language(request)
     return {
@@ -18,3 +25,6 @@ def menu_context(request):
         'coins_used_menu': 490,
         'coins_balance_menu': 1000,
     }
+
+def user_context(request):
+    return {'username': user_profile_stub() if is_authenticated() else 'Гость'}

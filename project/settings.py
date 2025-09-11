@@ -95,6 +95,7 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'apps.basetmp.context_processors.menu_context',
+                'apps.basetmp.context_processors.user_context',
                 'apps.scheduler.context_processors.scheduler',
                 'apps.settings.context_processors.settings',
                 'apps.posting.context_processors.all_posts',
