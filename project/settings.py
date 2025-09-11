@@ -92,6 +92,9 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'project.context_processors.dark_mode',
+                'apps.login.context_processors.login_page',
+                'apps.login.context_processors.reset_page',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'apps.basetmp.context_processors.menu_context',
@@ -102,9 +105,7 @@ TEMPLATES = [
                 'apps.createpost.context_processors.create_post',
                 'apps.subscribe.context_processors.subscription',
                 'apps.contentplan.context_processors.contentplan',
-                'apps.login.context_processors.login_page',
-                'apps.login.context_processors.reset_page',
-                'project.context_processors.dark_mode',
+                'apps.basetmp.context_processors.progress_context',
                 'apps.generation.context_processors.autogeneration',
             ],
         },

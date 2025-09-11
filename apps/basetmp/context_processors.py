@@ -1,6 +1,12 @@
 from project.language import translate, language
 
 
+def progress_context(request):
+    progress_value = 20
+    return {
+        'progress_value': progress_value
+    }
+
 def user_profile_stub():
     username = 'Никита Джигурда'
     return username
