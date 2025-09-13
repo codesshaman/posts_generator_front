@@ -27,33 +27,33 @@
 
 <!-- Фильтры -->
 <div class="d-flex flex-wrap">
-    <div class="dropdown mb-2 mb-md-0 me-2">
-        <button class="btn btn-light dropdown-toggle" type="button" id="dateDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            {{ by_pub_date }}
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dateDropdown">
-            <li><a class="dropdown-item" href="#"><i class="ph ph-calendar me-2"></i> {{ all_dates }}</a></li>
-            <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-check me-2"></i> {{ today }}</a></li>
-            <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-blank me-2"></i> {{ tomorrow }}</a></li>
-            <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-plus me-2"></i> {{ this_week }}</a></li>
-            <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-x me-2"></i> {{ next_week }}</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#"><i class="ph ph-sort-ascending me-2"></i> {{ nearest_first }}</a></li>
-            <li><a class="dropdown-item" href="#"><i class="ph ph-sort-descending me-2"></i> {{ latest_first }}</a></li>
-        </ul>
-    </div>
-    <div class="dropdown me-2 mb-2 mb-md-0">
-        <button class="btn btn-light dropdown-toggle" type="button" id="platformDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            {{ all_platforms }}
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="platformDropdown">
-            <li><a class="dropdown-item" href="#"><i class="ph ph-globe me-2"></i> {{ all_platforms }}</a></li>
-            <li><a class="dropdown-item" href="#"><i class="ph ph-facebook-logo me-2"></i> {{ vk }}</a></li>
-            <li><a class="dropdown-item" href="#"><i class="ph ph-instagram-logo me-2"></i> {{ tg }}</a></li>
-            <li><a class="dropdown-item" href="#"><i class="ph ph-twitter-logo me-2"></i> {{ email }}</a></li>
-            <li><a class="dropdown-item" href="#"><i class="ph ph-linkedin-logo me-2"></i> {{ boosty }}</a></li>
-        </ul>
-    </div>
+<!--    <div class="dropdown mb-2 mb-md-0 me-2">-->
+<!--        <button class="btn btn-light dropdown-toggle" type="button" id="dateDropdown" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--            {{ by_pub_date }}-->
+<!--        </button>-->
+<!--        <ul class="dropdown-menu" aria-labelledby="dateDropdown">-->
+<!--            <li><a class="dropdown-item" href="#"><i class="ph ph-calendar me-2"></i> {{ all_dates }}</a></li>-->
+<!--            <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-check me-2"></i> {{ today }}</a></li>-->
+<!--            <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-blank me-2"></i> {{ tomorrow }}</a></li>-->
+<!--            <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-plus me-2"></i> {{ this_week }}</a></li>-->
+<!--            <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-x me-2"></i> {{ next_week }}</a></li>-->
+<!--            <li><hr class="dropdown-divider"></li>-->
+<!--            <li><a class="dropdown-item" href="#"><i class="ph ph-sort-ascending me-2"></i> {{ nearest_first }}</a></li>-->
+<!--            <li><a class="dropdown-item" href="#"><i class="ph ph-sort-descending me-2"></i> {{ latest_first }}</a></li>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--    <div class="dropdown me-2 mb-2 mb-md-0">-->
+<!--        <button class="btn btn-light dropdown-toggle" type="button" id="platformDropdown" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--            {{ all_platforms }}-->
+<!--        </button>-->
+<!--        <ul class="dropdown-menu" aria-labelledby="platformDropdown">-->
+<!--            <li><a class="dropdown-item" href="#"><i class="ph ph-globe me-2"></i> {{ all_platforms }}</a></li>-->
+<!--            <li><a class="dropdown-item" href="#"><i class="ph ph-facebook-logo me-2"></i> {{ vk }}</a></li>-->
+<!--            <li><a class="dropdown-item" href="#"><i class="ph ph-instagram-logo me-2"></i> {{ tg }}</a></li>-->
+<!--            <li><a class="dropdown-item" href="#"><i class="ph ph-twitter-logo me-2"></i> {{ email }}</a></li>-->
+<!--            <li><a class="dropdown-item" href="#"><i class="ph ph-linkedin-logo me-2"></i> {{ boosty }}</a></li>-->
+<!--        </ul>-->
+<!--    </div>-->
     <a href="/create_post" class="btn btn-primary">
         <i class="ph ph-plus me-2"></i> {{ add_to_queue }}
     </a>
