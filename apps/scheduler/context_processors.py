@@ -31,3 +31,9 @@ def scheduler(request):
         "save": translate("Сохранить", lang),
         "right_now": translate("Вы уверены, что хотите опубликовать этот пост прямо сейчас?", lang),
     }
+
+def platform(request):
+    return {'selected_platform': request.GET.get('platform', 'all')}
+
+def date_filter(request):
+    return {'selected_date_filter': request.GET.get('date', 'all')}
