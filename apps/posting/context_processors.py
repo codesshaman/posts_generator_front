@@ -42,3 +42,12 @@ def all_posts(request):
         "del_confirm": translate("Подтверждение удаления", lang),
         "post_editing": translate("Редактирование поста", lang),
     }
+
+def platform(request):
+    return {'selected_platform': request.GET.get('platform', 'all')}
+
+def date_filter(request):
+    return {'selected_date_filter': request.GET.get('date', 'all')}
+
+def status_filter(request):
+    return {'selected_status': request.GET.get('status', 'all')}

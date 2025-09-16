@@ -5,44 +5,83 @@
 
 <!-- Фильтры -->
 <div class="d-flex flex-wrap">
-<!--    <div class="dropdown mb-2 mb-md-0">-->
-<!--        <button class="btn btn-light dropdown-toggle" type="button" id="dateDropdown" data-bs-toggle="dropdown" aria-expanded="false">-->
-<!--            {{ by_date }}-->
-<!--        </button>-->
-<!--        <ul class="dropdown-menu" aria-labelledby="dateDropdown">-->
-<!--            <li><a class="dropdown-item" href="#"><i class="ph ph-calendar me-2"></i>{{ all_dates }}</a></li>-->
-<!--            <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-check me-2"></i>{{ today }}</a></li>-->
-<!--            <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-blank me-2"></i>{{ last_7_days }}</a></li>-->
-<!--            <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-plus me-2"></i>{{ last_30_days }}</a></li>-->
-<!--            <li><a class="dropdown-item" href="#"><i class="ph ph-calendar-x me-2"></i>{{ last_90_days }}</a></li>-->
-<!--            <li><hr class="dropdown-divider"></li>-->
-<!--            <li><a class="dropdown-item" href="#"><i class="ph ph-sort-ascending me-2"></i>{{ new_first }}</a></li>-->
-<!--            <li><a class="dropdown-item" href="#"><i class="ph ph-sort-descending me-2"></i>{{ old_first }}</a></li>-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--    <div class="dropdown me-2 mb-2 mb-md-0">-->
-<!--        <button class="btn btn-light dropdown-toggle" type="button" id="platformDropdown" data-bs-toggle="dropdown" aria-expanded="false">-->
-<!--            {{ all_platforms }}-->
-<!--        </button>-->
-<!--        <ul class="dropdown-menu" aria-labelledby="platformDropdown">-->
-<!--            <li><a class="dropdown-item" href="#"><i class="ph ph-globe me-2"></i>{{ all_platforms }}</a></li>-->
-<!--            <li><a class="dropdown-item" href="#"><i class="ph ph-vk-logo me-2"></i>{{ vk }}</a></li>-->
-<!--            <li><a class="dropdown-item" href="#"><i class="ph ph-telegram-logo me-2"></i>{{ tg }}</a></li>-->
-<!--            <li><a class="dropdown-item" href="#"><i class="ph ph-envelope-simple me-2"></i>{{ email }}</a></li>-->
-<!--            <li><a class="dropdown-item" href="#"><i class="ph ph-newspaper me-2"></i>{{ boosty }}</a></li>-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--    <div class="dropdown me-2 mb-2 mb-md-0">-->
-<!--        <button class="btn btn-light dropdown-toggle" type="button" id="statusDropdown" data-bs-toggle="dropdown" aria-expanded="false">-->
-<!--            {{ all_statuses }}-->
-<!--        </button>-->
-<!--        <ul class="dropdown-menu" aria-labelledby="statusDropdown">-->
-<!--            <li><a class="dropdown-item" href="#"><i class="ph ph-list me-2"></i>{{ all_statuses }}</a></li>-->
-<!--            <li><a class="dropdown-item" href="#"><i class="ph ph-check-circle me-2"></i>{{ published }}</a></li>-->
-<!--            <li><a class="dropdown-item" href="#"><i class="ph ph-note-pencil me-2"></i>{{ draft }}</a></li>-->
-<!--            <li><a class="dropdown-item" href="#"><i class="ph ph-clock me-2"></i>{{ queue }}</a></li>-->
-<!--        </ul>-->
-<!--    </div>-->
+
+<div class="dropdown mb-2 mb-md-0">
+    <button class="btn btn-light dropdown-toggle" type="button" id="dateDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        {% if selected_date_filter == 'all' %}
+            {{ all_dates }}
+        {% elif selected_date_filter == 'today' %}
+            {{ today }}
+        {% elif selected_date_filter == 'last_7_days' %}
+            {{ last_7_days }}
+        {% elif selected_date_filter == 'last_30_days' %}
+            {{ last_30_days }}
+        {% elif selected_date_filter == 'last_90_days' %}
+            {{ last_90_days }}
+        {% elif selected_date_filter == 'new_first' %}
+            {{ new_first }}
+        {% elif selected_date_filter == 'old_first' %}
+            {{ old_first }}
+        {% else %}
+            {{ all_dates }}
+        {% endif %}
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dateDropdown">
+        <li><a class="dropdown-item" href="{% url 'date_filter' %}?date=all&platform={{ selected_platform }}&status={{ selected_status }}"><i class="ph ph-calendar me-2"></i>{{ all_dates }}</a></li>
+        <li><a class="dropdown-item" href="{% url 'date_filter' %}?date=today&platform={{ selected_platform }}&status={{ selected_status }}"><i class="ph ph-calendar-check me-2"></i>{{ today }}</a></li>
+        <li><a class="dropdown-item" href="{% url 'date_filter' %}?date=last_7_days&platform={{ selected_platform }}&status={{ selected_status }}"><i class="ph ph-calendar-blank me-2"></i>{{ last_7_days }}</a></li>
+        <li><a class="dropdown-item" href="{% url 'date_filter' %}?date=last_30_days&platform={{ selected_platform }}&status={{ selected_status }}"><i class="ph ph-calendar-plus me-2"></i>{{ last_30_days }}</a></li>
+        <li><a class="dropdown-item" href="{% url 'date_filter' %}?date=last_90_days&platform={{ selected_platform }}&status={{ selected_status }}"><i class="ph ph-calendar-x me-2"></i>{{ last_90_days }}</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="{% url 'date_filter' %}?date=new_first&platform={{ selected_platform }}&status={{ selected_status }}"><i class="ph ph-sort-ascending me-2"></i>{{ new_first }}</a></li>
+        <li><a class="dropdown-item" href="{% url 'date_filter' %}?date=old_first&platform={{ selected_platform }}&status={{ selected_status }}"><i class="ph ph-sort-descending me-2"></i>{{ old_first }}</a></li>
+    </ul>
+</div>
+<div class="dropdown me-2 mb-2 mb-md-0">
+    <button class="btn btn-light dropdown-toggle" type="button" id="platformDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        {% if selected_platform == 'all' %}
+            {{ all_platforms }}
+        {% elif selected_platform == 'vk' %}
+            {{ vk }}
+        {% elif selected_platform == 'tg' %}
+            {{ tg }}
+        {% elif selected_platform == 'email' %}
+            {{ email }}
+        {% elif selected_platform == 'boosty' %}
+            {{ boosty }}
+        {% else %}
+            {{ all_platforms }}
+        {% endif %}
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="platformDropdown">
+        <li><a class="dropdown-item" href="{% url 'platform_filter' %}?platform=all&date={{ selected_date_filter }}&status={{ selected_status }}"><i class="ph ph-globe me-2"></i>{{ all_platforms }}</a></li>
+        <li><a class="dropdown-item" href="{% url 'platform_filter' %}?platform=vk&date={{ selected_date_filter }}&status={{ selected_status }}"><i class="ph ph-vk-logo me-2"></i>{{ vk }}</a></li>
+        <li><a class="dropdown-item" href="{% url 'platform_filter' %}?platform=tg&date={{ selected_date_filter }}&status={{ selected_status }}"><i class="ph ph-telegram-logo me-2"></i>{{ tg }}</a></li>
+        <li><a class="dropdown-item" href="{% url 'platform_filter' %}?platform=email&date={{ selected_date_filter }}&status={{ selected_status }}"><i class="ph ph-envelope-simple me-2"></i>{{ email }}</a></li>
+        <li><a class="dropdown-item" href="{% url 'platform_filter' %}?platform=boosty&date={{ selected_date_filter }}&status={{ selected_status }}"><i class="ph ph-newspaper me-2"></i>{{ boosty }}</a></li>
+    </ul>
+</div>
+<div class="dropdown me-2 mb-2 mb-md-0">
+    <button class="btn btn-light dropdown-toggle" type="button" id="statusDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        {% if selected_status == 'all' %}
+            {{ all_statuses }}
+        {% elif selected_status == 'published' %}
+            {{ published }}
+        {% elif selected_status == 'draft' %}
+            {{ draft }}
+        {% elif selected_status == 'queue' %}
+            {{ queue }}
+        {% else %}
+            {{ all_statuses }}
+        {% endif %}
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="statusDropdown">
+        <li><a class="dropdown-item" href="{% url 'status_filter' %}?status=all&date={{ selected_date_filter }}&platform={{ selected_platform }}"><i class="ph ph-list me-2"></i>{{ all_statuses }}</a></li>
+        <li><a class="dropdown-item" href="{% url 'status_filter' %}?status=published&date={{ selected_date_filter }}&platform={{ selected_platform }}"><i class="ph ph-check-circle me-2"></i>{{ published }}</a></li>
+        <li><a class="dropdown-item" href="{% url 'status_filter' %}?status=draft&date={{ selected_date_filter }}&platform={{ selected_platform }}"><i class="ph ph-note-pencil me-2"></i>{{ draft }}</a></li>
+        <li><a class="dropdown-item" href="{% url 'status_filter' %}?status=queue&date={{ selected_date_filter }}&platform={{ selected_platform }}"><i class="ph ph-clock me-2"></i>{{ queue }}</a></li>
+    </ul>
+</div>
 </div>
 </div>
 
